@@ -1,0 +1,268 @@
+2026-03-24T15:32:47.258Z	Initializing build environment...
+2026-03-24T15:32:49.105Z	Success: Finished initializing build environment
+2026-03-24T15:32:54.156Z	Cloning repository...
+2026-03-24T15:32:55.927Z	No build output detected to cache. Skipping.
+2026-03-24T15:32:55.927Z	No dependencies detected to cache. Skipping.
+2026-03-24T15:32:55.932Z	Detected the following tools from environment: bun@1.2.15, nodejs@22.16.0
+2026-03-24T15:32:55.934Z	Installing project dependencies: bun install
+2026-03-24T15:32:56.128Z	bun install v1.2.15 (df017990)
+2026-03-24T15:32:56.169Z	Resolving dependencies
+2026-03-24T15:32:59.987Z	Resolved, downloaded and extracted [1300]
+2026-03-24T15:32:59.988Z	warn: incorrect peer dependency "react@19.2.4"
+2026-03-24T15:32:59.988Z	
+2026-03-24T15:32:59.988Z	warn: incorrect peer dependency "react@19.2.4"
+2026-03-24T15:32:59.988Z	
+2026-03-24T15:32:59.988Z	warn: incorrect peer dependency "react-dom@19.2.4"
+2026-03-24T15:33:01.702Z	Saved lockfile
+2026-03-24T15:33:01.702Z	
+2026-03-24T15:33:01.703Z	+ @tailwindcss/vite@4.1.12 (v4.2.2 available)
+2026-03-24T15:33:01.703Z	+ @vitejs/plugin-react@4.7.0 (v6.0.1 available)
+2026-03-24T15:33:01.707Z	+ tailwindcss@4.1.12 (v4.2.2 available)
+2026-03-24T15:33:01.709Z	+ vite@6.3.5 (v8.0.2 available)
+2026-03-24T15:33:01.709Z	+ @emotion/react@11.14.0
+2026-03-24T15:33:01.709Z	+ @emotion/styled@11.14.1
+2026-03-24T15:33:01.709Z	+ @mui/icons-material@7.3.5 (v7.3.9 available)
+2026-03-24T15:33:01.709Z	+ @mui/material@7.3.5 (v7.3.9 available)
+2026-03-24T15:33:01.709Z	+ @popperjs/core@2.11.8
+2026-03-24T15:33:01.709Z	+ @radix-ui/react-accordion@1.2.3 (v1.2.12 available)
+2026-03-24T15:33:01.709Z	+ @radix-ui/react-alert-dialog@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.709Z	+ @radix-ui/react-aspect-ratio@1.1.2 (v1.1.8 available)
+2026-03-24T15:33:01.710Z	+ @radix-ui/react-avatar@1.1.3 (v1.1.11 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-checkbox@1.1.4 (v1.3.3 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-collapsible@1.1.3 (v1.1.12 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-context-menu@2.2.6 (v2.2.16 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-dialog@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-dropdown-menu@2.1.6 (v2.1.16 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-hover-card@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-label@2.1.2 (v2.1.8 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-menubar@1.1.6 (v1.1.16 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-navigation-menu@1.2.5 (v1.2.14 available)
+2026-03-24T15:33:01.712Z	+ @radix-ui/react-popover@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.712Z	+ @radix-ui/react-progress@1.1.2 (v1.1.8 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-radio-group@1.2.3 (v1.3.8 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-scroll-area@1.2.3 (v1.2.10 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-select@2.1.6 (v2.2.6 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-separator@1.1.2 (v1.1.8 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-slider@1.2.3 (v1.3.6 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-slot@1.1.2 (v1.2.4 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-switch@1.1.3 (v1.2.6 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-tabs@1.1.3 (v1.1.13 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-toggle@1.1.2 (v1.1.10 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-toggle-group@1.1.2 (v1.1.11 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-tooltip@1.1.8 (v1.2.8 available)
+2026-03-24T15:33:01.713Z	+ class-variance-authority@0.7.1
+2026-03-24T15:33:01.713Z	+ clsx@2.1.1
+2026-03-24T15:33:01.714Z	+ cmdk@1.1.1
+2026-03-24T15:33:01.714Z	+ date-fns@3.6.0 (v4.1.0 available)
+2026-03-24T15:33:01.716Z	+ embla-carousel-react@8.6.0
+2026-03-24T15:33:01.716Z	+ input-otp@1.4.2
+2026-03-24T15:33:01.716Z	+ lucide-react@0.487.0 (v1.0.1 available)
+2026-03-24T15:33:01.716Z	+ motion@12.23.24 (v12.38.0 available)
+2026-03-24T15:33:01.716Z	+ next-themes@0.4.6
+2026-03-24T15:33:01.716Z	+ react-day-picker@8.10.1 (v9.14.0 available)
+2026-03-24T15:33:01.716Z	+ react-dnd@16.0.1
+2026-03-24T15:33:01.716Z	+ react-dnd-html5-backend@16.0.1
+2026-03-24T15:33:01.716Z	+ react-hook-form@7.55.0 (v7.72.0 available)
+2026-03-24T15:33:01.716Z	+ react-popper@2.3.0
+2026-03-24T15:33:01.716Z	+ react-resizable-panels@2.1.7 (v4.7.5 available)
+2026-03-24T15:33:01.719Z	+ react-responsive-masonry@2.7.1
+2026-03-24T15:33:01.719Z	+ react-router@7.13.2
+2026-03-24T15:33:01.719Z	+ react-slick@0.31.0
+2026-03-24T15:33:01.720Z	+ recharts@2.15.2 (v3.8.0 available)
+2026-03-24T15:33:01.720Z	+ slick-carousel@1.8.1
+2026-03-24T15:33:01.720Z	+ sonner@2.0.3 (v2.0.7 available)
+2026-03-24T15:33:01.720Z	+ tailwind-merge@3.2.0 (v3.5.0 available)
+2026-03-24T15:33:01.720Z	+ tw-animate-css@1.3.8 (v1.4.0 available)
+2026-03-24T15:33:01.720Z	+ vaul@1.1.2
+2026-03-24T15:33:01.720Z	
+2026-03-24T15:33:01.720Z	291 packages installed [5.63s]
+2026-03-24T15:33:01.720Z	
+2026-03-24T15:33:01.720Z	Blocked 1 postinstall. Run `bun pm untrusted` for details.
+2026-03-24T15:33:01.936Z	Executing user build command: npm run build
+2026-03-24T15:33:02.302Z	
+2026-03-24T15:33:02.302Z	> @figma/my-make-file@0.0.1 build
+2026-03-24T15:33:02.302Z	> vite build
+2026-03-24T15:33:02.302Z	
+2026-03-24T15:33:02.736Z	vite v6.3.5 building for production...
+2026-03-24T15:33:02.854Z	transforming...
+2026-03-24T15:32:47.258Z	Initializing build environment...
+2026-03-24T15:32:49.105Z	Success: Finished initializing build environment
+2026-03-24T15:32:54.156Z	Cloning repository...
+2026-03-24T15:32:55.927Z	No build output detected to cache. Skipping.
+2026-03-24T15:32:55.927Z	No dependencies detected to cache. Skipping.
+2026-03-24T15:32:55.932Z	Detected the following tools from environment: bun@1.2.15, nodejs@22.16.0
+2026-03-24T15:32:55.934Z	Installing project dependencies: bun install
+2026-03-24T15:32:56.128Z	bun install v1.2.15 (df017990)
+2026-03-24T15:32:56.169Z	Resolving dependencies
+2026-03-24T15:32:59.987Z	Resolved, downloaded and extracted [1300]
+2026-03-24T15:32:59.988Z	warn: incorrect peer dependency "react@19.2.4"
+2026-03-24T15:32:59.988Z	
+2026-03-24T15:32:59.988Z	warn: incorrect peer dependency "react@19.2.4"
+2026-03-24T15:32:59.988Z	
+2026-03-24T15:32:59.988Z	warn: incorrect peer dependency "react-dom@19.2.4"
+2026-03-24T15:33:01.702Z	Saved lockfile
+2026-03-24T15:33:01.702Z	
+2026-03-24T15:33:01.703Z	+ @tailwindcss/vite@4.1.12 (v4.2.2 available)
+2026-03-24T15:33:01.703Z	+ @vitejs/plugin-react@4.7.0 (v6.0.1 available)
+2026-03-24T15:33:01.707Z	+ tailwindcss@4.1.12 (v4.2.2 available)
+2026-03-24T15:33:01.709Z	+ vite@6.3.5 (v8.0.2 available)
+2026-03-24T15:33:01.709Z	+ @emotion/react@11.14.0
+2026-03-24T15:33:01.709Z	+ @emotion/styled@11.14.1
+2026-03-24T15:33:01.709Z	+ @mui/icons-material@7.3.5 (v7.3.9 available)
+2026-03-24T15:33:01.709Z	+ @mui/material@7.3.5 (v7.3.9 available)
+2026-03-24T15:33:01.709Z	+ @popperjs/core@2.11.8
+2026-03-24T15:33:01.709Z	+ @radix-ui/react-accordion@1.2.3 (v1.2.12 available)
+2026-03-24T15:33:01.709Z	+ @radix-ui/react-alert-dialog@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.709Z	+ @radix-ui/react-aspect-ratio@1.1.2 (v1.1.8 available)
+2026-03-24T15:33:01.710Z	+ @radix-ui/react-avatar@1.1.3 (v1.1.11 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-checkbox@1.1.4 (v1.3.3 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-collapsible@1.1.3 (v1.1.12 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-context-menu@2.2.6 (v2.2.16 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-dialog@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-dropdown-menu@2.1.6 (v2.1.16 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-hover-card@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-label@2.1.2 (v2.1.8 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-menubar@1.1.6 (v1.1.16 available)
+2026-03-24T15:33:01.711Z	+ @radix-ui/react-navigation-menu@1.2.5 (v1.2.14 available)
+2026-03-24T15:33:01.712Z	+ @radix-ui/react-popover@1.1.6 (v1.1.15 available)
+2026-03-24T15:33:01.712Z	+ @radix-ui/react-progress@1.1.2 (v1.1.8 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-radio-group@1.2.3 (v1.3.8 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-scroll-area@1.2.3 (v1.2.10 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-select@2.1.6 (v2.2.6 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-separator@1.1.2 (v1.1.8 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-slider@1.2.3 (v1.3.6 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-slot@1.1.2 (v1.2.4 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-switch@1.1.3 (v1.2.6 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-tabs@1.1.3 (v1.1.13 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-toggle@1.1.2 (v1.1.10 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-toggle-group@1.1.2 (v1.1.11 available)
+2026-03-24T15:33:01.713Z	+ @radix-ui/react-tooltip@1.1.8 (v1.2.8 available)
+2026-03-24T15:33:01.713Z	+ class-variance-authority@0.7.1
+2026-03-24T15:33:01.713Z	+ clsx@2.1.1
+2026-03-24T15:33:01.714Z	+ cmdk@1.1.1
+2026-03-24T15:33:01.714Z	+ date-fns@3.6.0 (v4.1.0 available)
+2026-03-24T15:33:01.716Z	+ embla-carousel-react@8.6.0
+2026-03-24T15:33:01.716Z	+ input-otp@1.4.2
+2026-03-24T15:33:01.716Z	+ lucide-react@0.487.0 (v1.0.1 available)
+2026-03-24T15:33:01.716Z	+ motion@12.23.24 (v12.38.0 available)
+2026-03-24T15:33:01.716Z	+ next-themes@0.4.6
+2026-03-24T15:33:01.716Z	+ react-day-picker@8.10.1 (v9.14.0 available)
+2026-03-24T15:33:01.716Z	+ react-dnd@16.0.1
+2026-03-24T15:33:01.716Z	+ react-dnd-html5-backend@16.0.1
+2026-03-24T15:33:01.716Z	+ react-hook-form@7.55.0 (v7.72.0 available)
+2026-03-24T15:33:01.716Z	+ react-popper@2.3.0
+2026-03-24T15:33:01.716Z	+ react-resizable-panels@2.1.7 (v4.7.5 available)
+2026-03-24T15:33:01.719Z	+ react-responsive-masonry@2.7.1
+2026-03-24T15:33:01.719Z	+ react-router@7.13.2
+2026-03-24T15:33:01.719Z	+ react-slick@0.31.0
+2026-03-24T15:33:01.720Z	+ recharts@2.15.2 (v3.8.0 available)
+2026-03-24T15:33:01.720Z	+ slick-carousel@1.8.1
+2026-03-24T15:33:01.720Z	+ sonner@2.0.3 (v2.0.7 available)
+2026-03-24T15:33:01.720Z	+ tailwind-merge@3.2.0 (v3.5.0 available)
+2026-03-24T15:33:01.720Z	+ tw-animate-css@1.3.8 (v1.4.0 available)
+2026-03-24T15:33:01.720Z	+ vaul@1.1.2
+2026-03-24T15:33:01.720Z	
+2026-03-24T15:33:01.720Z	291 packages installed [5.63s]
+2026-03-24T15:33:01.720Z	
+2026-03-24T15:33:01.720Z	Blocked 1 postinstall. Run `bun pm untrusted` for details.
+2026-03-24T15:33:01.936Z	Executing user build command: npm run build
+2026-03-24T15:33:02.302Z	
+2026-03-24T15:33:02.302Z	> @figma/my-make-file@0.0.1 build
+2026-03-24T15:33:02.302Z	> vite build
+2026-03-24T15:33:02.302Z	
+2026-03-24T15:33:02.736Z	vite v6.3.5 building for production...
+2026-03-24T15:33:02.854Z	transforming...
+2026-03-24T15:33:07.736Z	✓ 2961 modules transformed.
+2026-03-24T15:33:07.859Z	rendering chunks...
+2026-03-24T15:33:07.865Z	computing gzip size...
+2026-03-24T15:33:08.308Z	dist/assets/slick-BlzDm7g2.svg         2.15 kB │ gzip:  0.91 kB
+2026-03-24T15:33:08.309Z	dist/assets/ajax-loader-BcnMEykj.gif   4.18 kB
+2026-03-24T15:33:08.309Z	dist/index.html                        8.21 kB │ gzip:  2.52 kB
+2026-03-24T15:33:08.309Z	dist/assets/index-2d6kTBOk.css        13.62 kB │ gzip:  3.90 kB
+2026-03-24T15:33:08.309Z	dist/assets/index-bpraLKX2.js         89.08 kB │ gzip: 25.64 kB
+2026-03-24T15:33:08.309Z	✓ built in 5.52s
+2026-03-24T15:33:08.396Z	Success: Build command completed
+2026-03-24T15:33:08.588Z	Executing user deploy command: npx wrangler deploy
+2026-03-24T15:33:10.863Z	npm warn exec The following package was not found and will be installed: wrangler@4.77.0
+2026-03-24T15:33:20.797Z	
+2026-03-24T15:33:20.797Z	 ⛅️ wrangler 4.77.0
+2026-03-24T15:33:20.797Z	───────────────────
+2026-03-24T15:33:21.196Z	
+2026-03-24T15:33:21.197Z	Detected Project Settings:
+2026-03-24T15:33:21.197Z	 - Worker Name: healthinsuranceleadgenerationfinal
+2026-03-24T15:33:21.198Z	 - Framework: Vite
+2026-03-24T15:33:21.207Z	 - Build Command: bun run build
+2026-03-24T15:33:21.207Z	 - Output Directory: dist
+2026-03-24T15:33:21.208Z	
+2026-03-24T15:33:21.208Z	? Do you want to modify these settings?
+2026-03-24T15:33:21.208Z	🤖 Using fallback value in non-interactive context: no
+2026-03-24T15:33:21.208Z	
+2026-03-24T15:33:21.208Z	📦 Install packages:
+2026-03-24T15:33:21.208Z	 - wrangler (devDependency)
+2026-03-24T15:33:21.208Z	
+2026-03-24T15:33:21.208Z	📝 Update package.json scripts:
+2026-03-24T15:33:21.209Z	 - "deploy": "bun run build && wrangler deploy"
+2026-03-24T15:33:21.210Z	 - "preview": "bun run build && wrangler dev"
+2026-03-24T15:33:21.210Z	
+2026-03-24T15:33:21.210Z	📄 Create wrangler.jsonc:
+2026-03-24T15:33:21.211Z	  {
+2026-03-24T15:33:21.211Z	    "$schema": "node_modules/wrangler/config-schema.json",
+2026-03-24T15:33:21.211Z	    "name": "healthinsuranceleadgenerationfinal",
+2026-03-24T15:33:21.211Z	    "compatibility_date": "2025-09-27",
+2026-03-24T15:33:21.211Z	    "observability": {
+2026-03-24T15:33:21.211Z	      "enabled": true
+2026-03-24T15:33:21.211Z	    },
+2026-03-24T15:33:21.211Z	    "assets": {
+2026-03-24T15:33:21.211Z	      "not_found_handling": "single-page-application"
+2026-03-24T15:33:21.211Z	    },
+2026-03-24T15:33:21.211Z	    "compatibility_flags": [
+2026-03-24T15:33:21.211Z	      "nodejs_compat"
+2026-03-24T15:33:21.211Z	    ]
+2026-03-24T15:33:21.211Z	  }
+2026-03-24T15:33:21.212Z	
+2026-03-24T15:33:21.220Z	🛠️  Configuring project for Vite
+2026-03-24T15:33:21.220Z	
+2026-03-24T15:33:21.220Z	? Proceed with setup?
+2026-03-24T15:33:21.220Z	🤖 Using fallback value in non-interactive context: yes
+2026-03-24T15:33:24.630Z	├ Adding Wrangler files to the .gitignore file
+2026-03-24T15:33:24.630Z	│ created .gitignore file
+2026-03-24T15:33:24.630Z	│
+2026-03-24T15:33:24.630Z	[build] Running: bun run build
+2026-03-24T15:33:24.762Z	[build] $ vite build
+2026-03-24T15:33:24.763Z	[build] 
+2026-03-24T15:33:26.295Z	[build] vite v6.3.5 building for production...
+2026-03-24T15:33:26.297Z	[build] 
+2026-03-24T15:33:26.387Z	[build] transforming...
+2026-03-24T15:33:26.390Z	[build] 
+2026-03-24T15:33:31.106Z	[build] ✓ 2961 modules transformed.
+2026-03-24T15:33:31.107Z	[build] 
+2026-03-24T15:33:31.218Z	[build] rendering chunks...
+2026-03-24T15:33:31.219Z	[build] 
+2026-03-24T15:33:31.228Z	[build] computing gzip size...
+2026-03-24T15:33:31.228Z	[build] 
+2026-03-24T15:33:31.235Z	[build] dist/.assetsignore                     0.02 kB
+2026-03-24T15:33:31.235Z	[build] 
+2026-03-24T15:33:31.236Z	[build] dist/wrangler.json                     1.16 kB │ gzip:  0.59 kB
+2026-03-24T15:33:31.236Z	[build] 
+2026-03-24T15:33:31.254Z	[build] dist/assets/slick-BlzDm7g2.svg         2.15 kB │ gzip:  0.91 kB
+2026-03-24T15:33:31.254Z	[build] dist/assets/ajax-loader-BcnMEykj.gif   4.18 kB
+2026-03-24T15:33:31.254Z	[build] dist/index.html                        8.21 kB │ gzip:  2.52 kB
+2026-03-24T15:33:31.254Z	[build] dist/assets/index-2d6kTBOk.css        13.62 kB │ gzip:  3.90 kB
+2026-03-24T15:33:31.255Z	[build] dist/assets/index-bpraLKX2.js         89.08 kB │ gzip: 25.64 kB
+2026-03-24T15:33:31.255Z	[build] ✓ built in 4.92s
+2026-03-24T15:33:31.255Z	[build] 
+2026-03-24T15:33:31.353Z	Using redirected Wrangler configuration.
+2026-03-24T15:33:31.354Z	 - Configuration being used: "dist/wrangler.json"
+2026-03-24T15:33:31.354Z	 - Original user's configuration: "wrangler.jsonc"
+2026-03-24T15:33:31.354Z	 - Deploy configuration file: ".wrangler/deploy/config.json"
+2026-03-24T15:33:31.377Z	
+2026-03-24T15:33:31.379Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-03-24T15:33:31.379Z	
+2026-03-24T15:33:31.458Z	✘ [ERROR] EISDIR: illegal operation on a directory, read
+2026-03-24T15:33:31.459Z	
+2026-03-24T15:33:31.459Z	
+2026-03-24T15:33:31.484Z	If you think this is a bug then please create an issue at https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-24T15:33:31.486Z	? Would you like to report this error to Cloudflare? Wrangler's output and the error details will be shared with the Wrangler team to help us diagnose and fix the issue.
+2026-03-24T15:33:31.486Z	🤖 Using fallback value in non-interactive context: no
+2026-03-24T15:33:31.505Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-24_15-33-19_950.log"
+2026-03-24T15:33:31.798Z	Failed: error occurred while running deploy command

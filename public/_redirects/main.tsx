@@ -1,4 +1,5 @@
-# Serve static files directly
+# Netlify redirects file
+# Serve static files directly - do NOT redirect to index.html
 /sitemap.xml /sitemap.xml 200
 /robots.txt /robots.txt 200
 /favicon.ico /favicon.ico 200
