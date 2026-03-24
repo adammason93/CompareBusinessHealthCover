@@ -2,8 +2,6 @@ import { Shield, Check, Star, ArrowRight, ChevronDown, Search, Heart, Home as Ho
 import { Button } from "@/app/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect } from "react";
-import logoImage from "figma:asset/f0b41f84c1c3aad390d2bbbcfc3d75608b3edd25.png";
-import footerLogoImage from "figma:asset/f0b41f84c1c3aad390d2bbbcfc3d75608b3edd25.png";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
@@ -284,11 +282,9 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <img 
-              src={logoImage} 
-              alt="HealthCoverComparison" 
-              className="h-8 sm:h-12 w-auto"
-            />
+            <div className="text-2xl font-bold text-teal-500">
+              HealthCoverComparison
+            </div>
             <nav className="hidden lg:flex items-center gap-6">
               <div 
                 className="relative"

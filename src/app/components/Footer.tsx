@@ -1,5 +1,4 @@
 import { Star, Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail } from "lucide-react";
-import footerLogoImage from "figma:asset/53f4d59d261632d5c3576da24d1fe68c407521d4.png";
 
 interface FooterProps {
   onNavigate?: (page: string) => void;
@@ -146,11 +145,9 @@ export function Footer({ onNavigate }: FooterProps = {}) {
 
           {/* Logo */}
           <div className="flex justify-center items-start">
-            <img 
-              src={footerLogoImage} 
-              alt="HealthCoverComparison" 
-              className="h-12 w-auto"
-            />
+            <div className="text-2xl font-bold text-teal-500">
+              HealthCoverComparison
+            </div>
           </div>
         </div>
 

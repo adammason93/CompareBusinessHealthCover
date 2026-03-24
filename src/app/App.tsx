@@ -288,7 +288,14 @@ export default function App() {
         return <Sitemap onGetStarted={handleGetStarted} />;
       case 'disclaimer':
         return <Disclaimer onGetStarted={handleGetStarted} />;
+      case 'home':
+        return null; // Home is handled separately in the main render
       default:
+        // If no match found, redirect to home
+        console.warn('⚠️ Unknown page:', currentPage, '- Redirecting to home');
+        if (currentPage !== 'home') {
+          setTimeout(() => setCurrentPage('home'), 0);
+        }
         return null;
     }
   };

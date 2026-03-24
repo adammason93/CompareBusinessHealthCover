@@ -1,7 +1,6 @@
 import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { projectId, publicAnonKey } from '/utils/supabase/info';
-import qrCodeImage from "figma:asset/9f02f371aaf2108f17f8fd29dcf7e3fbe3b6d273.png";
 
 export function ReviewSection() {
   const reviewUrl = "https://search.google.com/local/writereview?placeid=ChIJJ0AV2EEKeUgRAdZzBt6rT10";
@@ -86,20 +85,12 @@ export function ReviewSection() {
               <p className="text-gray-700 mb-4 font-medium">
                 Scan to leave a review
               </p>
-              <div className="w-64 h-64 border-4 border-gray-200 rounded-lg overflow-hidden bg-white flex items-center justify-center">
-                <img 
-                  src={qrCodeImage} 
-                  alt="QR Code for Google Reviews" 
-                  className="w-full h-full object-cover"
-                  style={{
-                    objectPosition: 'center',
-                    transform: 'scale(1.2)'
-                  }}
-                />
+              <div className="w-64 h-64 border-4 border-gray-200 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                <div className="text-center p-8">
+                  <p className="text-sm text-gray-600">QR Code</p>
+                  <p className="text-xs text-gray-500 mt-2">Scan with your phone</p>
+                </div>
               </div>
-              <p className="text-sm text-gray-500 mt-3">
-                Use your phone camera to scan
-              </p>
             </div>
 
             {/* Right: Link & Info */}

@@ -1,6 +1,5 @@
 import { ChevronDown, Search, Menu, X } from "lucide-react";
 import { useState, memo } from "react";
-import logoImage from "figma:asset/f0b41f84c1c3aad390d2bbbcfc3d75608b3edd25.png";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 
 interface HeaderProps {
@@ -31,12 +30,8 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <button onClick={() => onNavigate('home')}>
-              <img 
-                src={logoImage} 
-                alt="HealthCoverComparison" 
-                className="h-8 sm:h-12 w-auto"
-              />
+            <button onClick={() => onNavigate('home')} className="text-2xl font-bold text-teal-500">
+              HealthCoverComparison
             </button>
             
             {/* Desktop Navigation */}
