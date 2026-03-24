@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap Deployment Tester</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #2d2f5e;
+            border-bottom: 3px solid #2d2f5e;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-url {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        button {
+            background: #2d2f5e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #1f2454;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .status-icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Sitemap Deployment Tester</h1>
+    
+    <div class="info">
+        <strong>📋 Instructions:</strong>
+        <ol>
+            <li>Deploy all changes to your live domain</li>
+            <li>Wait 2-3 minutes for deployment to complete</li>
+            <li>Click "Test All" button below</li>
+            <li>All tests should show ✅ SUCCESS</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Test 1: Sitemap XML</h2>
+        <div class="test-url" id="url-sitemap">https://healthcovercomparison.co.uk/sitemap.xml</div>
+        <button onclick="testUrl('sitemap', 'https://healthcovercomparison.co.uk/sitemap.xml', 'xml')">Test Sitemap</button>
+        <button onclick="window.open('https://healthcovercomparison.co.uk/sitemap.xml', '_blank')">Open in Browser</button>
+        <div id="result-sitemap"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🤖 Test 2: Robots.txt</h2>
+        <div class="test-url" id="url-robots">https://healthcovercomparison.co.uk/robots.txt</div>
+        <button onclick="testUrl('robots', 'https://healthcovercomparison.co.uk/robots.txt', 'text')">Test Robots</button>
+        <button onclick="window.open('https://healthcovercomparison.co.uk/robots.txt', '_blank')">Open in Browser</button>
+        <div id="result-robots"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Test 3: Test Static File</h2>
+        <div class="test-url" id="url-test">https://healthcovercomparison.co.uk/test-static.txt</div>
+        <button onclick="testUrl('test', 'https://healthcovercomparison.co.uk/test-static.txt', 'text')">Test Static File</button>
+        <button onclick="window.open('https://healthcovercomparison.co.uk/test-static.txt', '_blank')">Open in Browser</button>
+        <div id="result-test"></div>
+    </div>
+
+    <div class="test-section" style="background: #2d2f5e; color: white;">
+        <h2>🚀 Run All Tests</h2>
+        <button onclick="testAll()" style="background: white; color: #2d2f5e; font-weight: bold; font-size: 16px;">Test All URLs</button>
+        <div id="summary" style="margin-top: 15px; color: white;"></div>
+    </div>
+
+    <div class="info">
+        <strong>✅ Expected Results:</strong>
+        <ul>
+            <li><strong>Sitemap:</strong> Should start with <code>&lt;?xml version="1.0"</code></li>
+            <li><strong>Robots:</strong> Should contain <code>User-agent: *</code> and <code>Sitemap:</code> directives</li>
+            <li><strong>Test File:</strong> Should contain "This is a test file to verify static file serving"</li>
+        </ul>
+    </div>
+
+    <div class="info">
+        <strong>❌ If Tests Fail:</strong>
+        <ol>
+            <li>Verify deployment completed successfully</li>
+            <li>Clear your browser cache (Ctrl+Shift+R or Cmd+Shift+R)</li>
+            <li>Clear CDN cache if using Cloudflare</li>
+            <li>Wait 5 more minutes and test again</li>
+            <li>Check the browser console for CORS errors</li>
+            <li>Read <code>/SITEMAP-DEPLOYMENT-GUIDE.md</code> for detailed troubleshooting</li>
+        </ol>
+    </div>
+
+    <script>
+        async function testUrl(testName, url, expectedType) {
+            const resultDiv = document.getElementById(`result-${testName}`);
+            resultDiv.innerHTML = '<div class="result pending"><span class="status-icon">⏳</span>Testing...</div>';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    cache: 'no-cache',
+                });
+
+                const contentType = response.headers.get('content-type') || '';
+                const text = await response.text();
+
+                let success = false;
+                let message = '';
+
+                if (!response.ok) {
+                    message = `❌ ERROR: HTTP ${response.status} - File not accessible`;
+                } else if (expectedType === 'xml') {
+                    if (text.includes('<?xml') && text.includes('<urlset')) {
+                        success = true;
+                        message = '✅ SUCCESS: Valid XML sitemap detected!';
+                    } else if (text.includes('Not Found') || text.includes('<!DOCTYPE html>')) {
+                        message = '❌ ERROR: React app is intercepting the request (showing HTML instead of XML)';
+                    } else {
+                        message = '❌ ERROR: Response is not valid XML sitemap format';
+                    }
+                } else if (expectedType === 'text') {
+                    if (text.includes('Not Found') || text.includes('<!DOCTYPE html>')) {
+                        message = '❌ ERROR: React app is intercepting the request (showing HTML instead of text)';
+                    } else if (testName === 'test' && text.includes('test file to verify')) {
+                        success = true;
+                        message = '✅ SUCCESS: Test file served correctly!';
+                    } else if (testName === 'robots' && text.includes('User-agent:')) {
+                        success = true;
+                        message = '✅ SUCCESS: Robots.txt served correctly!';
+                    } else {
+                        message = `⚠️ WARNING: File accessible but content unexpected. Content-Type: ${contentType}`;
+                    }
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="result ${success ? 'success' : 'error'}">
+                        <div><span class="status-icon">${success ? '✅' : '❌'}</span>${message}</div>
+                        <div style="margin-top: 10px; font-size: 12px; font-weight: normal;">
+                            Status: ${response.status} | Content-Type: ${contentType}
+                        </div>
+                        <details style="margin-top: 10px; font-size: 11px; font-weight: normal;">
+                            <summary>View Response (first 500 chars)</summary>
+                            <pre style="background: #f8f8f8; padding: 10px; border-radius: 4px; overflow-x: auto; color: #333; margin-top: 5px;">${text.substring(0, 500)}</pre>
+                        </details>
+                    </div>
+                `;
+
+                return success;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <span class="status-icon">❌</span>ERROR: ${error.message}
+                        <div style="margin-top: 10px; font-size: 12px; font-weight: normal;">
+                            This might be a CORS error or network issue. Try opening the URL directly in your browser.
+                        </div>
+                    </div>
+                `;
+                return false;
+            }
+        }
+
+        async function testAll() {
+            document.getElementById('summary').innerHTML = '<div style="color: #fff3cd; font-weight: bold;">⏳ Running all tests...</div>';
+            
+            const results = await Promise.all([
+                testUrl('sitemap', 'https://healthcovercomparison.co.uk/sitemap.xml', 'xml'),
+                testUrl('robots', 'https://healthcovercomparison.co.uk/robots.txt', 'text'),
+                testUrl('test', 'https://healthcovercomparison.co.uk/test-static.txt', 'text')
+            ]);
+
+            const passCount = results.filter(r => r).length;
+            const totalCount = results.length;
+
+            let summaryHTML = '';
+            if (passCount === totalCount) {
+                summaryHTML = `
+                    <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-top: 10px;">
+                        <h3 style="margin: 0 0 10px 0;">🎉 ALL TESTS PASSED! (${passCount}/${totalCount})</h3>
+                        <p style="margin: 0;">Your sitemap is accessible and ready for Google Search Console!</p>
+                        <p style="margin: 10px 0 0 0; font-weight: bold;">Next Step: Submit your sitemap to Google Search Console</p>
+                    </div>
+                `;
+            } else {
+                summaryHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-top: 10px;">
+                        <h3 style="margin: 0 0 10px 0;">❌ TESTS FAILED (${passCount}/${totalCount} passed)</h3>
+                        <p style="margin: 0;">Some static files are not being served correctly.</p>
+                        <p style="margin: 10px 0 0 0; font-weight: bold;">Action Required: Review deployment configuration and check troubleshooting guide</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('summary').innerHTML = summaryHTML;
+        }
+    </script>
+</body>
+</html>

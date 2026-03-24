@@ -1,0 +1,60 @@
+Subject: Broken Link on Your [PAGE TITLE] Page
+
+Hi [NAME],
+
+I hope this email finds you well!
+
+I was researching [TOPIC] for a project I'm working on and came across your article "[ARTICLE TITLE]" at [URL]. It's a really comprehensive resource - I especially found the section on [SPECIFIC SECTION] helpful.
+
+While reading through, I noticed a couple of links that appear to be broken:
+
+1. [BROKEN LINK 1] - Returns a 404 error
+   Located in section: [WHERE IT IS]
+
+2. [BROKEN LINK 2] - Domain appears to have expired
+   Located in section: [WHERE IT IS]
+
+I wanted to give you a heads up so you could update them. I know broken links can affect user experience and SEO.
+
+If you're looking for a replacement resource, I recently published a comprehensive guide on [RELATED TOPIC] that covers similar ground:
+
+[YOUR URL]
+
+It includes:
+• [POINT 1 - Similar to what the broken link covered]
+• [POINT 2 - Additional value]
+• [POINT 3 - Useful information]
+
+Feel free to use it if you think it's a good fit, or I'm happy to help you find other resources if you prefer!
+
+Thanks for creating such helpful content, and hope this helps!
+
+Best,
+
+[YOUR NAME]
+HealthCoverComparison
+📧 info@healthcovercomparison.co.uk
+
+---
+
+HOW TO FIND BROKEN LINKS:
+
+Method 1: Manual Check
+- Use Ctrl+F to search for "http" in page source
+- Click through each link to test
+
+Method 2: Browser Extensions
+- Check My Links (Chrome extension)
+- Link Checker (Firefox extension)
+
+Method 3: Online Tools
+- Ahrefs Broken Link Checker (free)
+- Dead Link Checker
+- W3C Link Checker
+
+BEST PRACTICES:
+✅ Actually help them by finding real broken links
+✅ Your replacement should genuinely be helpful
+✅ Don't push - offer it as a suggestion
+✅ Provide value first, link request second
+✅ Be professional and courteous
