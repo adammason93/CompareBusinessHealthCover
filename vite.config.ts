@@ -16,11 +16,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  publicDir: 'public', // Ensure public directory is recognized
+  publicDir: 'public',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    // Copy public files to dist root
     copyPublicDir: true,
+    rollupOptions: {
+      output: {
+        // Ensure proper asset handling
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
+    },
   },
 })

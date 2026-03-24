@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "deploy": "echo 'Deploy complete - files are in dist/'",
     "dev": "vite"
   },
   "dependencies": {
