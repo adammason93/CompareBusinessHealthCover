@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch site (Vite + Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "vite: dev"
+    },
+    {
+      "name": "Dev server only (terminal)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bash scripts/dev.sh",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
