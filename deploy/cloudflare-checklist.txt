@@ -22,7 +22,7 @@ Cloudflare deploy — fix “build works but site shows Worker placeholder”
    - Build the site first: npm run build  (produces ./dist from Vite)
    - Deploy Worker + assets from the repo (single source of truth):
        npm run workers:deploy
-   - Config: wrangler.worker.toml + worker/index.ts (main is NOT dist/index.js —
+   - Config: wrangler.jsonc + worker/index.ts (main is NOT dist/index.js —
      Vite’s dist/index.html is not a Worker module.)
    - Do not maintain different Worker code only in the dashboard; push changes to Git.
 

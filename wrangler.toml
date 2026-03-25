@@ -10,7 +10,7 @@
 # SPA client-side routing: public/_redirects is copied to dist/_redirects on build.
 #
 # CLI upload: npm run pages:deploy  (set --project-name to match your Pages project)
-# Optional Workers+assets path: wrangler.worker.toml + npm run workers:deploy
+# Optional Workers+assets path: wrangler.jsonc + npm run workers:deploy
 # -----------------------------------------------------------------------------
 compatibility_date = "2025-03-24"
 pages_build_output_dir = "dist"
