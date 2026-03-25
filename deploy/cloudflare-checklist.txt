@@ -1,0 +1,31 @@
+Cloudflare deploy — fix “build works but site shows Worker placeholder”
+================================================================================
+
+1) CONFIRM WHAT IS SERVING YOUR DOMAIN (Pages vs Worker)
+   - Dashboard: Workers & Pages → open each project.
+   - Pages projects show a “Pages” label and deploy previews from Git.
+   - Workers show “Worker” and a code editor with export default { fetch … }.
+   - Custom domains: Workers & Pages → your site → Custom domains.
+   - If the domain is attached to a Worker that still returns “Hello world”, that
+     Worker is what users see — not your Git build output.
+
+2) RECOMMENDED: CLOUDFLARE PAGES (this repo is set up for this)
+   - Create or use a Pages project: Connect the GitHub repo.
+   - Build command: npm run build
+   - Build output directory: dist
+   - Environment: NODE_VERSION = 20 (or rely on .nvmrc if supported)
+   - Attach your production domain to THIS Pages project.
+   - Remove the domain from any standalone “hello world” Worker (or delete that
+     Worker’s route) so traffic goes to Pages only.
+
+3) OPTIONAL: WORKERS + STATIC ASSETS (if you must use Workers, not Pages)
+   - Build the site first: npm run build  (produces ./dist from Vite)
+   - Deploy Worker + assets from the repo (single source of truth):
+       npm run workers:deploy
+   - Config: wrangler.worker.toml + worker/index.ts (main is NOT dist/index.js —
+     Vite’s dist/index.html is not a Worker module.)
+   - Do not maintain different Worker code only in the dashboard; push changes to Git.
+
+4) VERIFY AFTER DEPLOY
+   - View page source on the live URL: you should see your real <title> and
+     script tags from the built index.html, not a single line of plain text.

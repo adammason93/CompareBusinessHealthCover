@@ -1,6 +1,16 @@
-# Cloudflare Pages — connect the repo in the dashboard with:
+# Cloudflare Pages (recommended for this Vite SPA)
+# -----------------------------------------------------------------------------
+# Dashboard: Workers & Pages → Create → Pages → Connect Git (this repo).
 #   Build command: npm run build
 #   Build output directory: dist
-# CLI: npm run pages:deploy (uses --project-name; match your Pages project name)
+#   Node: 20 (see .nvmrc) — set NODE_VERSION=20 in Pages → Settings → Environment if needed.
+# Attach your custom domain to THIS Pages project. If a separate Worker still owns the
+# hostname, users will see the Worker response (e.g. “Hello world”), not dist/.
+#
+# SPA client-side routing: public/_redirects is copied to dist/_redirects on build.
+#
+# CLI upload: npm run pages:deploy  (set --project-name to match your Pages project)
+# Optional Workers+assets path: wrangler.worker.toml + npm run workers:deploy
+# -----------------------------------------------------------------------------
 compatibility_date = "2025-03-24"
 pages_build_output_dir = "dist"
