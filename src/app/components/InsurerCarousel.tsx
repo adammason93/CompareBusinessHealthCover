@@ -4,15 +4,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const insurers = [
-  { name: "Aviva", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "AXA", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "Vitality", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "Bupa", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "WPA", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "The Exeter", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "Freedom", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "Cigna", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
+const insurers: { name: string; logo: string; description: string }[] = [
+  { name: "Aviva", logo: "/insurers/aviva.png", description: "Trusted UK insurer with flexible private medical plans." },
+  { name: "AXA", logo: "/insurers/axa.png", description: "Global health cover with extensive hospital networks." },
+  { name: "Vitality", logo: "/insurers/vitality.png", description: "Rewards-based health and life insurance." },
+  { name: "WPA", logo: "/insurers/wpa.png", description: "Not-for-profit healthcare with personal service." },
+  { name: "The Exeter", logo: "/insurers/exeter.png", description: "Specialist health and protection for individuals & families." },
+  { name: "Freedom Health Insurance", logo: "/insurers/freedom.png", description: "Flexible policies tailored to your needs." },
+  { name: "Cigna", logo: "/insurers/cigna.png", description: "International and UK-focused health solutions." },
 ];
 
 export function InsurerCarousel() {
@@ -76,11 +75,13 @@ export function InsurerCarousel() {
               <div key={index} className="px-2 sm:px-3">
                 <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 h-64 sm:h-72 md:h-80 flex flex-col items-center justify-between shadow-md hover:shadow-xl transition-shadow">
                   <div className="flex-1 flex items-center justify-center w-full p-4">
-                    <img 
-                      src={insurer.logo} 
+                    <img
+                      src={insurer.logo}
                       alt={`${insurer.name} logo`}
-                      className="max-w-full max-h-full object-contain"
-                      style={{ maxHeight: '140px' }}
+                      className="max-w-full max-h-full w-auto object-contain"
+                      style={{ maxHeight: "120px" }}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   
@@ -158,7 +159,17 @@ export function InsurerCarousel() {
             opacity: 0.6;
             transition: opacity 0.3s ease;
           }
-          \n          .insurer-carousel-wrapper .slick-slide.slick-active {\n            opacity: 1;\n          }\n        }\n        \n        /* Mobile optimization - no opacity effects */\n        @media (max-width: 767px) {\n          .insurer-carousel-wrapper .slick-slide {\n            opacity: 1;\n          }\n        }\n      `}</style>
+          .insurer-carousel-wrapper .slick-slide.slick-active {
+            opacity: 1;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .insurer-carousel-wrapper .slick-slide {
+            opacity: 1;
+          }
+        }
+      `}</style>
     </section>
   );
 }

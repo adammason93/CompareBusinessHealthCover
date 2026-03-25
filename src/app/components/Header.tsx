@@ -1,6 +1,7 @@
 import { ChevronDown, Search, Menu, X } from "lucide-react";
 import { useState, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
+import { BrandLogo } from "@/app/components/BrandLogo";
 
 interface HeaderProps {
   onGetStarted: () => void;
@@ -30,9 +31,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <button onClick={() => onNavigate('home')} className="text-2xl font-bold text-teal-500">
-              HealthCoverComparison
-            </button>
+            <BrandLogo onClick={() => onNavigate("home")} />
             
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-6">

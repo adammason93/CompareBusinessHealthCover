@@ -12,6 +12,7 @@ import { ReviewSection } from "@/app/components/ReviewSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { BrandLogo } from "@/app/components/BrandLogo";
 
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
@@ -282,9 +283,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-teal-500">
-              HealthCoverComparison
-            </div>
+            <BrandLogo onClick={() => onNavigate?.("home")} />
             <nav className="hidden lg:flex items-center gap-6">
               <div 
                 className="relative"
