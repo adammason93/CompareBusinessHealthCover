@@ -13,12 +13,17 @@ Cloudflare deploy — fix “build works but site shows Worker placeholder”
    - Create or use a Pages project: Connect the GitHub repo.
    - Build command: npm run build
    - Build output directory: dist
+   - Leave “Deploy command” empty (Pages uploads dist automatically). Do NOT set it to
+     npm run deploy — that script is for Workers Builds (see item 3).
    - Environment: NODE_VERSION = 20 (or rely on .nvmrc if supported)
    - Attach your production domain to THIS Pages project.
    - Remove the domain from any standalone “hello world” Worker (or delete that
      Worker’s route) so traffic goes to Pages only.
 
-3) OPTIONAL: WORKERS + STATIC ASSETS (if you must use Workers, not Pages)
+3) WORKERS BUILDS (Git) + STATIC ASSETS
+   - Build command: npm run build
+   - Deploy command: npm run deploy  (runs wrangler deploy --config wrangler.jsonc after build)
+   - Or locally: npm run workers:deploy  (build + deploy in one step)
    - Build the site first: npm run build  (produces ./dist from Vite)
    - Deploy Worker + assets from the repo (single source of truth):
        npm run workers:deploy
