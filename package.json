@@ -9,7 +9,8 @@
   "scripts": {
     "build": "vite build",
     "deploy": "echo 'Deploy complete - files are in dist/'",
-    "dev": "vite"
+    "dev": "vite",
+    "pages:deploy": "npm run build && wrangler pages deploy dist --project-name=healthcovercompare"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -74,7 +75,8 @@
     "@tailwindcss/vite": "4.1.12",
     "@vitejs/plugin-react": "4.7.0",
     "tailwindcss": "4.1.12",
-    "vite": "6.3.5"
+    "vite": "6.3.5",
+    "wrangler": "^4.77.0"
   },
   "pnpm": {
     "overrides": {

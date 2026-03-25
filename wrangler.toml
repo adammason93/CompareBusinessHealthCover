@@ -1,0 +1,6 @@
+# Cloudflare Pages — connect the repo in the dashboard with:
+#   Build command: npm run build
+#   Build output directory: dist
+# CLI: npm run pages:deploy (uses --project-name; match your Pages project name)
+compatibility_date = "2025-03-24"
+pages_build_output_dir = "dist"
