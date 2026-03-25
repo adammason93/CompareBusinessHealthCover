@@ -11,7 +11,9 @@
     "deploy": "wrangler deploy",
     "dev": "vite",
     "pages:deploy": "npm run build && wrangler pages deploy dist --project-name=healthcovercompare",
-    "workers:deploy": "npm run build && npm run deploy"
+    "workers:deploy": "npm run build && npm run deploy",
+    "supabase:deploy": "supabase functions deploy make-server-2031af1c --project-ref bjylempevckvbpzpiicx",
+    "supabase:login": "supabase login"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -78,7 +80,8 @@
     "@vitejs/plugin-react": "4.7.0",
     "tailwindcss": "4.1.12",
     "vite": "6.3.5",
-    "wrangler": "^4.77.0"
+    "wrangler": "^4.77.0",
+    "supabase": "^2.84.1"
   },
   "pnpm": {
     "overrides": {

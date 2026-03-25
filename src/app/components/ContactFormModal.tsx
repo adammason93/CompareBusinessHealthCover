@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { projectId, publicAnonKey } from "/utils/supabase/info";
+import { publicAnonKey } from "/utils/supabase/info";
+import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
 interface ContactFormModalProps {
   isOpen: boolean;
@@ -31,7 +32,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/contact`, {
+      const response = await fetch(supabaseEdgeUrl('/contact'), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

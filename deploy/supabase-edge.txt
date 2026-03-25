@@ -1,0 +1,23 @@
+Supabase Edge Function: server
+================================
+Function path: supabase/functions/make-server-2031af1c/ (Hono app, entry: index.tsx)
+  Deployed URL: https://bjylempevckvbpzpiicx.supabase.co/functions/v1/make-server-2031af1c
+
+Prerequisites
+-------------
+1. Install deps: npm install
+2. Log in (one-time): npm run supabase:login
+   Or set SUPABASE_ACCESS_TOKEN (Dashboard → Account → Access Tokens) and:
+   export SUPABASE_ACCESS_TOKEN="your-token"
+
+Deploy
+------
+  npm run supabase:deploy
+
+This deploys the function named "make-server-2031af1c" to project ref bjylempevckvbpzpiicx
+(must match utils/supabase/info.tsx projectId and utils/supabase/edge.ts SUPABASE_EDGE_FUNCTION_SLUG).
+
+Secrets (Dashboard → Edge Functions → server → Secrets)
+---------------------------------------------------------
+The function expects Deno env vars such as SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
+SUPABASE_ANON_KEY, etc. Configure them in the Supabase dashboard if not already set.

@@ -4,7 +4,8 @@ import { Input } from "@/app/components/ui/input";
 import { Dialog, DialogContent } from "@/app/components/ui/dialog";
 import { LogIn, UserPlus, Mail, Lock, User, X, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { projectId, publicAnonKey } from "/utils/supabase/info";
+import { publicAnonKey } from "/utils/supabase/info";
+import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
 
     try {
       const endpoint = isLogin ? '/login' : '/signup';
-      const url = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c${endpoint}`;
+      const url = supabaseEdgeUrl(endpoint);
       
       console.log('Attempting request to:', url);
       console.log('Request body:', { 

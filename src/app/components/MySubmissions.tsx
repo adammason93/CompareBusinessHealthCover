@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/app/components/ui/dialog";
 import { Button } from "@/app/components/ui/button";
 import { FileText, Calendar, User, Mail, Phone, X, Loader2 } from "lucide-react";
-import { projectId, publicAnonKey } from "/utils/supabase/info";
+import { publicAnonKey } from "/utils/supabase/info";
+import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
 interface MySubmissionsProps {
   isOpen: boolean;
@@ -38,7 +39,7 @@ export function MySubmissions({ isOpen, onClose, authToken, user }: MySubmission
       console.log('User ID:', user?.id);
       
       const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/user-submissions`,
+        supabaseEdgeUrl('/user-submissions'),
         {
           method: "GET",
           headers: {

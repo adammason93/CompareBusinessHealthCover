@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
-import { projectId, publicAnonKey } from '/utils/supabase/info';
+import { publicAnonKey } from '/utils/supabase/info';
+import { supabaseEdgeUrl } from '/utils/supabase/edge';
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 interface ContactUsProps {
@@ -34,7 +35,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
 
     try {
       const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/contact`,
+        supabaseEdgeUrl('/contact'),
         {
           method: 'POST',
           headers: {

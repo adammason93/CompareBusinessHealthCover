@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/app/components/ui/button';
 import { CheckCircle2, XCircle, Loader2, AlertCircle } from 'lucide-react';
+import { publicAnonKey } from '/utils/supabase/info';
+import { supabaseEdgeUrl } from '/utils/supabase/edge';
 
 export function SupabaseConnectionTest() {
   const [testing, setTesting] = useState(false);
@@ -17,8 +19,8 @@ export function SupabaseConnectionTest() {
     try {
       // Test 1: Health Check (requires Supabase auth)
       console.log('Testing health endpoint...');
-      const healthUrl = 'https://bjylempevckvbpzpiicx.supabase.co/functions/v1/make-server-2031af1c/health';
-      const authHeader = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqeWxlbXBldmNrdmJwenBpaWN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5MDI1ODgsImV4cCI6MjA4NDQ3ODU4OH0.QNgiklDhLOSD_cCCKvKg8CLgatgldvoT4pn3oRYH0lc';
+      const healthUrl = supabaseEdgeUrl('/health');
+      const authHeader = `Bearer ${publicAnonKey}`;
       
       console.log('URL:', healthUrl);
       console.log('Auth header:', authHeader.substring(0, 50) + '...');
@@ -58,12 +60,12 @@ export function SupabaseConnectionTest() {
     try {
       // Test 2: Signup Endpoint (without actually creating a user)
       console.log('Testing signup endpoint...');
-      const signupUrl = 'https://bjylempevckvbpzpiicx.supabase.co/functions/v1/make-server-2031af1c/signup';
+      const signupUrl = supabaseEdgeUrl('/signup');
       const signupResponse = await fetch(signupUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqeWxlbXBldmNrdmJwenBpaWN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5MDI1ODgsImV4cCI6MjA4NDQ3ODU4OH0.QNgiklDhLOSD_cCCKvKg8CLgatgldvoT4pn3oRYH0lc'
+          'Authorization': `Bearer ${publicAnonKey}`
         },
         body: JSON.stringify({
           // Intentionally missing fields to test endpoint response

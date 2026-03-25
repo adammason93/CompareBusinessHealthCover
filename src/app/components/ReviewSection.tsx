@@ -1,6 +1,7 @@
 import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
-import { projectId, publicAnonKey } from '/utils/supabase/info';
+import { publicAnonKey } from '/utils/supabase/info';
+import { supabaseEdgeUrl } from '/utils/supabase/edge';
 
 export function ReviewSection() {
   const reviewUrl = "https://search.google.com/local/writereview?placeid=ChIJJ0AV2EEKeUgRAdZzBt6rT10";
@@ -13,7 +14,7 @@ export function ReviewSection() {
     const fetchRating = async () => {
       try {
         const response = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/google-reviews`,
+          supabaseEdgeUrl('/google-reviews'),
           {
             headers: {
               'Authorization': `Bearer ${publicAnonKey}`

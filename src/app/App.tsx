@@ -33,7 +33,8 @@ import { AdminLeads } from "@/app/pages/AdminLeads";
 import { StaticFileServer } from "@/app/components/StaticFileServer";
 import { SEOHead } from "@/app/components/SEOHead";
 import { getSEOConfig } from "@/app/config/seo";
-import { projectId, publicAnonKey } from "/utils/supabase/info";
+import { publicAnonKey } from "/utils/supabase/info";
+import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -150,7 +151,7 @@ export default function App() {
       console.log('Submitting with token type:', authToken ? 'User JWT' : 'Anon Key');
       
       // Send form data to backend
-      const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/submit-form`, {
+      const response = await fetch(supabaseEdgeUrl('/submit-form'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

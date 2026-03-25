@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { projectId, publicAnonKey } from "/utils/supabase/info";
+import { publicAnonKey } from "/utils/supabase/info";
+import { supabaseEdgeUrl } from "/utils/supabase/edge";
 import { Pencil, Save, X, Search, Download, LogOut, Filter } from "lucide-react";
 import { format } from "date-fns";
 
@@ -113,7 +114,7 @@ export function AdminLeads() {
       setIsLoading(true);
       console.log('🔍 Fetching leads from API...');
       const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/admin/leads`,
+        supabaseEdgeUrl('/admin/leads'),
         {
           headers: {
             "Content-Type": "application/json",
@@ -164,7 +165,7 @@ export function AdminLeads() {
       console.log('📝 Edited data:', JSON.stringify(lead));
       
       const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/admin/leads/${leadId}`,
+        supabaseEdgeUrl(`/admin/leads/${leadId}`),
         {
           method: "PUT",
           headers: {
