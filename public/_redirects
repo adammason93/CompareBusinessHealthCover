@@ -1,3 +1,0 @@
-# Cloudflare Pages / Netlify-style redirects — static files in dist are served first.
-# Remaining routes return index.html for the React SPA (client-side routing).
-/* /index.html 200

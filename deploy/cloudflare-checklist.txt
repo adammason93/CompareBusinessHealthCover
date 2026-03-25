@@ -30,6 +30,8 @@ Cloudflare deploy — fix “build works but site shows Worker placeholder”
    - Config: wrangler.toml + worker/index.ts (main is NOT dist/index.js —
      Vite’s dist/index.html is not a Worker module.)
    - Do not maintain different Worker code only in the dashboard; push changes to Git.
+   - SPA fallback is in worker/index.ts. Do not add public/_redirects with /* → /index.html —
+     Workers deploy rejects that rule (infinite loop validation).
 
 4) VERIFY AFTER DEPLOY
    - View page source on the live URL: you should see your real <title> and
