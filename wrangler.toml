@@ -1,16 +1,21 @@
-# Cloudflare Pages (recommended for this Vite SPA)
-# -----------------------------------------------------------------------------
-# Dashboard: Workers & Pages → Create → Pages → Connect Git (this repo).
-#   Build command: npm run build
-#   Build output directory: dist
-#   Node: 20 (see .nvmrc) — set NODE_VERSION=20 in Pages → Settings → Environment if needed.
-# Attach your custom domain to THIS Pages project. If a separate Worker still owns the
-# hostname, users will see the Worker response (e.g. “Hello world”), not dist/.
+# Cloudflare — one config for Workers deploy (`npx wrangler deploy`) and Pages hints.
 #
-# SPA client-side routing: public/_redirects is copied to dist/_redirects on build.
+# Pages (recommended for this Vite SPA): Workers & Pages → Pages → Connect Git
+#   Build: npm run build | Output: dist | Node: 20 (.nvmrc)
+#   Do not set a deploy command on Pages — it uploads dist automatically.
 #
-# CLI upload: npm run pages:deploy  (set --project-name to match your Pages project)
-# Optional Workers+assets path: wrangler.jsonc + npm run workers:deploy
+# Workers Builds (Git): Build: npm run build | Deploy: npx wrangler deploy
+#   Worker entry serves ./dist via Assets (not dist/index.js — that is HTML from Vite).
+#
+# SPA routing: public/_redirects → dist/_redirects
 # -----------------------------------------------------------------------------
-compatibility_date = "2025-03-24"
-pages_build_output_dir = "dist"
+
+name = "healthinsuranceleadgenerationfinal"
+main = "worker/index.ts"
+compatibility_date = "2026-03-25"
+# Do not set pages_build_output_dir here — it makes Wrangler treat this as a Pages
+# project and warn on `wrangler deploy`. For Pages-only, set output dir "dist" in the dashboard.
+
+[assets]
+directory = "dist"
+binding = "STATIC"

@@ -22,12 +22,12 @@ Cloudflare deploy — fix “build works but site shows Worker placeholder”
 
 3) WORKERS BUILDS (Git) + STATIC ASSETS
    - Build command: npm run build
-   - Deploy command: npm run deploy  (runs wrangler deploy --config wrangler.jsonc after build)
+   - Deploy command: npx wrangler deploy  (or npm run deploy — uses wrangler.toml)
    - Or locally: npm run workers:deploy  (build + deploy in one step)
    - Build the site first: npm run build  (produces ./dist from Vite)
    - Deploy Worker + assets from the repo (single source of truth):
        npm run workers:deploy
-   - Config: wrangler.jsonc + worker/index.ts (main is NOT dist/index.js —
+   - Config: wrangler.toml + worker/index.ts (main is NOT dist/index.js —
      Vite’s dist/index.html is not a Worker module.)
    - Do not maintain different Worker code only in the dashboard; push changes to Git.
 
