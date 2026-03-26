@@ -103,11 +103,7 @@
   }
 }
 
-@media (min-width: 768px) {
-  .circle-pattern {
-    background-attachment: fixed;
-  }
-}
+/* Avoid background-attachment: fixed on .circle-pattern — it forces repaints every scroll frame */
 
 /* Performance optimizations for all screen sizes */
 * {

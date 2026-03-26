@@ -179,21 +179,9 @@ export function InsurerCarousel({ onNavigate }: InsurerCarouselProps) {
           border-radius: 4px;
         }
         
-        /* Only apply opacity transitions on desktop for better mobile performance */
-        @media (min-width: 768px) {
-          .insurer-carousel-wrapper .slick-slide {
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-          }
-          .insurer-carousel-wrapper .slick-slide.slick-active {
-            opacity: 1;
-          }
-        }
-
-        @media (max-width: 767px) {
-          .insurer-carousel-wrapper .slick-slide {
-            opacity: 1;
-          }
+        /* Keep slides at full opacity — fading inactive slides caused extra repaints while scrolling */
+        .insurer-carousel-wrapper .slick-slide {
+          opacity: 1;
         }
       `}</style>
     </section>
