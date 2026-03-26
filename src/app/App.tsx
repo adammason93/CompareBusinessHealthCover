@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { LandingPage } from "@/app/components/LandingPage";
 import { EnhancedMultiStepForm } from "@/app/components/EnhancedMultiStepForm";
 import { SuccessPage } from "@/app/components/SuccessPage";
@@ -7,34 +7,70 @@ import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { AuthModal } from "@/app/components/AuthModal";
 import { MySubmissions } from "@/app/components/MySubmissions";
-import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
 import { Dialog, DialogContent } from "@/app/components/ui/dialog";
 import { CookieManager } from "@/app/components/CookieManager";
 import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
-import { HealthInsuranceGuide } from "@/app/pages/HealthInsuranceGuide";
-import { BusinessHealthInsurance } from "@/app/pages/BusinessHealthInsurance";
-import { SelfEmployedHealthInsurance } from "@/app/pages/SelfEmployedHealthInsurance";
-import { CorporateHealthInsurance } from "@/app/pages/CorporateHealthInsurance";
-import { FamilyHealthInsurance } from "@/app/pages/FamilyHealthInsurance";
-import { SeniorHealthInsurance } from "@/app/pages/SeniorHealthInsurance";
-import { InternationalHealthInsurance } from "@/app/pages/InternationalHealthInsurance";
-import { SmallCompanyHealthInsurance } from "@/app/pages/SmallCompanyHealthInsurance";
-import { AboutUs } from "@/app/pages/AboutUs";
-import { ContactUs } from "@/app/pages/ContactUs";
-import { PrivacyPolicy } from "@/app/pages/PrivacyPolicy";
-import { TermsConditions } from "@/app/pages/TermsConditions";
-import { CookiePolicy } from "@/app/components/CookiePolicy";
-import { TermsAndConditions } from "@/app/components/TermsAndConditions";
-import { InsuranceTypes } from "@/app/components/InsuranceTypes";
-import { PartnerInsurers } from "@/app/components/PartnerInsurers";
-import { Sitemap } from "@/app/components/Sitemap";
-import { Disclaimer } from "@/app/pages/Disclaimer";
-import { AdminLeads } from "@/app/pages/AdminLeads";
-import { StaticFileServer } from "@/app/components/StaticFileServer";
 import { SEOHead } from "@/app/components/SEOHead";
 import { getSEOConfig } from "@/app/config/seo";
 import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
+
+const PageFallback = () => (
+  <main className="min-h-[50vh] flex items-center justify-center bg-gray-50 text-gray-500 text-sm">
+    Loading…
+  </main>
+);
+
+const HealthInsuranceGuide = lazy(() =>
+  import("@/app/pages/HealthInsuranceGuide").then((m) => ({ default: m.HealthInsuranceGuide }))
+);
+const BusinessHealthInsurance = lazy(() =>
+  import("@/app/pages/BusinessHealthInsurance").then((m) => ({ default: m.BusinessHealthInsurance }))
+);
+const SelfEmployedHealthInsurance = lazy(() =>
+  import("@/app/pages/SelfEmployedHealthInsurance").then((m) => ({ default: m.SelfEmployedHealthInsurance }))
+);
+const CorporateHealthInsurance = lazy(() =>
+  import("@/app/pages/CorporateHealthInsurance").then((m) => ({ default: m.CorporateHealthInsurance }))
+);
+const FamilyHealthInsurance = lazy(() =>
+  import("@/app/pages/FamilyHealthInsurance").then((m) => ({ default: m.FamilyHealthInsurance }))
+);
+const SeniorHealthInsurance = lazy(() =>
+  import("@/app/pages/SeniorHealthInsurance").then((m) => ({ default: m.SeniorHealthInsurance }))
+);
+const InternationalHealthInsurance = lazy(() =>
+  import("@/app/pages/InternationalHealthInsurance").then((m) => ({ default: m.InternationalHealthInsurance }))
+);
+const SmallCompanyHealthInsurance = lazy(() =>
+  import("@/app/pages/SmallCompanyHealthInsurance").then((m) => ({ default: m.SmallCompanyHealthInsurance }))
+);
+const AboutUs = lazy(() => import("@/app/pages/AboutUs").then((m) => ({ default: m.AboutUs })));
+const ContactUs = lazy(() => import("@/app/pages/ContactUs").then((m) => ({ default: m.ContactUs })));
+const PrivacyPolicy = lazy(() =>
+  import("@/app/pages/PrivacyPolicy").then((m) => ({ default: m.PrivacyPolicy }))
+);
+const TermsConditions = lazy(() =>
+  import("@/app/pages/TermsConditions").then((m) => ({ default: m.TermsConditions }))
+);
+const CookiePolicy = lazy(() =>
+  import("@/app/components/CookiePolicy").then((m) => ({ default: m.CookiePolicy }))
+);
+const TermsAndConditions = lazy(() =>
+  import("@/app/components/TermsAndConditions").then((m) => ({ default: m.TermsAndConditions }))
+);
+const InsuranceTypes = lazy(() =>
+  import("@/app/components/InsuranceTypes").then((m) => ({ default: m.InsuranceTypes }))
+);
+const PartnerInsurers = lazy(() =>
+  import("@/app/components/PartnerInsurers").then((m) => ({ default: m.PartnerInsurers }))
+);
+const Sitemap = lazy(() => import("@/app/components/Sitemap").then((m) => ({ default: m.Sitemap })));
+const Disclaimer = lazy(() => import("@/app/pages/Disclaimer").then((m) => ({ default: m.Disclaimer })));
+const AdminLeads = lazy(() => import("@/app/pages/AdminLeads").then((m) => ({ default: m.AdminLeads })));
+const StaticFileServer = lazy(() =>
+  import("@/app/components/StaticFileServer").then((m) => ({ default: m.StaticFileServer }))
+);
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -312,29 +348,35 @@ export default function App() {
         canonical={`https://healthcovercomparison.co.uk/${currentPage === 'home' ? '' : currentPage}`}
       />
 
-      {/* Debug Info - Minimized */}
-      <div style={{ 
-        position: 'fixed', 
-        bottom: 0, 
-        left: 0, 
-        background: 'rgba(0,0,0,0.6)', 
-        color: 'white', 
-        padding: '4px 8px', 
-        zIndex: 9999, 
-        fontSize: '9px',
-        maxWidth: '120px',
-        borderTopRightRadius: '4px',
-        opacity: 0.5
-      }}>
-        <div>Page: <strong>{currentPage}</strong></div>
-      </div>
-      
-      {currentPage === 'admin-leads' ? (
-        <AdminLeads />
-      ) : currentPage.startsWith('static/') ? (
-        // Render static files without header/footer
-        renderPage()
-      ) : currentPage === 'home' ? (
+      {import.meta.env.DEV && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            background: "rgba(0,0,0,0.6)",
+            color: "white",
+            padding: "4px 8px",
+            zIndex: 9999,
+            fontSize: "9px",
+            maxWidth: "120px",
+            borderTopRightRadius: "4px",
+            opacity: 0.5,
+          }}
+        >
+          <div>
+            Page: <strong>{currentPage}</strong>
+          </div>
+        </div>
+      )}
+
+      {currentPage === "admin-leads" ? (
+        <Suspense fallback={<PageFallback />}>
+          <AdminLeads />
+        </Suspense>
+      ) : currentPage.startsWith("static/") ? (
+        <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
+      ) : currentPage === "home" ? (
         <LandingPage 
           onGetStarted={handleGetStarted} 
           onNavigate={handleNavigate}
@@ -346,15 +388,15 @@ export default function App() {
         />
       ) : (
         <>
-          <Header 
-            onGetStarted={handleGetStarted} 
+          <Header
+            onGetStarted={handleGetStarted}
             onNavigate={handleNavigate}
             onOpenAuth={handleOpenAuthModal}
             onLogout={handleLogout}
             onViewSubmissions={handleViewSubmissions}
             user={user}
           />
-          {renderPage()}
+          <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
           <Footer onNavigate={handleNavigate} />
         </>
       )}

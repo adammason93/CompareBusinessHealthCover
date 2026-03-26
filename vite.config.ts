@@ -23,8 +23,14 @@ export default defineConfig({
     copyPublicDir: true,
     rollupOptions: {
       output: {
-        // Ensure proper asset handling
         assetFileNames: 'assets/[name]-[hash][extname]',
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('recharts')) return 'recharts'
+          if (id.includes('lucide-react')) return 'icons'
+          if (id.includes('node_modules/react-dom/')) return 'react-vendor'
+          if (id.includes('node_modules/react/')) return 'react-vendor'
+        },
       },
     },
   },

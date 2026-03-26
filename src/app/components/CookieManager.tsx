@@ -23,21 +23,31 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
   });
 
   useEffect(() => {
-    // Check if user has already made a choice
     const consent = localStorage.getItem('cookieConsent');
     const sessionConsent = sessionStorage.getItem('cookieConsent');
-    
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let idleId: number | undefined;
+
     if (!consent && !sessionConsent) {
-      // Show banner after a brief delay for better UX
-      setTimeout(() => setIsVisible(true), 1000);
+      const show = () => setIsVisible(true);
+      if (typeof requestIdleCallback !== 'undefined') {
+        idleId = requestIdleCallback(show, { timeout: 3500 });
+      } else {
+        timer = setTimeout(show, 2800);
+      }
     } else {
-      // Load existing preferences
       loadPreferences();
     }
 
-    // Listen for storage changes (cross-tab sync)
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    return () => {
+      if (timer !== undefined) clearTimeout(timer);
+      if (idleId !== undefined && typeof cancelIdleCallback !== 'undefined') {
+        cancelIdleCallback(idleId);
+      }
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const handleStorageChange = (e: StorageEvent) => {
@@ -381,10 +391,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
 
   return (
     <>
-      {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-40" />
-      
-      {/* Cookie Consent Banner */}
+      {/* Bottom banner only (no full-viewport overlay) so hero/LCP is not dimmed or repainted as largest element */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 animate-slide-up">
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] rounded-lg shadow-2xl border border-teal-500/20 overflow-hidden">
           <div className="p-6 sm:p-8">
