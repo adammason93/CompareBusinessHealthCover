@@ -1,1 +1,2 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+/* Poppins is loaded from index.html (non-blocking) — avoid @import here so the bundled
+   CSS file does not chain a render-blocking request to fonts.googleapis.com. */

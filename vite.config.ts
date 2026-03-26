@@ -1,7 +1,30 @@
 import { defineConfig } from 'vite'
+import type { Plugin } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { LCP_HERO_IMAGE_URL, POPPINS_LATIN_WOFF2 } from './src/config/lcp'
+
+/** LCP image + critical fonts discoverable in the initial HTML (SPA-friendly). */
+function injectLcpHints(): Plugin {
+  return {
+    name: 'inject-lcp-hints',
+    enforce: 'pre',
+    transformIndexHtml(html) {
+      if (html.includes('data-lcp-prefetch')) return html
+      const hints = `    <!-- LCP / font hints (injected by vite.config.ts) -->
+    <link rel="preload" data-lcp-prefetch href="${LCP_HERO_IMAGE_URL}" as="image" fetchpriority="high" />
+    <link rel="preload" href="${POPPINS_LATIN_WOFF2.w400}" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="${POPPINS_LATIN_WOFF2.w700}" as="font" type="font/woff2" crossorigin />
+`
+      return html.replace(
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+        `<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+${hints}`,
+      )
+    },
+  }
+}
 
 export default defineConfig({
   plugins: [
@@ -9,6 +32,7 @@ export default defineConfig({
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
+    injectLcpHints(),
   ],
   resolve: {
     alias: {

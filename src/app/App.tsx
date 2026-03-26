@@ -125,8 +125,6 @@ export default function App() {
       } else {
         setCurrentPage('home');
       }
-      // Scroll to top when page changes
-      window.scrollTo(0, 0);
     };
 
     // Force check hash multiple times for mobile
@@ -237,16 +235,6 @@ export default function App() {
     console.log('🔄 Current page before:', currentPage);
     setCurrentPage(page);
     console.log('🔄 setCurrentPage called with:', page);
-    
-    // Use requestAnimationFrame to ensure scroll happens after render
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        console.log('📜 Force scrolled to top');
-      });
-    });
   };
 
   const handleAuthSuccess = (userData: any, token: string) => {

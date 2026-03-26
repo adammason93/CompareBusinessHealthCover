@@ -13,6 +13,7 @@ import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { BrandLogo } from "@/app/components/BrandLogo";
+import { LCP_HERO_IMAGE_URL } from "@/config/lcp";
 
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
@@ -573,8 +574,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <section className="relative overflow-hidden circle-pattern" style={{ backgroundColor: '#2d2f5e' }}>
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
-          <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1767082090422-2e5aeeba2afe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjBwYXJlbnRzJTIwY2hpbGRyZW4lMjBvdXRkb29yJTIwaGFwcHklMjBoZWFsdGh5fGVufDF8fHx8MTc3MTU5NjQxMXww&ixlib=rb-4.1.0&q=70&w=600"
+          <ImageWithFallback
+            src={LCP_HERO_IMAGE_URL}
             alt="Happy family"
             className="w-full h-full object-cover object-right"
             loading="eager"
