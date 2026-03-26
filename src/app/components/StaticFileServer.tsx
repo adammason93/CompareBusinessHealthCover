@@ -116,6 +116,13 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://healthcovercomparison.co.uk/nhs-waiting-times-england</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
   <!-- Health Insurance Pages -->
   <url>
     <loc>https://healthcovercomparison.co.uk/health-insurance-guide</loc>
@@ -301,6 +308,7 @@ Allow: /robots.txt
 Allow: /
 Allow: /about-us
 Allow: /contact-us
+Allow: /nhs-waiting-times-england
 Allow: /health-insurance-guide
 Allow: /business-health-insurance
 Allow: /family-health-insurance

@@ -43,6 +43,14 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                 </button>
               </li>
               <li>
+                <button
+                  onClick={() => handleNavigation('nhs-waiting-times-england')}
+                  className="hover:text-teal-500 text-left"
+                >
+                  NHS waiting times (England)
+                </button>
+              </li>
+              <li>
                 <button 
                   onClick={() => handleNavigation('sitemap')}
                   className="hover:text-teal-500 text-left"

@@ -15,6 +15,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: 'Home', page: 'home' },
         { label: 'About Us', page: 'about-us' },
         { label: 'Contact Us', page: 'contact-us' },
+        { label: 'NHS waiting times (England)', page: 'nhs-waiting-times-england' },
         { label: 'My Submissions', page: 'my-submissions' }
       ]
     },

@@ -23,6 +23,7 @@ Allow: /robots.txt
 Allow: /
 Allow: /about-us
 Allow: /contact-us
+Allow: /nhs-waiting-times-england
 Allow: /health-insurance-guide
 Allow: /business-health-insurance
 Allow: /family-health-insurance

@@ -27,6 +27,13 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://healthcovercomparison.co.uk/nhs-waiting-times-england</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
   <!-- Health Insurance Pages -->
   <url>
     <loc>https://healthcovercomparison.co.uk/health-insurance-guide</loc>

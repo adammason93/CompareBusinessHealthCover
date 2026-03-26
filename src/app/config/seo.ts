@@ -103,6 +103,14 @@ export const SEO_CONFIG = {
         'UK health insurers list, private medical insurers UK, PMI providers UK, compare UK health insurance companies',
     },
 
+    'nhs-waiting-times-england': {
+      title: 'NHS Waiting Times England | Key Statistics & PDF Download',
+      description:
+        'NHS waiting times and key statistics for England: elective RTT lists, A&E four-hour waits, cancer pathways, ambulances—plus download the UK Parliament Commons Library briefing PDF.',
+      keywords:
+        'NHS waiting times England, NHS waiting list UK, RTT 18 weeks, A&E waiting times NHS, NHS key statistics England PDF',
+    },
+
     'about-us': {
       title: 'About HealthCoverCompare | UK Health Insurance Comparison',
       description:

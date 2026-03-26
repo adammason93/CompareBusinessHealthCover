@@ -82,6 +82,9 @@ const InsurerProfilePage = lazy(() =>
 const InsurersHubPage = lazy(() =>
   import("@/app/pages/InsurersHubPage").then((m) => ({ default: m.InsurersHubPage }))
 );
+const NhsWaitingTimesEngland = lazy(() =>
+  import("@/app/pages/NhsWaitingTimesEngland").then((m) => ({ default: m.NhsWaitingTimesEngland }))
+);
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -346,6 +349,8 @@ export default function App() {
         return <PartnerInsurers onNavigate={handleNavigate} />;
       case 'insurers':
         return <InsurersHubPage onGetStarted={handleGetStarted} onNavigate={handleNavigate} />;
+      case 'nhs-waiting-times-england':
+        return <NhsWaitingTimesEngland onGetStarted={handleGetStarted} />;
       case 'sitemap':
         return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':
