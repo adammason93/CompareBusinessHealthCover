@@ -19,3 +19,10 @@ compatibility_date = "2026-03-25"
 [assets]
 directory = "dist"
 binding = "STATIC"
+
+# If Google Search Console flags robots.txt "Unknown directive" on Content-Signal: that text is
+# prepended by Cloudflare Bot Management, not by this repo. Fix: Security → Bots (or Security →
+# Settings → Bot traffic) → turn off "Instruct AI bot traffic with robots.txt", OR run:
+#   CLOUDFLARE_API_TOKEN=… npm run cf:robots:off
+# See scripts/cloudflare-disable-managed-robots.mjs and:
+# https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/

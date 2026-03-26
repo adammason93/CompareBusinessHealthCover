@@ -13,7 +13,8 @@
     "pages:deploy": "npm run build && wrangler pages deploy dist --project-name=healthcovercompare",
     "workers:deploy": "npm run build && npm run deploy",
     "supabase:deploy": "supabase functions deploy make-server-2031af1c --project-ref bjylempevckvbpzpiicx",
-    "supabase:login": "supabase login"
+    "supabase:login": "supabase login",
+    "cf:robots:off": "node scripts/cloudflare-disable-managed-robots.mjs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
