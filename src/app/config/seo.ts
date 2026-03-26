@@ -3,120 +3,162 @@ export const SEO_CONFIG = {
   siteUrl: 'https://healthcovercomparison.co.uk',
   defaultImage: 'https://healthcovercomparison.co.uk/og-image.jpg',
   twitterHandle: '@HealthCoverUK',
-  
+
   pages: {
     home: {
-      title: 'Compare Health Insurance Quotes UK',
-      description: 'Find the best health insurance deals in the UK. Compare quotes from leading providers for family, business, and individual health cover. FCA-regulated broker partners.',
-      keywords: 'health insurance UK, private health insurance, compare health insurance, medical insurance quotes, UK health cover, family health insurance',
+      title: 'Compare Private Health Insurance Quotes UK | Free Comparison',
+      description:
+        'Compare private health insurance quotes from UK insurers and FCA-regulated brokers. Family, business and individual cover—see options in one place with no obligation.',
+      keywords:
+        'compare health insurance UK, private health insurance quotes, PMI comparison UK, medical insurance UK, family health insurance, business health insurance',
     },
-    
+
     'health-insurance-guide': {
-      title: 'UK Health Insurance Guide 2026',
-      description: 'Complete guide to private health insurance in the UK. Learn about coverage options, costs, benefits, and how to choose the right plan for your needs.',
-      keywords: 'health insurance guide UK, private medical insurance guide, PMI explained, health cover options UK',
+      title: 'Private Health Insurance UK: How It Works & What It Costs',
+      description:
+        'Plain-English guide to private medical insurance (PMI) in the UK: what’s covered, typical costs, NHS vs private, and how to compare policies before you buy.',
+      keywords:
+        'private health insurance UK guide, PMI explained UK, how much is health insurance UK, NHS vs private healthcare, compare PMI',
     },
-    
+
     'business-health-insurance': {
-      title: 'Business Health Insurance UK',
-      description: 'Comprehensive business health insurance for UK companies. Protect your team with private medical cover from FCA-regulated providers. Get competitive quotes today.',
-      keywords: 'business health insurance, company medical insurance, SME health cover, corporate health insurance UK',
+      title: 'Business Health Insurance UK | Employee & Company Medical Cover',
+      description:
+        'Compare business health insurance for UK companies. Group PMI for staff wellbeing and retention—quotes via FCA-regulated brokers. SMEs to larger teams.',
+      keywords:
+        'business health insurance UK, company medical insurance, employee health cover UK, group PMI SME, corporate medical insurance quotes',
     },
-    
+
     'family-health-insurance': {
-      title: 'Family Health Insurance UK',
-      description: 'Affordable family health insurance plans in the UK. Comprehensive medical cover for your loved ones from trusted providers. Compare quotes and save.',
-      keywords: 'family health insurance UK, private family medical cover, children health insurance, family PMI',
+      title: 'Family Health Insurance UK | Private Medical Cover for Families',
+      description:
+        'Compare family private health insurance in the UK. Cover for children and adults, outpatient and inpatient options—get matched to brokers who can quote major insurers.',
+      keywords:
+        'family health insurance UK, private medical insurance for family, children health cover UK, family PMI quotes',
     },
-    
+
     'self-employed-health-insurance': {
-      title: 'Self-Employed Health Insurance UK',
-      description: 'Health insurance for self-employed professionals in the UK. Flexible plans, tax benefits, and comprehensive medical cover. Get instant quotes.',
-      keywords: 'self employed health insurance, freelancer medical insurance, sole trader health cover UK',
+      title: 'Self-Employed Health Insurance UK | PMI for Freelancers & Sole Traders',
+      description:
+        'Private health insurance for self-employed people in the UK. Flexible PMI when you have no company scheme—understand tax angles and compare options with regulated brokers.',
+      keywords:
+        'self employed health insurance UK, freelancer private medical insurance, sole trader health cover UK, PMI self employed',
     },
-    
+
     'senior-health-insurance': {
-      title: 'Senior Health Insurance UK',
-      description: 'Specialized health insurance for seniors and over 65s in the UK. Comprehensive medical cover with no age limits from leading providers.',
-      keywords: 'senior health insurance UK, over 65 medical insurance, elderly health cover, pensioner health insurance',
+      title: 'Health Insurance for Over 50s & Seniors UK | Private Medical Cover',
+      description:
+        'Compare health insurance for older adults in the UK. Plans for over 50s and seniors—understand eligibility, exclusions and how brokers help you compare quotes.',
+      keywords:
+        'over 50 health insurance UK, senior private medical insurance, health insurance over 65 UK, elderly PMI UK',
     },
-    
+
     'international-health-insurance': {
-      title: 'International Health Insurance UK',
-      description: 'Global health insurance for UK expats and international travelers. Worldwide medical cover with emergency repatriation. Compare quotes now.',
-      keywords: 'international health insurance, expat medical cover UK, global health insurance, worldwide PMI',
+      title: 'International Health Insurance UK | Global & Expat Medical Cover',
+      description:
+        'Compare international health insurance from the UK: expats, frequent travellers, and worldwide coverage. Worldwide treatment and repatriation options via brokers.',
+      keywords:
+        'international health insurance UK, expat medical insurance, global health insurance UK, worldwide PMI',
     },
-    
+
     'corporate-health-insurance': {
-      title: 'Corporate Health Insurance UK',
-      description: 'Enterprise health insurance solutions for large UK corporations. Attract and retain top talent with comprehensive employee medical benefits.',
-      keywords: 'corporate health insurance, large company medical benefits, employee health cover, enterprise PMI UK',
+      title: 'Corporate Health Insurance UK | Large Company Employee Benefits',
+      description:
+        'Enterprise and corporate private medical insurance for UK organisations. Employee benefits schemes, retention and wellbeing—compare approaches with FCA-regulated brokers.',
+      keywords:
+        'corporate health insurance UK, large company PMI, employee medical benefits UK, enterprise health insurance',
     },
-    
+
     'small-company-health-insurance': {
-      title: 'Small Company Health Insurance UK',
-      description: 'Affordable health insurance for small businesses and SMEs in the UK. Flexible plans starting from 2 employees. Compare quotes from top providers.',
-      keywords: 'small company health insurance, SME medical cover UK, small business health benefits, startup health insurance',
+      title: 'Small Business Health Insurance UK | SME & Startup Medical Cover',
+      description:
+        'Affordable health insurance for small UK businesses and startups—from a handful of employees upward. Compare group PMI options and broker support for SMEs.',
+      keywords:
+        'small business health insurance UK, SME health insurance, startup employee medical cover, group health insurance small company',
     },
-    
+
     'insurance-types': {
-      title: 'Types of Health Insurance UK',
-      description: 'Explore all types of health insurance available in the UK. From family plans to business cover, understand your options and find the right fit.',
-      keywords: 'types of health insurance UK, PMI types, medical insurance options, health cover categories',
+      title: 'Types of Private Health Insurance in the UK Explained',
+      description:
+        'Understand types of UK private medical insurance: inpatient, outpatient, dental, cash plans, and extras. Choose the right structure before you compare quotes.',
+      keywords:
+        'types of health insurance UK, PMI types, outpatient vs inpatient UK, private medical insurance options',
     },
-    
+
     'partner-insurers': {
-      title: 'Our Partner Insurance Providers',
-      description: 'Work with the UK\'s leading health insurance providers. All our broker partners are FCA-regulated for your protection and peace of mind.',
-      keywords: 'UK health insurance providers, FCA regulated insurance brokers, medical insurance companies UK',
+      title: 'Partner Insurers & Brokers | UK Health Insurance Providers',
+      description:
+        'We work with leading UK private medical insurers and FCA-regulated brokers. Compare Aviva, AXA, Bupa, Vitality-style cover and more—see who we partner with.',
+      keywords:
+        'UK health insurance providers, private medical insurers UK, FCA regulated insurance brokers, compare health insurers',
     },
-    
+
     'about-us': {
-      title: 'About HealthCoverCompare',
-      description: 'HealthCoverCompare connects UK customers with FCA-regulated insurance brokers. Our mission is to simplify health insurance comparison and help you find the best cover.',
-      keywords: 'about healthcovercompare, UK insurance comparison, FCA regulated brokers, health insurance lead generation',
+      title: 'About HealthCoverCompare | UK Health Insurance Comparison',
+      description:
+        'HealthCoverCompare is a UK introducer helping you compare private health insurance. We connect you with FCA-regulated brokers—no advice on site; brokers provide quotes and suitability.',
+      keywords:
+        'about HealthCoverCompare, UK health insurance comparison service, FCA regulated insurance introduction, private medical insurance UK',
     },
-    
+
     'contact-us': {
-      title: 'Contact Us',
-      description: 'Get in touch with HealthCoverCompare. Our team is here to help you find the right health insurance solution. Call us or fill out our contact form.',
-      keywords: 'contact healthcovercompare, health insurance enquiries UK, insurance broker contact',
+      title: 'Contact HealthCoverCompare | Health Insurance Enquiries UK',
+      description:
+        'Contact HealthCoverCompare by phone or email for health insurance comparison enquiries. UK-based details—brokers handle quotes and product questions.',
+      keywords:
+        'contact HealthCoverCompare, health insurance enquiry UK, private medical insurance contact',
     },
-    
+
     'privacy-policy': {
       title: 'Privacy Policy',
-      description: 'Our commitment to protecting your personal data. Read our GDPR-compliant privacy policy and learn how we handle your information.',
-      keywords: 'privacy policy, GDPR compliance, data protection UK, cookie policy',
-      noindex: true,
+      description:
+        'How we collect, use and protect your personal data when you use HealthCoverCompare. GDPR-focused summary for UK users.',
+      keywords: 'privacy policy, GDPR UK, data protection HealthCoverCompare',
     },
-    
+
     'terms-conditions': {
       title: 'Terms & Conditions',
-      description: 'Terms and conditions for using HealthCoverCompare. Read our service terms, disclaimers, and legal information.',
-      keywords: 'terms and conditions, service terms, legal disclaimer UK',
-      noindex: true,
+      description:
+        'Terms of use for HealthCoverCompare’s website and comparison service. Read our disclaimers, limitations and legal information.',
+      keywords: 'terms and conditions UK, website terms of use, insurance comparison terms',
     },
-    
+
+    /** Same content as terms-conditions — route used by some internal links */
+    'terms-and-conditions': {
+      title: 'Terms & Conditions',
+      description:
+        'Terms of use for HealthCoverCompare’s website and comparison service. Read our disclaimers, limitations and legal information.',
+      keywords: 'terms and conditions UK, website terms of use, insurance comparison terms',
+    },
+
     'cookie-policy': {
       title: 'Cookie Policy',
-      description: 'Learn how HealthCoverCompare uses cookies to improve your browsing experience. Manage your cookie preferences anytime.',
-      keywords: 'cookie policy UK, cookie consent, website cookies, tracking preferences',
-      noindex: true,
+      description:
+        'How HealthCoverCompare uses cookies and similar technologies. Manage preferences and learn about essential vs optional cookies.',
+      keywords: 'cookie policy UK, cookie consent, website cookies',
     },
-    
-    'disclaimer': {
+
+    disclaimer: {
       title: 'Disclaimer',
-      description: 'Important disclaimer about our health insurance comparison services. We connect you with FCA-regulated brokers who provide professional advice.',
-      keywords: 'insurance disclaimer, FCA compliance, broker services disclaimer',
+      description:
+        'Important information about our role as an introducer, FCA-regulated brokers, and limits of our comparison service. Read before using the site.',
+      keywords: 'insurance disclaimer UK, introducer disclaimer, FCA broker services',
+    },
+
+    sitemap: {
+      title: 'Sitemap',
+      description:
+        'Browse all HealthCoverCompare pages: guides, product areas and legal pages. UK private health insurance comparison hub.',
+      keywords: 'sitemap, health insurance pages UK, HealthCoverCompare navigation',
+    },
+
+    'admin-leads': {
+      title: 'Admin',
+      description: 'Internal leads view.',
+      keywords: '',
       noindex: true,
     },
-    
-    'sitemap': {
-      title: 'Sitemap',
-      description: 'Complete sitemap of HealthCoverCompare. Browse all our health insurance guides, resources, and information pages.',
-      keywords: 'site map, website navigation, health insurance pages UK',
-    },
-  }
+  },
 };
 
 export function getSEOConfig(page: string) {
