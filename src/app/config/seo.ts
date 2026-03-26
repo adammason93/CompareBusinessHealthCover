@@ -1,3 +1,5 @@
+import { getInsurerBySlug } from '@/app/config/insurers';
+
 export const SEO_CONFIG = {
   siteName: 'HealthCoverCompare',
   siteUrl: 'https://healthcovercomparison.co.uk',
@@ -93,6 +95,14 @@ export const SEO_CONFIG = {
         'UK health insurance providers, private medical insurers UK, FCA regulated insurance brokers, compare health insurers',
     },
 
+    insurers: {
+      title: 'UK Health Insurers | Private Medical Insurance Guides',
+      description:
+        'Browse leading UK private health insurers: AXA, Aviva, Vitality, WPA, The Exeter, Freedom, Cigna. Read neutral guides and compare quotes with FCA-regulated brokers.',
+      keywords:
+        'UK health insurers list, private medical insurers UK, PMI providers UK, compare UK health insurance companies',
+    },
+
     'about-us': {
       title: 'About HealthCoverCompare | UK Health Insurance Comparison',
       description:
@@ -162,5 +172,13 @@ export const SEO_CONFIG = {
 };
 
 export function getSEOConfig(page: string) {
+  const insurer = getInsurerBySlug(page);
+  if (insurer) {
+    return {
+      title: insurer.seo.title,
+      description: insurer.seo.description,
+      keywords: insurer.seo.keywords,
+    };
+  }
   return SEO_CONFIG.pages[page as keyof typeof SEO_CONFIG.pages] || SEO_CONFIG.pages.home;
 }

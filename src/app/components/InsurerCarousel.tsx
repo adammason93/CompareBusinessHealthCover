@@ -1,20 +1,14 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { INSURERS } from "@/app/config/insurers";
 
-const insurers: { name: string; logo: string; description: string }[] = [
-  { name: "Aviva", logo: "/insurers/aviva.png", description: "Trusted UK insurer with flexible private medical plans." },
-  { name: "AXA", logo: "/insurers/axa.png", description: "Global health cover with extensive hospital networks." },
-  { name: "Vitality", logo: "/insurers/vitality.png", description: "Rewards-based health and life insurance." },
-  { name: "WPA", logo: "/insurers/wpa.png", description: "Not-for-profit healthcare with personal service." },
-  { name: "The Exeter", logo: "/insurers/exeter.png", description: "Specialist health and protection for individuals & families." },
-  { name: "Freedom Health Insurance", logo: "/insurers/freedom.png", description: "Flexible policies tailored to your needs." },
-  { name: "Cigna", logo: "/insurers/cigna.png", description: "International and UK-focused health solutions." },
-];
+interface InsurerCarouselProps {
+  onNavigate?: (page: string) => void;
+}
 
-export function InsurerCarousel() {
+export function InsurerCarousel({ onNavigate }: InsurerCarouselProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [slidesToShow, setSlidesToShow] = useState(3);
 
@@ -65,15 +59,44 @@ export function InsurerCarousel() {
   return (
     <section className="py-12 sm:py-16" style={{ backgroundColor: '#e8ecf1' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12" style={{ color: '#003366' }}>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4" style={{ color: '#003366' }}>
           Compare Leading Insurers
         </h2>
+        <p className="text-center mb-8 sm:mb-12">
+          <a
+            href="/insurers"
+            onClick={(e) => {
+              if (onNavigate && !e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
+                e.preventDefault();
+                onNavigate('insurers');
+              }
+            }}
+            className="text-sm font-semibold text-[#003366] underline hover:text-[#0ebcc8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#003366] rounded"
+          >
+            View all insurer guides
+          </a>
+        </p>
         
         <div className="insurer-carousel-wrapper">
           <Slider {...settings}>
-            {insurers.map((insurer, index) => (
-              <div key={index} className="px-2 sm:px-3">
-                <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 h-64 sm:h-72 md:h-80 flex flex-col items-center justify-between shadow-md hover:shadow-xl transition-shadow">
+            {INSURERS.map((insurer) => (
+              <div key={insurer.slug} className="px-2 sm:px-3">
+                <a
+                  href={`/${insurer.slug}`}
+                  onClick={(e) => {
+                    if (
+                      onNavigate &&
+                      !e.ctrlKey &&
+                      !e.metaKey &&
+                      !e.shiftKey &&
+                      e.button === 0
+                    ) {
+                      e.preventDefault();
+                      onNavigate(insurer.slug);
+                    }
+                  }}
+                  className="block bg-white rounded-lg p-4 sm:p-6 md:p-8 h-64 sm:h-72 md:h-80 flex flex-col items-center justify-between shadow-md hover:shadow-xl transition-shadow cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#003366] focus-visible:ring-offset-2"
+                >
                   <div className="flex-1 flex items-center justify-center w-full p-4">
                     <img
                       src={insurer.logo}
@@ -84,16 +107,19 @@ export function InsurerCarousel() {
                       decoding="async"
                     />
                   </div>
-                  
-                  <div className="text-center mt-4 sm:mt-6">
+
+                  <div className="text-center mt-4 sm:mt-6 w-full">
                     <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2 text-gray-900">
                       {insurer.name}
                     </h3>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                      {insurer.description}
+                      {insurer.shortDescription}
                     </p>
+                    <span className="inline-block mt-3 text-xs font-semibold text-[#003366] underline">
+                      Learn more
+                    </span>
                   </div>
-                </div>
+                </a>
               </div>
             ))}
           </Slider>

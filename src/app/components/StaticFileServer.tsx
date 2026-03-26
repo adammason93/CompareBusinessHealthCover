@@ -188,6 +188,56 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.7</priority>
   </url>
 
+  <!-- Insurer guides -->
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/axa-health</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/aviva</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/vitality</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/wpa</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/exeter</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/freedom</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/insurers/cigna</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
   <!-- Legal Pages -->
   <url>
     <loc>https://healthcovercomparison.co.uk/privacy-policy</loc>
@@ -261,6 +311,7 @@ Allow: /corporate-health-insurance
 Allow: /small-company-health-insurance
 Allow: /insurance-types
 Allow: /partner-insurers
+Allow: /insurers
 Allow: /privacy-policy
 Allow: /terms-conditions
 Allow: /cookie-policy

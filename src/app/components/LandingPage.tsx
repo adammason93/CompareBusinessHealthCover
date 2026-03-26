@@ -713,7 +713,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Insurer Carousel */}
-      <InsurerCarousel />
+      <InsurerCarousel onNavigate={onNavigate} />
 
       {/* How Do We Work Section - Find Your Best Health Cover */}
       <section id="find-best-cover" className="py-20 pb-0" style={{ backgroundColor: '#f9fafb' }}>

@@ -33,6 +33,7 @@ Allow: /corporate-health-insurance
 Allow: /small-company-health-insurance
 Allow: /insurance-types
 Allow: /partner-insurers
+Allow: /insurers
 Allow: /privacy-policy
 Allow: /terms-conditions
 Allow: /cookie-policy

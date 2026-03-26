@@ -12,6 +12,7 @@ import { CookieManager } from "@/app/components/CookieManager";
 import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
 import { SEOHead } from "@/app/components/SEOHead";
 import { getSEOConfig } from "@/app/config/seo";
+import { getInsurerBySlug, resolveInsurerRoute } from "@/app/config/insurers";
 import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
@@ -75,6 +76,12 @@ const AdminLeads = lazy(() => import("@/app/pages/AdminLeads").then((m) => ({ de
 const StaticFileServer = lazy(() =>
   import("@/app/components/StaticFileServer").then((m) => ({ default: m.StaticFileServer }))
 );
+const InsurerProfilePage = lazy(() =>
+  import("@/app/pages/InsurerProfilePage").then((m) => ({ default: m.InsurerProfilePage }))
+);
+const InsurersHubPage = lazy(() =>
+  import("@/app/pages/InsurersHubPage").then((m) => ({ default: m.InsurersHubPage }))
+);
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -83,59 +90,76 @@ export default function App() {
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPage, setCurrentPage] = useState(() => {
-    // Check pathname first (for SEO-friendly URLs like /about-us)
-    const pathname = window.location.pathname.slice(1); // Remove leading slash
-    
-    // Handle static file requests - serve them directly
+    const pathname = window.location.pathname.slice(1).replace(/^index\.html$/i, '');
+
     if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
       console.log('🔍 Static file requested:', pathname, '- Will serve from /static/ route');
       return `static/${pathname}`;
     }
-    
-    if (pathname && pathname !== '' && pathname !== 'index.html') {
-      console.log('🎯 Initial page from pathname:', pathname);
-      return pathname;
+
+    if (pathname && pathname !== '') {
+      const resolved = resolveInsurerRoute(pathname);
+      if (resolved !== pathname) {
+        window.history.replaceState({}, '', `/${resolved}`);
+      }
+      return resolved;
     }
     
     // Check query params (for mobile)
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = urlParams.get('page');
     if (pageParam) {
-      console.log('🎯 Initial page from query param:', pageParam);
-      return pageParam;
+      return resolveInsurerRoute(pageParam);
     }
-    
-    // Fallback to hash
+
     const hash = window.location.hash.slice(1);
-    console.log('🎯 Initial hash:', hash);
-    return hash || 'home';
+    return (hash ? resolveInsurerRoute(hash) : null) || 'home';
   });
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
 
-  // Handle URL hash navigation
+  // Handle URL hash navigation (does not override pathname-based routes like /about-us)
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.slice(1); // Remove the #
-      console.log('🔗 Hash changed to:', hash);
-      console.log('🔗 Full URL:', window.location.href);
-      console.log('🔗 Window location hash:', window.location.hash);
+      const hash = window.location.hash.slice(1);
       if (hash) {
         setCurrentPage(hash);
       } else {
-        setCurrentPage('home');
+        const path = window.location.pathname.replace(/^\//, '').replace(/^index\.html$/i, '');
+        if (!path) {
+          setCurrentPage('home');
+        }
       }
     };
 
-    // Force check hash multiple times for mobile
     handleHashChange();
     setTimeout(handleHashChange, 100);
     setTimeout(handleHashChange, 500);
     setTimeout(handleHashChange, 1000);
 
-    // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => {
+      let pathname = window.location.pathname.replace(/^\//, '').replace(/^index\.html$/i, '');
+      if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
+        setCurrentPage(`static/${pathname}`);
+        return;
+      }
+      if (!pathname) {
+        setCurrentPage('home');
+        return;
+      }
+      const resolved = resolveInsurerRoute(pathname);
+      if (resolved !== pathname) {
+        window.history.replaceState({}, '', `/${resolved}`);
+      }
+      setCurrentPage(resolved);
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   // Debug current page
@@ -231,10 +255,17 @@ export default function App() {
   };
 
   const handleNavigate = (page: string) => {
-    console.log('🔄 Navigation requested to:', page);
-    console.log('🔄 Current page before:', currentPage);
     setCurrentPage(page);
-    console.log('🔄 setCurrentPage called with:', page);
+    if (page.startsWith('static/')) {
+      const file = page.replace('static/', '');
+      window.history.pushState({ page }, '', `/${file}`);
+      return;
+    }
+    if (page === 'home') {
+      window.history.pushState({ page: 'home' }, '', '/');
+      return;
+    }
+    window.history.pushState({ page }, '', `/${page}`);
   };
 
   const handleAuthSuccess = (userData: any, token: string) => {
@@ -312,20 +343,32 @@ export default function App() {
       case 'insurance-types':
         return <InsuranceTypes onGetStarted={handleGetStarted} />;
       case 'partner-insurers':
-        return <PartnerInsurers onGetStarted={handleGetStarted} />;
+        return <PartnerInsurers onNavigate={handleNavigate} />;
+      case 'insurers':
+        return <InsurersHubPage onGetStarted={handleGetStarted} onNavigate={handleNavigate} />;
       case 'sitemap':
-        return <Sitemap onGetStarted={handleGetStarted} />;
+        return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':
         return <Disclaimer onGetStarted={handleGetStarted} />;
       case 'home':
         return null; // Home is handled separately in the main render
-      default:
-        // If no match found, redirect to home
+      default: {
+        const insurer = getInsurerBySlug(currentPage);
+        if (insurer) {
+          return (
+            <InsurerProfilePage
+              insurer={insurer}
+              onGetStarted={handleGetStarted}
+              onNavigate={handleNavigate}
+            />
+          );
+        }
         console.warn('⚠️ Unknown page:', currentPage, '- Redirecting to home');
         if (currentPage !== 'home') {
           setTimeout(() => setCurrentPage('home'), 0);
         }
         return null;
+      }
     }
   };
 
