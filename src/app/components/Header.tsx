@@ -140,22 +140,26 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 w-48 xl:w-64 text-sm"
                   />
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
+                    aria-label="Search"
                     className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-teal-500 transition-colors"
                   >
-                    <Search className="w-5 h-5" />
+                    <Search className="w-5 h-5" aria-hidden />
                   </button>
                 </div>
               </form>
             </nav>
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
+              type="button"
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden text-gray-600 hover:text-teal-500 p-2"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden /> : <Menu className="w-6 h-6" aria-hidden />}
             </button>
           </div>
         </div>

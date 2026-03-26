@@ -107,19 +107,24 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <a href="#" className="hover:text-teal-500">
-                  <Facebook className="w-5 h-5" />
+                  <Facebook className="w-5 h-5" aria-hidden />
+                  <span className="sr-only">Facebook</span>
                 </a>
                 <a href="#" className="hover:text-teal-500">
-                  <Twitter className="w-5 h-5" />
+                  <Twitter className="w-5 h-5" aria-hidden />
+                  <span className="sr-only">X (Twitter)</span>
                 </a>
                 <a href="#" className="hover:text-teal-500">
-                  <Instagram className="w-5 h-5" />
+                  <Instagram className="w-5 h-5" aria-hidden />
+                  <span className="sr-only">Instagram</span>
                 </a>
                 <a href="#" className="hover:text-teal-500">
-                  <Linkedin className="w-5 h-5" />
+                  <Linkedin className="w-5 h-5" aria-hidden />
+                  <span className="sr-only">LinkedIn</span>
                 </a>
                 <a href="#" className="hover:text-teal-500">
-                  <MessageCircle className="w-5 h-5" />
+                  <MessageCircle className="w-5 h-5" aria-hidden />
+                  <span className="sr-only">Contact us via message</span>
                 </a>
               </div>
             </div>
