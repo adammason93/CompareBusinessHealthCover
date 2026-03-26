@@ -22,6 +22,22 @@ function hasStaticAssetExtension(pathname: string): boolean {
   return last.includes('.') && last.length > 0
 }
 
+const HASHED_ASSET = /\.(js|mjs|css|woff2?|ttf|otf|svg|png|jpe?g|gif|webp|ico|json|map)$/i
+
+function withAssetCache(request: Request, response: Response, pathname: string): Response {
+  if (pathname.startsWith('/assets/') && HASHED_ASSET.test(pathname)) {
+    const headers = new Headers(response.headers)
+    headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+  }
+  if (pathname === '/index.html' || pathname === '/') {
+    const headers = new Headers(response.headers)
+    headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+  }
+  return response
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -40,13 +56,14 @@ export default {
 
     let response = await env.STATIC.fetch(assetRequest)
     if (response.status !== 404) {
-      return response
+      return withAssetCache(request, response, normalizedPath)
     }
 
     if (hasStaticAssetExtension(normalizedPath)) {
       return response
     }
 
-    return env.STATIC.fetch(new Request(new URL('/index.html', original.origin), request))
+    const spa = await env.STATIC.fetch(new Request(new URL('/index.html', original.origin), request))
+    return withAssetCache(request, spa, '/index.html')
   },
 }

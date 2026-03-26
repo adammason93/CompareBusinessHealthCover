@@ -26,6 +26,24 @@ ${hints}`,
   }
 }
 
+/** Preload hashed entry CSS so the browser can start fetch in parallel with JS (post = runs after Vite injects links). */
+function preloadEntryCss(): Plugin {
+  return {
+    name: 'preload-entry-css',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        if (html.includes('data-css-preload')) return html
+        return html.replace(
+          /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/,
+          '<link rel="preload" data-css-preload href="$1" as="style" crossorigin />\n    <link rel="stylesheet" crossorigin href="$1">',
+        )
+      },
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     // The React and Tailwind plugins are both required for Make, even if
@@ -33,6 +51,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     injectLcpHints(),
+    preloadEntryCss(),
   ],
   resolve: {
     alias: {

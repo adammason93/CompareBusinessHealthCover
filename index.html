@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YPNDGKEPC1"></script>
+    <!-- gtag stub: queues until gtag.js loads (deferred in <body> — keeps main thread free for LCP) -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YPNDGKEPC1');
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
     </script>
     
     <!-- Primary Meta Tags -->
@@ -193,5 +191,23 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function () {
+        function loadGtag() {
+          if (window.__gtagJsLoading) return;
+          window.__gtagJsLoading = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-YPNDGKEPC1";
+          s.onload = function () {
+            gtag("js", new Date());
+            gtag("config", "G-YPNDGKEPC1");
+          };
+          document.head.appendChild(s);
+        }
+        var ric = window.requestIdleCallback || function (cb) { return setTimeout(function () { cb({ didTimeout: false, timeRemaining: function () { return 0; } }); }, 1); };
+        ric(loadGtag, { timeout: 4500 });
+      })();
+    </script>
   </body>
 </html>
