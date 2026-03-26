@@ -61,6 +61,8 @@ export default defineConfig({
   },
   publicDir: 'public',
   build: {
+    // Emit .map files so Lighthouse can attribute issues to source; disable if you must not expose sources publicly.
+    sourcemap: true,
     outDir: 'dist',
     assetsDir: 'assets',
     copyPublicDir: true,
