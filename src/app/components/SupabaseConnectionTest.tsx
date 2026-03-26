@@ -125,7 +125,7 @@ export function SupabaseConnectionTest() {
           <Button
             onClick={runTests}
             disabled={testing}
-            className="w-full bg-teal-500 hover:bg-teal-600"
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white"
           >
             {testing ? (
               <>

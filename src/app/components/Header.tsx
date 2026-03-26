@@ -308,7 +308,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                   onGetStarted();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full bg-teal-500 hover:bg-teal-600 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
               >
                 Get A Quote
               </button>

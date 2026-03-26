@@ -211,7 +211,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
       <div className="flex items-center gap-2 sm:gap-3">
         {Icon && (
           <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
-            currentValue === value ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-600'
+            currentValue === value ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'
           }`}>
             <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
@@ -228,7 +228,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
         </div>
         <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center border-2 flex-shrink-0 ${
           currentValue === value 
-            ? 'bg-teal-500 border-teal-500' 
+            ? 'bg-teal-600 border-teal-600' 
             : 'bg-white border-gray-300'
         }`}>
           {currentValue === value && <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />}
@@ -256,7 +256,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
     >
       <div className="flex flex-col items-center gap-3">
         <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${
-          currentValue === value ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-600'
+          currentValue === value ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'
         }`}>
           <Icon className="w-10 h-10" strokeWidth={1.5} />
         </div>
@@ -267,7 +267,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
         </span>
         <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${
           currentValue === value 
-            ? 'bg-teal-500 border-teal-500' 
+            ? 'bg-teal-600 border-teal-600' 
             : 'bg-white border-gray-300'
         }`}>
           {currentValue === value && <Check className="w-4 h-4 text-white" />}
@@ -326,7 +326,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       whileHover={step.number <= currentStep ? { scale: 1.1 } : {}}
                       className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                         step.number === currentStep
-                          ? 'bg-teal-500 text-white shadow-lg ring-2 ring-teal-200'
+                          ? 'bg-teal-600 text-white shadow-lg ring-2 ring-teal-200'
                           : completedSteps.includes(step.number)
                           ? 'bg-green-500 text-white'
                           : step.number < currentStep
@@ -370,7 +370,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                 >
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                     step.number === currentStep
-                      ? 'bg-teal-500 text-white shadow-lg scale-110'
+                      ? 'bg-teal-600 text-white shadow-lg scale-110'
                       : completedSteps.includes(step.number)
                       ? 'bg-green-500 text-white'
                       : step.number < currentStep

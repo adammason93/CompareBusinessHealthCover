@@ -188,7 +188,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-6 py-3 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-3 bg-teal-600 text-white rounded-full hover:bg-teal-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Sending..." : "Submit"}
             </button>

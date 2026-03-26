@@ -204,7 +204,7 @@ export function GoogleReviews() {
                 onClick={() => handleDotClick(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentIndex
-                    ? "bg-teal-500 w-8"
+                    ? "bg-teal-600 w-8"
                     : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to review ${index + 1}`}

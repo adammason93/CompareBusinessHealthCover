@@ -36,7 +36,7 @@ export function SelfEmployedHealthInsurance({ onGetStarted }: SelfEmployedHealth
             <Button 
               size="lg" 
               onClick={onGetStarted} 
-              className="bg-teal-500 hover:bg-teal-600 text-white rounded-full px-8 py-6 text-lg"
+              className="bg-teal-600 hover:bg-teal-700 text-white rounded-full px-8 py-6 text-lg"
             >
               Get Your Free Quote <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

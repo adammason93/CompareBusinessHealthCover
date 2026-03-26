@@ -285,7 +285,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-teal-500 hover:bg-teal-600 text-white py-4 text-lg rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full bg-teal-600 hover:bg-teal-700 text-white py-4 text-lg rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>Sending...</>
@@ -318,7 +318,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
           </p>
           <Button
             onClick={onGetStarted}
-            className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-6 text-lg rounded-full"
+            className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 text-lg rounded-full"
           >
             Get Your Free Quote
           </Button>

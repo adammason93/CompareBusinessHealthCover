@@ -16,9 +16,13 @@ import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
 const PageFallback = () => (
-  <main className="min-h-[50vh] flex items-center justify-center bg-gray-50 text-gray-500 text-sm">
+  <div
+    className="min-h-[50vh] flex items-center justify-center bg-gray-50 text-gray-500 text-sm"
+    role="status"
+    aria-live="polite"
+  >
     Loading…
-  </main>
+  </div>
 );
 
 const HealthInsuranceGuide = lazy(() =>
@@ -371,11 +375,15 @@ export default function App() {
       )}
 
       {currentPage === "admin-leads" ? (
-        <Suspense fallback={<PageFallback />}>
-          <AdminLeads />
-        </Suspense>
+        <main id="main-content">
+          <Suspense fallback={<PageFallback />}>
+            <AdminLeads />
+          </Suspense>
+        </main>
       ) : currentPage.startsWith("static/") ? (
-        <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
+        <main id="main-content">
+          <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
+        </main>
       ) : currentPage === "home" ? (
         <LandingPage 
           onGetStarted={handleGetStarted} 
@@ -396,7 +404,9 @@ export default function App() {
             onViewSubmissions={handleViewSubmissions}
             user={user}
           />
-          <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
+          <main id="main-content">
+            <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
+          </main>
           <Footer onNavigate={handleNavigate} />
         </>
       )}

@@ -255,7 +255,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Button
               onClick={onGetStarted}
-              className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-6 text-lg rounded-full"
+              className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 text-lg rounded-full"
             >
               Get Your Free Quote
             </Button>

@@ -100,7 +100,7 @@ export function CookieConsent({ onNavigate }: CookieConsentProps) {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={handleAccept}
-                    className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-500/20"
+                    className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-600/20"
                   >
                     Accept All
                   </button>

@@ -74,7 +74,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 transition={{ delay: 0.5 }}
                 className="flex items-start gap-3 p-3 bg-teal-50 rounded-xl"
               >
-                <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
                 <div>

@@ -182,7 +182,7 @@ export function FAQSection() {
           <div className="flex justify-center mt-8">
             <button
               onClick={toggleShowAll}
-              className="px-8 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-full font-medium transition-colors"
+              className="px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-full font-medium transition-colors"
             >
               {showAll ? "Show Less" : `Show ${currentData.length - INITIAL_DISPLAY_COUNT} More`}
             </button>

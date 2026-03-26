@@ -86,10 +86,10 @@ export function ReviewSection() {
               <p className="text-gray-700 mb-4 font-medium">
                 Scan to leave a review
               </p>
-              <div className="w-64 h-64 border-4 border-gray-200 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+              <div className="w-64 h-64 border-4 border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
                 <div className="text-center p-8">
-                  <p className="text-sm text-gray-600">QR Code</p>
-                  <p className="text-xs text-gray-500 mt-2">Scan with your phone</p>
+                  <p className="text-sm text-gray-700">QR Code</p>
+                  <p className="text-xs text-gray-700 mt-2">Scan with your phone</p>
                 </div>
               </div>
             </div>
@@ -139,13 +139,13 @@ export function ReviewSection() {
                     href={reviewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors shadow-md hover:shadow-lg"
+                    className="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors shadow-md hover:shadow-lg"
                   >
                     <Star className="w-5 h-5" />
                     Leave a Google Review
                   </a>
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-700">
                     It only takes a minute and means the world to us!
                   </p>
                 </>

@@ -289,7 +289,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   <button
                     onClick={() => setPreferences({ ...preferences, analytics: !preferences.analytics })}
                     className={`w-12 h-6 rounded-full transition-colors ${
-                      preferences.analytics ? 'bg-teal-500' : 'bg-gray-300'
+                      preferences.analytics ? 'bg-teal-600' : 'bg-gray-300'
                     } flex items-center ${preferences.analytics ? 'justify-end' : 'justify-start'} px-1`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full" />
@@ -315,7 +315,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   <button
                     onClick={() => setPreferences({ ...preferences, marketing: !preferences.marketing })}
                     className={`w-12 h-6 rounded-full transition-colors ${
-                      preferences.marketing ? 'bg-teal-500' : 'bg-gray-300'
+                      preferences.marketing ? 'bg-teal-600' : 'bg-gray-300'
                     } flex items-center ${preferences.marketing ? 'justify-end' : 'justify-start'} px-1`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full" />
@@ -341,7 +341,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   <button
                     onClick={() => setPreferences({ ...preferences, functional: !preferences.functional })}
                     className={`w-12 h-6 rounded-full transition-colors ${
-                      preferences.functional ? 'bg-teal-500' : 'bg-gray-300'
+                      preferences.functional ? 'bg-teal-600' : 'bg-gray-300'
                     } flex items-center ${preferences.functional ? 'justify-end' : 'justify-start'} px-1`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full" />
@@ -378,7 +378,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
               </button>
               <button
                 onClick={handleSaveCustom}
-                className="px-6 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-500/20"
+                className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-600/20"
               >
                 Save Preferences
               </button>
@@ -441,7 +441,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={handleAcceptAll}
-                    className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-500/20"
+                    className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-600/20"
                   >
                     Accept All
                   </button>

@@ -559,7 +559,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   onGetStarted();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full bg-teal-500 hover:bg-teal-600 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
               >
                 Get A Complimentary Quote
               </button>
@@ -568,6 +568,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         )}
       </header>
 
+      <main id="main-content">
       {/* Hero Section */}
       <section className="relative overflow-hidden circle-pattern" style={{ backgroundColor: '#2d2f5e' }}>
         {/* Background Image Overlay */}
@@ -625,7 +626,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                 </button>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
-                  className="button-hover-animate bg-teal-500 hover:bg-teal-600 text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                  className="button-hover-animate bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
                 >
                   Get in touch
                 </button>
@@ -1028,6 +1029,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       {/* Review Section */}
       <ReviewSection />
 
+      </main>
+
       {/* Footer */}
       <Footer onNavigate={onNavigate} />
 
@@ -1079,7 +1082,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   setBenefitModalOpen(null);
                   onGetStarted();
                 }}
-                className="px-6 py-2 rounded-full bg-teal-500 hover:bg-teal-600 text-white transition-colors"
+                className="px-6 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white transition-colors"
               >
                 Get Started
               </button>
