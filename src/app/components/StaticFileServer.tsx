@@ -252,6 +252,20 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.75</priority>
   </url>
 
+  <!-- Insurer comparisons -->
+  <url>
+    <loc>https://healthcovercomparison.co.uk/compare/axa-health-vs-bupa</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+  <url>
+    <loc>https://healthcovercomparison.co.uk/compare/vitality-vs-bupa</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
   <!-- Legal Pages -->
   <url>
     <loc>https://healthcovercomparison.co.uk/privacy-policy</loc>

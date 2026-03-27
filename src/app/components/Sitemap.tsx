@@ -1,6 +1,7 @@
 import React from 'react';
 import { FileText, Users, Shield, Mail, Phone, MapPin } from 'lucide-react';
 import { INSURERS } from '@/app/config/insurers';
+import { INSURER_COMPARISONS } from '@/app/config/insurerComparisons';
 
 interface SitemapProps {
   onNavigate: (page: string) => void;
@@ -39,6 +40,10 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         ...INSURERS.map((i) => ({
           label: `${i.name} — overview`,
           page: i.slug,
+        })),
+        ...INSURER_COMPARISONS.map((c) => ({
+          label: `${c.left.name} vs ${c.right.name}`,
+          page: c.slug,
         })),
       ],
     },

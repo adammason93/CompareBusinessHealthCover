@@ -15,6 +15,7 @@ import { ChatBot } from "@/app/components/ChatBot";
 import { SiteChatProvider } from "@/app/context/SiteChatContext";
 import { getSEOConfig } from "@/app/config/seo";
 import { getInsurerBySlug, resolveInsurerRoute } from "@/app/config/insurers";
+import { getComparisonBySlug } from "@/app/config/insurerComparisons";
 import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
@@ -83,6 +84,9 @@ const InsurerProfilePage = lazy(() =>
 );
 const InsurersHubPage = lazy(() =>
   import("@/app/pages/InsurersHubPage").then((m) => ({ default: m.InsurersHubPage }))
+);
+const InsurerComparisonPage = lazy(() =>
+  import("@/app/pages/InsurerComparisonPage").then((m) => ({ default: m.InsurerComparisonPage }))
 );
 const NhsWaitingTimesEngland = lazy(() =>
   import("@/app/pages/NhsWaitingTimesEngland").then((m) => ({ default: m.NhsWaitingTimesEngland }))
@@ -367,6 +371,16 @@ export default function App() {
       case 'home':
         return null; // Home is handled separately in the main render
       default: {
+        const comparison = getComparisonBySlug(currentPage);
+        if (comparison) {
+          return (
+            <InsurerComparisonPage
+              comparison={comparison}
+              onGetStarted={handleGetStarted}
+              onNavigate={handleNavigate}
+            />
+          );
+        }
         const insurer = getInsurerBySlug(currentPage);
         if (insurer) {
           return (

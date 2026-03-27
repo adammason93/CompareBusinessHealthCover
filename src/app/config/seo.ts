@@ -1,4 +1,5 @@
 import { getInsurerBySlug } from '@/app/config/insurers';
+import { getComparisonBySlug } from '@/app/config/insurerComparisons';
 
 export const SEO_CONFIG = {
   siteName: 'HealthCoverCompare',
@@ -188,6 +189,14 @@ export const SEO_CONFIG = {
 };
 
 export function getSEOConfig(page: string) {
+  const comparison = getComparisonBySlug(page);
+  if (comparison) {
+    return {
+      title: comparison.seo.title,
+      description: comparison.seo.description,
+      keywords: comparison.seo.keywords,
+    };
+  }
   const insurer = getInsurerBySlug(page);
   if (insurer) {
     return {

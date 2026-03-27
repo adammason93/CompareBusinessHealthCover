@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { INSURERS } from "@/app/config/insurers";
+import { INSURER_COMPARISONS } from "@/app/config/insurerComparisons";
 
 interface InsurersHubPageProps {
   onGetStarted: () => void;
@@ -65,6 +66,31 @@ export function InsurersHubPage({ onGetStarted, onNavigate }: InsurersHubPagePro
             HealthCoverCompare is an introducer, not an insurer. Information is for general guidance only; brokers
             provide quotes and regulated advice.
           </p>
+
+          <div className="mt-16 pt-12 border-t border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 text-center mb-3">Insurer comparisons</h2>
+            <p className="text-gray-600 text-center text-sm max-w-xl mx-auto mb-8">
+              High-level themes to discuss with a broker—not live prices or recommendations.
+            </p>
+            <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+              {INSURER_COMPARISONS.map((c) => (
+                <li key={c.slug}>
+                  <a
+                    href={`/${c.slug}`}
+                    onClick={(e) => {
+                      if (!e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
+                        e.preventDefault();
+                        onNavigate(c.slug);
+                      }
+                    }}
+                    className="inline-flex items-center justify-center rounded-full border-2 border-[#0ebcc8] text-[#0a9aa3] hover:bg-[#0ebcc8]/10 font-semibold px-6 py-3 text-sm transition-colors"
+                  >
+                    {c.left.name} vs {c.right.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
     </div>
