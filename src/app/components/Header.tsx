@@ -1,4 +1,4 @@
-import { ChevronDown, Search, Menu, X } from "lucide-react";
+import { ChevronDown, Search, Menu, X, ArrowRight } from "lucide-react";
 import { useState, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { BrandLogo } from "@/app/components/BrandLogo";
@@ -129,6 +129,13 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               >
                 Contact Us
               </button>
+              <button
+                type="button"
+                onClick={onGetStarted}
+                className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-5 py-2.5 text-sm font-medium shadow-md border border-gray-200/80 transition-colors"
+              >
+                Start a quote <ArrowRight className="ml-1.5 w-4 h-4 shrink-0" aria-hidden />
+              </button>
               
               {/* Search Bar */}
               <form onSubmit={handleSearch} className="flex items-center">
@@ -151,16 +158,24 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               </form>
             </nav>
 
-            {/* Mobile Menu Button */}
-            <button
-              type="button"
-              aria-expanded={mobileMenuOpen}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-gray-600 hover:text-teal-500 p-2"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden /> : <Menu className="w-6 h-6" aria-hidden />}
-            </button>
+            <div className="flex lg:hidden items-center gap-2">
+              <button
+                type="button"
+                onClick={onGetStarted}
+                className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-3.5 py-2 text-sm font-medium shadow-md border border-gray-200/80 whitespace-nowrap"
+              >
+                Start a quote <ArrowRight className="ml-1 w-3.5 h-3.5 shrink-0" aria-hidden />
+              </button>
+              <button
+                type="button"
+                aria-expanded={mobileMenuOpen}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-600 hover:text-teal-500 p-2"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden /> : <Menu className="w-6 h-6" aria-hidden />}
+              </button>
+            </div>
           </div>
         </div>
 

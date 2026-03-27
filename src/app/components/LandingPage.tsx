@@ -321,8 +321,22 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               >
                 Contact Us
               </button>
+              <button
+                type="button"
+                onClick={onGetStarted}
+                className="button-hover-animate inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-5 py-2.5 text-sm font-medium shadow-md border border-gray-200/80"
+              >
+                Start a quote <ArrowRight className="ml-1.5 w-4 h-4 shrink-0" aria-hidden />
+              </button>
             </nav>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={onGetStarted}
+                className="button-hover-animate lg:hidden inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-3.5 py-2 text-sm font-medium shadow-md border border-gray-200/80 whitespace-nowrap"
+              >
+                Start a quote <ArrowRight className="ml-1 w-3.5 h-3.5 shrink-0" aria-hidden />
+              </button>
               {/* Desktop Search */}
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <div className="relative">
