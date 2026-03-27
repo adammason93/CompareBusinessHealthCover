@@ -71,7 +71,23 @@ export function SEOHead({
       canonicalLink.rel = 'canonical';
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.href = canonical || window.location.href.split('?')[0].split('#')[0];
+    const canonicalUrl = canonical || window.location.href.split('?')[0].split('#')[0];
+    canonicalLink.href = canonicalUrl;
+
+    // Self-referencing hreflang must match canonical (en-GB + x-default for single-locale UK site)
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => {
+      const hl = el.getAttribute('hreflang');
+      if (hl === 'en-GB' || hl === 'x-default') {
+        el.remove();
+      }
+    });
+    for (const hreflang of ['en-GB', 'x-default'] as const) {
+      const link = document.createElement('link');
+      link.rel = 'alternate';
+      link.hreflang = hreflang;
+      link.href = canonicalUrl;
+      document.head.appendChild(link);
+    }
 
   }, [title, description, keywords, ogImage, ogType, canonical, noindex]);
 
