@@ -53,7 +53,7 @@ export function InsurerProfilePage({ insurer, onGetStarted, onNavigate }: Insure
                   type="button"
                   size="lg"
                   onClick={() => onNavigate("insurers")}
-                  className="rounded-full px-8 py-6 text-lg bg-white text-[#2d2f5e] font-semibold border-0 shadow-md hover:bg-gray-100 hover:text-[#2d2f5e] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#2d2f5e]"
+                  className="rounded-full px-8 py-6 text-lg bg-white !text-black font-semibold border-0 shadow-md hover:bg-gray-100 hover:!text-black focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#2d2f5e]"
                 >
                   All insurer guides
                 </Button>
