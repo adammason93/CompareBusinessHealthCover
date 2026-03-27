@@ -193,11 +193,16 @@
     }
     </script>
     <style>
-      /* Pre-React shell: matches hero colour; replaced when the app mounts */
+      /* First paint before React: match header / page chrome (white) — avoids navy hero flash */
+      html,
+      body {
+        margin: 0;
+        background: #ffffff;
+      }
       #root > .app-boot-shell {
         min-height: 100vh;
-        background: #2d2f5e;
-        color: #fff;
+        background: #ffffff;
+        color: #111827;
         font-family: system-ui, -apple-system, Segoe UI, sans-serif;
       }
     </style>
