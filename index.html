@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,11 @@
       window.gtag = gtag;
     </script>
     
-    <!-- Primary Meta Tags -->
-    <title>HealthCoverCompare - Compare Health Insurance Quotes UK | Free Comparison</title>
-    <meta name="title" content="HealthCoverCompare - Compare Health Insurance Quotes UK | Free Comparison" />
-    <meta name="description" content="Compare health insurance quotes from leading UK providers including Bupa, AXA, Aviva & Vitality. Get instant quotes for private medical insurance, family cover, business health insurance. Free, no-obligation comparison service." />
+    <!-- Primary Meta Tags (aligned with src/app/config/seo.ts home + SEOHead suffix) -->
+    <title>Compare Private Health Insurance Quotes UK | Free Comparison | HealthCoverCompare</title>
+    <meta name="title" content="Compare Private Health Insurance Quotes UK | Free Comparison | HealthCoverCompare" />
+    <meta name="description" content="Compare private health insurance quotes from UK insurers and FCA-regulated brokers. Family, business and individual cover—see options in one place with no obligation." />
+    <link rel="alternate" hreflang="en-GB" href="https://healthcovercomparison.co.uk/" />
     <meta name="keywords" content="health insurance UK, private medical insurance, health insurance comparison, compare health insurance, family health insurance, business health insurance, health insurance quotes, medical insurance UK, private healthcare UK" />
     <meta name="author" content="HealthCoverComparison" />
     <meta name="robots" content="index, follow" />
@@ -33,8 +34,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://healthcovercomparison.co.uk/" />
-    <meta property="og:title" content="HealthCoverComparison - Compare Health Insurance Quotes UK" />
-    <meta property="og:description" content="Compare health insurance quotes from leading UK providers. Get instant quotes for private medical insurance, family cover, and business health insurance. Free, no-obligation service." />
+    <meta property="og:title" content="Compare Private Health Insurance Quotes UK | HealthCoverCompare" />
+    <meta property="og:description" content="Compare private health insurance quotes from UK insurers and FCA-regulated brokers. Family, business and individual cover—see options in one place with no obligation." />
     <meta property="og:image" content="https://healthcovercomparison.co.uk/og-image.jpg" />
     <meta property="og:site_name" content="HealthCoverComparison" />
     <meta property="og:locale" content="en_GB" />
@@ -42,8 +43,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://healthcovercomparison.co.uk/" />
-    <meta property="twitter:title" content="HealthCoverComparison - Compare Health Insurance Quotes UK" />
-    <meta property="twitter:description" content="Compare health insurance quotes from leading UK providers. Get instant quotes for private medical insurance. Free, no-obligation service." />
+    <meta property="twitter:title" content="Compare Private Health Insurance Quotes UK | HealthCoverCompare" />
+    <meta property="twitter:description" content="Compare private health insurance quotes from UK insurers and FCA-regulated brokers. Free, no-obligation comparison." />
     <meta property="twitter:image" content="https://healthcovercomparison.co.uk/og-image.jpg" />
     
     <!-- Geo Tags -->
@@ -192,7 +193,41 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Static shell for crawlers and tools that do not execute JavaScript; replaced on client when the app mounts. -->
+    <div id="root">
+      <main id="main-content">
+        <h1>Compare private health insurance quotes in the UK</h1>
+        <p>
+          HealthCoverCompare is a free comparison service for private medical insurance. Whether you need individual cover, family health insurance, or a policy for your business, our FCA regulated broker partners can help you review options from major UK insurers—including names like Bupa, AXA Health, Aviva, Vitality, and others—so you can see quotes and features in one place.
+        </p>
+        <p>
+          Comparing health insurance quotes helps you understand premiums, excess levels, outpatient cover, and hospital networks before you commit. You can use HealthCoverCompare to start a no-obligation enquiry: complete a short form and let regulated brokers contact insurers on your behalf, explain policy wording in plain English, and support you through renewals or changes if you go ahead.
+        </p>
+        <h2>Why compare private health insurance?</h2>
+        <p>
+          Private health insurance in the United Kingdom is not one-size-fits-all. Providers differ on cancer care, mental health, dental add-ons, and how they treat pre-existing conditions. A structured comparison makes it easier to match cover to your budget and priorities—whether you want faster access to consultants, private rooms, or specific hospitals in your area.
+        </p>
+        <h2>Free comparison, no obligation</h2>
+        <p>
+          There is no charge for using HealthCoverCompare to explore your options. You are not obliged to buy a policy; the goal is to save time and bring clarity to a complex market. If you are also researching NHS waiting times, corporate schemes, or international cover, you can browse our guides and product pages below before you request a quote.
+        </p>
+        <p>
+          This page explains how HealthCoverCompare fits into the UK private medical insurance market. When you move through our site with JavaScript enabled, you will see interactive tools, insurer information, and the same emphasis on FCA-regulated advice. The headings and paragraphs above ensure that basic information about our comparison service remains available even when scripts are not run. For the fastest route to a quote, use the Start a quote button once the full site has loaded.
+        </p>
+        <nav aria-label="Key site sections">
+          <h2>Popular pages</h2>
+          <ul>
+            <li><a href="/health-insurance-guide">Private health insurance guide</a></li>
+            <li><a href="/family-health-insurance">Family health insurance</a></li>
+            <li><a href="/business-health-insurance">Business health insurance</a></li>
+            <li><a href="/partner-insurers">Partner insurers</a></li>
+            <li><a href="/contact-us">Contact us</a></li>
+            <li><a href="/about-us">About us</a></li>
+            <li><a href="/sitemap">Sitemap</a></li>
+          </ul>
+        </nav>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       (function () {

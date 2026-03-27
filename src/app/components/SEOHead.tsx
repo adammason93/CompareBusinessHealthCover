@@ -20,6 +20,8 @@ export function SEOHead({
   noindex = false
 }: SEOHeadProps) {
   useEffect(() => {
+    document.documentElement.lang = 'en-GB';
+
     // Set page title
     document.title = `${title} | HealthCoverCompare`;
 
