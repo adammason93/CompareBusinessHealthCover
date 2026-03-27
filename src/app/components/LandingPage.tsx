@@ -12,7 +12,6 @@ import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { BrandLogo } from "@/app/components/BrandLogo";
 import { SiteChatButton } from "@/app/components/SiteChatButton";
-import { WhatsAppChatButton } from "@/app/components/WhatsAppChatButton";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
 import { LCP_HERO_IMAGE_URL } from "@/config/lcp";
 
@@ -315,16 +314,22 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               >
                 About Us
               </button>
-              <button 
+              <button
+                type="button"
                 onClick={() => onNavigate?.('contact-us')}
-                className="text-gray-900 hover:text-teal-500 py-2 whitespace-nowrap"
+                className="inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 text-sm font-medium shadow-md rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
               >
-                Contact Us
+                Contact us
               </button>
-              <WhatsAppChatButton variant="nav" />
             </nav>
             <div className="flex items-center gap-2 sm:gap-3">
-              <WhatsAppChatButton variant="navCompact" className="lg:hidden" />
+              <button
+                type="button"
+                onClick={() => onNavigate?.('contact-us')}
+                className="lg:hidden inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white px-3.5 py-2 text-sm font-medium shadow-md rounded-full whitespace-nowrap"
+              >
+                Contact us
+              </button>
               {/* Desktop Search */}
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <div className="relative">
@@ -468,16 +473,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               >
                 About Us
               </button>
-              <button 
-                onClick={() => {
-                  onNavigate?.('contact-us');
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left text-gray-900 font-medium py-2"
-              >
-                Contact Us
-              </button>
-
               {/* Mobile Search Bar */}
               <form onSubmit={handleSearch} className="pt-4 border-t">
                 <div className="relative">
@@ -497,10 +492,16 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                 </div>
               </form>
 
-              <WhatsAppChatButton
-                variant="mobileMenu"
-                onAfterClick={() => setMobileMenuOpen(false)}
-              />
+              <button
+                type="button"
+                onClick={() => {
+                  onNavigate?.('contact-us');
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 py-3 font-medium text-center mt-4 transition-colors"
+              >
+                Contact us
+              </button>
             </div>
           </div>
         )}
