@@ -1,5 +1,8 @@
 import type { MouseEvent } from "react";
-import { Star, Facebook, Instagram, Linkedin, MessageCircle, Phone, Mail } from "lucide-react";
+import { Star, Facebook, Instagram, Linkedin, MessageCircle, Phone, Mail, Twitter } from "lucide-react";
+
+/** Set when you have an X/Twitter profile to link; icon stays hidden while null */
+const TWITTER_PROFILE_URL: string | null = null;
 
 interface FooterProps {
   onNavigate?: (page: string) => void;
@@ -91,6 +94,17 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                   <Instagram className="w-5 h-5" aria-hidden />
                   <span className="sr-only">Instagram</span>
                 </a>
+                {TWITTER_PROFILE_URL ? (
+                  <a
+                    href={TWITTER_PROFILE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-teal-500"
+                  >
+                    <Twitter className="w-5 h-5" aria-hidden />
+                    <span className="sr-only">X (Twitter)</span>
+                  </a>
+                ) : null}
                 <a
                   href="https://www.linkedin.com/company/112598987/"
                   target="_blank"

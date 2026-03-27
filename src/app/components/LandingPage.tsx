@@ -1,8 +1,21 @@
-import { Shield, Check, Star, ArrowRight, ChevronDown, Heart, Home as HomeIcon, X } from "lucide-react";
-import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
+import {
+  Shield,
+  Check,
+  Star,
+  ArrowRight,
+  ChevronDown,
+  Heart,
+  Home as HomeIcon,
+  X,
+  MessageCircle,
+  TrendingUp,
+  Headphones,
+  PiggyBank,
+  Users,
+  Building2,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
-import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
