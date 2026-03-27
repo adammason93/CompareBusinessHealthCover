@@ -462,15 +462,27 @@ export default function App() {
           <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>
         </main>
       ) : currentPage === "home" ? (
-        <LandingPage 
-          onGetStarted={handleGetStarted} 
-          onNavigate={handleNavigate}
-          renderEmbeddedForm={renderEmbeddedForm}
-          onOpenAuth={handleOpenAuthModal}
-          onLogout={handleLogout}
-          onViewSubmissions={handleViewSubmissions}
-          user={user}
-        />
+        <>
+          <Header
+            onNavigate={handleNavigate}
+            onOpenAuth={handleOpenAuthModal}
+            onLogout={handleLogout}
+            onViewSubmissions={handleViewSubmissions}
+            user={user}
+          />
+          <main id="main-content">
+            <LandingPage
+              onGetStarted={handleGetStarted}
+              onNavigate={handleNavigate}
+              renderEmbeddedForm={renderEmbeddedForm}
+              onOpenAuth={handleOpenAuthModal}
+              onLogout={handleLogout}
+              onViewSubmissions={handleViewSubmissions}
+              user={user}
+            />
+          </main>
+          <Footer onNavigate={handleNavigate} />
+        </>
       ) : (
         <>
           <Header
