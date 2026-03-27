@@ -131,7 +131,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            We work with all of the UK's leading health insurance providers to ensure you have access to the widest range of policies and the most competitive prices available.
+            Our FCA regulated broker partners work with all of the UK&apos;s leading health insurance providers to ensure you have access to the widest range of policies and the most competitive prices available.
           </p>
           <h4 className="font-semibold text-gray-900 text-lg">Our Partner Insurers Include:</h4>
           <div className="grid grid-cols-2 gap-3 my-4">
@@ -199,20 +199,20 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            We understand that comparing health insurance policies can be time-consuming and overwhelming. That's why we do all the hard work for you, making the entire process simple, quick, and stress-free.
+            Our FCA regulated broker partners understand that comparing health insurance policies can be time-consuming and overwhelming. That&apos;s why they do all the hard work for you, making the entire process simple, quick, and stress-free.
           </p>
-          <h4 className="font-semibold text-gray-900 text-lg">We Handle Everything:</h4>
+          <h4 className="font-semibold text-gray-900 text-lg">Our FCA regulated broker partners handle everything:</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
             <li>Thousands of policy options in minutes, not hours</li>
-            <li>We contact multiple insurers on your behalf</li>
+            <li>Our FCA regulated broker partners contact multiple insurers on your behalf</li>
             <li>Simplified comparison tables showing key differences</li>
             <li>All quotes presented in one easy-to-understand format</li>
-            <li>We handle all the paperwork and administration</li>
-            <li>Smooth transition if you're switching providers</li>
+            <li>Our FCA regulated broker partners handle all the paperwork and administration</li>
+            <li>Smooth transition if you&apos;re switching providers</li>
             <li>Ongoing support for renewals and policy changes</li>
           </ul>
           <p className="text-gray-700 leading-relaxed">
-            Instead of spending hours researching and contacting individual insurers, you can complete one simple form and let us do the rest. We'll present you with the best options matched to your needs, saving you valuable time and effort.
+            Instead of spending hours researching and contacting individual insurers, you can complete one simple form and let our FCA regulated broker partners do the rest. They will present you with the best options matched to your needs, saving you valuable time and effort.
           </p>
         </div>
       )
