@@ -350,26 +350,14 @@ app.get("/make-server-2031af1c/sitemap.xml", (c) => {
 
 // Robots.txt endpoint
 app.get("/make-server-2031af1c/robots.txt", (c) => {
-  const robots = `# robots.txt for HealthCoverCompare
-# Updated: March 24, 2026
-
+  const robots = `# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://healthcovercomparison.co.uk/sitemap.xml
-
-# Crawl delay (reduced for better indexing)
-Crawl-delay: 5
-
-# Block access to admin and API areas
 Disallow: /admin-leads
 Disallow: /api/
-Disallow: /*.json$
 
-# Allow search engines to crawl all important pages
-Allow: /sitemap.xml
-Allow: /robots.txt`;
+Sitemap: https://healthcovercomparison.co.uk/sitemap.xml
+`;
 
   return c.body(robots, 200, {
     'Content-Type': 'text/plain',

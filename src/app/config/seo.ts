@@ -10,7 +10,7 @@ export const SEO_CONFIG = {
     home: {
       title: 'UK Private Health Insurance Quotes',
       description:
-        'Compare UK private health insurance via FCA-regulated brokers. Family, business or individual cover—no obligation.',
+        'Compare UK private health insurance with our FCA regulated broker partners: family, business or individual cover, major insurers, and no-obligation quotes. Start online in minutes.',
       keywords:
         'compare health insurance UK, private health insurance quotes, PMI comparison UK, medical insurance UK, family health insurance, business health insurance',
     },

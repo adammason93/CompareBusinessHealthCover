@@ -14,7 +14,7 @@
     <!-- Primary Meta Tags (aligned with src/app/config/seo.ts home + SEOHead suffix; lengths tuned for SERP pixel limits) -->
     <title>UK Private Health Insurance Quotes | HealthCoverCompare</title>
     <meta name="title" content="UK Private Health Insurance Quotes | HealthCoverCompare" />
-    <meta name="description" content="Compare UK private health insurance via FCA-regulated brokers. Family, business or individual cover—no obligation." />
+    <meta name="description" content="Compare UK private health insurance with our FCA regulated broker partners: family, business or individual cover, major insurers, and no-obligation quotes. Start online in minutes." />
     <meta name="keywords" content="health insurance UK, private medical insurance, health insurance comparison, compare health insurance, family health insurance, business health insurance, health insurance quotes, medical insurance UK, private healthcare UK" />
     <meta name="author" content="HealthCoverComparison" />
     <meta name="robots" content="index, follow" />
@@ -36,7 +36,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://healthcovercomparison.co.uk/" />
     <meta property="og:title" content="UK Private Health Insurance Quotes | HealthCoverCompare" />
-    <meta property="og:description" content="Compare UK private health insurance via FCA-regulated brokers. Family, business or individual cover—no obligation." />
+    <meta property="og:description" content="Compare UK private health insurance with our FCA regulated broker partners: family, business or individual cover, major insurers, and no-obligation quotes. Start online in minutes." />
     <meta property="og:image" content="https://healthcovercomparison.co.uk/og-image.jpg" />
     <meta property="og:site_name" content="HealthCoverComparison" />
     <meta property="og:locale" content="en_GB" />
@@ -45,7 +45,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://healthcovercomparison.co.uk/" />
     <meta property="twitter:title" content="UK Private Health Insurance Quotes | HealthCoverCompare" />
-    <meta property="twitter:description" content="Compare UK private health insurance via FCA-regulated brokers. No obligation." />
+    <meta property="twitter:description" content="Compare UK private health insurance with our FCA regulated broker partners: family, business or individual cover, no-obligation quotes." />
     <meta property="twitter:image" content="https://healthcovercomparison.co.uk/og-image.jpg" />
     
     <!-- Geo Tags -->
@@ -193,15 +193,30 @@
     }
     </script>
     <style>
-      /* First paint before React: no unstyled text flash (shell matches hero #2d2f5e) */
-      #root:empty {
+      /* Pre-React shell: matches hero colour; replaced when the app mounts */
+      #root > .app-boot-shell {
         min-height: 100vh;
         background: #2d2f5e;
+        color: #fff;
+        font-family: system-ui, -apple-system, Segoe UI, sans-serif;
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Semantic H1–H3 for crawlers that do not run JS; copy mirrors the live hero/sections -->
+      <main class="app-boot-shell" style="max-width:80rem;margin:0 auto;padding:1.5rem 1rem 3rem">
+        <h1 style="font-size:clamp(1.5rem,4vw,3rem);font-weight:800;margin:0 0 1rem;line-height:1.15">
+          Access treatment faster with affordable health insurance.
+        </h1>
+        <h2 style="font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:700;margin:1.75rem 0 0.75rem">
+          Find your best health cover
+        </h2>
+        <h3 style="font-size:1.125rem;font-weight:600;margin:0.5rem 0 0;opacity:0.95">
+          Price Match Guarantee
+        </h3>
+      </main>
+    </div>
     <!-- SEO copy for crawlers without JS only; not shown when JavaScript runs (no layout flash) -->
     <noscript>
       <main id="main-content">
@@ -213,10 +228,12 @@
           Comparing health insurance quotes helps you understand premiums, excess levels, outpatient cover, and hospital networks before you commit. You can use HealthCoverCompare to start a no-obligation enquiry: complete a short form and let regulated brokers contact insurers on your behalf, explain policy wording in plain English, and support you through renewals or changes if you go ahead.
         </p>
         <h2>Why compare private health insurance?</h2>
+        <h3>Understand cover and costs</h3>
         <p>
           Private health insurance in the United Kingdom is not one-size-fits-all. Providers differ on cancer care, mental health, dental add-ons, and how they treat pre-existing conditions. A structured comparison makes it easier to match cover to your budget and priorities—whether you want faster access to consultants, private rooms, or specific hospitals in your area.
         </p>
         <h2>Free comparison, no obligation</h2>
+        <h3>No charge to explore options</h3>
         <p>
           There is no charge for using HealthCoverCompare to explore your options. You are not obliged to buy a policy; the goal is to save time and bring clarity to a complex market. If you are also researching NHS waiting times, corporate schemes, or international cover, you can browse our guides and product pages below before you request a quote.
         </p>

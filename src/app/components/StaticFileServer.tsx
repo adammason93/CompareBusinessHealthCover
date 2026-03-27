@@ -290,49 +290,14 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
 
 </urlset>`;
 
-const ROBOTS_CONTENT = `# robots.txt for HealthCoverCompare
-# Updated: March 24, 2026
-
+const ROBOTS_CONTENT = `# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://healthcovercomparison.co.uk/sitemap.xml
-
-# Crawl delay (reduced for better indexing)
-Crawl-delay: 5
-
-# Block access to admin and API areas
 Disallow: /admin-leads
 Disallow: /api/
-Disallow: /*.json$
 
-# Explicitly allow sitemap and robots.txt
-Allow: /sitemap.xml
-Allow: /robots.txt
-
-# Allow search engines to crawl all important pages
-Allow: /
-Allow: /about-us
-Allow: /contact-us
-Allow: /nhs-waiting-times-england
-Allow: /bma-private-medical-insurance-guide
-Allow: /health-insurance-guide
-Allow: /business-health-insurance
-Allow: /family-health-insurance
-Allow: /self-employed-health-insurance
-Allow: /senior-health-insurance
-Allow: /international-health-insurance
-Allow: /corporate-health-insurance
-Allow: /small-company-health-insurance
-Allow: /insurance-types
-Allow: /partner-insurers
-Allow: /insurers
-Allow: /privacy-policy
-Allow: /terms-conditions
-Allow: /cookie-policy
-Allow: /disclaimer
-Allow: /sitemap`;
+Sitemap: https://healthcovercomparison.co.uk/sitemap.xml
+`;
 
 const TEST_STATIC_CONTENT = `This is a test file to verify static file serving is working correctly.
 If you can read this at https://healthcovercomparison.co.uk/test-static.txt then your static files are being served properly.
