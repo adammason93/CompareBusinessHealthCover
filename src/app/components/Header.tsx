@@ -30,7 +30,7 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-4 min-w-0 w-full">
-            <div className="shrink-0 min-w-0 max-w-[260px] sm:max-w-[300px] lg:max-w-[350px] [&_img]:!max-w-full">
+            <div className="shrink-0 min-w-0 max-w-[280px] sm:max-w-[325px] lg:max-w-[380px] [&_img]:!max-w-full">
               <BrandLogo onClick={() => onNavigate("home")} />
             </div>
 
