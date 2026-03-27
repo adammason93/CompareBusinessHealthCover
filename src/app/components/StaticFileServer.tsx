@@ -123,6 +123,13 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.75</priority>
   </url>
 
+  <url>
+    <loc>https://healthcovercomparison.co.uk/bma-private-medical-insurance-guide</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
   <!-- Health Insurance Pages -->
   <url>
     <loc>https://healthcovercomparison.co.uk/health-insurance-guide</loc>
@@ -309,6 +316,7 @@ Allow: /
 Allow: /about-us
 Allow: /contact-us
 Allow: /nhs-waiting-times-england
+Allow: /bma-private-medical-insurance-guide
 Allow: /health-insurance-guide
 Allow: /business-health-insurance
 Allow: /family-health-insurance

@@ -51,6 +51,14 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                 </button>
               </li>
               <li>
+                <button
+                  onClick={() => handleNavigation('bma-private-medical-insurance-guide')}
+                  className="hover:text-teal-500 text-left"
+                >
+                  BMA private insurance guide
+                </button>
+              </li>
+              <li>
                 <button 
                   onClick={() => handleNavigation('sitemap')}
                   className="hover:text-teal-500 text-left"

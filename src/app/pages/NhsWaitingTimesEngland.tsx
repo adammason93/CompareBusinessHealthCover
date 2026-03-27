@@ -58,7 +58,7 @@ export function NhsWaitingTimesEngland({ onGetStarted }: NhsWaitingTimesEnglandP
                 <a
                   href="https://commonslibrary.parliament.uk/research-briefings/cbp-7281/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="text-[#0ebcc8] underline hover:text-[#0da5b5]"
                 >
                   UK Parliament Commons Library (CBP 7281)
@@ -67,7 +67,7 @@ export function NhsWaitingTimesEngland({ onGetStarted }: NhsWaitingTimesEnglandP
                 <a
                   href="https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="text-[#0ebcc8] underline hover:text-[#0da5b5]"
                 >
                   Open Parliament Licence

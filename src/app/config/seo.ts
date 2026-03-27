@@ -111,6 +111,14 @@ export const SEO_CONFIG = {
         'NHS waiting times England, NHS waiting list UK, RTT 18 weeks, A&E waiting times NHS, NHS key statistics England PDF',
     },
 
+    'bma-private-medical-insurance-guide': {
+      title: 'BMA Guide: Buying Private Medical Insurance (UK) | PDF & Key Points',
+      description:
+        'Summary of the BMA patient guide on private medical insurance: underwriting types, exclusions, consultant choice, PHIN, claims and switching—download the full September 2019 PDF.',
+      keywords:
+        'BMA private medical insurance guide, PMI patient guide UK, private health insurance questions to ask, moratorium underwriting UK',
+    },
+
     'about-us': {
       title: 'About HealthCoverCompare | UK Health Insurance Comparison',
       description:

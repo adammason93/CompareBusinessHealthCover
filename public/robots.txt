@@ -24,6 +24,7 @@ Allow: /
 Allow: /about-us
 Allow: /contact-us
 Allow: /nhs-waiting-times-england
+Allow: /bma-private-medical-insurance-guide
 Allow: /health-insurance-guide
 Allow: /business-health-insurance
 Allow: /family-health-insurance
