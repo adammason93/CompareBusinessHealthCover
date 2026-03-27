@@ -762,7 +762,14 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   Get advice on the right private health insurance for you
                 </p>
               </div>
-              <SiteChatButton variant="sticky" className="shrink-0" />
+              <button
+                type="button"
+                onClick={onGetStarted}
+                className="shrink-0 inline-flex items-center justify-center gap-1.5 bg-white hover:bg-gray-50 text-teal-700 rounded-full px-4 py-2 sm:px-5 sm:py-2 text-xs sm:text-sm font-semibold shadow-md w-full sm:w-auto whitespace-nowrap transition-colors border border-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#00bca7]"
+              >
+                Start a quote
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" aria-hidden />
+              </button>
             </div>
           </div>
         </div>
