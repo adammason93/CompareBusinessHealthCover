@@ -29,11 +29,13 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
     <>
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <BrandLogo onClick={() => onNavigate("home")} />
-            
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6">
+          <div className="flex items-center gap-4 min-w-0 w-full">
+            <div className="shrink-0 min-w-0 max-w-[220px] sm:max-w-[260px] lg:max-w-[300px] [&_img]:!max-w-full">
+              <BrandLogo onClick={() => onNavigate("home")} />
+            </div>
+
+            {/* Desktop: nav + CTA + search grouped at the end, no stray flex gap */}
+            <nav className="hidden lg:flex items-center gap-3 xl:gap-4 ml-auto shrink-0 flex-nowrap">
               <div 
                 className="relative"
                 onMouseEnter={() => setHealthDropdownOpen(true)}
@@ -130,15 +132,14 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
                 Contact us
               </button>
               
-              {/* Search Bar */}
-              <form onSubmit={handleSearch} className="flex items-center">
+              <form onSubmit={handleSearch} className="flex items-center shrink-0">
                 <div className="relative">
                   <input 
                     type="text" 
                     placeholder="Search..." 
                     value={searchQuery} 
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 w-48 xl:w-64 text-sm"
+                    className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 w-44 xl:w-56 text-sm"
                   />
                   <button
                     type="submit"
@@ -151,7 +152,7 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
               </form>
             </nav>
 
-            <div className="flex lg:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2 ml-auto shrink-0">
               <button
                 type="button"
                 onClick={() => onNavigate('contact-us')}
