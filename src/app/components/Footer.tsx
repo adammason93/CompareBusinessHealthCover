@@ -14,7 +14,7 @@ const QUICK_LINKS: { page: string; label: string }[] = [
   { page: 'family-health-insurance', label: 'Family health insurance' },
   { page: 'self-employed-health-insurance', label: 'Self-employed health insurance' },
   { page: 'insurance-types', label: 'Insurance Types' },
-  { page: 'partner-insurers', label: 'Partner Insurers' },
+  { page: 'insurers', label: 'UK health insurers' },
   { page: 'nhs-waiting-times-england', label: 'NHS waiting times (England)' },
   { page: 'bma-private-medical-insurance-guide', label: 'BMA private insurance guide' },
   { page: 'sitemap', label: 'Sitemap' },

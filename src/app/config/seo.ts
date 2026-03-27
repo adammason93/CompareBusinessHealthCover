@@ -88,14 +88,6 @@ export const SEO_CONFIG = {
         'types of health insurance UK, PMI types, outpatient vs inpatient UK, private medical insurance options',
     },
 
-    'partner-insurers': {
-      title: 'Partner Insurers & Brokers | UK Health Insurance Providers',
-      description:
-        'We work with leading UK private medical insurers and FCA-regulated brokers. Compare Aviva, AXA, Bupa, Vitality-style cover and more—see who we partner with.',
-      keywords:
-        'UK health insurance providers, private medical insurers UK, FCA regulated insurance brokers, compare health insurers',
-    },
-
     insurers: {
       title: 'UK Health Insurers | Private Medical Insurance Guides',
       description:

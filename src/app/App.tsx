@@ -19,6 +19,15 @@ import { getComparisonBySlug } from "@/app/config/insurerComparisons";
 import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
+/** Retired routes → replace URL and show target page */
+function applyLegacyPageRedirect(pathname: string): string {
+  if (pathname === "partner-insurers") {
+    window.history.replaceState({}, "", "/insurers");
+    return "insurers";
+  }
+  return pathname;
+}
+
 const PageFallback = () => (
   <div
     className="min-h-[50vh] flex items-center justify-center bg-gray-50 text-gray-500 text-sm"
@@ -70,9 +79,6 @@ const TermsAndConditions = lazy(() =>
 const InsuranceTypes = lazy(() =>
   import("@/app/components/InsuranceTypes").then((m) => ({ default: m.InsuranceTypes }))
 );
-const PartnerInsurers = lazy(() =>
-  import("@/app/components/PartnerInsurers").then((m) => ({ default: m.PartnerInsurers }))
-);
 const Sitemap = lazy(() => import("@/app/components/Sitemap").then((m) => ({ default: m.Sitemap })));
 const Disclaimer = lazy(() => import("@/app/pages/Disclaimer").then((m) => ({ default: m.Disclaimer })));
 const AdminLeads = lazy(() => import("@/app/pages/AdminLeads").then((m) => ({ default: m.AdminLeads })));
@@ -112,8 +118,9 @@ export default function App() {
     }
 
     if (pathname && pathname !== '') {
-      const resolved = resolveInsurerRoute(pathname);
-      if (resolved !== pathname) {
+      const afterLegacy = applyLegacyPageRedirect(pathname);
+      const resolved = resolveInsurerRoute(afterLegacy);
+      if (resolved !== afterLegacy) {
         window.history.replaceState({}, '', `/${resolved}`);
       }
       return resolved;
@@ -123,11 +130,17 @@ export default function App() {
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = urlParams.get('page');
     if (pageParam) {
-      return resolveInsurerRoute(pageParam);
+      const p = pageParam === 'partner-insurers' ? 'insurers' : pageParam;
+      return resolveInsurerRoute(p);
     }
 
     const hash = window.location.hash.slice(1);
-    return (hash ? resolveInsurerRoute(hash) : null) || 'home';
+    if (!hash) return 'home';
+    const fromHash = hash === 'partner-insurers' ? 'insurers' : hash;
+    if (hash === 'partner-insurers') {
+      window.history.replaceState({}, '', '/insurers');
+    }
+    return resolveInsurerRoute(fromHash);
   });
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
@@ -137,7 +150,11 @@ export default function App() {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1);
       if (hash) {
-        setCurrentPage(hash);
+        const page = hash === 'partner-insurers' ? 'insurers' : hash;
+        if (hash === 'partner-insurers') {
+          window.history.replaceState({}, '', '/insurers');
+        }
+        setCurrentPage(page);
       } else {
         const path = window.location.pathname.replace(/^\//, '').replace(/^index\.html$/i, '');
         if (!path) {
@@ -166,8 +183,9 @@ export default function App() {
         setCurrentPage('home');
         return;
       }
-      const resolved = resolveInsurerRoute(pathname);
-      if (resolved !== pathname) {
+      const afterLegacy = applyLegacyPageRedirect(pathname);
+      const resolved = resolveInsurerRoute(afterLegacy);
+      if (resolved !== afterLegacy) {
         window.history.replaceState({}, '', `/${resolved}`);
       }
       setCurrentPage(resolved);
@@ -269,17 +287,18 @@ export default function App() {
   };
 
   const handleNavigate = (page: string) => {
-    setCurrentPage(page);
-    if (page.startsWith('static/')) {
-      const file = page.replace('static/', '');
-      window.history.pushState({ page }, '', `/${file}`);
+    const target = page === 'partner-insurers' ? 'insurers' : page;
+    setCurrentPage(target);
+    if (target.startsWith('static/')) {
+      const file = target.replace('static/', '');
+      window.history.pushState({ page: target }, '', `/${file}`);
       return;
     }
-    if (page === 'home') {
+    if (target === 'home') {
       window.history.pushState({ page: 'home' }, '', '/');
       return;
     }
-    window.history.pushState({ page }, '', `/${page}`);
+    window.history.pushState({ page: target }, '', `/${target}`);
   };
 
   const handleAuthSuccess = (userData: any, token: string) => {
@@ -356,8 +375,6 @@ export default function App() {
         return <TermsAndConditions onGetStarted={handleGetStarted} />;
       case 'insurance-types':
         return <InsuranceTypes onGetStarted={handleGetStarted} />;
-      case 'partner-insurers':
-        return <PartnerInsurers onNavigate={handleNavigate} />;
       case 'insurers':
         return <InsurersHubPage onGetStarted={handleGetStarted} onNavigate={handleNavigate} />;
       case 'nhs-waiting-times-england':
