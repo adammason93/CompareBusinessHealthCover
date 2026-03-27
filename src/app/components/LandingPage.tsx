@@ -1,4 +1,4 @@
-import { Shield, Check, Star, ArrowRight, ChevronDown, Heart, Home as HomeIcon } from "lucide-react";
+import { Shield, Check, Star, ArrowRight, ChevronDown, Heart, Home as HomeIcon, X } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
@@ -13,11 +13,20 @@ import { SiteChatButton } from "@/app/components/SiteChatButton";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
 import { LCP_HERO_IMAGE_URL } from "@/config/lcp";
 
+const STICKY_BANNER_DISMISS_KEY = "hcc-sticky-quote-banner-dismissed";
+
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [benefitModalOpen, setBenefitModalOpen] = useState<string | null>(null);
   const [showStickyBanner, setShowStickyBanner] = useState(false);
+  const [stickyBannerDismissed, setStickyBannerDismissed] = useState(() => {
+    try {
+      return typeof sessionStorage !== "undefined" && sessionStorage.getItem(STICKY_BANNER_DISMISS_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -708,27 +717,39 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       )}
 
       {/* Sticky Bottom Banner */}
-      {showStickyBanner && (
-        <div 
-          className="fixed bottom-4 sm:bottom-6 left-0 right-0 z-40 transition-transform duration-300 flex justify-center px-2 sm:px-4"
-          style={{
-            transform: showStickyBanner ? 'translateY(0)' : 'translateY(100%)'
-          }}
-        >
-          <div 
-            className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%]"
-            style={{ backgroundColor: '#00bca7' }}
+      {showStickyBanner && !stickyBannerDismissed && (
+        <div className="fixed bottom-3 sm:bottom-4 left-0 right-0 z-40 flex justify-center px-2 sm:px-4 pointer-events-none">
+          <div
+            className="pointer-events-auto relative w-full max-w-[95%] sm:max-w-[min(42rem,85%)] rounded-xl shadow-lg pl-3 pr-9 py-2 sm:pl-4 sm:pr-10 sm:py-2.5"
+            style={{ backgroundColor: "#00bca7" }}
+            role="region"
+            aria-label="Quote reminder"
           >
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
-              <div className="flex-1 text-center sm:text-left">
-                <h3 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1">
+            <button
+              type="button"
+              onClick={() => {
+                try {
+                  sessionStorage.setItem(STICKY_BANNER_DISMISS_KEY, "1");
+                } catch {
+                  /* ignore */
+                }
+                setStickyBannerDismissed(true);
+              }}
+              className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 p-1 rounded-full text-white/90 hover:text-white hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#00bca7]"
+              aria-label="Hide this message"
+            >
+              <X className="w-4 h-4 sm:w-[18px] sm:h-[18px]" aria-hidden />
+            </button>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
+              <div className="flex-1 text-center sm:text-left min-w-0 pr-1">
+                <h3 className="text-white text-sm sm:text-base font-semibold leading-snug">
                   Get a quote for private health insurance
                 </h3>
-                <p className="text-white text-xs sm:text-sm md:text-base">
+                <p className="text-white/90 text-[11px] sm:text-xs leading-snug mt-0.5">
                   Get advice on the right private health insurance for you
                 </p>
               </div>
-              <SiteChatButton variant="sticky" />
+              <SiteChatButton variant="sticky" className="shrink-0" />
             </div>
           </div>
         </div>
