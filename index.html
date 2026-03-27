@@ -192,10 +192,18 @@
       ]
     }
     </script>
+    <style>
+      /* First paint before React: no unstyled text flash (shell matches hero #2d2f5e) */
+      #root:empty {
+        min-height: 100vh;
+        background: #2d2f5e;
+      }
+    </style>
   </head>
   <body>
-    <!-- Static shell for crawlers and tools that do not execute JavaScript; replaced on client when the app mounts. -->
-    <div id="root">
+    <div id="root"></div>
+    <!-- SEO copy for crawlers without JS only; not shown when JavaScript runs (no layout flash) -->
+    <noscript>
       <main id="main-content">
         <h1>Compare private health insurance quotes in the UK</h1>
         <p>
@@ -228,7 +236,7 @@
           </ul>
         </nav>
       </main>
-    </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       (function () {

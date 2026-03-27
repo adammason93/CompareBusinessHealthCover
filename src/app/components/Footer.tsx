@@ -1,12 +1,32 @@
+import type { MouseEvent } from "react";
 import { Star, Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail } from "lucide-react";
 
 interface FooterProps {
   onNavigate?: (page: string) => void;
 }
 
+const hrefForPage = (page: string) => (page === 'home' ? '/' : `/${page}`);
+
+const QUICK_LINKS: { page: string; label: string }[] = [
+  { page: 'about-us', label: 'About Us' },
+  { page: 'contact-us', label: 'Contact us' },
+  { page: 'health-insurance-guide', label: 'Health insurance guide' },
+  { page: 'family-health-insurance', label: 'Family health insurance' },
+  { page: 'self-employed-health-insurance', label: 'Self-employed health insurance' },
+  { page: 'insurance-types', label: 'Insurance Types' },
+  { page: 'partner-insurers', label: 'Partner Insurers' },
+  { page: 'nhs-waiting-times-england', label: 'NHS waiting times (England)' },
+  { page: 'bma-private-medical-insurance-guide', label: 'BMA private insurance guide' },
+  { page: 'sitemap', label: 'Sitemap' },
+  { page: 'disclaimer', label: 'Disclaimer' },
+  { page: 'privacy-policy', label: 'Privacy Policy' },
+  { page: 'terms-and-conditions', label: 'Terms & Conditions' },
+  { page: 'cookie-policy', label: 'Cookie Policy' },
+];
+
 export function Footer({ onNavigate }: FooterProps = {}) {
-  const handleNavigation = (page: string) => {
-    console.log('🔗 Footer navigation to:', page);
+  const handleNavClick = (page: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     onNavigate?.(page);
   };
 
@@ -14,90 +34,21 @@ export function Footer({ onNavigate }: FooterProps = {}) {
     <footer className="bg-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {/* Quick Links */}
+          {/* Quick Links — real <a href> for crawlers; SPA navigation on click */}
           <div>
             <h3 className="text-xl mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <button 
-                  onClick={() => handleNavigation('about-us')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('insurance-types')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Insurance Types
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('partner-insurers')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Partner Insurers
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavigation('nhs-waiting-times-england')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  NHS waiting times (England)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavigation('bma-private-medical-insurance-guide')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  BMA private insurance guide
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('sitemap')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Sitemap
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('disclaimer')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Disclaimer
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('privacy-policy')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Privacy Policy
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('terms-and-conditions')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Terms & Conditions
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('cookie-policy')}
-                  className="hover:text-teal-500 text-left"
-                >
-                  Cookie Policy
-                </button>
-              </li>
+              {QUICK_LINKS.map(({ page, label }) => (
+                <li key={page}>
+                  <a
+                    href={hrefForPage(page)}
+                    onClick={handleNavClick(page)}
+                    className="hover:text-teal-500 text-left block"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
             <p className="mt-4 text-sm">ICO Registration: ZC107389</p>
           </div>
@@ -194,9 +145,27 @@ export function Footer({ onNavigate }: FooterProps = {}) {
 
         {/* Bottom Links */}
         <div className="border-t border-gray-800 pt-6 flex flex-wrap justify-center gap-4 text-xs">
-          <a href="#" className="hover:text-teal-500 uppercase">Compare Private Health Insurance</a>
-          <a href="#" className="hover:text-teal-500 uppercase">Compare Health Insurance</a>
-          <a href="#" className="hover:text-teal-500 uppercase">Compare Medical Insurance</a>
+          <a
+            href="/"
+            onClick={handleNavClick("home")}
+            className="hover:text-teal-500 uppercase"
+          >
+            Compare Private Health Insurance
+          </a>
+          <a
+            href="/insurance-types"
+            onClick={handleNavClick("insurance-types")}
+            className="hover:text-teal-500 uppercase"
+          >
+            Compare Health Insurance
+          </a>
+          <a
+            href="/insurance-types"
+            onClick={handleNavClick("insurance-types")}
+            className="hover:text-teal-500 uppercase"
+          >
+            Compare Medical Insurance
+          </a>
         </div>
       </div>
     </footer>
