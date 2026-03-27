@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
-import { ChatBot } from "@/app/components/ChatBot";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
 import { ReviewSection } from "@/app/components/ReviewSection";
@@ -12,7 +11,7 @@ import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { BrandLogo } from "@/app/components/BrandLogo";
-import { WhatsAppChatLink } from "@/app/components/WhatsAppChatLink";
+import { SiteChatButton } from "@/app/components/SiteChatButton";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
 import { LCP_HERO_IMAGE_URL } from "@/config/lcp";
 
@@ -321,10 +320,10 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
               >
                 Contact Us
               </button>
-              <WhatsAppChatLink variant="nav" />
+              <SiteChatButton variant="nav" />
             </nav>
             <div className="flex items-center gap-2 sm:gap-3">
-              <WhatsAppChatLink variant="navCompact" className="lg:hidden" />
+              <SiteChatButton variant="navCompact" className="lg:hidden" />
               {/* Desktop Search */}
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <div className="relative">
@@ -497,7 +496,7 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
                 </div>
               </form>
 
-              <WhatsAppChatLink
+              <SiteChatButton
                 variant="mobileMenu"
                 onAfterClick={() => setMobileMenuOpen(false)}
               />
@@ -553,7 +552,7 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
               </div>
               
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <WhatsAppChatLink variant="hero" />
+                <SiteChatButton variant="hero" />
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
                   className="button-hover-animate bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
@@ -946,7 +945,7 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
               </div>
             </div>
 
-            <WhatsAppChatLink variant="section" />
+            <SiteChatButton variant="section" />
           </div>
         </div>
       </section>
@@ -964,9 +963,6 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
         isOpen={isContactModalOpen} 
         onClose={() => setIsContactModalOpen(false)}
       />
-
-      {/* ChatBot */}
-      <ChatBot />
 
       {/* Benefit Details Modal */}
       {benefitModalOpen && (
@@ -1002,7 +998,7 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
               >
                 Close
               </button>
-              <WhatsAppChatLink
+              <SiteChatButton
                 variant="modal"
                 onAfterClick={() => setBenefitModalOpen(null)}
               />
@@ -1032,7 +1028,7 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
                   Get advice on the right private health insurance for you
                 </p>
               </div>
-              <WhatsAppChatLink variant="sticky" />
+              <SiteChatButton variant="sticky" />
             </div>
           </div>
         </div>

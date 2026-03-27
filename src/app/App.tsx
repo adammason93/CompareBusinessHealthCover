@@ -11,6 +11,8 @@ import { Dialog, DialogContent } from "@/app/components/ui/dialog";
 import { CookieManager } from "@/app/components/CookieManager";
 import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
 import { SEOHead } from "@/app/components/SEOHead";
+import { ChatBot } from "@/app/components/ChatBot";
+import { SiteChatProvider } from "@/app/context/SiteChatContext";
 import { getSEOConfig } from "@/app/config/seo";
 import { getInsurerBySlug, resolveInsurerRoute } from "@/app/config/insurers";
 import { publicAnonKey } from "/utils/supabase/info";
@@ -385,6 +387,7 @@ export default function App() {
   };
 
   return (
+    <SiteChatProvider>
     <div>
       {/* SEO Meta Tags */}
       <SEOHead
@@ -489,6 +492,9 @@ export default function App() {
       
       {/* Cookie Settings Button (permanent access) */}
       <CookieSettingsButton />
+
+      {currentPage !== "admin-leads" && !currentPage.startsWith("static/") && <ChatBot />}
     </div>
+    </SiteChatProvider>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
+import { useSiteChat } from '@/app/context/SiteChatContext';
 
 interface Message {
   id: string;
@@ -105,7 +106,7 @@ const getSmartResponse = (userMessage: string): string => {
 };
 
 export function ChatBot() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, openChat, closeChat } = useSiteChat();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -170,7 +171,7 @@ export function ChatBot() {
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/20 z-40"
-          onClick={() => setIsOpen(false)}
+          onClick={() => closeChat()}
           aria-label="Close chat overlay"
         />
       )}
@@ -178,7 +179,8 @@ export function ChatBot() {
       {/* Floating Chat Button */}
       {!isOpen && (
         <button
-          onClick={() => setIsOpen(true)}
+          type="button"
+          onClick={() => openChat()}
           className="fixed bottom-24 sm:bottom-6 right-6 z-50 bg-teal-600 hover:bg-teal-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110"
           aria-label="Open chat"
         >
@@ -201,10 +203,10 @@ export function ChatBot() {
               </div>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              type="button"
+              onClick={() => closeChat()}
               className="hover:bg-white/10 rounded-full p-1 transition-colors flex-shrink-0"
               aria-label="Close chat"
-              type="button"
             >
               <X className="w-5 h-5" />
             </button>
