@@ -12,7 +12,7 @@ export function BrandLogo({
     <img
       src="/logo-healthcover-comparison.png?v=2"
       alt="HealthCover Comparison — UK private health insurance comparison"
-      className={`h-10 sm:h-11 md:h-12 w-auto max-w-[min(96vw,640px)] object-contain object-left ${className}`}
+      className={`h-11 sm:h-12 md:h-14 w-auto max-w-[min(96vw,720px)] object-contain object-left ${className}`}
       width={1024}
       height={311}
       decoding="async"
