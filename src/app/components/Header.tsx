@@ -2,7 +2,7 @@ import { ChevronDown, Search, Menu, X } from "lucide-react";
 import { useState, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { BrandLogo } from "@/app/components/BrandLogo";
-import { SiteChatButton } from "@/app/components/SiteChatButton";
+import { WhatsAppChatButton } from "@/app/components/WhatsAppChatButton";
 
 interface HeaderProps {
   onNavigate: (page: string) => void;
@@ -129,7 +129,7 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
               >
                 Contact Us
               </button>
-              <SiteChatButton variant="nav" />
+              <WhatsAppChatButton variant="nav" />
               
               {/* Search Bar */}
               <form onSubmit={handleSearch} className="flex items-center">
@@ -153,7 +153,7 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
             </nav>
 
             <div className="flex lg:hidden items-center gap-2">
-              <SiteChatButton variant="navCompact" />
+              <WhatsAppChatButton variant="navCompact" />
               <button
                 type="button"
                 aria-expanded={mobileMenuOpen}
@@ -305,7 +305,7 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
                 </div>
               </form>
 
-              <SiteChatButton
+              <WhatsAppChatButton
                 variant="mobileMenu"
                 onAfterClick={() => setMobileMenuOpen(false)}
               />

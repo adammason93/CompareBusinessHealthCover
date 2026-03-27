@@ -1,4 +1,4 @@
-import { Shield, Check, Star, ChevronDown, Search, Heart, Home as HomeIcon, Menu, X, LogIn, LogOut, User, FileText } from "lucide-react";
+import { Shield, Check, Star, ArrowRight, ChevronDown, Search, Heart, Home as HomeIcon, Menu, X, LogIn, LogOut, User, FileText } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
@@ -12,10 +12,11 @@ import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { BrandLogo } from "@/app/components/BrandLogo";
 import { SiteChatButton } from "@/app/components/SiteChatButton";
+import { WhatsAppChatButton } from "@/app/components/WhatsAppChatButton";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
 import { LCP_HERO_IMAGE_URL } from "@/config/lcp";
 
-export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
+export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
   const [lifeDropdownOpen, setLifeDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -320,10 +321,10 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
               >
                 Contact Us
               </button>
-              <SiteChatButton variant="nav" />
+              <WhatsAppChatButton variant="nav" />
             </nav>
             <div className="flex items-center gap-2 sm:gap-3">
-              <SiteChatButton variant="navCompact" className="lg:hidden" />
+              <WhatsAppChatButton variant="navCompact" className="lg:hidden" />
               {/* Desktop Search */}
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <div className="relative">
@@ -496,7 +497,7 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
                 </div>
               </form>
 
-              <SiteChatButton
+              <WhatsAppChatButton
                 variant="mobileMenu"
                 onAfterClick={() => setMobileMenuOpen(false)}
               />
@@ -552,7 +553,14 @@ export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogo
               </div>
               
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <SiteChatButton variant="hero" />
+                <button
+                  type="button"
+                  onClick={onGetStarted}
+                  className="button-hover-animate bg-white hover:bg-gray-100 text-black rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                >
+                  Start a quote{' '}
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" aria-hidden />
+                </button>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
                   className="button-hover-animate bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
