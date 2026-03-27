@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { Star, Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail } from "lucide-react";
+import { Star, Facebook, Instagram, Linkedin, MessageCircle, Phone, Mail } from "lucide-react";
 
 interface FooterProps {
   onNavigate?: (page: string) => void;
@@ -73,25 +73,40 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                 South Yorkshire
               </div>
               <div className="flex items-center gap-4 mt-4">
-                <a href="#" className="hover:text-teal-500">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61575468412423"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-500"
+                >
                   <Facebook className="w-5 h-5" aria-hidden />
                   <span className="sr-only">Facebook</span>
                 </a>
-                <a href="#" className="hover:text-teal-500">
-                  <Twitter className="w-5 h-5" aria-hidden />
-                  <span className="sr-only">X (Twitter)</span>
-                </a>
-                <a href="#" className="hover:text-teal-500">
+                <a
+                  href="https://www.instagram.com/healthcovercomparison/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-500"
+                >
                   <Instagram className="w-5 h-5" aria-hidden />
                   <span className="sr-only">Instagram</span>
                 </a>
-                <a href="#" className="hover:text-teal-500">
+                <a
+                  href="https://www.linkedin.com/company/112598987/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-500"
+                >
                   <Linkedin className="w-5 h-5" aria-hidden />
                   <span className="sr-only">LinkedIn</span>
                 </a>
-                <a href="#" className="hover:text-teal-500">
+                <a
+                  href={hrefForPage('contact-us')}
+                  onClick={handleNavClick('contact-us')}
+                  className="hover:text-teal-500"
+                >
                   <MessageCircle className="w-5 h-5" aria-hidden />
-                  <span className="sr-only">Contact us via message</span>
+                  <span className="sr-only">Contact us</span>
                 </a>
               </div>
             </div>
