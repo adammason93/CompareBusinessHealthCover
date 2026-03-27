@@ -1,5 +1,4 @@
-import { Shield, Check, Star, ArrowRight, ChevronDown, Search, Heart, Home as HomeIcon, Menu, X, LogIn, LogOut, User, FileText } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { Shield, Check, Star, ChevronDown, Search, Heart, Home as HomeIcon, Menu, X, LogIn, LogOut, User, FileText } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
@@ -13,10 +12,11 @@ import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { BrandLogo } from "@/app/components/BrandLogo";
+import { WhatsAppChatLink } from "@/app/components/WhatsAppChatLink";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
 import { LCP_HERO_IMAGE_URL } from "@/config/lcp";
 
-export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
+export function LandingPage({ onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
   const [lifeDropdownOpen, setLifeDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -321,22 +321,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               >
                 Contact Us
               </button>
-              <button
-                type="button"
-                onClick={onGetStarted}
-                className="button-hover-animate inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-5 py-2.5 text-sm font-medium shadow-md border border-gray-200/80"
-              >
-                Start a quote <ArrowRight className="ml-1.5 w-4 h-4 shrink-0" aria-hidden />
-              </button>
+              <WhatsAppChatLink variant="nav" />
             </nav>
             <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                type="button"
-                onClick={onGetStarted}
-                className="button-hover-animate lg:hidden inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-3.5 py-2 text-sm font-medium shadow-md border border-gray-200/80 whitespace-nowrap"
-              >
-                Start a quote <ArrowRight className="ml-1 w-3.5 h-3.5 shrink-0" aria-hidden />
-              </button>
+              <WhatsAppChatLink variant="navCompact" className="lg:hidden" />
               {/* Desktop Search */}
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
                 <div className="relative">
@@ -509,16 +497,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                 </div>
               </form>
 
-              {/* Get A Quote Button */}
-              <button
-                onClick={() => {
-                  onGetStarted();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
-              >
-                Get A Complimentary Quote
-              </button>
+              <WhatsAppChatLink
+                variant="mobileMenu"
+                onAfterClick={() => setMobileMenuOpen(false)}
+              />
             </div>
           </div>
         )}
@@ -571,12 +553,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
               
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <button 
-                  onClick={onGetStarted} 
-                  className="button-hover-animate bg-white hover:bg-gray-100 text-black rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
-                >
-                  Start a quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
-                </button>
+                <WhatsAppChatLink variant="hero" />
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
                   className="button-hover-animate bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
@@ -969,12 +946,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
             </div>
 
-            <Button 
-              onClick={onGetStarted}
-              className="bg-white hover:bg-gray-100 text-black rounded-full px-8 py-6 text-lg w-fit"
-            >
-              Start Your Free Quote Here
-            </Button>
+            <WhatsAppChatLink variant="section" />
           </div>
         </div>
       </section>
@@ -1030,15 +1002,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               >
                 Close
               </button>
-              <button 
-                onClick={() => {
-                  setBenefitModalOpen(null);
-                  onGetStarted();
-                }}
-                className="px-6 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white transition-colors"
-              >
-                Get Started
-              </button>
+              <WhatsAppChatLink
+                variant="modal"
+                onAfterClick={() => setBenefitModalOpen(null)}
+              />
             </div>
           </div>
         </div>
@@ -1065,12 +1032,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   Get advice on the right private health insurance for you
                 </p>
               </div>
-              <button
-                onClick={onGetStarted}
-                className="bg-white hover:bg-gray-50 text-gray-900 rounded-full px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base md:text-lg font-semibold transition-colors whitespace-nowrap shadow-lg w-full sm:w-auto"
-              >
-                Get quotes
-              </button>
+              <WhatsAppChatLink variant="sticky" />
             </div>
           </div>
         </div>

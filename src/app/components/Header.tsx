@@ -1,10 +1,10 @@
-import { ChevronDown, Search, Menu, X, ArrowRight } from "lucide-react";
+import { ChevronDown, Search, Menu, X } from "lucide-react";
 import { useState, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { BrandLogo } from "@/app/components/BrandLogo";
+import { WhatsAppChatLink } from "@/app/components/WhatsAppChatLink";
 
 interface HeaderProps {
-  onGetStarted: () => void;
   onNavigate: (page: string) => void;
   onOpenAuth?: () => void;
   onLogout?: () => void;
@@ -12,7 +12,7 @@ interface HeaderProps {
   user?: any;
 }
 
-export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderProps) {
+export const Header = memo(function Header({ onNavigate }: HeaderProps) {
   const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -129,13 +129,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               >
                 Contact Us
               </button>
-              <button
-                type="button"
-                onClick={onGetStarted}
-                className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-5 py-2.5 text-sm font-medium shadow-md border border-gray-200/80 transition-colors"
-              >
-                Start a quote <ArrowRight className="ml-1.5 w-4 h-4 shrink-0" aria-hidden />
-              </button>
+              <WhatsAppChatLink variant="nav" />
               
               {/* Search Bar */}
               <form onSubmit={handleSearch} className="flex items-center">
@@ -159,13 +153,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
             </nav>
 
             <div className="flex lg:hidden items-center gap-2">
-              <button
-                type="button"
-                onClick={onGetStarted}
-                className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-black rounded-full px-3.5 py-2 text-sm font-medium shadow-md border border-gray-200/80 whitespace-nowrap"
-              >
-                Start a quote <ArrowRight className="ml-1 w-3.5 h-3.5 shrink-0" aria-hidden />
-              </button>
+              <WhatsAppChatLink variant="navCompact" />
               <button
                 type="button"
                 aria-expanded={mobileMenuOpen}
@@ -317,16 +305,10 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                 </div>
               </form>
 
-              {/* Get A Quote Button */}
-              <button
-                onClick={() => {
-                  onGetStarted();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
-              >
-                Get A Quote
-              </button>
+              <WhatsAppChatLink
+                variant="mobileMenu"
+                onAfterClick={() => setMobileMenuOpen(false)}
+              />
             </div>
           </div>
         )}

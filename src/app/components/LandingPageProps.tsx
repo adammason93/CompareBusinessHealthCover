@@ -1,5 +1,6 @@
 export interface LandingPageProps {
-  onGetStarted: () => void;
+  /** Opens the multi-step quote form (optional; primary CTAs may use WhatsApp instead). */
+  onGetStarted?: () => void;
   onNavigate?: (page: string) => void;
   renderEmbeddedForm?: () => JSX.Element;
   onOpenAuth?: () => void;

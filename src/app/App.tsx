@@ -440,7 +440,6 @@ export default function App() {
       ) : (
         <>
           <Header
-            onGetStarted={handleGetStarted}
             onNavigate={handleNavigate}
             onOpenAuth={handleOpenAuthModal}
             onLogout={handleLogout}
