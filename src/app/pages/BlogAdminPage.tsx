@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Loader2, Plus, Pencil, Trash2, LogOut, Eye, EyeOff } from "lucide-react";
+import { BlogMarkdown } from "@/app/components/BlogMarkdown";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
@@ -355,15 +357,63 @@ export function BlogAdminPage() {
             </div>
             <div>
               <label className="text-xs font-medium text-slate-600 block mb-1">Body</label>
-              <Textarea
-                rows={12}
-                value={form.body}
-                onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
-                placeholder={
-                  "Paragraphs separated by blank lines. For an extra image in the article, add a paragraph that is only a direct image URL (https://…jpg or .png)."
-                }
-                className="font-mono text-sm"
-              />
+              <p className="text-xs text-slate-500 mb-2">
+                Markdown. The preview updates as you type and matches how the post appears when published.
+              </p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+                <Textarea
+                  rows={12}
+                  value={form.body}
+                  onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
+                  placeholder={`Write in Markdown (saved as-is).
+
+# Heading
+## Subheading
+- Bullet list
+1. Numbered list
+**bold** *italic* [link text](https://…)
+![alt text](https://…image.jpg)
+
+| Column A | Column B |
+| -------- | -------- |
+| cell     | cell     |
+
+\`\`\`
+code block
+\`\`\``}
+                  className="font-mono text-sm min-h-[280px] lg:min-h-[min(70vh,520px)]"
+                />
+                <div className="space-y-2 min-w-0">
+                  <p className="text-xs font-medium text-slate-600">Preview</p>
+                  <div className="border border-slate-200 rounded-xl bg-gray-50 p-4 sm:p-6 min-h-[280px] max-h-[min(70vh,560px)] overflow-y-auto">
+                    <article className="max-w-none">
+                      {form.title ? (
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
+                          {form.title}
+                        </h1>
+                      ) : (
+                        <p className="text-sm text-slate-400 italic mb-3">Title appears here when you add one.</p>
+                      )}
+                      {form.excerpt ? (
+                        <p className="text-base text-gray-600 leading-relaxed mb-6">{form.excerpt}</p>
+                      ) : null}
+                      {form.cover_image_url ? (
+                        <div className="mb-6 rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
+                          <ImageWithFallback
+                            src={form.cover_image_url}
+                            alt=""
+                            className="w-full max-h-[14rem] sm:max-h-[18rem] object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : null}
+                      <BlogMarkdown
+                        content={form.body.trim() ? form.body : "*Nothing written yet — add Markdown in the editor.*"}
+                      />
+                    </article>
+                  </div>
+                </div>
+              </div>
             </div>
             <label className="flex items-center gap-2 text-sm cursor-pointer">
               <input

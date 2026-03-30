@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { BlogMarkdown, plainTextFromMarkdown } from "@/app/components/BlogMarkdown";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 import { publicAnonKey } from "/utils/supabase/info";
 
@@ -21,43 +22,6 @@ interface BlogPostPageProps {
   onNavigate: (page: string) => void;
   onGetStarted: () => void;
   onMetaLoaded: (meta: { title: string; description: string } | null) => void;
-}
-
-/** Paragraph that is only a direct https image URL → render as <img>. */
-function singleImageUrlFromBlock(block: string): string | null {
-  const t = block.trim();
-  const m = t.match(
-    /^\s*(https?:\/\/[^\s]+\.(?:jpe?g|png|gif|webp))(?:\?[^\s]*)?\s*$/i,
-  );
-  return m ? m[1] : null;
-}
-
-function renderBodyBlocks(body: string, titleForAlt: string) {
-  const blocks = body
-    .split(/\n\n+/)
-    .map((b) => b.trim())
-    .filter(Boolean);
-  return blocks.map((block, i) => {
-    const imgUrl = singleImageUrlFromBlock(block);
-    if (imgUrl) {
-      return (
-        <figure key={i} className="my-6">
-          <ImageWithFallback
-            src={imgUrl}
-            alt=""
-            className="w-full max-h-[28rem] object-contain rounded-lg border border-gray-100 bg-gray-50"
-            loading="lazy"
-          />
-          <figcaption className="sr-only">Image in article: {titleForAlt}</figcaption>
-        </figure>
-      );
-    }
-    return (
-      <p key={i} className="text-gray-700 leading-relaxed mb-4 whitespace-pre-wrap">
-        {block}
-      </p>
-    );
-  });
 }
 
 export function BlogPostPage({ slug, onNavigate, onGetStarted, onMetaLoaded }: BlogPostPageProps) {
@@ -87,7 +51,7 @@ export function BlogPostPage({ slug, onNavigate, onGetStarted, onMetaLoaded }: B
         const p = json.post as BlogPostPublic;
         if (!cancelled) {
           setPost(p);
-          const description = (p.excerpt || p.body.slice(0, 160)).replace(/\s+/g, " ").trim();
+          const description = (p.excerpt || plainTextFromMarkdown(p.body, 200)).replace(/\s+/g, " ").trim();
           onMetaLoaded({
             title: `${p.title} | HealthCoverCompare Blog`,
             description: description.length > 160 ? `${description.slice(0, 157)}…` : description,
@@ -156,7 +120,7 @@ export function BlogPostPage({ slug, onNavigate, onGetStarted, onMetaLoaded }: B
                 />
               </div>
             ) : null}
-            <div className="prose prose-gray max-w-none">{renderBodyBlocks(post.body, post.title)}</div>
+            <BlogMarkdown content={post.body} />
             <div className="mt-12 pt-8 border-t border-gray-200">
               <Button
                 type="button"
