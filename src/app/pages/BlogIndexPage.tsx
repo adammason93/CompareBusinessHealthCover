@@ -73,7 +73,7 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {loading && (
           <div className="flex justify-center py-16 text-gray-500">
             <Loader2 className="w-8 h-8 animate-spin" aria-hidden />
@@ -82,7 +82,7 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
         )}
 
         {!loading && error && (
-          <div className="rounded-xl border border-amber-200 bg-amber-50 text-amber-900 px-4 py-3 text-sm">
+          <div className="rounded-xl border border-amber-200 bg-amber-50 text-amber-900 px-4 py-3 text-sm max-w-3xl mx-auto">
             {error}
           </div>
         )}
@@ -92,20 +92,20 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
         )}
 
         {!loading && !error && posts.length > 0 && (
-          <ul className="space-y-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 list-none p-0 m-0">
             {posts.map((p) => {
               const dateStr = p.published_at || p.updated_at;
               const dateLabel = dateStr
                 ? format(new Date(dateStr), "d MMMM yyyy")
                 : "";
               return (
-                <li key={p.id}>
-                  <article className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:border-teal-200 transition-colors">
+                <li key={p.id} className="min-w-0">
+                  <article className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:border-teal-200 hover:shadow-md transition-all h-full flex flex-col">
                     {p.cover_image_url ? (
                       <button
                         type="button"
                         onClick={() => onNavigate(`blog/${p.slug}`)}
-                        className="block w-full aspect-[16/9] bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+                        className="block w-full aspect-[4/3] sm:aspect-[16/10] bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 shrink-0"
                       >
                         <ImageWithFallback
                           src={p.cover_image_url}
@@ -114,32 +114,39 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
                           loading="lazy"
                         />
                       </button>
-                    ) : null}
-                    <div className="p-6">
-                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{dateLabel}</p>
-                    <h2 className="text-xl font-semibold text-gray-900">
+                    ) : (
                       <button
                         type="button"
                         onClick={() => onNavigate(`blog/${p.slug}`)}
-                        className="text-left hover:text-teal-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 rounded"
-                      >
-                        {p.title}
-                      </button>
-                    </h2>
-                    {p.excerpt ? (
-                      <p className="mt-2 text-gray-600 text-sm leading-relaxed line-clamp-3">{p.excerpt}</p>
-                    ) : null}
-                    <div className="mt-4">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="text-teal-700 border-teal-200 hover:bg-teal-50"
-                        onClick={() => onNavigate(`blog/${p.slug}`)}
-                      >
-                        Read more
-                      </Button>
-                    </div>
+                        className="block w-full aspect-[4/3] sm:aspect-[16/10] bg-gradient-to-br from-slate-100 to-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 shrink-0"
+                        aria-label={p.title}
+                      />
+                    )}
+                    <div className="p-4 flex flex-col flex-1 min-h-0">
+                      <p className="text-[11px] text-gray-500 uppercase tracking-wide mb-1">{dateLabel}</p>
+                      <h2 className="text-base font-semibold text-gray-900 leading-snug">
+                        <button
+                          type="button"
+                          onClick={() => onNavigate(`blog/${p.slug}`)}
+                          className="text-left w-full hover:text-teal-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 rounded line-clamp-2"
+                        >
+                          {p.title}
+                        </button>
+                      </h2>
+                      {p.excerpt ? (
+                        <p className="mt-2 text-gray-600 text-sm leading-relaxed line-clamp-2">{p.excerpt}</p>
+                      ) : null}
+                      <div className="mt-auto pt-3">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="w-full text-teal-700 border-teal-200 hover:bg-teal-50"
+                          onClick={() => onNavigate(`blog/${p.slug}`)}
+                        >
+                          Read more
+                        </Button>
+                      </div>
                     </div>
                   </article>
                 </li>

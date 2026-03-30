@@ -193,36 +193,20 @@
     }
     </script>
     <style>
-      /* First paint before React: match header / page chrome (white) — avoids navy hero flash */
+      /* First paint before React: no placeholder text in #root (avoids flash of large headings). */
       html,
       body {
         margin: 0;
         background: #ffffff;
       }
-      #root > .app-boot-shell {
+      #root {
         min-height: 100vh;
-        background: #ffffff;
-        color: #111827;
-        font-family: system-ui, -apple-system, Segoe UI, sans-serif;
       }
     </style>
   </head>
   <body>
-    <div id="root">
-      <!-- Semantic H1–H3 for crawlers that do not run JS; copy mirrors the live hero/sections -->
-      <main class="app-boot-shell" style="max-width:80rem;margin:0 auto;padding:1.5rem 1rem 3rem">
-        <h1 style="font-size:clamp(1.5rem,4vw,3rem);font-weight:800;margin:0 0 1rem;line-height:1.15">
-          Access treatment faster with affordable health insurance.
-        </h1>
-        <h2 style="font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:700;margin:1.75rem 0 0.75rem">
-          Find your best health cover
-        </h2>
-        <h3 style="font-size:1.125rem;font-weight:600;margin:0.5rem 0 0;opacity:0.95">
-          Price Match Guarantee
-        </h3>
-      </main>
-    </div>
-    <!-- SEO copy for crawlers without JS only; not shown when JavaScript runs (no layout flash) -->
+    <div id="root"></div>
+    <!-- SEO copy for crawlers without JS only; empty #root until React mounts for normal visitors -->
     <noscript>
       <main id="main-content">
         <h1>Compare private health insurance quotes in the UK</h1>
