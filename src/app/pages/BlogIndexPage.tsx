@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { Loader2, BookOpen } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
+import { publicAnonKey } from "/utils/supabase/info";
 
 export interface BlogListItem {
   id: string;
@@ -29,10 +30,16 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(supabaseEdgeUrl("/blog/posts"));
-        const json = await res.json();
+        const res = await fetch(supabaseEdgeUrl("/blog/posts"), {
+          headers: { Authorization: `Bearer ${publicAnonKey}` },
+        });
+        const json = await res.json().catch(() => ({}));
         if (!res.ok) {
-          throw new Error(json.error || "Could not load posts");
+          const msg =
+            (typeof json.error === "string" && json.error) ||
+            (typeof json.message === "string" && json.message) ||
+            "Could not load posts";
+          throw new Error(msg);
         }
         if (!cancelled) {
           setPosts(json.posts ?? []);

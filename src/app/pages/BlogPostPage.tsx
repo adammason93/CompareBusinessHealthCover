@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
+import { publicAnonKey } from "/utils/supabase/info";
 
 export interface BlogPostPublic {
   slug: string;
@@ -40,10 +41,16 @@ export function BlogPostPage({ slug, onNavigate, onGetStarted, onMetaLoaded }: B
       setError(null);
       setPost(null);
       try {
-        const res = await fetch(supabaseEdgeUrl(`/blog/posts/${encodeURIComponent(slug)}`));
-        const json = await res.json();
+        const res = await fetch(supabaseEdgeUrl(`/blog/posts/${encodeURIComponent(slug)}`), {
+          headers: { Authorization: `Bearer ${publicAnonKey}` },
+        });
+        const json = await res.json().catch(() => ({}));
         if (!res.ok) {
-          throw new Error(json.error || "Could not load this post");
+          const msg =
+            (typeof json.error === "string" && json.error) ||
+            (typeof json.message === "string" && json.message) ||
+            "Could not load this post";
+          throw new Error(msg);
         }
         const p = json.post as BlogPostPublic;
         if (!cancelled) {

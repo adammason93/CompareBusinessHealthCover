@@ -716,11 +716,16 @@ function blogAdminAuthError(c: { req: { header: (n: string) => string | undefine
       503,
     );
   }
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+  const headerSecret = c.req.header("X-Blog-Admin-Secret")?.trim() ?? "";
   const auth = c.req.header("Authorization");
   const bearer = auth?.startsWith("Bearer ") ? auth.slice(7).trim() : "";
-  const headerSecret = c.req.header("X-Blog-Admin-Secret")?.trim() ?? "";
-  const token = bearer || headerSecret;
-  if (!token || token !== secret) {
+  // Supabase gateway requires a valid JWT in Authorization; blog password goes in X-Blog-Admin-Secret.
+  let adminToken = headerSecret;
+  if (!adminToken && bearer && bearer !== anonKey) {
+    adminToken = bearer;
+  }
+  if (!adminToken || adminToken !== secret) {
     return c.json({ error: "Unauthorized" }, 401);
   }
   return null;

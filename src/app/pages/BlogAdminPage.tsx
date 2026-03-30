@@ -4,6 +4,7 @@ import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
+import { publicAnonKey } from "/utils/supabase/info";
 
 /** sessionStorage key for the bearer token typed on /blog-admin (must match Edge secret BLOG_ADMIN_SECRET). */
 const STORAGE_KEY = "hcc_blog_admin_secret";
@@ -42,7 +43,8 @@ export function BlogAdminPage() {
   const authHeaders = useCallback(() => {
     return {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${secret}`,
+      Authorization: `Bearer ${publicAnonKey}`,
+      "X-Blog-Admin-Secret": secret,
     };
   }, [secret]);
 
@@ -52,9 +54,13 @@ export function BlogAdminPage() {
     setError(null);
     try {
       const res = await fetch(supabaseEdgeUrl("/admin/blog/posts"), { headers: authHeaders() });
-      const json = await res.json();
+      const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        throw new Error(json.error || "Failed to load posts");
+        const msg =
+          (typeof json.error === "string" && json.error) ||
+          (typeof json.message === "string" && json.message) ||
+          `Request failed (${res.status})`;
+        throw new Error(msg);
       }
       setPosts(json.posts ?? []);
     } catch (e: unknown) {
@@ -128,9 +134,13 @@ export function BlogAdminPage() {
             published: form.published,
           }),
         });
-        const json = await res.json();
+        const json = await res.json().catch(() => ({}));
         if (!res.ok) {
-          throw new Error(json.error || "Save failed");
+          throw new Error(
+            (typeof json.error === "string" && json.error) ||
+              (typeof json.message === "string" && json.message) ||
+              "Save failed",
+          );
         }
         setMessage("Post updated.");
         await loadPosts();
@@ -146,9 +156,13 @@ export function BlogAdminPage() {
             published: form.published,
           }),
         });
-        const json = await res.json();
+        const json = await res.json().catch(() => ({}));
         if (!res.ok) {
-          throw new Error(json.error || "Create failed");
+          throw new Error(
+            (typeof json.error === "string" && json.error) ||
+              (typeof json.message === "string" && json.message) ||
+              "Create failed",
+          );
         }
         setMessage("Post created. Public URL: /blog/" + (json.post?.slug || ""));
         if (json.post?.id) {
@@ -175,9 +189,13 @@ export function BlogAdminPage() {
         method: "DELETE",
         headers: authHeaders(),
       });
-      const json = await res.json();
+      const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        throw new Error(json.error || "Delete failed");
+        throw new Error(
+          (typeof json.error === "string" && json.error) ||
+            (typeof json.message === "string" && json.message) ||
+            "Delete failed",
+        );
       }
       if (editingId === id) {
         startNew();
