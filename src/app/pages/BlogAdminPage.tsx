@@ -1,10 +1,31 @@
-import { useCallback, useEffect, useState } from "react";
-import { Loader2, Plus, Pencil, Trash2, LogOut, Eye, EyeOff } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Bold,
+  Code,
+  Heading2,
+  ImageIcon,
+  Italic,
+  Link2,
+  List,
+  ListOrdered,
+  Loader2,
+  LogOut,
+  Minus,
+  Pencil,
+  Plus,
+  Quote,
+  SquareCode,
+  Strikethrough,
+  Trash2,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import { BlogMarkdown } from "@/app/components/BlogMarkdown";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
+import { cn } from "@/app/components/ui/utils";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 import { publicAnonKey } from "/utils/supabase/info";
 
@@ -33,6 +54,9 @@ const emptyForm = {
   published: false,
 };
 
+/** Max size for drag-and-drop / paste images embedded as data URLs in the body (Markdown). */
+const MAX_EMBED_IMAGE_BYTES = 1.5 * 1024 * 1024;
+
 export function BlogAdminPage() {
   const [secretInput, setSecretInput] = useState("");
   const [secret, setSecret] = useState(() => sessionStorage.getItem(STORAGE_KEY) ?? "");
@@ -43,6 +67,174 @@ export function BlogAdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
+  const bodyRef = useRef<HTMLTextAreaElement>(null);
+  const [bodyDragOver, setBodyDragOver] = useState(false);
+  const [embedImageHint, setEmbedImageHint] = useState<string | null>(null);
+
+  /** Run after React commits the controlled textarea value so selection indices match `form.body`. */
+  const focusBodyAndSelect = useCallback((start: number, end: number) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = bodyRef.current;
+        if (!el) return;
+        el.focus();
+        el.setSelectionRange(start, end);
+      });
+    });
+  }, []);
+
+  /** Insert or wrap selection with Markdown; if nothing selected, places the cursor inside empty delimiters when sensible. */
+  const applyBodyMarkdown = useCallback(
+    (
+      before: string,
+      after: string,
+      opts?: { emptySelect?: [number, number] } // offsets from insertion start for selection after insert
+    ) => {
+      const el = bodyRef.current;
+      if (!el) return;
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      const body = form.body;
+      const selected = body.slice(start, end);
+      let inserted: string;
+      let caretStart: number;
+      let caretEnd: number;
+      if (selected) {
+        inserted = before + selected + after;
+        caretStart = start + inserted.length;
+        caretEnd = caretStart;
+      } else {
+        inserted = before + after;
+        const inner = opts?.emptySelect;
+        if (inner) {
+          caretStart = start + inner[0];
+          caretEnd = start + inner[1];
+        } else {
+          caretStart = caretEnd = start + before.length;
+        }
+      }
+      const next = body.slice(0, start) + inserted + body.slice(end);
+      setForm((f) => ({ ...f, body: next }));
+      focusBodyAndSelect(caretStart, caretEnd);
+    },
+    [form.body, focusBodyAndSelect],
+  );
+
+  const insertBodyAtCursor = useCallback(
+    (snippet: string, selectOffset?: [number, number]) => {
+      const el = bodyRef.current;
+      if (!el) return;
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      const body = form.body;
+      const next = body.slice(0, start) + snippet + body.slice(end);
+      setForm((f) => ({ ...f, body: next }));
+      if (selectOffset) {
+        focusBodyAndSelect(start + selectOffset[0], start + selectOffset[1]);
+      } else {
+        focusBodyAndSelect(start + snippet.length, start + snippet.length);
+      }
+    },
+    [form.body, focusBodyAndSelect],
+  );
+
+  const applyBodyLink = useCallback(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const body = form.body;
+    const selected = body.slice(start, end);
+    if (selected) {
+      const inserted = `[${selected}](https://)`;
+      const next = body.slice(0, start) + inserted + body.slice(end);
+      setForm((f) => ({ ...f, body: next }));
+      focusBodyAndSelect(start + inserted.length, start + inserted.length);
+    } else {
+      const inserted = "[link text](https://)";
+      const next = body.slice(0, start) + inserted + body.slice(end);
+      setForm((f) => ({ ...f, body: next }));
+      focusBodyAndSelect(start + 1, start + 10);
+    }
+  }, [form.body, focusBodyAndSelect]);
+
+  const handleBodyDrop = useCallback(
+    (e: React.DragEvent<HTMLTextAreaElement>) => {
+      e.preventDefault();
+      setBodyDragOver(false);
+      const el = bodyRef.current;
+      const start = el?.selectionStart ?? form.body.length;
+      const end = el?.selectionEnd ?? form.body.length;
+      const file = e.dataTransfer.files?.[0];
+      if (!file || !file.type.startsWith("image/")) return;
+      if (file.size > MAX_EMBED_IMAGE_BYTES) {
+        setEmbedImageHint(
+          `Image is larger than ${Math.round(MAX_EMBED_IMAGE_BYTES / (1024 * 1024))}MB. Host it elsewhere and use the image button or paste a URL.`,
+        );
+        return;
+      }
+      setEmbedImageHint(null);
+      const alt = file.name.replace(/\.[^.]+$/, "") || "image";
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = typeof reader.result === "string" ? reader.result : "";
+        if (!dataUrl) return;
+        const md = `![${alt}](${dataUrl})`;
+        let caretPos = start;
+        setForm((f) => {
+          const base = f.body;
+          const needsBreak = start > 0 && /[^\s\n]/.test(base[start - 1] ?? "");
+          const prefix = needsBreak ? "\n\n" : "";
+          const suffix = "\n\n";
+          const next = base.slice(0, start) + prefix + md + suffix + base.slice(end);
+          caretPos = start + prefix.length + md.length + suffix.length;
+          return { ...f, body: next };
+        });
+        focusBodyAndSelect(caretPos, caretPos);
+      };
+      reader.readAsDataURL(file);
+    },
+    [form.body, focusBodyAndSelect],
+  );
+
+  const handleBodyPaste = useCallback(
+    (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      const el = bodyRef.current;
+      const start = el?.selectionStart ?? form.body.length;
+      const end = el?.selectionEnd ?? form.body.length;
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (item.kind !== "file" || !item.type.startsWith("image/")) continue;
+        const file = item.getAsFile();
+        if (!file) continue;
+        e.preventDefault();
+        if (file.size > MAX_EMBED_IMAGE_BYTES) {
+          setEmbedImageHint(
+            `Pasted image is larger than ${Math.round(MAX_EMBED_IMAGE_BYTES / (1024 * 1024))}MB. Host it elsewhere and paste a URL instead.`,
+          );
+          return;
+        }
+        setEmbedImageHint(null);
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = typeof reader.result === "string" ? reader.result : "";
+          if (!dataUrl) return;
+          const md = `![image](${dataUrl})`;
+          setForm((f) => {
+            const base = f.body;
+            const next = base.slice(0, start) + md + base.slice(end);
+            return { ...f, body: next };
+          });
+          focusBodyAndSelect(start + md.length, start + md.length);
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+    },
+    [form.body, focusBodyAndSelect],
+  );
 
   const authHeaders = useCallback(() => {
     return {
@@ -358,14 +550,168 @@ export function BlogAdminPage() {
             <div>
               <label className="text-xs font-medium text-slate-600 block mb-1">Body</label>
               <p className="text-xs text-slate-500 mb-2">
-                Markdown. The preview updates as you type and matches how the post appears when published.
+                Markdown. Use the toolbar for bold, links, and more. The preview updates as you type.
               </p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-                <Textarea
-                  rows={12}
-                  value={form.body}
-                  onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
-                  placeholder={`Write in Markdown (saved as-is).
+                <div className="space-y-2 min-w-0">
+                  <div
+                    className="flex flex-wrap gap-1 p-1.5 border border-slate-200 rounded-lg bg-slate-50/90"
+                    role="toolbar"
+                    aria-label="Markdown formatting"
+                  >
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Bold (**)"
+                      onClick={() => applyBodyMarkdown("**", "**")}
+                    >
+                      <Bold className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Italic (_)"
+                      onClick={() => applyBodyMarkdown("_", "_")}
+                    >
+                      <Italic className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Strikethrough (~~)"
+                      onClick={() => applyBodyMarkdown("~~", "~~")}
+                    >
+                      <Strikethrough className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Link"
+                      onClick={applyBodyLink}
+                    >
+                      <Link2 className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Inline code (`)"
+                      onClick={() => applyBodyMarkdown("`", "`")}
+                    >
+                      <Code className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Heading (##)"
+                      onClick={() => insertBodyAtCursor("\n## Heading\n", [4, 11])}
+                    >
+                      <Heading2 className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Bullet list"
+                      onClick={() => insertBodyAtCursor("\n- ")}
+                    >
+                      <List className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Numbered list"
+                      onClick={() => insertBodyAtCursor("\n1. ")}
+                    >
+                      <ListOrdered className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Block quote"
+                      onClick={() => insertBodyAtCursor("\n> ")}
+                    >
+                      <Quote className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Code block"
+                      onClick={() => insertBodyAtCursor("\n```\n\n```\n", [5, 5])}
+                    >
+                      <SquareCode className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Image ![alt](url)"
+                      onClick={() => insertBodyAtCursor("![alt](https://)", [2, 5])}
+                    >
+                      <ImageIcon className="h-4 w-4" aria-hidden />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 shrink-0"
+                      title="Horizontal rule"
+                      onClick={() => insertBodyAtCursor("\n\n---\n\n")}
+                    >
+                      <Minus className="h-4 w-4" aria-hidden />
+                    </Button>
+                  </div>
+                  <p className="text-[11px] text-slate-500">
+                    Drag a small image onto the editor or paste from the clipboard to embed it (stored in the post as a
+                    data URL — prefer hosted URLs for large files).
+                  </p>
+                  {embedImageHint ? (
+                    <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-2 py-1.5">
+                      {embedImageHint}
+                    </p>
+                  ) : null}
+                  <div
+                    className={cn(
+                      "rounded-lg transition-shadow",
+                      bodyDragOver && "ring-2 ring-teal-500 ring-offset-2 ring-offset-white",
+                    )}
+                  >
+                    <Textarea
+                      ref={bodyRef}
+                      rows={12}
+                      value={form.body}
+                      onChange={(e) => {
+                        setEmbedImageHint(null);
+                        setForm((f) => ({ ...f, body: e.target.value }));
+                      }}
+                      onDrop={handleBodyDrop}
+                      onDragOver={(ev) => {
+                        ev.preventDefault();
+                        ev.dataTransfer.dropEffect = "copy";
+                        setBodyDragOver(true);
+                      }}
+                      onDragLeave={() => setBodyDragOver(false)}
+                      onPaste={handleBodyPaste}
+                      placeholder={`Write in Markdown (saved as-is).
 
 # Heading
 ## Subheading
@@ -381,8 +727,10 @@ export function BlogAdminPage() {
 \`\`\`
 code block
 \`\`\``}
-                  className="font-mono text-sm min-h-[280px] lg:min-h-[min(70vh,520px)]"
-                />
+                      className="font-mono text-sm min-h-[280px] lg:min-h-[min(70vh,520px)]"
+                    />
+                  </div>
+                </div>
                 <div className="space-y-2 min-w-0">
                   <p className="text-xs font-medium text-slate-600">Preview</p>
                   <div className="border border-slate-200 rounded-xl bg-gray-50 p-4 sm:p-6 min-h-[280px] max-h-[min(70vh,560px)] overflow-y-auto">
