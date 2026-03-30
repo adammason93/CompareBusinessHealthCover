@@ -28,6 +28,11 @@ function applyLegacyPageRedirect(pathname: string): string {
   return pathname;
 }
 
+/** `/blog-admin/` must match `blog-admin` (Cloudflare often normalizes with a trailing slash). */
+function routeKeyFromPathname(pathname: string): string {
+  return pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
+}
+
 const PageFallback = () => (
   <div
     className="min-h-[50vh] flex items-center justify-center bg-gray-50 text-gray-500 text-sm"
@@ -119,7 +124,7 @@ export default function App() {
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPage, setCurrentPage] = useState(() => {
-    const pathname = window.location.pathname.slice(1).replace(/^index\.html$/i, '');
+    const pathname = routeKeyFromPathname(window.location.pathname);
 
     if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
       console.log('🔍 Static file requested:', pathname, '- Will serve from /static/ route');
@@ -165,7 +170,7 @@ export default function App() {
   // that path always wins — otherwise a leftover hash (e.g. `#home`) can overwrite and show the homepage.
   useEffect(() => {
     const syncPageFromUrl = () => {
-      let pathname = window.location.pathname.replace(/^\//, "").replace(/^index\.html$/i, "");
+      const pathname = routeKeyFromPathname(window.location.pathname);
       if (pathname === "sitemap.xml" || pathname === "robots.txt" || pathname === "test-static.txt") {
         setCurrentPage(`static/${pathname}`);
         return;
@@ -202,7 +207,7 @@ export default function App() {
 
   useEffect(() => {
     const onPopState = () => {
-      let pathname = window.location.pathname.replace(/^\//, '').replace(/^index\.html$/i, '');
+      const pathname = routeKeyFromPathname(window.location.pathname);
       if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
         setCurrentPage(`static/${pathname}`);
         return;
@@ -315,7 +320,8 @@ export default function App() {
   };
 
   const handleNavigate = (page: string) => {
-    const target = page === 'partner-insurers' ? 'insurers' : page;
+    const raw = page === "partner-insurers" ? "insurers" : page;
+    const target = raw.replace(/\/+$/, "") || "home";
     setCurrentPage(target);
     if (target.startsWith('static/')) {
       const file = target.replace('static/', '');
@@ -418,6 +424,8 @@ export default function App() {
         return <Disclaimer onGetStarted={handleGetStarted} />;
       case 'blog':
         return <BlogIndexPage onNavigate={handleNavigate} onGetStarted={handleGetStarted} />;
+      case 'blog-admin':
+        return null;
       case 'home':
         return null; // Home is handled separately in the main render
       default: {
