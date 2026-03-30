@@ -1,5 +1,0 @@
-# SPA fallback (Cloudflare Pages, Netlify). Static files are served as assets first.
-/sitemap.xml  /sitemap.xml  200
-/robots.txt   /robots.txt   200
-/test-static.txt  /test-static.txt  200
-/*  /index.html  200
