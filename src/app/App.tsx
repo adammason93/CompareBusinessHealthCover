@@ -506,11 +506,21 @@ export default function App() {
       )}
 
       {currentPage === "admin-leads" || currentPage === "blog-admin" ? (
-        <main id="main-content">
-          <Suspense fallback={<PageFallback />}>
-            {currentPage === "admin-leads" ? <AdminLeads /> : <BlogAdminPage />}
-          </Suspense>
-        </main>
+        <>
+          <Header
+            onNavigate={handleNavigate}
+            onOpenAuth={handleOpenAuthModal}
+            onLogout={handleLogout}
+            onViewSubmissions={handleViewSubmissions}
+            user={user}
+          />
+          <main id="main-content">
+            <Suspense fallback={<PageFallback />}>
+              {currentPage === "admin-leads" ? <AdminLeads /> : <BlogAdminPage />}
+            </Suspense>
+          </main>
+          <Footer onNavigate={handleNavigate} />
+        </>
       ) : currentPage.startsWith("static/") ? (
         <main id="main-content">
           <Suspense fallback={<PageFallback />}>{renderPage()}</Suspense>

@@ -471,22 +471,24 @@ export function BlogAdminPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="border-b bg-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-lg font-semibold">Blog admin</h1>
-        <div className="flex items-center gap-2">
-          <Button type="button" variant="outline" size="sm" onClick={startNew}>
-            <Plus className="w-4 h-4 mr-1" aria-hidden />
-            New post
-          </Button>
-          <Button type="button" variant="ghost" size="sm" onClick={handleLogout}>
-            <LogOut className="w-4 h-4 mr-1" aria-hidden />
-            Clear secret
-          </Button>
+      <div className="border-b bg-white">
+        <div className="w-full max-w-[min(100%,1800px)] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-2">
+          <h1 className="text-lg font-semibold">Blog admin</h1>
+          <div className="flex items-center gap-2">
+            <Button type="button" variant="outline" size="sm" onClick={startNew}>
+              <Plus className="w-4 h-4 mr-1" aria-hidden />
+              New post
+            </Button>
+            <Button type="button" variant="ghost" size="sm" onClick={handleLogout}>
+              <LogOut className="w-4 h-4 mr-1" aria-hidden />
+              Clear secret
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto p-4 grid lg:grid-cols-2 gap-8">
-        <div>
+      <div className="w-full max-w-[min(100%,1800px)] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 grid grid-cols-1 lg:grid-cols-[minmax(0,17.5rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] gap-8 lg:gap-10">
+        <div className="min-w-0">
           <h2 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-3">All posts</h2>
           {loading ? (
             <div className="flex items-center gap-2 text-slate-500 py-8">
@@ -533,11 +535,11 @@ export function BlogAdminPage() {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h2 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-3">
             {editingId ? "Edit post" : "New post"}
           </h2>
-          <form onSubmit={submitPost} className="space-y-4 bg-white border border-slate-200 rounded-xl p-4">
+          <form onSubmit={submitPost} className="space-y-4 bg-white border border-slate-200 rounded-xl p-4 sm:p-6 lg:p-8">
             <div>
               <label className="text-xs font-medium text-slate-600 block mb-1">Title</label>
               <Input
@@ -589,7 +591,7 @@ export function BlogAdminPage() {
                 Markdown. Pasting from Word, Google Docs, or web pages converts to headings, bold, lists, and links. Use
                 the toolbar for shortcuts. The preview updates as you type.
               </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
                 <div className="space-y-2 min-w-0">
                   <div
                     className="flex flex-wrap gap-1 p-1.5 border border-slate-200 rounded-lg bg-slate-50/90"
@@ -764,13 +766,13 @@ export function BlogAdminPage() {
 \`\`\`
 code block
 \`\`\``}
-                      className="font-mono text-sm min-h-[280px] lg:min-h-[min(70vh,520px)]"
+                      className="font-mono text-sm min-h-[300px] lg:min-h-[min(75vh,680px)] w-full"
                     />
                   </div>
                 </div>
                 <div className="space-y-2 min-w-0">
                   <p className="text-xs font-medium text-slate-600">Preview</p>
-                  <div className="border border-slate-200 rounded-xl bg-gray-50 p-4 sm:p-6 min-h-[280px] max-h-[min(70vh,560px)] overflow-y-auto">
+                  <div className="border border-slate-200 rounded-xl bg-gray-50 p-4 sm:p-6 min-h-[300px] max-h-[min(75vh,680px)] overflow-y-auto w-full">
                     <article className="max-w-none">
                       {form.title ? (
                         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
