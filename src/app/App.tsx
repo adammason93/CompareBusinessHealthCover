@@ -161,31 +161,43 @@ export default function App() {
     }
   }, [currentPage]);
 
-  // Handle URL hash navigation (does not override pathname-based routes like /about-us)
+  // Hash navigation for `/` + `#page` only. If the URL has a real path (`/blog-admin`, `/about-us`, …),
+  // that path always wins — otherwise a leftover hash (e.g. `#home`) can overwrite and show the homepage.
   useEffect(() => {
-    const handleHashChange = () => {
+    const syncPageFromUrl = () => {
+      let pathname = window.location.pathname.replace(/^\//, "").replace(/^index\.html$/i, "");
+      if (pathname === "sitemap.xml" || pathname === "robots.txt" || pathname === "test-static.txt") {
+        setCurrentPage(`static/${pathname}`);
+        return;
+      }
+      if (pathname) {
+        const afterLegacy = applyLegacyPageRedirect(pathname);
+        const resolved = resolveInsurerRoute(afterLegacy);
+        if (resolved !== afterLegacy) {
+          window.history.replaceState({}, "", `/${resolved}`);
+        }
+        setCurrentPage(resolved);
+        return;
+      }
       const hash = window.location.hash.slice(1);
       if (hash) {
-        const page = hash === 'partner-insurers' ? 'insurers' : hash;
-        if (hash === 'partner-insurers') {
-          window.history.replaceState({}, '', '/insurers');
+        const page = hash === "partner-insurers" ? "insurers" : hash;
+        if (hash === "partner-insurers") {
+          window.history.replaceState({}, "", "/insurers");
         }
-        setCurrentPage(page);
-      } else {
-        const path = window.location.pathname.replace(/^\//, '').replace(/^index\.html$/i, '');
-        if (!path) {
-          setCurrentPage('home');
-        }
+        setCurrentPage(resolveInsurerRoute(page));
+        return;
       }
+      setCurrentPage("home");
     };
 
-    handleHashChange();
-    setTimeout(handleHashChange, 100);
-    setTimeout(handleHashChange, 500);
-    setTimeout(handleHashChange, 1000);
+    syncPageFromUrl();
+    setTimeout(syncPageFromUrl, 100);
+    setTimeout(syncPageFromUrl, 500);
+    setTimeout(syncPageFromUrl, 1000);
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", syncPageFromUrl);
+    return () => window.removeEventListener("hashchange", syncPageFromUrl);
   }, []);
 
   useEffect(() => {
