@@ -189,7 +189,7 @@ app.use(
   "/*",
   cors({
     origin: "*",
-    allowHeaders: ["Content-Type", "Authorization"],
+    allowHeaders: ["Content-Type", "Authorization", "X-Blog-Admin-Secret"],
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     exposeHeaders: ["Content-Length"],
     maxAge: 600,
@@ -230,6 +230,13 @@ app.get("/make-server-2031af1c/sitemap.xml", (c) => {
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://healthcovercomparison.co.uk/blog</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
   </url>
 
   <!-- Health Insurance Pages -->
@@ -347,6 +354,7 @@ app.get("/make-server-2031af1c/robots.txt", (c) => {
 User-agent: *
 Allow: /
 Disallow: /admin-leads
+Disallow: /blog-admin
 Disallow: /api/
 
 Sitemap: https://healthcovercomparison.co.uk/sitemap.xml
@@ -692,6 +700,230 @@ app.get("/make-server-2031af1c/get-form", async (c) => {
   } catch (error: any) {
     console.error("Get form error:", error);
     return c.json({ error: error.message || "Failed to get form" }, 500);
+  }
+});
+
+const BLOG_SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+function blogAdminAuthError(c: { req: { header: (n: string) => string | undefined }; json: (o: object, s?: number) => Response }) {
+  const secret = Deno.env.get("BLOG_ADMIN_SECRET");
+  if (!secret) {
+    return c.json(
+      {
+        error:
+          "BLOG_ADMIN_SECRET is not set. Add it under Supabase → Project Settings → Edge Functions → Secrets, then redeploy this function.",
+      },
+      503,
+    );
+  }
+  const auth = c.req.header("Authorization");
+  const bearer = auth?.startsWith("Bearer ") ? auth.slice(7).trim() : "";
+  const headerSecret = c.req.header("X-Blog-Admin-Secret")?.trim() ?? "";
+  const token = bearer || headerSecret;
+  if (!token || token !== secret) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+  return null;
+}
+
+function slugifyTitle(title: string): string {
+  const s = title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+  return s || "post";
+}
+
+// Public: published blog posts list
+app.get("/make-server-2031af1c/blog/posts", async (c) => {
+  try {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("id, slug, title, excerpt, published_at, updated_at")
+      .eq("published", true)
+      .order("published_at", { ascending: false, nullsFirst: false });
+
+    if (error) {
+      console.error("blog list error:", error);
+      return c.json({ error: error.message || "Failed to load posts" }, 500);
+    }
+    return c.json({ posts: data ?? [] });
+  } catch (e: any) {
+    console.error("blog list exception:", e);
+    return c.json({ error: e.message || "Failed to load posts" }, 500);
+  }
+});
+
+// Public: single published post by slug
+app.get("/make-server-2031af1c/blog/posts/:slug", async (c) => {
+  try {
+    const slug = c.req.param("slug");
+    if (!slug || !BLOG_SLUG_RE.test(slug)) {
+      return c.json({ error: "Invalid slug" }, 400);
+    }
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("slug, title, excerpt, body, published_at, updated_at")
+      .eq("slug", slug)
+      .eq("published", true)
+      .maybeSingle();
+
+    if (error) {
+      console.error("blog get error:", error);
+      return c.json({ error: error.message || "Failed to load post" }, 500);
+    }
+    if (!data) {
+      return c.json({ error: "Not found" }, 404);
+    }
+    return c.json({ post: data });
+  } catch (e: any) {
+    console.error("blog get exception:", e);
+    return c.json({ error: e.message || "Failed to load post" }, 500);
+  }
+});
+
+// Admin: all posts (drafts + published). Requires BLOG_ADMIN_SECRET.
+app.get("/make-server-2031af1c/admin/blog/posts", async (c) => {
+  const denied = blogAdminAuthError(c);
+  if (denied) return denied;
+  try {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .order("updated_at", { ascending: false });
+
+    if (error) {
+      console.error("admin blog list error:", error);
+      return c.json({ error: error.message || "Failed to load posts" }, 500);
+    }
+    return c.json({ posts: data ?? [] });
+  } catch (e: any) {
+    console.error("admin blog list exception:", e);
+    return c.json({ error: e.message || "Failed to load posts" }, 500);
+  }
+});
+
+app.post("/make-server-2031af1c/admin/blog/posts", async (c) => {
+  const denied = blogAdminAuthError(c);
+  if (denied) return denied;
+  try {
+    const body = await c.req.json();
+    const title = typeof body.title === "string" ? body.title.trim() : "";
+    if (!title) {
+      return c.json({ error: "title is required" }, 400);
+    }
+    let slug = typeof body.slug === "string" ? body.slug.trim().toLowerCase() : "";
+    if (!slug) {
+      slug = slugifyTitle(title);
+    }
+    if (!BLOG_SLUG_RE.test(slug)) {
+      return c.json(
+        { error: "slug must be lowercase letters, numbers, and single hyphens (e.g. my-health-post)" },
+        400,
+      );
+    }
+    const excerpt = typeof body.excerpt === "string" ? body.excerpt : "";
+    const postBody = typeof body.body === "string" ? body.body : "";
+    const published = Boolean(body.published);
+    const published_at = published ? new Date().toISOString() : null;
+
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .insert({
+        slug,
+        title,
+        excerpt,
+        body: postBody,
+        published,
+        published_at,
+        updated_at: new Date().toISOString(),
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error("admin blog insert:", error);
+      if (error.code === "23505") {
+        return c.json({ error: "A post with this slug already exists" }, 409);
+      }
+      return c.json({ error: error.message || "Failed to create post" }, 500);
+    }
+    return c.json({ post: data });
+  } catch (e: any) {
+    console.error("admin blog create exception:", e);
+    return c.json({ error: e.message || "Failed to create post" }, 500);
+  }
+});
+
+app.put("/make-server-2031af1c/admin/blog/posts/:id", async (c) => {
+  const denied = blogAdminAuthError(c);
+  if (denied) return denied;
+  try {
+    const id = c.req.param("id");
+    if (!id) {
+      return c.json({ error: "Missing id" }, 400);
+    }
+    const body = await c.req.json();
+    const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
+
+    if (typeof body.title === "string") updates.title = body.title.trim();
+    if (typeof body.excerpt === "string") updates.excerpt = body.excerpt;
+    if (typeof body.body === "string") updates.body = body.body;
+    if (typeof body.slug === "string") {
+      const s = body.slug.trim().toLowerCase();
+      if (!BLOG_SLUG_RE.test(s)) {
+        return c.json({ error: "Invalid slug format" }, 400);
+      }
+      updates.slug = s;
+    }
+    if (typeof body.published === "boolean") {
+      updates.published = body.published;
+      if (body.published) {
+        const { data: existing } = await supabase.from("blog_posts").select("published_at").eq("id", id).maybeSingle();
+        updates.published_at = existing?.published_at ?? new Date().toISOString();
+      } else {
+        updates.published_at = null;
+      }
+    }
+
+    const { data, error } = await supabase.from("blog_posts").update(updates).eq("id", id).select().single();
+    if (error) {
+      console.error("admin blog update:", error);
+      if (error.code === "23505") {
+        return c.json({ error: "Slug already in use" }, 409);
+      }
+      return c.json({ error: error.message || "Failed to update post" }, 500);
+    }
+    if (!data) {
+      return c.json({ error: "Post not found" }, 404);
+    }
+    return c.json({ post: data });
+  } catch (e: any) {
+    console.error("admin blog update exception:", e);
+    return c.json({ error: e.message || "Failed to update post" }, 500);
+  }
+});
+
+app.delete("/make-server-2031af1c/admin/blog/posts/:id", async (c) => {
+  const denied = blogAdminAuthError(c);
+  if (denied) return denied;
+  try {
+    const id = c.req.param("id");
+    const { data: deleted, error } = await supabase.from("blog_posts").delete().eq("id", id).select("id").maybeSingle();
+    if (error) {
+      console.error("admin blog delete:", error);
+      return c.json({ error: error.message || "Failed to delete" }, 500);
+    }
+    if (!deleted) {
+      return c.json({ error: "Post not found" }, 404);
+    }
+    return c.json({ ok: true });
+  } catch (e: any) {
+    console.error("admin blog delete exception:", e);
+    return c.json({ error: e.message || "Failed to delete" }, 500);
   }
 });
 

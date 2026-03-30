@@ -117,6 +117,13 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
   </url>
 
   <url>
+    <loc>https://healthcovercomparison.co.uk/blog</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
     <loc>https://healthcovercomparison.co.uk/nhs-waiting-times-england</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>

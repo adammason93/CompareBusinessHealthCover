@@ -2,6 +2,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin-leads
+Disallow: /blog-admin
 Disallow: /api/
 
 Sitemap: https://healthcovercomparison.co.uk/sitemap.xml

@@ -177,6 +177,20 @@ export const SEO_CONFIG = {
       keywords: '',
       noindex: true,
     },
+
+    blog: {
+      title: 'Blog | HealthCoverCompare',
+      description:
+        'Articles and guides on UK private health insurance: comparing PMI, understanding cover, and practical tips from HealthCoverCompare.',
+      keywords: 'health insurance blog UK, private medical insurance articles, PMI guides UK',
+    },
+
+    'blog-admin': {
+      title: 'Blog admin',
+      description: 'Internal blog editor.',
+      keywords: '',
+      noindex: true,
+    },
   },
 };
 

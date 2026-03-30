@@ -102,6 +102,15 @@ const BmaPrivateMedicalInsuranceGuide = lazy(() =>
     default: m.BmaPrivateMedicalInsuranceGuide,
   }))
 );
+const BlogIndexPage = lazy(() =>
+  import("@/app/pages/BlogIndexPage").then((m) => ({ default: m.BlogIndexPage }))
+);
+const BlogPostPage = lazy(() =>
+  import("@/app/pages/BlogPostPage").then((m) => ({ default: m.BlogPostPage }))
+);
+const BlogAdminPage = lazy(() =>
+  import("@/app/pages/BlogAdminPage").then((m) => ({ default: m.BlogAdminPage }))
+);
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -144,6 +153,13 @@ export default function App() {
   });
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
+  const [blogSeoOverride, setBlogSeoOverride] = useState<{ title: string; description: string } | null>(null);
+
+  useEffect(() => {
+    if (!currentPage.startsWith("blog/") || currentPage === "blog") {
+      setBlogSeoOverride(null);
+    }
+  }, [currentPage]);
 
   // Handle URL hash navigation (does not override pathname-based routes like /about-us)
   useEffect(() => {
@@ -334,8 +350,11 @@ export default function App() {
     );
   };
 
-  // Get SEO config for current page
-  const seoConfig = getSEOConfig(currentPage);
+  const baseSeo = getSEOConfig(currentPage);
+  const seoConfig =
+    blogSeoOverride && currentPage.startsWith("blog/") && currentPage !== "blog"
+      ? { ...baseSeo, title: blogSeoOverride.title, description: blogSeoOverride.description }
+      : baseSeo;
 
   const renderPage = () => {
     // Handle static file requests
@@ -385,9 +404,24 @@ export default function App() {
         return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':
         return <Disclaimer onGetStarted={handleGetStarted} />;
+      case 'blog':
+        return <BlogIndexPage onNavigate={handleNavigate} onGetStarted={handleGetStarted} />;
       case 'home':
         return null; // Home is handled separately in the main render
       default: {
+        if (currentPage.startsWith('blog/')) {
+          const slug = currentPage.slice('blog/'.length);
+          if (slug) {
+            return (
+              <BlogPostPage
+                slug={slug}
+                onNavigate={handleNavigate}
+                onGetStarted={handleGetStarted}
+                onMetaLoaded={setBlogSeoOverride}
+              />
+            );
+          }
+        }
         const comparison = getComparisonBySlug(currentPage);
         if (comparison) {
           return (
@@ -451,10 +485,10 @@ export default function App() {
         </div>
       )}
 
-      {currentPage === "admin-leads" ? (
+      {currentPage === "admin-leads" || currentPage === "blog-admin" ? (
         <main id="main-content">
           <Suspense fallback={<PageFallback />}>
-            <AdminLeads />
+            {currentPage === "admin-leads" ? <AdminLeads /> : <BlogAdminPage />}
           </Suspense>
         </main>
       ) : currentPage.startsWith("static/") ? (
@@ -536,7 +570,9 @@ export default function App() {
       {/* Cookie Settings Button (permanent access) */}
       <CookieSettingsButton />
 
-      {currentPage !== "admin-leads" && !currentPage.startsWith("static/") && <ChatBot />}
+      {currentPage !== "admin-leads" &&
+        currentPage !== "blog-admin" &&
+        !currentPage.startsWith("static/") && <ChatBot />}
     </div>
     </SiteChatProvider>
   );

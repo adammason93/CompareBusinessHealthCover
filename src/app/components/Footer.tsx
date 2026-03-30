@@ -12,6 +12,7 @@ const hrefForPage = (page: string) => (page === 'home' ? '/' : `/${page}`);
 
 const QUICK_LINKS: { page: string; label: string }[] = [
   { page: 'about-us', label: 'About Us' },
+  { page: 'blog', label: 'Blog' },
   { page: 'contact-us', label: 'Contact us' },
   { page: 'health-insurance-guide', label: 'Health insurance guide' },
   { page: 'family-health-insurance', label: 'Family health insurance' },

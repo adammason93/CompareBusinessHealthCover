@@ -126,6 +126,13 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
               </button>
               <button
                 type="button"
+                onClick={() => onNavigate('blog')}
+                className="text-gray-900 hover:text-teal-500 py-2 whitespace-nowrap"
+              >
+                Blog
+              </button>
+              <button
+                type="button"
                 onClick={() => onNavigate('contact-us')}
                 className="inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 text-sm font-medium shadow-md rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
               >
@@ -281,6 +288,16 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
                 className="block w-full text-left text-gray-900 font-medium py-2"
               >
                 About Us
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  onNavigate('blog');
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left text-gray-900 font-medium py-2"
+              >
+                Blog
               </button>
               {/* Mobile Search Bar */}
               <form onSubmit={handleSearch} className="pt-4 border-t">

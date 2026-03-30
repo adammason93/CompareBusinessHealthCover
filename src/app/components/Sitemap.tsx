@@ -15,6 +15,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       links: [
         { label: 'Home', page: 'home' },
         { label: 'About Us', page: 'about-us' },
+        { label: 'Blog', page: 'blog' },
         { label: 'Contact Us', page: 'contact-us' },
         { label: 'NHS waiting times (England)', page: 'nhs-waiting-times-england' },
         { label: 'BMA private medical insurance guide', page: 'bma-private-medical-insurance-guide' },
