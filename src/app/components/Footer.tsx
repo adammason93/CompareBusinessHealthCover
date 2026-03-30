@@ -13,6 +13,8 @@ const hrefForPage = (page: string) => (page === 'home' ? '/' : `/${page}`);
 const QUICK_LINKS: { page: string; label: string }[] = [
   { page: 'about-us', label: 'About Us' },
   { page: 'blog', label: 'Blog' },
+  // Temporary: use client-side nav to avoid 307 on cold load; remove after Worker deep-link fix.
+  { page: 'blog-admin', label: 'Blog admin' },
   { page: 'contact-us', label: 'Contact us' },
   { page: 'health-insurance-guide', label: 'Health insurance guide' },
   { page: 'family-health-insurance', label: 'Family health insurance' },
