@@ -371,8 +371,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       {/* Insurer Carousel */}
       <InsurerCarousel onNavigate={onNavigate} />
 
-      <HomeBlogSection onNavigate={onNavigate} />
-
       {/* How Do We Work Section - Find Your Best Health Cover */}
       <section id="find-best-cover" className="py-20 pb-0" style={{ backgroundColor: '#f9fafb' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -682,6 +680,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
       {/* Review Section */}
       <ReviewSection />
+
+      <HomeBlogSection onNavigate={onNavigate} />
 
       {/* Contact Form Modal */}
       <ContactFormModal 

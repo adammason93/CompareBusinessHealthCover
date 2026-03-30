@@ -26,6 +26,7 @@ import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { cn } from "@/app/components/ui/utils";
+import { clipHtmlToMarkdown, normalizePlainPasteBullets } from "@/utils/htmlToMarkdown";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 import { publicAnonKey } from "/utils/supabase/info";
 
@@ -199,11 +200,27 @@ export function BlogAdminPage() {
 
   const handleBodyPaste = useCallback(
     (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
-      const items = e.clipboardData?.items;
-      if (!items) return;
+      const cd = e.clipboardData;
+      if (!cd) return;
       const el = bodyRef.current;
       const start = el?.selectionStart ?? form.body.length;
       const end = el?.selectionEnd ?? form.body.length;
+
+      const insertMarkdownBlock = (md: string) => {
+        setEmbedImageHint(null);
+        let caretPos = start;
+        setForm((f) => {
+          const b = f.body;
+          const needsBreak = start > 0 && /[^\s\n]/.test(b[start - 1] ?? "");
+          const prefix = needsBreak && md.length ? "\n\n" : "";
+          const next = b.slice(0, start) + prefix + md + b.slice(end);
+          caretPos = start + prefix.length + md.length;
+          return { ...f, body: next };
+        });
+        focusBodyAndSelect(caretPos, caretPos);
+      };
+
+      const items = cd.items;
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item.kind !== "file" || !item.type.startsWith("image/")) continue;
@@ -231,6 +248,25 @@ export function BlogAdminPage() {
         };
         reader.readAsDataURL(file);
         return;
+      }
+
+      const html = cd.getData("text/html");
+      if (html?.trim()) {
+        const md = clipHtmlToMarkdown(html);
+        if (md) {
+          e.preventDefault();
+          insertMarkdownBlock(md);
+          return;
+        }
+      }
+
+      const plain = cd.getData("text/plain");
+      if (plain) {
+        const normalized = normalizePlainPasteBullets(plain);
+        if (normalized !== plain) {
+          e.preventDefault();
+          insertMarkdownBlock(normalized);
+        }
       }
     },
     [form.body, focusBodyAndSelect],
@@ -550,7 +586,8 @@ export function BlogAdminPage() {
             <div>
               <label className="text-xs font-medium text-slate-600 block mb-1">Body</label>
               <p className="text-xs text-slate-500 mb-2">
-                Markdown. Use the toolbar for bold, links, and more. The preview updates as you type.
+                Markdown. Pasting from Word, Google Docs, or web pages converts to headings, bold, lists, and links. Use
+                the toolbar for shortcuts. The preview updates as you type.
               </p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
                 <div className="space-y-2 min-w-0">
