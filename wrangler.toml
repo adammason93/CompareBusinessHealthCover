@@ -7,7 +7,7 @@
 # Workers Builds (Git): Build: npm run build | Deploy: npx wrangler deploy
 #   Worker entry serves ./dist via Assets (not dist/index.js — that is HTML from Vite).
 #
-# SPA routing: worker/index.ts (404 → /index.html). Avoid public/_redirects /* → index.html on Workers.
+# SPA routing: worker/index.ts (404 → /index.html, and 307→/ from Assets → /index.html). No public/_redirects /* on Workers.
 # -----------------------------------------------------------------------------
 
 name = "healthinsuranceleadgenerationfinal"

@@ -22,6 +22,21 @@ function hasStaticAssetExtension(pathname: string): boolean {
   return last.includes('.') && last.length > 0
 }
 
+/** Workers Assets often answers unknown paths with 307 → `/` instead of 404; that breaks SPA deep links. */
+function redirectPointsToSiteRoot(locationHeader: string | null, baseUrl: URL): boolean {
+  if (!locationHeader) return false
+  const t = locationHeader.trim()
+  if (t === '/' || t === '') return true
+  try {
+    const u = new URL(t, baseUrl)
+    if (u.origin !== baseUrl.origin) return false
+    const p = normalizePathname(u.pathname)
+    return p === '' || p === '/'
+  } catch {
+    return false
+  }
+}
+
 const HASHED_ASSET = /\.(js|mjs|css|woff2?|ttf|otf|svg|png|jpe?g|gif|webp|ico|json|map)$/i
 
 function withAssetCache(request: Request, response: Response, pathname: string): Response {
@@ -56,6 +71,17 @@ export default {
 
     let response = await env.STATIC.fetch(assetRequest)
     if (response.status !== 404) {
+      if (
+        response.status >= 300 &&
+        response.status < 400 &&
+        !hasStaticAssetExtension(normalizedPath) &&
+        redirectPointsToSiteRoot(response.headers.get('Location'), original)
+      ) {
+        const spa = await env.STATIC.fetch(new Request(new URL('/index.html', original.origin), request))
+        if (spa.ok) {
+          return withAssetCache(request, spa, '/index.html')
+        }
+      }
       return withAssetCache(request, response, normalizedPath)
     }
 
