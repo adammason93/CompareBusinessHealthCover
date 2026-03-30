@@ -5,6 +5,7 @@ import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
+/** sessionStorage key for the bearer token typed on /blog-admin (must match Edge secret BLOG_ADMIN_SECRET). */
 const STORAGE_KEY = "hcc_blog_admin_secret";
 
 type BlogRow = {
