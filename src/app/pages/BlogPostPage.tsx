@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 import { publicAnonKey } from "/utils/supabase/info";
 
@@ -10,6 +11,7 @@ export interface BlogPostPublic {
   title: string;
   excerpt: string;
   body: string;
+  cover_image_url?: string | null;
   published_at: string | null;
   updated_at: string;
 }
@@ -21,11 +23,41 @@ interface BlogPostPageProps {
   onMetaLoaded: (meta: { title: string; description: string } | null) => void;
 }
 
-function bodyToParagraphs(body: string): string[] {
-  return body
+/** Paragraph that is only a direct https image URL → render as <img>. */
+function singleImageUrlFromBlock(block: string): string | null {
+  const t = block.trim();
+  const m = t.match(
+    /^\s*(https?:\/\/[^\s]+\.(?:jpe?g|png|gif|webp))(?:\?[^\s]*)?\s*$/i,
+  );
+  return m ? m[1] : null;
+}
+
+function renderBodyBlocks(body: string, titleForAlt: string) {
+  const blocks = body
     .split(/\n\n+/)
-    .map((p) => p.trim())
+    .map((b) => b.trim())
     .filter(Boolean);
+  return blocks.map((block, i) => {
+    const imgUrl = singleImageUrlFromBlock(block);
+    if (imgUrl) {
+      return (
+        <figure key={i} className="my-6">
+          <ImageWithFallback
+            src={imgUrl}
+            alt=""
+            className="w-full max-h-[28rem] object-contain rounded-lg border border-gray-100 bg-gray-50"
+            loading="lazy"
+          />
+          <figcaption className="sr-only">Image in article: {titleForAlt}</figcaption>
+        </figure>
+      );
+    }
+    return (
+      <p key={i} className="text-gray-700 leading-relaxed mb-4 whitespace-pre-wrap">
+        {block}
+      </p>
+    );
+  });
 }
 
 export function BlogPostPage({ slug, onNavigate, onGetStarted, onMetaLoaded }: BlogPostPageProps) {
@@ -114,13 +146,17 @@ export function BlogPostPage({ slug, onNavigate, onGetStarted, onMetaLoaded }: B
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">{post.title}</h1>
               {post.excerpt ? <p className="mt-4 text-lg text-gray-600 leading-relaxed">{post.excerpt}</p> : null}
             </header>
-            <div className="prose prose-gray max-w-none">
-              {bodyToParagraphs(post.body).map((para, i) => (
-                <p key={i} className="text-gray-700 leading-relaxed mb-4 whitespace-pre-wrap">
-                  {para}
-                </p>
-              ))}
-            </div>
+            {post.cover_image_url ? (
+              <div className="mb-10 rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
+                <ImageWithFallback
+                  src={post.cover_image_url}
+                  alt={post.title}
+                  className="w-full max-h-[22rem] object-cover"
+                  loading="eager"
+                />
+              </div>
+            ) : null}
+            <div className="prose prose-gray max-w-none">{renderBodyBlocks(post.body, post.title)}</div>
             <div className="mt-12 pt-8 border-t border-gray-200">
               <Button
                 type="button"

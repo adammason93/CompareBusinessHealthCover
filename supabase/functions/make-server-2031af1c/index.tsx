@@ -747,7 +747,7 @@ app.get("/make-server-2031af1c/blog/posts", async (c) => {
   try {
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("id, slug, title, excerpt, published_at, updated_at")
+      .select("id, slug, title, excerpt, cover_image_url, published_at, updated_at")
       .eq("published", true)
       .order("published_at", { ascending: false, nullsFirst: false });
 
@@ -771,7 +771,7 @@ app.get("/make-server-2031af1c/blog/posts/:slug", async (c) => {
     }
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("slug, title, excerpt, body, published_at, updated_at")
+      .select("slug, title, excerpt, body, cover_image_url, published_at, updated_at")
       .eq("slug", slug)
       .eq("published", true)
       .maybeSingle();
@@ -832,6 +832,8 @@ app.post("/make-server-2031af1c/admin/blog/posts", async (c) => {
     }
     const excerpt = typeof body.excerpt === "string" ? body.excerpt : "";
     const postBody = typeof body.body === "string" ? body.body : "";
+    const cover_image_url =
+      typeof body.cover_image_url === "string" ? body.cover_image_url.trim().slice(0, 2048) : "";
     const published = Boolean(body.published);
     const published_at = published ? new Date().toISOString() : null;
 
@@ -842,6 +844,7 @@ app.post("/make-server-2031af1c/admin/blog/posts", async (c) => {
         title,
         excerpt,
         body: postBody,
+        cover_image_url,
         published,
         published_at,
         updated_at: new Date().toISOString(),
@@ -877,6 +880,9 @@ app.put("/make-server-2031af1c/admin/blog/posts/:id", async (c) => {
     if (typeof body.title === "string") updates.title = body.title.trim();
     if (typeof body.excerpt === "string") updates.excerpt = body.excerpt;
     if (typeof body.body === "string") updates.body = body.body;
+    if (typeof body.cover_image_url === "string") {
+      updates.cover_image_url = body.cover_image_url.trim().slice(0, 2048);
+    }
     if (typeof body.slug === "string") {
       const s = body.slug.trim().toLowerCase();
       if (!BLOG_SLUG_RE.test(s)) {

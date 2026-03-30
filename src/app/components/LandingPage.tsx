@@ -21,6 +21,7 @@ import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
 import { ReviewSection } from "@/app/components/ReviewSection";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
+import { HomeBlogSection } from "@/app/components/HomeBlogSection";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SiteChatButton } from "@/app/components/SiteChatButton";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
@@ -369,6 +370,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
       {/* Insurer Carousel */}
       <InsurerCarousel onNavigate={onNavigate} />
+
+      <HomeBlogSection onNavigate={onNavigate} />
 
       {/* How Do We Work Section - Find Your Best Health Cover */}
       <section id="find-best-cover" className="py-20 pb-0" style={{ backgroundColor: '#f9fafb' }}>

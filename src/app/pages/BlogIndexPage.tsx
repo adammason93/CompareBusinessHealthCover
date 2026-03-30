@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Loader2, BookOpen } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 import { publicAnonKey } from "/utils/supabase/info";
 
@@ -10,6 +11,7 @@ export interface BlogListItem {
   slug: string;
   title: string;
   excerpt: string;
+  cover_image_url?: string | null;
   published_at: string | null;
   updated_at: string;
 }
@@ -98,7 +100,22 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
                 : "";
               return (
                 <li key={p.id}>
-                  <article className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 hover:border-teal-200 transition-colors">
+                  <article className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:border-teal-200 transition-colors">
+                    {p.cover_image_url ? (
+                      <button
+                        type="button"
+                        onClick={() => onNavigate(`blog/${p.slug}`)}
+                        className="block w-full aspect-[16/9] bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+                      >
+                        <ImageWithFallback
+                          src={p.cover_image_url}
+                          alt={p.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </button>
+                    ) : null}
+                    <div className="p-6">
                     <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{dateLabel}</p>
                     <h2 className="text-xl font-semibold text-gray-900">
                       <button
@@ -122,6 +139,7 @@ export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) 
                       >
                         Read more
                       </Button>
+                    </div>
                     </div>
                   </article>
                 </li>

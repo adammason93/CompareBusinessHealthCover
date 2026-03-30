@@ -15,6 +15,7 @@ type BlogRow = {
   title: string;
   excerpt: string;
   body: string;
+  cover_image_url?: string;
   published: boolean;
   published_at: string | null;
   created_at: string;
@@ -26,6 +27,7 @@ const emptyForm = {
   title: "",
   excerpt: "",
   body: "",
+  cover_image_url: "",
   published: false,
 };
 
@@ -109,6 +111,7 @@ export function BlogAdminPage() {
       title: p.title,
       excerpt: p.excerpt,
       body: p.body,
+      cover_image_url: p.cover_image_url ?? "",
       published: p.published,
     });
     setMessage(null);
@@ -131,6 +134,7 @@ export function BlogAdminPage() {
             title: form.title.trim(),
             excerpt: form.excerpt,
             body: form.body,
+            cover_image_url: form.cover_image_url.trim(),
             published: form.published,
           }),
         });
@@ -153,6 +157,7 @@ export function BlogAdminPage() {
             title: form.title.trim(),
             excerpt: form.excerpt,
             body: form.body,
+            cover_image_url: form.cover_image_url.trim(),
             published: form.published,
           }),
         });
@@ -333,12 +338,30 @@ export function BlogAdminPage() {
               />
             </div>
             <div>
+              <label className="text-xs font-medium text-slate-600 block mb-1">
+                Cover image URL (optional)
+              </label>
+              <Input
+                type="url"
+                inputMode="url"
+                value={form.cover_image_url}
+                onChange={(e) => setForm((f) => ({ ...f, cover_image_url: e.target.value }))}
+                placeholder="https://… (HTTPS link to .jpg / .png / .webp)"
+                className="font-mono text-sm"
+              />
+              <p className="text-xs text-slate-500 mt-1">
+                Used on the home page, blog list, and top of the post. Host images anywhere (e.g. your CDN) and paste the URL.
+              </p>
+            </div>
+            <div>
               <label className="text-xs font-medium text-slate-600 block mb-1">Body</label>
               <Textarea
                 rows={12}
                 value={form.body}
                 onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
-                placeholder="Main content (blank lines become paragraphs)"
+                placeholder={
+                  "Paragraphs separated by blank lines. For an extra image in the article, add a paragraph that is only a direct image URL (https://…jpg or .png)."
+                }
                 className="font-mono text-sm"
               />
             </div>
