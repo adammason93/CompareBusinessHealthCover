@@ -16,6 +16,16 @@ export const REVIEWS_IO_STORE =
     (import.meta as unknown as { env?: { VITE_REVIEWS_IO_STORE?: string } }).env?.VITE_REVIEWS_IO_STORE?.trim()) ||
   "healthcovercomparison.co.uk-p0p1nby";
 
+/**
+ * Public company page on Reviews.io for “Leave a review” links (matches store slug in the URL path).
+ * Override with `VITE_REVIEWS_IO_PUBLIC_PAGE_URL` if Reviews.io uses a different path for your profile.
+ */
+export const REVIEWS_IO_PUBLIC_PAGE_URL =
+  (typeof import.meta !== "undefined" &&
+    (import.meta as unknown as { env?: { VITE_REVIEWS_IO_PUBLIC_PAGE_URL?: string } }).env
+      ?.VITE_REVIEWS_IO_PUBLIC_PAGE_URL?.trim()) ||
+  `https://www.reviews.io/company-reviews/store/${REVIEWS_IO_STORE}`;
+
 /** Must match dashboard embed: `<div id="reviewsio-carousel-widget">` */
 export const REVIEWS_IO_WIDGET_CONTAINER_ID = "reviewsio-carousel-widget";
 
