@@ -36,10 +36,10 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
     styles_carousel: "CarouselWidget--sideHeader--withcards",
     options: {
       general: {
-        /* Company-only: a single site review is usually company-level; "product" can yield zero matches. */
-        review_type: "company",
-        min_reviews: "1",
-        max_reviews: "20",
+        /* Must start with `company` so getAjax uses store_review (see Reviews.io carousel-inline dist). */
+        review_type: "company, product",
+        min_reviews: 1,
+        max_reviews: 20,
         address_format: "CITY, COUNTRY",
         enable_auto_scroll: 10000,
         enable_pause_button: true,
@@ -59,9 +59,9 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
         enable_videos: true,
         enable_review_date: true,
         disable_same_customer: true,
-        /* 0 = no star-rating filter (avoids hiding valid reviews if the scale is misread). */
-        min_review_percent: 0,
+        min_review_percent: 4,
         third_party_source: true,
+        enable_avatars: false,
         hide_empty_reviews: true,
         enable_product_name: true,
         tags: "",

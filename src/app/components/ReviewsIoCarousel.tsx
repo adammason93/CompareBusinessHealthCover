@@ -8,7 +8,8 @@ import {
 
 declare global {
   interface Window {
-    carouselInlineWidget?: new (elementId: string, config: unknown) => unknown;
+    /** Reviews.io defines this as a plain function, not a constructor — do not use `new`. */
+    carouselInlineWidget?: (elementId: string, config: unknown) => void;
   }
 }
 
@@ -32,7 +33,8 @@ async function ensureCarouselScriptLoaded(src: string): Promise<void> {
     await new Promise<void>((resolve, reject) => {
       const s = document.createElement("script");
       s.src = src;
-      s.async = true;
+      /* Match dashboard embed: no async — avoids racing React paint / other scripts. */
+      s.async = false;
       s.dataset.reviewsioCarouselScript = "1";
       s.onload = () => resolve();
       s.onerror = () => reject(new Error("Reviews.io script failed to load"));
@@ -70,17 +72,18 @@ export function ReviewsIoCarousel() {
       }
       if (cancelled || !rootRef.current) return;
 
-      const Widget = window.carouselInlineWidget;
-      if (!Widget) return;
+      const init = window.carouselInlineWidget;
+      if (!init) return;
 
       const config = getReviewsIoCarouselConfig(REVIEWS_IO_STORE);
       try {
         // Let layout commit so the widget can measure the container (empty carousels otherwise).
         await new Promise<void>((r) => requestAnimationFrame(() => r()));
         if (cancelled || !rootRef.current) return;
-        new Widget(WIDGET_CONTAINER_ID, config);
-      } catch {
-        /* ignore */
+        /* Plain call — `new` breaks Reviews.io’s non-constructor function (can throw / no-op). */
+        init(WIDGET_CONTAINER_ID, config);
+      } catch (e) {
+        console.error("Reviews.io carousel failed to initialize:", e);
       }
     };
 
