@@ -1,89 +1,100 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import {
   getReviewsIoCarouselConfig,
   REVIEWS_IO_STORE,
   REVIEWS_IO_URLS,
-  WIDGET_CONTAINER_ID,
+  REVIEWS_IO_WIDGET_CONTAINER_ID,
 } from "@/config/reviewsIoCarousel";
 
 declare global {
   interface Window {
-    /** Reviews.io defines this as a plain function, not a constructor — do not use `new`. */
-    carouselInlineWidget?: (elementId: string, config: unknown) => void;
+    /** Dashboard embed uses `new carouselInlineWidget(...)` */
+    carouselInlineWidget?: new (elementId: string, config: unknown) => unknown;
   }
 }
 
-function ensureStylesheet(href: string, marker: string): void {
-  if (document.querySelector(`link[data-reviewsio-carousel="${marker}"]`)) return;
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = href;
-  link.dataset.reviewsioCarousel = marker;
-  document.head.appendChild(link);
+/** If index.html script did not run (e.g. odd cache), inject once. */
+function injectCarouselScriptOnce(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector('script[src*="carousel-inline-iframeless"]')) {
+      resolve();
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = src;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error("Failed to load Reviews.io script"));
+    document.head.appendChild(s);
+  });
 }
 
-/**
- * Inject script once, then wait until `window.carouselInlineWidget` exists.
- * Handles cached scripts and React Strict Mode where `load` may have already fired before we subscribe.
- */
-async function ensureCarouselScriptLoaded(src: string): Promise<void> {
-  let script = document.querySelector<HTMLScriptElement>(`script[data-reviewsio-carousel-script="1"]`);
-
-  if (!script) {
-    await new Promise<void>((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = src;
-      /* Match dashboard embed: no async — avoids racing React paint / other scripts. */
-      s.async = false;
-      s.dataset.reviewsioCarouselScript = "1";
-      s.onload = () => resolve();
-      s.onerror = () => reject(new Error("Reviews.io script failed to load"));
-      document.head.appendChild(s);
-      script = s;
-    });
-  }
-
-  const deadline = Date.now() + 15000;
+async function waitForCarouselInlineWidget(): Promise<void> {
+  const deadline = Date.now() + 20000;
   while (!window.carouselInlineWidget && Date.now() < deadline) {
-    await new Promise((r) => setTimeout(r, 50));
+    await new Promise((r) => setTimeout(r, 40));
+  }
+  if (window.carouselInlineWidget) return;
+
+  console.warn("Reviews.io: script not on window yet — injecting fallback");
+  try {
+    await injectCarouselScriptOnce(REVIEWS_IO_URLS.script);
+  } catch (e) {
+    console.error("Reviews.io: fallback script load failed:", e);
+    throw e;
+  }
+
+  const deadline2 = Date.now() + 15000;
+  while (!window.carouselInlineWidget && Date.now() < deadline2) {
+    await new Promise((r) => setTimeout(r, 40));
   }
   if (!window.carouselInlineWidget) {
-    throw new Error("Reviews.io: carouselInlineWidget not available after script load");
+    throw new Error("Reviews.io: carouselInlineWidget is still undefined after load");
   }
 }
 
 /**
- * Reviews.io iframeless carousel — matches dashboard “Widget installation” embed.
+ * Reviews.io iframeless carousel — matches dashboard embed (fixed id + `new carouselInlineWidget`).
  */
 export function ReviewsIoCarousel() {
-  const rootRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     let cancelled = false;
 
-    ensureStylesheet(REVIEWS_IO_URLS.carouselCss, "widget");
-    ensureStylesheet(REVIEWS_IO_URLS.iconsCss, "icons");
-
     const run = async () => {
       try {
-        await ensureCarouselScriptLoaded(REVIEWS_IO_URLS.script);
-      } catch {
+        await waitForCarouselInlineWidget();
+      } catch (e) {
+        console.error("Reviews.io:", e);
         return;
       }
-      if (cancelled || !rootRef.current) return;
+      if (cancelled) return;
 
-      const init = window.carouselInlineWidget;
-      if (!init) return;
+      const Ctor = window.carouselInlineWidget;
+      if (!Ctor) {
+        console.error("Reviews.io: carouselInlineWidget missing");
+        return;
+      }
+
+      const el = document.getElementById(REVIEWS_IO_WIDGET_CONTAINER_ID);
+      if (!el) {
+        console.error("Reviews.io: container #reviewsio-carousel-widget not in DOM");
+        return;
+      }
+      if (el.querySelector(".CarouselWidget-prefix")) {
+        return;
+      }
 
       const config = getReviewsIoCarouselConfig(REVIEWS_IO_STORE);
       try {
-        // Let layout commit so the widget can measure the container (empty carousels otherwise).
-        await new Promise<void>((r) => requestAnimationFrame(() => r()));
-        if (cancelled || !rootRef.current) return;
-        /* Plain call — `new` breaks Reviews.io’s non-constructor function (can throw / no-op). */
-        init(WIDGET_CONTAINER_ID, config);
+        await new Promise<void>((r) => {
+          requestAnimationFrame(() => requestAnimationFrame(() => r()));
+        });
+        if (cancelled) return;
+        if (!document.getElementById(REVIEWS_IO_WIDGET_CONTAINER_ID)) return;
+
+        new Ctor(REVIEWS_IO_WIDGET_CONTAINER_ID, config);
       } catch (e) {
-        console.error("Reviews.io carousel failed to initialize:", e);
+        console.error("Reviews.io carousel init threw:", e);
       }
     };
 
@@ -91,9 +102,6 @@ export function ReviewsIoCarousel() {
 
     return () => {
       cancelled = true;
-      if (rootRef.current) {
-        rootRef.current.innerHTML = "";
-      }
     };
   }, []);
 
@@ -113,8 +121,7 @@ export function ReviewsIoCarousel() {
           Independent feedback from Reviews.io — verified customers who used HealthCoverComparison.
         </p>
         <div
-          id={WIDGET_CONTAINER_ID}
-          ref={rootRef}
+          id={REVIEWS_IO_WIDGET_CONTAINER_ID}
           className="w-full min-h-[320px] reviewsio-carousel-root"
         />
       </div>

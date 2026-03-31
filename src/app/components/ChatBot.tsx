@@ -262,11 +262,14 @@ export function ChatBot() {
           <div className="p-4 bg-white border-t border-gray-200 flex-shrink-0">
             <div className="flex gap-2">
               <input
+                id="chatbot-message"
+                name="message"
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
+                autoComplete="off"
                 className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                 disabled={isLoading}
               />

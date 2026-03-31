@@ -142,10 +142,13 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
               <form onSubmit={handleSearch} className="flex items-center shrink-0">
                 <div className="relative">
                   <input 
+                    id="site-search"
+                    name="q"
                     type="text" 
                     placeholder="Search..." 
                     value={searchQuery} 
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    autoComplete="off"
                     className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 w-44 xl:w-56 text-sm"
                   />
                   <button
@@ -303,10 +306,13 @@ export const Header = memo(function Header({ onNavigate }: HeaderProps) {
               <form onSubmit={handleSearch} className="pt-4 border-t">
                 <div className="relative">
                   <input 
+                    id="site-search-mobile"
+                    name="q"
                     type="text" 
                     placeholder="Search..." 
                     value={searchQuery} 
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    autoComplete="off"
                     className="w-full border border-gray-300 rounded-full px-4 py-3 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
                   />
                   <button 

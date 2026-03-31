@@ -2,7 +2,7 @@
  * Reviews.io carousel (iframeless). Dashboard → Widgets → copy embed; override store via
  * `VITE_REVIEWS_IO_STORE` if needed.
  */
-export const REVIEWS_IO_ASSET_QUERY = "?_t=2026033108" as const;
+export const REVIEWS_IO_ASSET_QUERY = "?_t=2026033109" as const;
 
 export const REVIEWS_IO_URLS = {
   script: `https://widget.reviews.io/carousel-inline-iframeless/dist.js${REVIEWS_IO_ASSET_QUERY}`,
@@ -14,7 +14,8 @@ export const REVIEWS_IO_STORE =
   (import.meta.env.VITE_REVIEWS_IO_STORE as string | undefined)?.trim() ||
   "healthcovercomparison.co.uk-p0p1nby";
 
-const WIDGET_CONTAINER_ID = "reviewsio-carousel-widget";
+/** Must match dashboard embed: `<div id="reviewsio-carousel-widget">` */
+export const REVIEWS_IO_WIDGET_CONTAINER_ID = "reviewsio-carousel-widget";
 
 export type CarouselInlineWidgetConfig = {
   store: string;
@@ -36,10 +37,9 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
     styles_carousel: "CarouselWidget--sideHeader--withcards",
     options: {
       general: {
-        /* Must start with `company` so getAjax uses store_review (see Reviews.io carousel-inline dist). */
         review_type: "company, product",
-        min_reviews: 1,
-        max_reviews: 20,
+        min_reviews: "1",
+        max_reviews: "20",
         address_format: "CITY, COUNTRY",
         enable_auto_scroll: 10000,
         enable_pause_button: true,
@@ -61,7 +61,6 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
         disable_same_customer: true,
         min_review_percent: 4,
         third_party_source: true,
-        enable_avatars: false,
         hide_empty_reviews: true,
         enable_product_name: true,
         tags: "",
@@ -176,4 +175,3 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
   };
 }
 
-export { WIDGET_CONTAINER_ID };
