@@ -73,11 +73,6 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                   info@healthcovercomparison.co.uk
                 </a>
               </div>
-              <div className="text-sm text-gray-400 mt-2">
-                83, Hall Road Moorgate<br />
-                Rotherham<br />
-                South Yorkshire
-              </div>
               <div className="flex items-center gap-4 mt-4">
                 <a
                   href="https://www.facebook.com/profile.php?id=61575468412423"
@@ -168,9 +163,8 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               HealthCoverComparison is a trading name for <span className="text-gray-300">MASON & HALL DIGITAL LTD</span>, which is a registered company in England and Wales.
             </p>
             <p>
-              Company No.: <span className="text-gray-300">17086378</span> | 
-              Registered Address: <span className="text-gray-300">83, Hall Road Moorgate, Rotherham, South Yorkshire</span> | 
-              ICO Registration No.: <span className="text-gray-300">ZC107389</span>
+              Company No.: <span className="text-gray-300">17086378</span> | ICO Registration No.:{" "}
+              <span className="text-gray-300">ZC107389</span>
             </p>
           </div>
         </div>
