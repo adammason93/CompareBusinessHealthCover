@@ -2,7 +2,7 @@
  * Reviews.io carousel (iframeless). Dashboard → Widgets → copy embed; override store via
  * `VITE_REVIEWS_IO_STORE` if needed.
  */
-export const REVIEWS_IO_ASSET_QUERY = "?_t=2026033109" as const;
+export const REVIEWS_IO_ASSET_QUERY = "?_t=2026033112" as const;
 
 export const REVIEWS_IO_URLS = {
   script: `https://widget.reviews.io/carousel-inline-iframeless/dist.js${REVIEWS_IO_ASSET_QUERY}`,
@@ -49,7 +49,7 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
     styles_carousel: "CarouselWidget--sideHeader--withcards",
     options: {
       general: {
-        review_type: "company, product",
+        review_type: "company",
         min_reviews: "1",
         max_reviews: "20",
         address_format: "CITY, COUNTRY",
@@ -73,7 +73,7 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
         disable_same_customer: true,
         min_review_percent: 4,
         third_party_source: true,
-        hide_empty_reviews: false,
+        hide_empty_reviews: true,
         enable_product_name: true,
         tags: "",
         branch: "",
@@ -92,7 +92,7 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
     styles: {
       "--base-font-size": "16px",
       "--base-maxwidth": "100%",
-      "--reviewsio-logo-style": "var(--logo-inverted)",
+      "--reviewsio-logo-style": "var(--logo-normal)",
       "--common-star-color": " #0E1311",
       "--common-star-disabled-color": " rgba(0,0,0,0.25)",
       "--medium-star-size": " 22px",
@@ -101,13 +101,13 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
       "--x-small-star-display": "inline-flex",
       "--header-order": "1",
       "--header-width": "280px",
-      "--header-bg-start-color": "#0E1311",
-      "--header-bg-end-color": "#0E1311",
+      "--header-bg-start-color": "#009689",
+      "--header-bg-end-color": "#009689",
       "--header-gradient-direction": "135deg",
       "--header-padding": "1.5em",
       "--header-border-width": "0px",
       "--header-border-color": "rgba(0,0,0,0.1)",
-      "--header-border-radius": "0px",
+      "--header-border-radius": "10px",
       "--header-shadow-size": "10px",
       "--header-shadow-color": "rgba(0, 0, 0, 0.05)",
       "--header-star-color": "#ffffff",
@@ -121,7 +121,7 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
       "--header-subheading-font-size": "inherit",
       "--header-subheading-font-weight": "300",
       "--header-subheading-line-height": "inherit",
-      "--header-subheading-text-transform": "inherit",
+      "--header-subheading-text-transform": "none",
       "--item-maximum-columns": "5",
       "--item-background-start-color": "#ffffff",
       "--item-background-end-color": "#ffffff",
@@ -134,13 +134,13 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
       "--item-shadow-color": "rgba(0,0,0,0.05)",
       "--heading-text-color": " #0E1311",
       "--heading-text-font-weight": " 600",
-      "--heading-text-font-family": " inherit",
+      "--heading-text-font-family": "Poppins",
       "--heading-text-line-height": " 1.4",
       "--heading-text-letter-spacing": "0",
       "--heading-text-transform": "none",
       "--body-text-color": " #0E1311",
       "--body-text-font-weight": "400",
-      "--body-text-font-family": " inherit",
+      "--body-text-font-family": "Poppins",
       "--body-text-line-height": " 1.4",
       "--body-text-letter-spacing": "0",
       "--body-text-transform": "none",
@@ -164,7 +164,7 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
       "--author-font-weight": "inherit",
       "--author-text-transform": "inherit",
       "--photo-video-thumbnail-size": "60px",
-      "--photo-video-thumbnail-border-radius": "0px",
+      "--photo-video-thumbnail-border-radius": "20px",
       "--popup-backdrop-color": "rgba(0,0,0,0.75)",
       "--popup-color": "#ffffff",
       "--popup-star-color": "inherit",
