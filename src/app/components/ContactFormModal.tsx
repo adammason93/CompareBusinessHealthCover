@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { requestTrustpilotInvitationAfterContact } from "@/utils/trustpilotInvitation";
 import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
@@ -50,6 +51,10 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
       }
 
       setSubmitStatus("success");
+      requestTrustpilotInvitationAfterContact({
+        name: formData.name,
+        email: formData.email,
+      });
       setFormData({
         name: "",
         email: "",

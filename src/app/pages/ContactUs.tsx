@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+import { requestTrustpilotInvitationAfterContact } from "@/utils/trustpilotInvitation";
 import { publicAnonKey } from '/utils/supabase/info';
 import { supabaseEdgeUrl } from '/utils/supabase/edge';
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
@@ -51,6 +52,10 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
       }
 
       setSubmitSuccess(true);
+      requestTrustpilotInvitationAfterContact({
+        name: formData.name,
+        email: formData.email,
+      });
       setFormData({
         name: "",
         email: "",

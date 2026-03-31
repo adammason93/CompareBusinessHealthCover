@@ -16,6 +16,7 @@ import { SiteChatProvider } from "@/app/context/SiteChatContext";
 import { getSEOConfig } from "@/app/config/seo";
 import { getInsurerBySlug, resolveInsurerRoute } from "@/app/config/insurers";
 import { getComparisonBySlug } from "@/app/config/insurerComparisons";
+import { requestTrustpilotInvitationAfterQuote } from "@/utils/trustpilotInvitation";
 import { publicAnonKey } from "/utils/supabase/info";
 import { supabaseEdgeUrl } from "/utils/supabase/edge";
 
@@ -299,11 +300,13 @@ export default function App() {
         console.log('Form submitted successfully:', result);
       }
 
+      requestTrustpilotInvitationAfterQuote(data);
       setIsFormOpen(false);
       setIsSuccessOpen(true);
     } catch (error) {
       console.error('Error submitting form:', error);
       // Still show success page as failsafe
+      requestTrustpilotInvitationAfterQuote(data);
       setIsFormOpen(false);
       setIsSuccessOpen(true);
     } finally {
