@@ -7,6 +7,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "reviews:embed": "npx --yes tsx scripts/generate-reviews-carousel-html.mts",
+    "prebuild": "npm run reviews:embed",
     "build": "vite build",
     "deploy": "wrangler deploy",
     "dev": "vite",

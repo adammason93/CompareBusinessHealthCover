@@ -10,8 +10,10 @@ export const REVIEWS_IO_URLS = {
   iconsCss: `https://assets.reviews.io/iconfont/reviewsio-icons/style.css${REVIEWS_IO_ASSET_QUERY}`,
 } as const;
 
+/** Works in Vite (import.meta.env) and in Node/tsx (falls back to default store). */
 export const REVIEWS_IO_STORE =
-  (import.meta.env.VITE_REVIEWS_IO_STORE as string | undefined)?.trim() ||
+  (typeof import.meta !== "undefined" &&
+    (import.meta as unknown as { env?: { VITE_REVIEWS_IO_STORE?: string } }).env?.VITE_REVIEWS_IO_STORE?.trim()) ||
   "healthcovercomparison.co.uk-p0p1nby";
 
 /** Must match dashboard embed: `<div id="reviewsio-carousel-widget">` */
@@ -61,7 +63,7 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
         disable_same_customer: true,
         min_review_percent: 4,
         third_party_source: true,
-        hide_empty_reviews: true,
+        hide_empty_reviews: false,
         enable_product_name: true,
         tags: "",
         branch: "",
@@ -173,44 +175,4 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
       "--tooltip-text-color": "#ffffff",
     },
   };
-}
-
-/**
- * Full HTML document for a blob:-URL iframe — same script order as the Reviews.io dashboard embed
- * (external dist.js, then `new carouselInlineWidget(...)`). Avoids React/useEffect races on the main page.
- */
-export function buildReviewsCarouselEmbedHtml(config: CarouselInlineWidgetConfig): string {
-  const q = REVIEWS_IO_ASSET_QUERY;
-  const configJson = JSON.stringify(config).replace(/</g, "\\u003c");
-  return `<!DOCTYPE html>
-<html lang="en-GB">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://assets.reviews.io/css/widgets/carousel-widget.css${q}" />
-  <link rel="stylesheet" href="https://assets.reviews.io/iconfont/reviewsio-icons/style.css${q}" />
-  <style>html,body{margin:0;padding:0;background:transparent;min-height:100%;}</style>
-</head>
-<body>
-  <div id="reviewsio-carousel-widget"></div>
-  <script src="https://widget.reviews.io/carousel-inline-iframeless/dist.js${q}"></script>
-  <script>
-  (function() {
-    var cfg = ${configJson};
-    function run() {
-      if (typeof carouselInlineWidget === "undefined") {
-        setTimeout(run, 40);
-        return;
-      }
-      try {
-        new carouselInlineWidget("reviewsio-carousel-widget", cfg);
-      } catch (e) {
-        console.error("[Reviews.io iframe] init failed", e);
-      }
-    }
-    run();
-  })();
-  </script>
-</body>
-</html>`;
 }
