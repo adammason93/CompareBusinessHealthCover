@@ -21,26 +21,33 @@ function ensureStylesheet(href: string, marker: string): void {
   document.head.appendChild(link);
 }
 
-function loadCarouselScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const existing = document.querySelector<HTMLScriptElement>(`script[data-reviewsio-carousel-script="1"]`);
-    if (existing) {
-      if (window.carouselInlineWidget) {
-        queueMicrotask(() => resolve());
-        return;
-      }
-      existing.addEventListener("load", () => resolve(), { once: true });
-      existing.addEventListener("error", () => reject(new Error("Reviews.io script failed")), { once: true });
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = src;
-    script.async = true;
-    script.dataset.reviewsioCarouselScript = "1";
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Reviews.io script failed"));
-    document.head.appendChild(script);
-  });
+/**
+ * Inject script once, then wait until `window.carouselInlineWidget` exists.
+ * Handles cached scripts and React Strict Mode where `load` may have already fired before we subscribe.
+ */
+async function ensureCarouselScriptLoaded(src: string): Promise<void> {
+  let script = document.querySelector<HTMLScriptElement>(`script[data-reviewsio-carousel-script="1"]`);
+
+  if (!script) {
+    await new Promise<void>((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = src;
+      s.async = true;
+      s.dataset.reviewsioCarouselScript = "1";
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error("Reviews.io script failed to load"));
+      document.head.appendChild(s);
+      script = s;
+    });
+  }
+
+  const deadline = Date.now() + 15000;
+  while (!window.carouselInlineWidget && Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, 50));
+  }
+  if (!window.carouselInlineWidget) {
+    throw new Error("Reviews.io: carouselInlineWidget not available after script load");
+  }
 }
 
 /**
@@ -57,7 +64,7 @@ export function ReviewsIoCarousel() {
 
     const run = async () => {
       try {
-        await loadCarouselScript(REVIEWS_IO_URLS.script);
+        await ensureCarouselScriptLoaded(REVIEWS_IO_URLS.script);
       } catch {
         return;
       }
@@ -68,6 +75,9 @@ export function ReviewsIoCarousel() {
 
       const config = getReviewsIoCarouselConfig(REVIEWS_IO_STORE);
       try {
+        // Let layout commit so the widget can measure the container (empty carousels otherwise).
+        await new Promise<void>((r) => requestAnimationFrame(() => r()));
+        if (cancelled || !rootRef.current) return;
         new Widget(WIDGET_CONTAINER_ID, config);
       } catch {
         /* ignore */
@@ -99,7 +109,11 @@ export function ReviewsIoCarousel() {
         <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-sm sm:text-base">
           Independent feedback from Reviews.io — verified customers who used HealthCoverComparison.
         </p>
-        <div id={WIDGET_CONTAINER_ID} ref={rootRef} className="min-h-[200px]" />
+        <div
+          id={WIDGET_CONTAINER_ID}
+          ref={rootRef}
+          className="w-full min-h-[320px] reviewsio-carousel-root"
+        />
       </div>
     </section>
   );

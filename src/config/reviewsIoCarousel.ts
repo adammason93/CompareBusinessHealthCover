@@ -36,7 +36,8 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
     styles_carousel: "CarouselWidget--sideHeader--withcards",
     options: {
       general: {
-        review_type: "company, product",
+        /* Company-only: a single site review is usually company-level; "product" can yield zero matches. */
+        review_type: "company",
         min_reviews: "1",
         max_reviews: "20",
         address_format: "CITY, COUNTRY",
@@ -58,7 +59,8 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
         enable_videos: true,
         enable_review_date: true,
         disable_same_customer: true,
-        min_review_percent: 4,
+        /* 0 = no star-rating filter (avoids hiding valid reviews if the scale is misread). */
+        min_review_percent: 0,
         third_party_source: true,
         hide_empty_reviews: true,
         enable_product_name: true,
