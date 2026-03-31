@@ -5,10 +5,10 @@
 export function ReviewsIoCarousel() {
   return (
     <section
-      className="py-12 sm:py-14 bg-gradient-to-br from-teal-50 via-sky-50/80 to-blue-50"
+      className="py-12 sm:py-14 bg-gradient-to-br from-teal-50 via-sky-50/80 to-blue-50 overflow-x-hidden"
       aria-labelledby="reviewsio-carousel-heading"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <h2
           id="reviewsio-carousel-heading"
           className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-3"
@@ -19,13 +19,15 @@ export function ReviewsIoCarousel() {
           Independent feedback from Reviews.io — verified customers who used HealthCoverComparison.
         </p>
 
-        <iframe
-          title="Customer reviews from Reviews.io"
-          src="/reviews-carousel.html"
-          className="w-full min-h-[380px] border-0 bg-transparent block"
-          loading="lazy"
-          referrerPolicy="strict-origin-when-cross-origin"
-        />
+        <div className="w-full min-w-0 overflow-x-hidden">
+          <iframe
+            title="Customer reviews from Reviews.io"
+            src="/reviews-carousel.html"
+            className="w-full max-w-full min-h-[380px] border-0 bg-transparent block"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
       </div>
     </section>
   );

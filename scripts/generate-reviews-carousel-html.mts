@@ -26,7 +26,7 @@ const html = `<!DOCTYPE html>
   <title>Reviews.io carousel</title>
   <link rel="stylesheet" href="https://assets.reviews.io/css/widgets/carousel-widget.css${q}" />
   <link rel="stylesheet" href="https://assets.reviews.io/iconfont/reviewsio-icons/style.css${q}" />
-  <style>html,body{margin:0;padding:0;background:transparent;min-height:auto;height:auto;}</style>
+  <style>html,body{margin:0;padding:0;background:transparent;min-height:auto;height:auto;overflow-x:hidden;max-width:100%;}#reviewsio-carousel-widget{max-width:100%;min-width:0;}</style>
 </head>
 <body>
   <div id="reviewsio-carousel-widget"></div>
