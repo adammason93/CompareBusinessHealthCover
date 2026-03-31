@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     id: 2,
     title: "Best Small Business Health Insurance Providers in the UK",
     subtitle: "Best Small Business Health Insurance in the UK – The Reviews",
-    description: "Your essential guide to the best small business health insurance UK. All reviews in one place including Defaqto, Trustpilot, Which? + Expert Broker Insight.",
+    description: "Your essential guide to the best small business health insurance UK. All reviews in one place including Defaqto, Reviews.io, Which? + Expert Broker Insight.",
     date: "3rd September 2025",
     category: "Health Insurance",
     image: "https://images.unsplash.com/photo-1667985805263-5531e05c3689?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzc21hbiUyMGxhcHRvcCUyMG9mZmljZXxlbnwxfHx8fDE3Njg4MzYyMTR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",

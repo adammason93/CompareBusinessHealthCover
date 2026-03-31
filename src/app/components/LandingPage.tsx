@@ -22,6 +22,7 @@ import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest"
 import { ReviewSection } from "@/app/components/ReviewSection";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { HomeBlogSection } from "@/app/components/HomeBlogSection";
+import { ReviewsIoCarousel } from "@/app/components/ReviewsIoCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SiteChatButton } from "@/app/components/SiteChatButton";
 import { HeroTypewriter } from "@/app/components/HeroTypewriter";
@@ -680,6 +681,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
       {/* Review Section */}
       <ReviewSection />
+
+      <ReviewsIoCarousel />
 
       <HomeBlogSection onNavigate={onNavigate} />
 
