@@ -1,107 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
+  buildReviewsCarouselEmbedHtml,
   getReviewsIoCarouselConfig,
   REVIEWS_IO_STORE,
-  REVIEWS_IO_URLS,
-  REVIEWS_IO_WIDGET_CONTAINER_ID,
 } from "@/config/reviewsIoCarousel";
 
-declare global {
-  interface Window {
-    /** Dashboard embed uses `new carouselInlineWidget(...)` */
-    carouselInlineWidget?: new (elementId: string, config: unknown) => unknown;
-  }
-}
-
-/** If index.html script did not run (e.g. odd cache), inject once. */
-function injectCarouselScriptOnce(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if (document.querySelector('script[src*="carousel-inline-iframeless"]')) {
-      resolve();
-      return;
-    }
-    const s = document.createElement("script");
-    s.src = src;
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error("Failed to load Reviews.io script"));
-    document.head.appendChild(s);
-  });
-}
-
-async function waitForCarouselInlineWidget(): Promise<void> {
-  const deadline = Date.now() + 20000;
-  while (!window.carouselInlineWidget && Date.now() < deadline) {
-    await new Promise((r) => setTimeout(r, 40));
-  }
-  if (window.carouselInlineWidget) return;
-
-  console.warn("Reviews.io: script not on window yet — injecting fallback");
-  try {
-    await injectCarouselScriptOnce(REVIEWS_IO_URLS.script);
-  } catch (e) {
-    console.error("Reviews.io: fallback script load failed:", e);
-    throw e;
-  }
-
-  const deadline2 = Date.now() + 15000;
-  while (!window.carouselInlineWidget && Date.now() < deadline2) {
-    await new Promise((r) => setTimeout(r, 40));
-  }
-  if (!window.carouselInlineWidget) {
-    throw new Error("Reviews.io: carouselInlineWidget is still undefined after load");
-  }
-}
-
 /**
- * Reviews.io iframeless carousel — matches dashboard embed (fixed id + `new carouselInlineWidget`).
+ * Reviews.io carousel runs inside a blob-document iframe so script order matches the dashboard embed
+ * (load dist.js, then `new carouselInlineWidget(...)`) without React timing issues on the main page.
  */
 export function ReviewsIoCarousel() {
+  const [iframeSrc, setIframeSrc] = useState<string | null>(null);
+
   useEffect(() => {
-    let cancelled = false;
-
-    const run = async () => {
-      try {
-        await waitForCarouselInlineWidget();
-      } catch (e) {
-        console.error("Reviews.io:", e);
-        return;
-      }
-      if (cancelled) return;
-
-      const Ctor = window.carouselInlineWidget;
-      if (!Ctor) {
-        console.error("Reviews.io: carouselInlineWidget missing");
-        return;
-      }
-
-      const el = document.getElementById(REVIEWS_IO_WIDGET_CONTAINER_ID);
-      if (!el) {
-        console.error("Reviews.io: container #reviewsio-carousel-widget not in DOM");
-        return;
-      }
-      if (el.querySelector(".CarouselWidget-prefix")) {
-        return;
-      }
-
-      const config = getReviewsIoCarouselConfig(REVIEWS_IO_STORE);
-      try {
-        await new Promise<void>((r) => {
-          requestAnimationFrame(() => requestAnimationFrame(() => r()));
-        });
-        if (cancelled) return;
-        if (!document.getElementById(REVIEWS_IO_WIDGET_CONTAINER_ID)) return;
-
-        new Ctor(REVIEWS_IO_WIDGET_CONTAINER_ID, config);
-      } catch (e) {
-        console.error("Reviews.io carousel init threw:", e);
-      }
-    };
-
-    void run();
-
+    const config = getReviewsIoCarouselConfig(REVIEWS_IO_STORE);
+    const html = buildReviewsCarouselEmbedHtml(config);
+    const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    setIframeSrc(url);
     return () => {
-      cancelled = true;
+      URL.revokeObjectURL(url);
     };
   }, []);
 
@@ -120,10 +38,21 @@ export function ReviewsIoCarousel() {
         <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-sm sm:text-base">
           Independent feedback from Reviews.io — verified customers who used HealthCoverComparison.
         </p>
-        <div
-          id={REVIEWS_IO_WIDGET_CONTAINER_ID}
-          className="w-full min-h-[320px] reviewsio-carousel-root"
-        />
+        {iframeSrc ? (
+          <iframe
+            title="Customer reviews from Reviews.io"
+            src={iframeSrc}
+            className="w-full min-h-[520px] border-0 bg-transparent rounded-lg"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        ) : (
+          <div
+            className="w-full min-h-[320px] rounded-lg bg-gray-100 animate-pulse"
+            aria-hidden
+          />
+        )}
       </div>
     </section>
   );

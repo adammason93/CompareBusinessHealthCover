@@ -175,3 +175,42 @@ export function getReviewsIoCarouselConfig(store: string): CarouselInlineWidgetC
   };
 }
 
+/**
+ * Full HTML document for a blob:-URL iframe — same script order as the Reviews.io dashboard embed
+ * (external dist.js, then `new carouselInlineWidget(...)`). Avoids React/useEffect races on the main page.
+ */
+export function buildReviewsCarouselEmbedHtml(config: CarouselInlineWidgetConfig): string {
+  const q = REVIEWS_IO_ASSET_QUERY;
+  const configJson = JSON.stringify(config).replace(/</g, "\\u003c");
+  return `<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://assets.reviews.io/css/widgets/carousel-widget.css${q}" />
+  <link rel="stylesheet" href="https://assets.reviews.io/iconfont/reviewsio-icons/style.css${q}" />
+  <style>html,body{margin:0;padding:0;background:transparent;min-height:100%;}</style>
+</head>
+<body>
+  <div id="reviewsio-carousel-widget"></div>
+  <script src="https://widget.reviews.io/carousel-inline-iframeless/dist.js${q}"></script>
+  <script>
+  (function() {
+    var cfg = ${configJson};
+    function run() {
+      if (typeof carouselInlineWidget === "undefined") {
+        setTimeout(run, 40);
+        return;
+      }
+      try {
+        new carouselInlineWidget("reviewsio-carousel-widget", cfg);
+      } catch (e) {
+        console.error("[Reviews.io iframe] init failed", e);
+      }
+    }
+    run();
+  })();
+  </script>
+</body>
+</html>`;
+}
