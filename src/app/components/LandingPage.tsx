@@ -19,7 +19,6 @@ import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { FAQSection } from "@/app/components/FAQSection";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
-import { ReviewSection } from "@/app/components/ReviewSection";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { HomeBlogSection } from "@/app/components/HomeBlogSection";
 import { ReviewsIoCarousel } from "@/app/components/ReviewsIoCarousel";
@@ -678,9 +677,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           </div>
         </div>
       </section>
-
-      {/* Review Section */}
-      <ReviewSection />
 
       <ReviewsIoCarousel />
 
