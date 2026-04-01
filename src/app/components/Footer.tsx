@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
-import { Star, Facebook, Instagram, Linkedin, MessageCircle, Phone, Mail, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MessageCircle, Phone, Mail, Twitter } from "lucide-react";
+import { ReviewsIoFooterBadge } from "@/app/components/ReviewsIoFooterBadge";
 
 /** Set when you have an X/Twitter profile to link; icon stays hidden while null */
 const TWITTER_PROFILE_URL: string | null = null;
@@ -124,22 +125,10 @@ export function Footer({ onNavigate }: FooterProps = {}) {
             </div>
           </div>
 
-          {/* Google Rating */}
+          {/* Reviews.io badge */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="text-4xl">G</div>
-              <div>
-                <div className="text-sm">Customer Reviews</div>
-                <div className="flex items-center gap-1">
-                  <span>5.0</span>
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h3 className="text-xl mb-4">Customer reviews</h3>
+            <ReviewsIoFooterBadge />
           </div>
         </div>
 
