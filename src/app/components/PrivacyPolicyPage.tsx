@@ -26,7 +26,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
           {/* Introduction */}
           <div className="prose max-w-none">
             <p className="text-lg text-gray-700 leading-relaxed">
-              Compare Business Health Cover (\"we\", \"us\", \"our\") is committed to protecting your privacy and handling your personal data transparently and securely.
+              Compare Business Cover (\"we\", \"us\", \"our\") is committed to protecting your privacy and handling your personal data transparently and securely.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mt-4">
               This Privacy Policy explains how we collect, use, and protect your personal information in accordance with the UK General Data Protection Regulation (UK GDPR) and Data Protection Act 2018.
@@ -43,7 +43,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
               <h2 className="text-2xl font-bold text-gray-900">1. Who We Are</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover is a health insurance comparison service that connects users with FCA-regulated insurance brokers and providers.
+              Compare Business Cover is a health insurance comparison service that connects users with FCA-regulated insurance brokers and providers.
             </p>
             <div className="bg-gray-50 rounded-xl p-6 space-y-3">
               <div className="flex items-start gap-3">

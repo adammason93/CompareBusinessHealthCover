@@ -226,7 +226,7 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
 
 </urlset>`;
 
-const ROBOTS_CONTENT = `# robots.txt for Compare Business Health Cover
+const ROBOTS_CONTENT = `# robots.txt for Compare Business Cover
 # Updated: March 24, 2026
 
 User-agent: *

@@ -78,7 +78,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <h1 className="text-4xl font-bold text-[#2d2f5e] mb-4">Sitemap</h1>
           <p className="text-gray-600 text-lg">
-            Navigate through all pages and resources available on Compare Business Health Cover
+            Navigate through all pages and resources available on Compare Business Cover
           </p>
         </div>
 
@@ -158,7 +158,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         {/* Key Features Section */}
         <div className="bg-gradient-to-r from-[#2d2f5e] to-[#1f2454] rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-white mb-6 text-center">
-            Why Use Compare Business Health Cover?
+            Why Use Compare Business Cover?
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
@@ -246,7 +246,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
             </button>
           </div>
           <p className="text-center text-gray-500 text-xs mt-4">
-            © 2026 Compare Business Health Cover. All rights reserved. ICO Registration Number: ZB592848
+            © 2026 Compare Business Cover. All rights reserved. ICO Registration Number: ZB592848
           </p>
         </div>
 

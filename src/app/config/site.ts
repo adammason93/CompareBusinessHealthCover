@@ -1,6 +1,6 @@
 export const SITE = {
-  name: 'Compare Business Health Cover',
-  shortName: 'Compare Business Health Cover',
+  name: 'Compare Business Cover',
+  shortName: 'Compare Business Cover',
   domain: 'comparebusinesshealthcover.co.uk',
   url: 'https://comparebusinesshealthcover.co.uk',
   email: 'info@comparebusinesshealthcover.co.uk',

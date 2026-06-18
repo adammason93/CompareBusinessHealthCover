@@ -21,7 +21,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">1. Introduction</h2>
             <p className="text-gray-700 mb-4">
-              Welcome to Compare Business Health Cover ("we", "our", "us"). These Terms and Conditions govern your use of our website and services. By accessing or using our website, you agree to be bound by these terms.
+              Welcome to Compare Business Cover ("we", "our", "us"). These Terms and Conditions govern your use of our website and services. By accessing or using our website, you agree to be bound by these terms.
             </p>
             <p className="text-gray-700">
               If you do not agree with any part of these terms, please do not use our website or services.
@@ -33,7 +33,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">2. Our Services</h2>
             <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">2.1 Comparison Service</h3>
             <p className="text-gray-700 mb-4">
-              Compare Business Health Cover provides a free lead generation and comparison service for health insurance products. We connect you with insurance brokers and providers who can help you compare quotes based on the information you provide. Our brokers will contact you to discuss your requirements and assist you in finding suitable coverage.
+              Compare Business Cover provides a free lead generation and comparison service for health insurance products. We connect you with insurance brokers and providers who can help you compare quotes based on the information you provide. Our brokers will contact you to discuss your requirements and assist you in finding suitable coverage.
             </p>
             
             <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">2.2 Information Accuracy</h3>
@@ -43,7 +43,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
 
             <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">2.3 Not Financial Advice</h3>
             <p className="text-gray-700">
-              Compare Business Health Cover is a lead generation service that connects you with insurance brokers and providers. We do not provide financial or insurance advice directly. The brokers and insurance specialists we connect you with are qualified to provide guidance, but you should ensure any advice is suitable for your individual circumstances before making insurance decisions.
+              Compare Business Cover is a lead generation service that connects you with insurance brokers and providers. We do not provide financial or insurance advice directly. The brokers and insurance specialists we connect you with are qualified to provide guidance, but you should ensure any advice is suitable for your individual circumstances before making insurance decisions.
             </p>
           </section>
 
@@ -109,7 +109,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">6. Intellectual Property</h2>
             <p className="text-gray-700 mb-4">
-              All content on this website, including text, graphics, logos, images, and software, is the property of Compare Business Health Cover or its content suppliers and is protected by copyright and intellectual property laws.
+              All content on this website, including text, graphics, logos, images, and software, is the property of Compare Business Cover or its content suppliers and is protected by copyright and intellectual property laws.
             </p>
             <p className="text-gray-700">
               You may not reproduce, distribute, modify, or create derivative works from any content on this website without our prior written consent.

@@ -15,7 +15,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             <h1 className="text-4xl md:text-5xl font-bold">Terms & Conditions</h1>
           </div>
           <div className="text-gray-300 space-y-1">
-            <p className="text-xl">Compare Business Health Cover</p>
+            <p className="text-xl">Compare Business Cover</p>
             <p>Effective Date: February 2026</p>
             <p>Last Updated: February 2026</p>
           </div>
@@ -33,24 +33,24 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">1. Introduction</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              These Terms and Conditions ("Terms") govern your use of the Compare Business Health Cover website ("Website").
+              These Terms and Conditions ("Terms") govern your use of the Compare Business Cover website ("Website").
             </p>
             <p className="text-gray-700 leading-relaxed">
               By accessing or using this Website, you agree to be legally bound by these Terms. If you do not agree, you must not use this Website.
             </p>
           </section>
 
-          {/* 2. About Compare Business Health Cover */}
+          {/* 2. About Compare Business Cover */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
               <Building className="w-6 h-6 text-teal-600" />
-              <h2 className="text-2xl font-bold text-gray-900">2. About Compare Business Health Cover</h2>
+              <h2 className="text-2xl font-bold text-gray-900">2. About Compare Business Cover</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover is an online comparison and introducer service that connects individuals and businesses with Financial Conduct Authority (FCA) regulated insurance brokers and providers.
+              Compare Business Cover is an online comparison and introducer service that connects individuals and businesses with Financial Conduct Authority (FCA) regulated insurance brokers and providers.
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover:
+              Compare Business Cover:
             </p>
             <ul className="space-y-2 ml-6 mb-4">
               <li className="text-gray-700 flex items-start gap-2">
@@ -98,7 +98,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">3. Our Service</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover provides an online platform that allows users to request information and quotes for health insurance products.
+              Compare Business Cover provides an online platform that allows users to request information and quotes for health insurance products.
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
               By submitting your information through this Website, you agree that:
@@ -130,7 +130,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">4. No Advice Provided</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover does not provide financial, legal, or insurance advice.
+              Compare Business Cover does not provide financial, legal, or insurance advice.
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
@@ -155,7 +155,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">5. Regulatory Status</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover acts solely as an introducer.
+              Compare Business Cover acts solely as an introducer.
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
@@ -164,7 +164,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               </li>
               <li className="text-gray-700 flex items-start gap-2">
                 <span className="text-teal-600 mt-1.5">•</span>
-                <span>Compare Business Health Cover is not responsible for the advice, recommendations, products, or services provided by third parties</span>
+                <span>Compare Business Cover is not responsible for the advice, recommendations, products, or services provided by third parties</span>
               </li>
             </ul>
           </section>
@@ -201,7 +201,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">7. Third-Party Services and Liability</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Health Cover introduces users to third-party insurance brokers and providers.
+              Compare Business Cover introduces users to third-party insurance brokers and providers.
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
               We do not control and are not responsible for:
@@ -240,7 +240,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">8. Limitation of Liability</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              To the fullest extent permitted by law, Compare Business Health Cover shall not be liable for:
+              To the fullest extent permitted by law, Compare Business Cover shall not be liable for:
             </p>
             <ul className="space-y-2 ml-6 mb-4">
               <li className="text-gray-700 flex items-start gap-2">
@@ -307,7 +307,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">10. Intellectual Property Rights</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              All Website content, including text, logos, graphics, and design, is owned by or licensed to Compare Business Health Cover.
+              All Website content, including text, logos, graphics, and design, is owned by or licensed to Compare Business Cover.
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
               You may not:
@@ -412,7 +412,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               <h2 className="text-2xl font-bold text-gray-900">14. Indemnity</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              You agree to indemnify and hold harmless Compare Business Health Cover against any claims, damages, or losses arising from:
+              You agree to indemnify and hold harmless Compare Business Cover against any claims, damages, or losses arising from:
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
@@ -471,7 +471,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
               If you have any questions about these Terms and Conditions, please contact us:
             </p>
             <div className="bg-gray-50 rounded-xl p-6 space-y-3">
-              <p className="font-semibold text-gray-900 mb-3">Compare Business Health Cover</p>
+              <p className="font-semibold text-gray-900 mb-3">Compare Business Cover</p>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-teal-600 mt-1 flex-shrink-0" />
                 <div>

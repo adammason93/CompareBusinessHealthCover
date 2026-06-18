@@ -31,7 +31,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   const sentences = [
     "The UK's Best SME Health Insurance Comparison",
     'Employee Cover From Just 2 Staff',
-    'Compare Business Health Cover & Save'
+    'Compare Business Cover & Save'
   ];
 
   const scrollToSection = (sectionId: string) => {

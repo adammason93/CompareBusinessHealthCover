@@ -182,7 +182,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
         {/* Bottom Links */}
         <div className="border-t border-gray-800 pt-6 flex flex-wrap justify-center gap-4 text-xs">
           <a href="#" className="hover:text-teal-500 uppercase">Compare SME Health Insurance</a>
-          <a href="#" className="hover:text-teal-500 uppercase">Compare Business Health Cover</a>
+          <a href="#" className="hover:text-teal-500 uppercase">Compare Business Cover</a>
           <a href="#" className="hover:text-teal-500 uppercase">Employee Health Benefits</a>
         </div>
       </div>

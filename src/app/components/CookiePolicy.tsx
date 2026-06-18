@@ -71,7 +71,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
               Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.
             </p>
             <p className="text-gray-700">
-              This Cookie Policy explains what cookies are, how we use them, and your choices regarding cookies on Compare Business Health Cover.
+              This Cookie Policy explains what cookies are, how we use them, and your choices regarding cookies on Compare Business Cover.
             </p>
           </section>
 

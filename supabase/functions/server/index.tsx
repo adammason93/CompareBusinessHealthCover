@@ -4,7 +4,7 @@ import { logger } from "npm:hono/logger";
 import * as kv from "./kv_store.tsx";
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 
-// Email-enabled Hono server for Compare Business Health Cover with user submissions
+// Email-enabled Hono server for Compare Business Cover with user submissions
 const app = new Hono();
 
 // Auth helper functions
@@ -366,7 +366,7 @@ app.get("/make-server-2031af1c/sitemap.xml", (c) => {
 
 // Robots.txt endpoint
 app.get("/make-server-2031af1c/robots.txt", (c) => {
-  const robots = `# robots.txt for Compare Business Health Cover
+  const robots = `# robots.txt for Compare Business Cover
 # Updated: March 24, 2026
 
 User-agent: *
@@ -406,7 +406,7 @@ app.post("/make-server-2031af1c/contact", async (c) => {
 
     // Prepare email content
     const emailContent = `
-New Contact Form Submission from Compare Business Health Cover
+New Contact Form Submission from Compare Business Cover
 
 Name: ${name}
 Email: ${email}
@@ -465,7 +465,7 @@ Submitted at: ${new Date().toISOString()}
     `;
 
     const emailPayload = {
-      from: "Compare Business Health Cover <noreply@comparebusinesshealthcover.co.uk>",
+      from: "Compare Business Cover <noreply@comparebusinesshealthcover.co.uk>",
       to: ["info@comparebusinesshealthcover.co.uk"],
       subject: `New Contact Form Submission from ${name}`,
       html: htmlContent,
@@ -884,7 +884,7 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
     `;
 
     const textContent = `
-New Insurance Quote Request from Compare Business Health Cover
+New Insurance Quote Request from Compare Business Cover
 
 PERSONAL DETAILS
 Name: ${formData.title || ""} ${formData.firstName} ${formData.lastName || ""}
@@ -936,7 +936,7 @@ Submitted at: ${new Date().toISOString()}
     }
 
     const internalSubject = `New Insurance Quote Request from ${formData.firstName} ${formData.lastName || ""}`;
-    const internalFrom = "Compare Business Health Cover <noreply@comparebusinesshealthcover.co.uk>";
+    const internalFrom = "Compare Business Cover <noreply@comparebusinesshealthcover.co.uk>";
     const internalRecipients = [
       "info@comparebusinesshealthcover.co.uk",
       "matt@myhealthpal.co.uk",
@@ -1017,7 +1017,7 @@ Submitted at: ${new Date().toISOString()}
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
               <p>Dear ${formData.firstName},</p>
               
-              <p>Thank you for requesting a quote from <strong>Compare Business Health Cover</strong>. We have received your information and our team will review your requirements.</p>
+              <p>Thank you for requesting a quote from <strong>Compare Business Cover</strong>. We have received your information and our team will review your requirements.</p>
               
               <p>One of our insurance specialists will contact you shortly at <strong>${formData.phone}</strong> or via email at <strong>${formData.email}</strong> to discuss your options and provide you with a personalized quote.</p>
               
@@ -1033,7 +1033,7 @@ Submitted at: ${new Date().toISOString()}
               <p style="margin: 5px 0;">📞 Phone: 01484 773038</p>
               
               <p style="margin-top: 20px;">Best regards,<br/>
-              <strong>The Compare Business Health Cover Team</strong></p>
+              <strong>The Compare Business Cover Team</strong></p>
             </div>
             
             <p style="color: #666; font-size: 11px; text-align: center; margin-top: 20px;">
@@ -1045,7 +1045,7 @@ Submitted at: ${new Date().toISOString()}
     `;
 
     const customerEmailPayload = {
-      from: "Compare Business Health Cover <noreply@comparebusinesshealthcover.co.uk>",
+      from: "Compare Business Cover <noreply@comparebusinesshealthcover.co.uk>",
       to: [formData.email],
       subject: "Thank You for Your Insurance Quote Request",
       html: customerHtmlContent,

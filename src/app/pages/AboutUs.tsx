@@ -28,7 +28,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-              About Compare Business Health Cover
+              About Compare Business Cover
             </h1>
             <p className="text-xl sm:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
               Your trusted partner in finding the perfect health insurance coverage for you and your family
@@ -47,7 +47,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Compare Business Health Cover is a leading UK-based health insurance comparison service dedicated to helping individuals, families, and businesses find the most suitable and affordable private medical insurance.
+                  Compare Business Cover is a leading UK-based health insurance comparison service dedicated to helping individuals, families, and businesses find the most suitable and affordable private medical insurance.
                 </p>
                 <p>
                   We understand that navigating the world of health insurance can be overwhelming. With countless providers, policy options, and varying levels of coverage, it's difficult to know where to start. That's where we come in.
@@ -186,7 +186,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Why Choose Compare Business Health Cover?
+              Why Choose Compare Business Cover?
             </h2>
           </div>
 

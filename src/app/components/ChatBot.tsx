@@ -109,7 +109,7 @@ export function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I'm your Compare Business Health Cover assistant. How can I help you today?",
+      text: "Hi! I'm your Compare Business Cover assistant. How can I help you today?",
       sender: 'bot',
       timestamp: new Date(),
     },

@@ -256,7 +256,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         {/* Disclaimer */}
         <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
           <p className="text-gray-700 text-sm">
-            <strong>Important:</strong> Compare Business Health Cover is an insurance intermediary, not an insurer. 
+            <strong>Important:</strong> Compare Business Cover is an insurance intermediary, not an insurer. 
             We may receive commission from our partner insurers, but this does not affect the price you pay. 
             All our partners are authorized and regulated by the Financial Conduct Authority (FCA).
           </p>
