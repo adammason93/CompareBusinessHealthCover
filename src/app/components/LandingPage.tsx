@@ -1,4 +1,4 @@
-import { Shield, Check, Star, ArrowRight, ChevronDown, Search, Heart, Home as HomeIcon, Menu, X, LogIn, LogOut, User, FileText } from "lucide-react";
+import { Shield, Check, Star, ArrowRight, ChevronDown, Heart, Home as HomeIcon, FileText } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect, useRef, memo } from "react";
@@ -6,12 +6,12 @@ import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
 import { ChatBot } from "@/app/components/ChatBot";
+import { Header } from "@/app/components/Header";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { ReviewSection } from "@/app/components/ReviewSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Logo } from "@/app/components/Logo";
 import { SITE } from "@/app/config/site";
 
 const HERO_SENTENCES = [
@@ -57,15 +57,10 @@ const HeroTypewriter = memo(function HeroTypewriter() {
 });
 
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
-  const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
-  const [lifeDropdownOpen, setLifeDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [benefitModalOpen, setBenefitModalOpen] = useState<string | null>(null);
   const [showStickyBanner, setShowStickyBanner] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const bannerSentinelRef = useRef<HTMLDivElement>(null);
 
   const scrollToSection = (sectionId: string) => {
@@ -115,15 +110,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
     return () => observer.disconnect();
   }, []);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log('Searching for:', searchQuery);
-      // Add your search logic here
-      alert(`Searching for: ${searchQuery}`);
-    }
-  };
-
   const benefitDetails = {
     priceMatch: {
       title: "Price Match Guarantee",
@@ -157,7 +143,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <h4 className="font-semibold text-gray-900 text-lg">What This Means For You:</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
             <li>Compare quotes at your own pace with zero pressure</li>
-            <li>Take time to review all options and discuss with family</li>
+            <li>Take time to review options with your leadership team</li>
             <li>No sales calls or pushy follow-ups - we respect your time</li>
             <li>Complete transparency with no hidden fees or charges</li>
             <li>Walk away at any time with no consequences</li>
@@ -197,7 +183,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            As an independent comparison service, our FCA regulated broker partners are not tied to any single insurance provider. This means their advice is completely impartial and focused solely on finding you the best coverage for your individual circumstances.
+            As an independent comparison service, our FCA regulated broker partners are not tied to any single insurance provider. Their advice is impartial and focused on finding the right group scheme for your business and workforce.
           </p>
           <h4 className="font-semibold text-gray-900 text-lg">Why Independence Matters:</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
@@ -264,290 +250,14 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   
   return (
     <div className="min-h-screen bg-gray-50 circle-pattern">
-      {/* Header */}
-      <header className="bg-white border-b shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <Logo onClick={() => onNavigate?.('home')} size="md" />
-            <nav className="hidden lg:flex items-center gap-6">
-              <div 
-                className="relative"
-                onMouseEnter={() => setHealthDropdownOpen(true)}
-                onMouseLeave={() => setHealthDropdownOpen(false)}
-              >
-                <button className="text-gray-900 hover:text-brand-teal flex items-center gap-1 py-2 whitespace-nowrap">
-                  Health Insurance
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                {healthDropdownOpen && (
-                  <div className="absolute top-full left-0 pt-2 z-50">
-                    <div className="bg-black text-white rounded-lg shadow-lg py-4 px-6 min-w-[280px]">
-                      <ul className="space-y-3">
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('health-insurance-guide')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Health Insurance Guide
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('business-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Business Health Insurance
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('self-employed-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Self Employed Health Insurance
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('corporate-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Corporate Health Insurance
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('family-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Family Health Insurance
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('senior-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Senior Health Insurance
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('international-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            International Health Insurance
-                          </button>
-                        </li>
-                        <li>
-                          <button 
-                            onClick={() => onNavigate?.('small-company-health-insurance')}
-                            className="hover:text-brand-teal block w-full text-left"
-                          >
-                            Small Company Health Insurance
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <button 
-                onClick={() => onNavigate?.('about-us')}
-                className="text-gray-900 hover:text-brand-teal py-2 whitespace-nowrap"
-              >
-                About Us
-              </button>
-              <button 
-                onClick={() => onNavigate?.('contact-us')}
-                className="text-gray-900 hover:text-brand-teal py-2 whitespace-nowrap"
-              >
-                Contact Us
-              </button>
-            </nav>
-            <div className="flex items-center gap-3">
-              {/* Desktop Search */}
-              <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2">
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    placeholder="Search..." 
-                    value={searchQuery} 
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/25 w-48 xl:w-64 text-sm"
-                  />
-                  <button 
-                    type="submit" 
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-teal transition-colors"
-                  >
-                    <Search className="w-5 h-5" />
-                  </button>
-                </div>
-              </form>
-
-              {/* Mobile Menu Button */}
-              <button 
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden text-gray-600 hover:text-brand-teal p-2"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
-            <div className="px-4 py-6 space-y-4 max-h-[80vh] overflow-y-auto">
-              {/* Health Insurance Dropdown */}
-              <div>
-                <button 
-                  onClick={() => setHealthDropdownOpen(!healthDropdownOpen)}
-                  className="flex items-center justify-between w-full text-gray-900 font-medium py-2"
-                >
-                  Health Insurance
-                  <ChevronDown className={`w-5 h-5 transition-transform ${healthDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {healthDropdownOpen && (
-                  <div className="pl-4 mt-2 space-y-2">
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('health-insurance-guide');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Health Insurance Guide
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('business-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Business Health Insurance
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('self-employed-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Self Employed Health Insurance
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('corporate-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Corporate Health Insurance
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('family-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Family Health Insurance
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('senior-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Senior Health Insurance
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('international-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      International Health Insurance
-                    </button>
-                    <button 
-                      onClick={() => {
-                        onNavigate?.('small-company-health-insurance');
-                        setMobileMenuOpen(false);
-                        setHealthDropdownOpen(false);
-                      }}
-                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
-                    >
-                      Small Company Health Insurance
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Other Links */}
-              <button 
-                onClick={() => {
-                  onNavigate?.('about-us');
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left text-gray-900 font-medium py-2"
-              >
-                About Us
-              </button>
-              <button 
-                onClick={() => {
-                  onNavigate?.('contact-us');
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left text-gray-900 font-medium py-2"
-              >
-                Contact Us
-              </button>
-
-              {/* Mobile Search Bar */}
-              <form onSubmit={handleSearch} className="pt-4 border-t">
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    placeholder="Search..." 
-                    value={searchQuery} 
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full border border-gray-300 rounded-full px-4 py-3 pr-10 focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/25"
-                  />
-                  <button 
-                    type="submit" 
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-teal transition-colors"
-                  >
-                    <Search className="w-5 h-5" />
-                  </button>
-                </div>
-              </form>
-
-              {/* Get A Quote Button */}
-              <button
-                onClick={() => {
-                  onGetStarted();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 py-3 font-medium text-center mt-4"
-              >
-                Get A Complimentary Quote
-              </button>
-            </div>
-          </div>
-        )}
-      </header>
+      <Header
+        onGetStarted={onGetStarted}
+        onNavigate={(page) => onNavigate?.(page)}
+        onOpenAuth={onOpenAuth}
+        onLogout={onLogout}
+        onViewSubmissions={onViewSubmissions}
+        user={user}
+      />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden circle-pattern" style={{ backgroundColor: '#1D2D50' }}>
@@ -648,17 +358,22 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             
             <div className="flex items-center gap-2 text-gray-900">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-              <span className="text-xs sm:text-sm">Compare Leading UK Insurers</span>
+              <span className="text-xs sm:text-sm">Trusted by UK Businesses</span>
+            </div>
+            
+            <div className="flex items-center gap-2 text-gray-900">
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <span className="text-xs sm:text-sm">Leading Business Insurers</span>
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
               <Check className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal" />
-              <span className="text-xs sm:text-sm">Complimentary Impartial Advice</span>
+              <span className="text-xs sm:text-sm">Employee Benefits Specialists</span>
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
               <Check className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal" />
-              <span className="text-xs sm:text-sm">No-Obligation Quotes</span>
+              <span className="text-xs sm:text-sm">Free SME Quotes</span>
             </div>
           </div>
           
@@ -668,19 +383,19 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               onClick={() => scrollToSection('find-best-cover')}
               className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
-              Find your best health cover
+              Compare business cover options
             </button>
             <button 
               onClick={() => scrollToSection('why-health-insurance')}
               className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
-              Why take out health insurance?
+              Why offer employee cover?
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}
               className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
-              How does health insurance work?
+              How group schemes work
             </button>
             <button 
               onClick={() => scrollToSection('why-use-us')}
@@ -699,10 +414,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <section id="find-best-cover" className="py-20 pb-0" style={{ backgroundColor: '#f9fafb' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl text-center text-gray-900 mb-4">
-            Find your <span style={{ fontWeight: 900 }}>best</span> health cover
+            Compare <span style={{ fontWeight: 900 }}>employee health cover</span> for your business
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-            Over 35,000 people trust Private Health Quoter partners for their private health cover. Why? because we make life easier by quickly finding you the best deals from the UK's leading insurers.
+            UK employers use us to compare group health insurance from leading providers — saving time, controlling costs, and building benefits packages that help attract and retain staff.
           </p>
           
           <div className="grid sm:grid-cols-3 gap-8 pb-32">
@@ -816,8 +531,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1758691461957-474a7686e388?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBwYXRpZW50JTIwY29uc3VsdGF0aW9uJTIwbWVkaWNhbCUyMHRyZWF0bWVudHxlbnwxfHx8fDE3NzE1OTcyOTR8MA&ixlib=rb-4.1.0&q=70&w=600"
-            alt="Healthcare professional"
+            src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=600"
+            alt="Business professionals in meeting"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1f2255]/90 via-[#1f2255]/85 to-[#1f2255]/90"></div>
@@ -832,40 +547,37 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16">
           <h2 className="text-3xl sm:text-4xl text-center text-white mb-16 font-bold">
-            Why take out health insurance?
+            Why offer employee health cover?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-12 pb-24">
-            {/* Avoid Waiting Lists */}
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                <Users className="w-12 h-12 text-pink-500" />
+                <Users className="w-12 h-12 text-brand-teal-light" />
               </div>
-              <h3 className="text-xl text-white mb-4 font-semibold">Avoid Waiting Lists</h3>
+              <h3 className="text-xl text-white mb-4 font-semibold">Attract &amp; Retain Talent</h3>
               <p className="text-gray-300 leading-relaxed">
-                One of the major benefits of private healthcare is that you'll be able to avoid lengthy NHS waiting lists when you do need treatment.
+                Group health cover is one of the most valued employee benefits — helping you compete for skilled staff and improve retention in a tight labour market.
               </p>
             </div>
 
-            {/* Choose your own hospital */}
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                <Building2 className="w-12 h-12 text-pink-500" />
+                <Building2 className="w-12 h-12 text-brand-teal-light" />
               </div>
-              <h3 className="text-xl text-white mb-4 font-semibold">Choose your preferred private facility</h3>
+              <h3 className="text-xl text-white mb-4 font-semibold">Reduce Absence &amp; Downtime</h3>
               <p className="text-gray-300 leading-relaxed">
-                You will have the ability to choose your preferred private facility.
+                Faster access to private treatment helps employees return to work sooner, reducing the cost and disruption of long-term sickness absence.
               </p>
             </div>
 
-            {/* Choose your own consultant */}
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                <Heart className="w-12 h-12 text-pink-500" />
+                <Heart className="w-12 h-12 text-brand-teal-light" />
               </div>
-              <h3 className="text-xl text-white mb-4 font-semibold">Choose your own consultant</h3>
+              <h3 className="text-xl text-white mb-4 font-semibold">Support Workforce Wellbeing</h3>
               <p className="text-gray-300 leading-relaxed">
-                Or you have the option to let the Insurer guide you.
+                Demonstrate a genuine commitment to your team&apos;s health — boosting morale, engagement, and your reputation as a responsible employer.
               </p>
             </div>
           </div>
@@ -886,20 +598,17 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             {/* Left Column */}
             <div>
               <h2 className="text-3xl sm:text-4xl text-gray-900 mb-6 text-center font-extrabold">
-                How does health insurance work?
+                How do business health schemes work?
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  With private health insurance, you'll enjoy high quality and dedicated medical care and treatment in the event of certain injuries, illnesses or diseases.
+                  A group health insurance policy covers eligible employees under a single scheme arranged by the employer. Cover levels, eligibility rules, and cost-sharing can be tailored to your business size and budget.
                 </p>
                 <p>
-                  The exact level of cover you receive (i.e. what kinds of conditions and treatment will be covered) will depend in part on the policy you take out. Just with any other kind of insurance, you can opt for comprehensive or more limited policies.
+                  Premiums are typically paid by the employer, often with tax-efficient treatment as a business expense. Employees may receive cover as a core benefit or on a voluntary basis, depending on the scheme structure.
                 </p>
                 <p>
-                  You may, for example, be happy leaving treatment for certain issues with the NHS, but want PMI to cover you for certain other potential health problems.
-                </p>
-                <p>
-                  Remember: it is very important to provide details of any existing medical conditions and ensure your "demands and needs" agreed with your advisor are completed accurately as this could impact on future claims.
+                  Our FCA-regulated broker partners help you compare options from leading UK insurers, explain underwriting requirements, and find a scheme suited to your workforce — from small teams of two upwards.
                 </p>
               </div>
             </div>
@@ -907,17 +616,17 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             {/* Right Column */}
             <div>
               <h2 className="text-3xl sm:text-4xl text-gray-900 mb-6 text-center font-extrabold">
-                Comparing health insurance policies online
+                Comparing SME cover with us
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  Health Insurance, also known as Private Medical Insurance, or PMI, covers the private treatment cost of treatable illnesses and injuries.
+                  Tell us about your company size, location, and the level of cover you need. We connect you with specialist brokers who compare group schemes from the UK&apos;s leading business health insurers.
                 </p>
                 <p>
-                  With Private Medical Insurance you avoid long NHS waiting lists and will have the ability to choose your preferred private facility, where you will receive top treatment from the comfort of your own en-suite hospital room.
+                  Whether you&apos;re setting up cover for the first time or reviewing an existing scheme at renewal, we simplify the process — one enquiry, multiple competitive quotes, expert guidance throughout.
                 </p>
                 <p>
-                  With our easy health insurance comparison, you'll be able to find the ideal policy to suit your needs in minutes. Get peace of mind today by starting your quote.
+                  There is no obligation to proceed. Start with a free SME quote and see what employee health cover could cost your business.
                 </p>
               </div>
             </div>
@@ -935,27 +644,27 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <div className="flex flex-wrap justify-center gap-4">
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">It's Complementary</span>
+              <span className="text-gray-900">Free SME Comparison Service</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Quotes From 5-star Defaqto Insurers</span>
+              <span className="text-gray-900">5-Star Defaqto Rated Insurers</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Save Time And Money</span>
+              <span className="text-gray-900">Expert Broker Guidance</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Best Premiums On The Market</span>
+              <span className="text-gray-900">Competitive Group Premiums</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Excellent Customer Feedback</span>
+              <span className="text-gray-900">Trusted by UK Employers</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Partnerships With Top Brokers</span>
+              <span className="text-gray-900">FCA Regulated Partners</span>
             </div>
           </div>
         </div>
@@ -969,31 +678,31 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="grid md:grid-cols-2">
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1739932905664-b7b4c0056f21?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZW5pb3IlMjBjb3VwbGUlMjB0YWJsZXR8ZW58MXx8fHwxNzY4ODM0OTQ0fDA&ixlib=rb-4.1.0&q=70&w=800&utm_source=figma&utm_medium=referral"
-              alt="Couple reviewing health insurance"
+              src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=800"
+              alt="Business team reviewing employee benefits"
               className="w-full h-full object-cover absolute inset-0"
             />
           </div>
           <div className="bg-black text-white p-8 lg:p-12 flex flex-col justify-center" style={{ backgroundColor: '#1D2D50' }}>
-            <h2 className="text-3xl lg:text-4xl mb-4">Already Covered?<br />Price Gone Up?</h2>
-            <p className="text-lg lg:text-xl mb-6">Compare, Switch & Save Now</p>
+            <h2 className="text-3xl lg:text-4xl mb-4">Renewing Your Group Scheme?<br />Compare &amp; Save</h2>
+            <p className="text-lg lg:text-xl mb-6">Review your employee health cover before renewal</p>
             
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3">
                 <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
-                <span className="text-base lg:text-lg">Get Better Cover</span>
+                <span className="text-base lg:text-lg">Benchmark against the wider market</span>
               </div>
               <div className="flex items-center gap-3">
                 <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
-                <span className="text-base lg:text-lg">Make Huge Savings</span>
+                <span className="text-base lg:text-lg">Reduce group premium costs</span>
               </div>
               <div className="flex items-center gap-3">
                 <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
-                <span className="text-base lg:text-lg">Continue Your Medical History</span>
+                <span className="text-base lg:text-lg">Maintain continuity for employees</span>
               </div>
               <div className="flex items-center gap-3">
                 <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
-                <span className="text-base lg:text-lg">Switch Anytime, Hassle-Free</span>
+                <span className="text-base lg:text-lg">Switch providers with broker support</span>
               </div>
             </div>
 
@@ -1001,7 +710,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               onClick={onGetStarted}
               className="bg-white hover:bg-gray-100 text-black rounded-full px-8 py-6 text-lg w-fit"
             >
-              Start Your Free Quote Here
+              Get an SME Quote
             </Button>
           </div>
         </div>
@@ -1083,17 +792,17 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
               <div className="flex-1 text-center sm:text-left">
                 <h3 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1">
-                  Get a quote for private health insurance
+                  Get an SME health insurance quote
                 </h3>
                 <p className="text-white text-xs sm:text-sm md:text-base">
-                  Get advice on the right private health insurance for you
+                  Compare group cover options for your business — free and no obligation
                 </p>
               </div>
               <button
                 onClick={onGetStarted}
                 className="bg-white hover:bg-gray-50 text-gray-900 rounded-full px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base md:text-lg font-semibold transition-colors whitespace-nowrap shadow-lg w-full sm:w-auto"
               >
-                Get quotes
+                Get SME Quote
               </button>
             </div>
           </div>

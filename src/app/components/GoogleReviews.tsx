@@ -18,21 +18,21 @@ const sampleReviews: Review[] = [
   {
     author_name: "Sarah Johnson",
     rating: 5,
-    text: "Absolutely fantastic service! They found me a health insurance policy that was £200 cheaper per year than my previous one, with better coverage. The team was knowledgeable and patient, answering all my questions. Highly recommend!",
+    text: "We needed group cover for our team of 12 and Compare Business Healthcover made the whole process straightforward. Our broker found a scheme that saved us money versus our renewal quote, with better outpatient cover for staff.",
     time: Date.now() - 86400000 * 15,
     relative_time_description: "2 weeks ago"
   },
   {
     author_name: "Michael Thompson",
     rating: 5,
-    text: "I was overwhelmed trying to compare different health insurance options, but Compare Business Healthcover made it so easy. They explained everything clearly and helped me find the perfect policy for my family. Outstanding service!",
+    text: "As a growing SME, employee benefits were new to us. The team explained our options clearly and helped us set up cover from just three staff. Professional, responsive, and genuinely focused on what worked for our business.",
     time: Date.now() - 86400000 * 30,
     relative_time_description: "a month ago"
   },
   {
     author_name: "Emma Davies",
     rating: 5,
-    text: "Professional, efficient, and incredibly helpful. I've been using their service for years and they always go above and beyond. Saved me hundreds on my health insurance renewal. Can't thank them enough!",
+    text: "We review our group scheme every year and use this service to benchmark premiums. Excellent support from FCA-regulated brokers — saved us a significant amount at renewal without reducing employee benefits.",
     time: Date.now() - 86400000 * 45,
     relative_time_description: "a month ago"
   }

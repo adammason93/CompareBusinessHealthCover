@@ -14,29 +14,28 @@ const getSmartResponse = (userMessage: string): string => {
   const message = userMessage.toLowerCase();
   
   // Health insurance basics
-  if (message.includes('what is') && (message.includes('health insurance') || message.includes('private medical'))) {
-    return "Health insurance (also called private medical insurance or PMI) covers the cost of private medical treatment. It gives you faster access to diagnosis, treatment, and consultations with specialists, without NHS waiting times.";
+  if (message.includes('what is') && (message.includes('health insurance') || message.includes('private medical') || message.includes('group'))) {
+    return "Business health insurance (group PMI) provides private medical cover for your employees under a scheme arranged by the employer. It helps staff access treatment faster, supports wellbeing, and is a valued employee benefit for UK SMEs.";
   }
   
   if (message.includes('how much') || message.includes('cost') || message.includes('price') || message.includes('expensive')) {
-    return "Health insurance costs vary based on age, health, coverage level, and location. Most policies range from £50-£200+ per month. I'd recommend getting a free personalized quote to see exact prices - just click 'Get Your Quote' above or call us at 01484 773038.";
+    return "Group health insurance costs depend on company size, employee ages, location, and cover level. Schemes often start from just 2 employees. Get a free SME quote for tailored pricing — click 'Get SME Quote' or call 01484 773038.";
   }
   
   if (message.includes('quote') || message.includes('get started') || message.includes('begin')) {
-    return "Great! You can get your free quote in 2 ways: 1) Click the 'Get Your Quote' button at the top of the page, or 2) Call our team at 01484 773038. It takes just a few minutes and there's no obligation.";
+    return "You can get a free SME quote by clicking 'Get SME Quote' on this page, or call our team on 01484 773038. It takes a few minutes and there is no obligation.";
   }
   
-  // Coverage questions
   if (message.includes('cover') && (message.includes('what') || message.includes('include'))) {
-    return "Most health insurance covers: specialist consultations, diagnostic tests (MRI, CT scans), surgery, cancer treatment, physiotherapy, and mental health support. Coverage varies by policy - get a quote to see specific details for your needs.";
+    return "Business health schemes typically cover specialist consultations, diagnostics, surgery, cancer treatment, and mental health support. Cover levels vary by insurer and scheme design — your broker can explain options for your workforce.";
+  }
+  
+  if (message.includes('business') || message.includes('company') || message.includes('employee') || message.includes('sme') || message.includes('staff')) {
+    return "We specialise in SME and business health insurance — from teams of 2 to larger corporate schemes. It is a proven way to attract talent, reduce absence, and support employee wellbeing. Call 01484 773038 or start an SME quote online.";
   }
   
   if (message.includes('family') || message.includes('children') || message.includes('kids')) {
-    return "Yes! We offer family health insurance that covers you, your partner, and children. Family policies are often more cost-effective than individual plans. Get a family quote by clicking 'Get Your Quote' or call 01484 773038.";
-  }
-  
-  if (message.includes('business') || message.includes('company') || message.includes('employee')) {
-    return "We provide business health insurance for companies of all sizes. It's a valuable employee benefit that improves wellbeing and reduces sick days. Contact us at 01484 773038 or email info@comparebusinesshealthcover.co.uk for business quotes.";
+    return "Our focus is business and group health insurance for employers. If you are looking to cover employees, click 'Get SME Quote' or call 01484 773038 and our brokers can advise on the right scheme for your company.";
   }
   
   // Pre-existing conditions
@@ -109,7 +108,7 @@ export function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I'm your Compare Business Healthcover assistant. How can I help you today?",
+      text: "Hello! I can help with SME and business health insurance questions — cover levels, group scheme costs, and getting a quote for your team.",
       sender: 'bot',
       timestamp: new Date(),
     },
