@@ -29,9 +29,9 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const sentences = [
-    "The UK's Best SME Health Insurance Comparison",
-    'Employee Cover From Just 2 Staff',
-    'Compare Business Cover & Save'
+    "SME Health Insurance From Just 2 Employees",
+    'Compare UK Business Health Cover',
+    'Protect Your Team & Retain Top Talent'
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -571,8 +571,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1767082090422-2e5aeeba2afe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjBwYXJlbnRzJTIwY2hpbGRyZW4lMjBvdXRkb29yJTIwaGFwcHklMjBoZWFsdGh5fGVufDF8fHx8MTc3MTU5NjQxMXww&ixlib=rb-4.1.0&q=70&w=600"
-            alt="Happy family"
+            src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=1080"
+            alt="Business team discussing employee health cover"
             className="w-full h-full object-cover object-right"
             loading="eager"
             fetchpriority="high"
@@ -585,15 +585,18 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <HomeIcon className="w-4 h-4" />
             <span>Home</span>
             <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
-            <span>Health Insurance</span>
+            <span>SME Health Insurance</span>
           </div>
 
           {/* Hero Content */}
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center pb-16 sm:pb-24">
             {/* Left Column - Heading */}
             <div>
+              <p className="text-teal-400 text-sm sm:text-base font-semibold uppercase tracking-wide mb-3">
+                For UK Small &amp; Medium Businesses
+              </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-extrabold text-white">
-                Access treatment faster with affordable health insurance.
+                Compare SME health insurance and give your team the cover they deserve.
               </h1>
             </div>
             
@@ -606,11 +609,11 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                  <span className="text-white text-base sm:text-lg">Avoid NHS waiting lists</span>
+                  <span className="text-white text-base sm:text-lg">Cover from just 2 employees — built for growing SMEs</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                  <span className="text-white text-base sm:text-lg">Choose your preferred private facility</span>
+                  <span className="text-white text-base sm:text-lg">Attract and retain staff with valued employee benefits</span>
                 </div>
               </div>
               
@@ -619,7 +622,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   onClick={onGetStarted} 
                   className="button-hover-animate bg-white hover:bg-gray-100 text-black rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
                 >
-                  Start a quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
+                  Get an SME quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
                 </button>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
@@ -638,15 +641,15 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center gap-2 sm:gap-3">
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-white" />
-                <span className="text-white">Avoid NHS waiting lists and get treatment quicker</span>
+                <span className="text-white">Tax-efficient employee health benefits for UK SMEs</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-white" />
-                <span className="text-white">Cover your whole family under one policy</span>
+                <span className="text-white">Flexible cover for teams of 2 to 250+ employees</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-white" />
-                <span className="text-white">Get private rooms and healthcare from top UK doctors</span>
+                <span className="text-white">Compare quotes from leading UK business insurers</span>
               </div>
             </div>
           </div>
