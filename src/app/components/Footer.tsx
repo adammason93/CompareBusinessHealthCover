@@ -1,4 +1,5 @@
 import { Star, Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail } from "lucide-react";
+import { Logo } from "@/app/components/Logo";
 import { SITE, mailto } from "@/app/config/site";
 
 interface FooterProps {
@@ -146,8 +147,8 @@ export function Footer({ onNavigate }: FooterProps = {}) {
 
           {/* Logo */}
           <div className="flex justify-center items-start">
-            <div className="text-2xl font-bold text-brand-teal">
-              {SITE.shortName}
+            <div className="bg-white rounded-lg px-4 py-2">
+              <Logo onClick={() => handleNavigation('home')} size="lg" />
             </div>
           </div>
         </div>
@@ -182,7 +183,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
         {/* Bottom Links */}
         <div className="border-t border-gray-800 pt-6 flex flex-wrap justify-center gap-4 text-xs">
           <a href="#" className="hover:text-brand-teal uppercase">Compare SME Health Insurance</a>
-          <a href="#" className="hover:text-brand-teal uppercase">Compare Business Cover</a>
+          <a href="#" className="hover:text-brand-teal uppercase">Compare Business Healthcover</a>
           <a href="#" className="hover:text-brand-teal uppercase">Employee Health Benefits</a>
         </div>
       </div>

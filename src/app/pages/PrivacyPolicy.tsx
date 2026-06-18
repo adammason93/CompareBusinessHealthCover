@@ -8,7 +8,7 @@ export function PrivacyPolicy({ onGetStarted }: PrivacyPolicyProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#2d2f5e] to-[#1f2454] text-white py-16">
+      <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
             <Shield className="w-12 h-12 text-brand-teal-light" />
@@ -26,7 +26,7 @@ export function PrivacyPolicy({ onGetStarted }: PrivacyPolicyProps) {
           {/* Introduction */}
           <div className="prose max-w-none">
             <p className="text-lg text-gray-700 leading-relaxed">
-              Compare Business Cover ("we", "us", "our") is committed to protecting your privacy and handling your personal data transparently and securely.
+              Compare Business Healthcover ("we", "us", "our") is committed to protecting your privacy and handling your personal data transparently and securely.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mt-4">
               This Privacy Policy explains how we collect, use, and protect your personal information in accordance with the UK General Data Protection Regulation (UK GDPR) and Data Protection Act 2018.
@@ -40,7 +40,7 @@ export function PrivacyPolicy({ onGetStarted }: PrivacyPolicyProps) {
               <h2 className="text-2xl font-bold text-gray-900">1. Who We Are</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Compare Business Cover is a health insurance comparison service that connects users with FCA-regulated insurance brokers and providers.
+              Compare Business Healthcover is a health insurance comparison service that connects users with FCA-regulated insurance brokers and providers.
             </p>
             <div className="bg-gray-50 rounded-xl p-6 space-y-3">
               <div className="flex items-start gap-3">

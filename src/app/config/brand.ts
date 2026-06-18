@@ -1,13 +1,18 @@
-/** Corporate teal brand palette — single source of truth for inline styles */
+/** Brand palette aligned with the Compare Business Healthcover logo */
 export const BRAND = {
-  navy: '#2d2f5e',
-  navyDark: '#1f2454',
-  navyDeeper: '#1f2356',
-  navyStrip: '#252547',
-  teal: '#0f766e',
-  tealHover: '#0b5f59',
-  tealSoft: '#148585',
-  tealLight: '#8ecfc8',
-  tealMuted: '#e8f3f2',
-  heading: '#1e3a5f',
+  navy: '#1D2D50',
+  navyDark: '#16233d',
+  navyDeeper: '#111b30',
+  navyStrip: '#1a2847',
+  teal: '#26B4AF',
+  tealHover: '#1fa09b',
+  tealSoft: '#2fc4bf',
+  tealLight: '#7fd4d0',
+  tealMuted: '#e8f7f6',
+  heading: '#1D2D50',
+} as const;
+
+export const LOGO = {
+  src: '/logo.png',
+  iconSrc: '/favicon-icon.png',
 } as const;

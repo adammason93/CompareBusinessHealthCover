@@ -11,6 +11,7 @@ import { ReviewSection } from "@/app/components/ReviewSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Logo } from "@/app/components/Logo";
 import { SITE } from "@/app/config/site";
 
 const HERO_SENTENCES = [
@@ -267,9 +268,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-brand-teal">
-              {SITE.shortName}
-            </div>
+            <Logo onClick={() => onNavigate?.('home')} size="md" />
             <nav className="hidden lg:flex items-center gap-6">
               <div 
                 className="relative"
@@ -551,7 +550,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden circle-pattern" style={{ backgroundColor: '#2d2f5e' }}>
+      <section className="relative overflow-hidden circle-pattern" style={{ backgroundColor: '#1D2D50' }}>
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
@@ -561,7 +560,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             loading="eager"
             fetchpriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2d2f5e] via-[#2d2f5e]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1D2D50] via-[#1D2D50]/80 to-transparent"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 z-10">
           {/* Breadcrumb */}
@@ -617,7 +616,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         </div>
         
         {/* Benefits Strip - Dark Background */}
-        <div className="border-t border-gray-600 text-white" style={{ backgroundColor: '#252547' }}>
+        <div className="border-t border-gray-600 text-white" style={{ backgroundColor: '#1a2847' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center gap-2 sm:gap-3">
@@ -927,7 +926,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Why Use Us Section */}
-      <section id="why-use-us" className="py-16" style={{ backgroundColor: '#1f2454' }}>
+      <section id="why-use-us" className="py-16" style={{ backgroundColor: '#16233d' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl text-center text-white mb-12">
             Why Use Us?
@@ -975,7 +974,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               className="w-full h-full object-cover absolute inset-0"
             />
           </div>
-          <div className="bg-black text-white p-8 lg:p-12 flex flex-col justify-center" style={{ backgroundColor: '#2d2f5e' }}>
+          <div className="bg-black text-white p-8 lg:p-12 flex flex-col justify-center" style={{ backgroundColor: '#1D2D50' }}>
             <h2 className="text-3xl lg:text-4xl mb-4">Already Covered?<br />Price Gone Up?</h2>
             <p className="text-lg lg:text-xl mb-6">Compare, Switch & Save Now</p>
             
@@ -1079,7 +1078,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         >
           <div 
             className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%]"
-            style={{ backgroundColor: '#0f766e' }}
+            style={{ backgroundColor: '#26B4AF' }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
               <div className="flex-1 text-center sm:text-left">

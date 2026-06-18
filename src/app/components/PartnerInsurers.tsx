@@ -85,7 +85,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#2d2f5e] mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#1D2D50] mb-4">
             Our Partner Insurers
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -97,10 +97,10 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {whyOurPartners.map((item, index) => (
             <div key={index} className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-[#148585] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#2fc4bf] rounded-full flex items-center justify-center mx-auto mb-4">
                 <item.icon className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-[#2d2f5e] mb-2">{item.title}</h3>
+              <h3 className="text-lg font-bold text-[#1D2D50] mb-2">{item.title}</h3>
               <p className="text-gray-600 text-sm">{item.description}</p>
             </div>
           ))}
@@ -108,14 +108,14 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
 
         {/* Partner Cards */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-[#2d2f5e] mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[#1D2D50] mb-8 text-center">
             Leading Insurance Providers
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border-2 border-transparent hover:border-[#148585]">
+              <div key={index} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border-2 border-transparent hover:border-[#2fc4bf]">
                 {/* Partner Logo Placeholder */}
-                <div className="h-16 bg-gradient-to-r from-[#2d2f5e] to-[#148585] rounded-lg flex items-center justify-center mb-4">
+                <div className="h-16 bg-gradient-to-r from-[#1D2D50] to-[#2fc4bf] rounded-lg flex items-center justify-center mb-4">
                   <span className="text-white font-bold text-xl">{partner.name}</span>
                 </div>
 
@@ -134,12 +134,12 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
 
                 {/* Specialties */}
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-[#2d2f5e]">Specialties:</p>
+                  <p className="text-sm font-semibold text-[#1D2D50]">Specialties:</p>
                   <div className="flex flex-wrap gap-2">
                     {partner.specialties.map((specialty, idx) => (
                       <span
                         key={idx}
-                        className="bg-[#f0f9fa] text-[#148585] px-3 py-1 rounded-full text-xs font-medium"
+                        className="bg-[#f0f9fa] text-[#2fc4bf] px-3 py-1 rounded-full text-xs font-medium"
                       >
                         {specialty}
                       </span>
@@ -155,15 +155,15 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         <div className="bg-white rounded-lg shadow-sm p-8 mb-12">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-[#148585] mb-2">5+</div>
+              <div className="text-4xl font-bold text-[#2fc4bf] mb-2">5+</div>
               <p className="text-gray-600">Partner Insurers</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-[#148585] mb-2">FCA</div>
+              <div className="text-4xl font-bold text-[#2fc4bf] mb-2">FCA</div>
               <p className="text-gray-600">Regulated Partners</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-[#148585] mb-2">100%</div>
+              <div className="text-4xl font-bold text-[#2fc4bf] mb-2">100%</div>
               <p className="text-gray-600">Free Comparison</p>
             </div>
           </div>
@@ -171,64 +171,64 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
 
         {/* How We Choose Partners */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-12">
-          <h2 className="text-2xl font-bold text-[#2d2f5e] mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[#1D2D50] mb-6 text-center">
             How We Select Our Partners
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2fc4bf] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#2d2f5e] mb-1">Financial Strength</h3>
+                  <h3 className="font-semibold text-[#1D2D50] mb-1">Financial Strength</h3>
                   <p className="text-gray-600 text-sm">We partner only with financially stable insurers with strong credit ratings</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2fc4bf] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">2</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#2d2f5e] mb-1">Customer Service</h3>
+                  <h3 className="font-semibold text-[#1D2D50] mb-1">Customer Service</h3>
                   <p className="text-gray-600 text-sm">Partners must demonstrate excellent customer satisfaction scores</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2fc4bf] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">3</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#2d2f5e] mb-1">Product Range</h3>
+                  <h3 className="font-semibold text-[#1D2D50] mb-1">Product Range</h3>
                   <p className="text-gray-600 text-sm">Comprehensive coverage options to meet diverse customer needs</p>
                 </div>
               </div>
             </div>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2fc4bf] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">4</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#2d2f5e] mb-1">Competitive Pricing</h3>
+                  <h3 className="font-semibold text-[#1D2D50] mb-1">Competitive Pricing</h3>
                   <p className="text-gray-600 text-sm">Fair and competitive premium rates for all customer segments</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2fc4bf] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">5</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#2d2f5e] mb-1">Claims Performance</h3>
+                  <h3 className="font-semibold text-[#1D2D50] mb-1">Claims Performance</h3>
                   <p className="text-gray-600 text-sm">High claims acceptance rates and fast processing times</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2fc4bf] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">6</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#2d2f5e] mb-1">Regulatory Compliance</h3>
+                  <h3 className="font-semibold text-[#1D2D50] mb-1">Regulatory Compliance</h3>
                   <p className="text-gray-600 text-sm">Full FCA authorization and adherence to industry standards</p>
                 </div>
               </div>
@@ -237,7 +237,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-[#2d2f5e] to-[#1f2454] rounded-lg shadow-lg p-8 text-center mb-8">
+        <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] rounded-lg shadow-lg p-8 text-center mb-8">
           <h2 className="text-3xl font-bold text-white mb-4">
             Compare Quotes from Leading Insurers
           </h2>
@@ -246,7 +246,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
           </p>
           <button
             onClick={() => onNavigate('home')}
-            className="bg-[#148585] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
+            className="bg-[#2fc4bf] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
           >
             Get Your Free Quote
             <span>→</span>
@@ -256,7 +256,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         {/* Disclaimer */}
         <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
           <p className="text-gray-700 text-sm">
-            <strong>Important:</strong> Compare Business Cover is an insurance intermediary, not an insurer. 
+            <strong>Important:</strong> Compare Business Healthcover is an insurance intermediary, not an insurer. 
             We may receive commission from our partner insurers, but this does not affect the price you pay. 
             All our partners are authorized and regulated by the Financial Conduct Authority (FCA).
           </p>
@@ -266,7 +266,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         <div className="text-center">
           <button
             onClick={() => onNavigate('home')}
-            className="text-[#148585] hover:text-[#0da5b5] font-medium"
+            className="text-[#2fc4bf] hover:text-[#0da5b5] font-medium"
           >
             ← Back to Home
           </button>

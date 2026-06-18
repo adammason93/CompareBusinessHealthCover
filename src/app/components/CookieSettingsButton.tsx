@@ -20,7 +20,7 @@ export function CookieSettingsButton() {
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="fixed bottom-6 left-6 z-30 bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-brand-teal/30 hover:border-brand-teal/50 group"
+      className="fixed bottom-6 left-6 z-30 bg-gradient-to-r from-[#16233d] to-[#1D2D50] text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-brand-teal/30 hover:border-brand-teal/50 group"
       aria-label="Cookie Settings"
       title="Cookie Settings"
     >

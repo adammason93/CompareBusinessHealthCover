@@ -220,7 +220,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
           <div className="max-w-2xl w-full bg-white rounded-xl shadow-2xl overflow-hidden animate-slide-up">
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] p-6">
+            <div className="bg-gradient-to-r from-[#16233d] to-[#1D2D50] p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Settings className="w-6 h-6 text-brand-teal" />
@@ -386,7 +386,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
       
       {/* Cookie Consent Banner */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 animate-slide-up">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#16233d] to-[#1D2D50] rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
           <div className="p-6 sm:p-8">
             <div className="flex items-start gap-4">
               {/* Cookie Icon */}

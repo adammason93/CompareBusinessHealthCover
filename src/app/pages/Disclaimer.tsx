@@ -37,7 +37,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
                   <h2 className="text-2xl font-bold text-gray-900 m-0 mb-4">Company Information</h2>
                   <div className="space-y-2 text-gray-700">
                     <p className="mb-2">
-                      <strong>Compare Business Cover</strong> is a trading name for <strong>MASON & HALL DIGITAL LTD</strong> which is a registered company in England and Wales.
+                      <strong>Compare Business Healthcover</strong> is a trading name for <strong>MASON & HALL DIGITAL LTD</strong> which is a registered company in England and Wales.
                     </p>
                     <p><strong>Company No.:</strong> 17086378</p>
                     <p><strong>Registered Address:</strong> 83, Hall Road Moorgate, Rotherham, South Yorkshire</p>
@@ -54,7 +54,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
                 <h2 className="text-2xl font-bold text-gray-900 m-0">Nature of Our Service</h2>
               </div>
               <p className="text-gray-700 mb-4">
-                Compare Business Cover is a website designed to help people looking into health insurance. We are <strong>not</strong> a private health insurance company or a broker and are not able to offer any advice on any regulated financial services products.
+                Compare Business Healthcover is a website designed to help people looking into health insurance. We are <strong>not</strong> a private health insurance company or a broker and are not able to offer any advice on any regulated financial services products.
               </p>
               <p className="text-gray-700 mb-4">
                 We are an introduction-based service and have partnerships with a number of handpicked FCA regulated firms who can offer advice on private health insurance and other financial services products. The Terms and Conditions of those partners may vary.
@@ -65,7 +65,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Your Responsibility</h2>
               <p className="text-gray-700 mb-4">
-                If you enter an agreement through one of our partners then you do so at your own risk and must comply with their terms and conditions. Compare Business Cover will not be liable for any loss or damage in connection with using this website.
+                If you enter an agreement through one of our partners then you do so at your own risk and must comply with their terms and conditions. Compare Business Healthcover will not be liable for any loss or damage in connection with using this website.
               </p>
               <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
                 <p className="text-amber-900 text-sm mb-0">
@@ -86,7 +86,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Information Accuracy</h2>
               <p className="text-gray-700 mb-4">
-                Compare Business Cover does not guarantee the total accuracy of the information on our site and does not accept any liability for any inaccuracies or errors.
+                Compare Business Healthcover does not guarantee the total accuracy of the information on our site and does not accept any liability for any inaccuracies or errors.
               </p>
               <p className="text-gray-700">
                 While we strive to keep all information current and accurate, insurance products, prices, and terms can change. We recommend verifying all details directly with the insurance provider before making any decisions.
@@ -127,7 +127,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
                 Our partner firms are authorized and regulated by the Financial Conduct Authority (FCA). You can verify their regulatory status on the FCA Register at <a href="https://register.fca.org.uk" target="_blank" rel="noopener noreferrer" className="text-brand-teal-hover hover:text-brand-teal-hover underline">register.fca.org.uk</a>.
               </p>
               <p className="text-gray-700">
-                Compare Business Cover itself is not authorized or regulated by the FCA as we do not provide financial advice or arrange insurance contracts.
+                Compare Business Healthcover itself is not authorized or regulated by the FCA as we do not provide financial advice or arrange insurance contracts.
               </p>
             </div>
 

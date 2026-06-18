@@ -4,17 +4,17 @@
   --font-size: 16px;
   --background: #f8fafb;
   --foreground: oklch(0.145 0 0);
-  /* Brand — corporate teal on navy */
-  --brand-navy: #2d2f5e;
-  --brand-navy-dark: #1f2454;
-  --brand-navy-deeper: #1f2356;
-  --brand-navy-strip: #252547;
-  --brand-teal: #0f766e;
-  --brand-teal-hover: #0b5f59;
-  --brand-teal-soft: #148585;
-  --brand-teal-light: #8ecfc8;
-  --brand-teal-muted: #e8f3f2;
-  --brand-heading: #1e3a5f;
+  /* Brand — logo navy + corporate teal */
+  --brand-navy: #1D2D50;
+  --brand-navy-dark: #16233d;
+  --brand-navy-deeper: #111b30;
+  --brand-navy-strip: #1a2847;
+  --brand-teal: #26B4AF;
+  --brand-teal-hover: #1fa09b;
+  --brand-teal-soft: #2fc4bf;
+  --brand-teal-light: #7fd4d0;
+  --brand-teal-muted: #e8f7f6;
+  --brand-heading: #1D2D50;
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);

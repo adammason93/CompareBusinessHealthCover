@@ -25,7 +25,7 @@ const sampleReviews: Review[] = [
   {
     author_name: "Michael Thompson",
     rating: 5,
-    text: "I was overwhelmed trying to compare different health insurance options, but Compare Business Cover made it so easy. They explained everything clearly and helped me find the perfect policy for my family. Outstanding service!",
+    text: "I was overwhelmed trying to compare different health insurance options, but Compare Business Healthcover made it so easy. They explained everything clearly and helped me find the perfect policy for my family. Outstanding service!",
     time: Date.now() - 86400000 * 30,
     relative_time_description: "a month ago"
   },

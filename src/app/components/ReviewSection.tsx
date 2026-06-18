@@ -74,7 +74,7 @@ export function ReviewSection() {
           Leave Us a Review
         </h2>
         <p className="text-lg text-gray-600 mb-8">
-          We'd love to hear about your experience with Compare Business Cover
+          We'd love to hear about your experience with Compare Business Healthcover
         </p>
 
         {/* Content */}

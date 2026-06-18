@@ -10,7 +10,7 @@ export function BusinessHealthInsurance({ onGetStarted }: BusinessHealthInsuranc
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative text-white py-20 overflow-hidden" style={{ backgroundColor: '#2d2f5e' }}>
+      <section className="relative text-white py-20 overflow-hidden" style={{ backgroundColor: '#1D2D50' }}>
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
@@ -18,7 +18,7 @@ export function BusinessHealthInsurance({ onGetStarted }: BusinessHealthInsuranc
             alt="Happy family"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2d2f5e] via-[#2d2f5e]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1D2D50] via-[#1D2D50]/80 to-transparent"></div>
         </div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
@@ -87,7 +87,7 @@ export function BusinessHealthInsurance({ onGetStarted }: BusinessHealthInsuranc
       </section>
 
       {/* CTA Section */}
-      <section className="py-16" style={{ backgroundColor: '#148585' }}>
+      <section className="py-16" style={{ backgroundColor: '#2fc4bf' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl text-white mb-6">
             Ready to Compare Business Health Insurance?

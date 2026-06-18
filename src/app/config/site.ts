@@ -1,6 +1,6 @@
 export const SITE = {
-  name: 'Compare Business Cover',
-  shortName: 'Compare Business Cover',
+  name: 'Compare Business Healthcover',
+  shortName: 'Compare Business Healthcover',
   domain: 'comparebusinesshealthcover.co.uk',
   url: 'https://comparebusinesshealthcover.co.uk',
   email: 'info@comparebusinesshealthcover.co.uk',
@@ -9,7 +9,7 @@ export const SITE = {
   phoneDisplay: '01484 773038',
   twitterHandle: '@CompareBizHealth',
   defaultImage: 'https://comparebusinesshealthcover.co.uk/og-image.jpg',
-  themeColor: '#2d2f5e',
+  themeColor: '#1D2D50',
   /** Internal lead notification — same broker inbox as sister site */
   leadNotifyEmail: 'matt@myhealthpal.co.uk',
 } as const;

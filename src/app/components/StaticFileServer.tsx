@@ -58,10 +58,10 @@ export function StaticFileServer({ fileName }: StaticFileServerProps) {
       <div style={{
         position: 'sticky',
         top: 0,
-        background: '#2d2f5e',
+        background: '#1D2D50',
         color: 'white',
         padding: '12px 20px',
-        borderBottom: '2px solid #1f2454',
+        borderBottom: '2px solid #16233d',
         zIndex: 1000
       }}>
         <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
@@ -226,7 +226,7 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
 
 </urlset>`;
 
-const ROBOTS_CONTENT = `# robots.txt for Compare Business Cover
+const ROBOTS_CONTENT = `# robots.txt for Compare Business Healthcover
 # Updated: March 24, 2026
 
 User-agent: *

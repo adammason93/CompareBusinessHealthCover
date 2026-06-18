@@ -76,9 +76,9 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-          <h1 className="text-4xl font-bold text-[#2d2f5e] mb-4">Sitemap</h1>
+          <h1 className="text-4xl font-bold text-[#1D2D50] mb-4">Sitemap</h1>
           <p className="text-gray-600 text-lg">
-            Navigate through all pages and resources available on Compare Business Cover
+            Navigate through all pages and resources available on Compare Business Healthcover
           </p>
         </div>
 
@@ -91,11 +91,11 @@ export function Sitemap({ onNavigate }: SitemapProps) {
               className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#148585] rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-[#2fc4bf] rounded-lg flex items-center justify-center flex-shrink-0">
                   <link.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#2d2f5e] mb-1">{link.title}</h3>
+                  <h3 className="font-bold text-[#1D2D50] mb-1">{link.title}</h3>
                   <p className="text-gray-600 text-sm">{link.content}</p>
                 </div>
               </div>
@@ -108,19 +108,19 @@ export function Sitemap({ onNavigate }: SitemapProps) {
           {sitemapSections.map((section, index) => (
             <div key={index} className="bg-white rounded-lg shadow-sm p-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-[#148585] rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-[#2fc4bf] rounded-lg flex items-center justify-center">
                   <section.icon className="w-5 h-5 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-[#2d2f5e]">{section.title}</h2>
+                <h2 className="text-2xl font-bold text-[#1D2D50]">{section.title}</h2>
               </div>
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <button
                       onClick={() => onNavigate(link.page)}
-                      className="text-[#148585] hover:text-[#0da5b5] hover:underline font-medium flex items-center gap-2 group"
+                      className="text-[#2fc4bf] hover:text-[#0da5b5] hover:underline font-medium flex items-center gap-2 group"
                     >
-                      <span className="text-gray-400 group-hover:text-[#148585] transition-colors">→</span>
+                      <span className="text-gray-400 group-hover:text-[#2fc4bf] transition-colors">→</span>
                       {link.label}
                     </button>
                   </li>
@@ -132,7 +132,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
 
         {/* Insurance Types Grid */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-12">
-          <h2 className="text-2xl font-bold text-[#2d2f5e] mb-6">All Insurance Types</h2>
+          <h2 className="text-2xl font-bold text-[#1D2D50] mb-6">All Insurance Types</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
               'Life Insurance',
@@ -145,9 +145,9 @@ export function Sitemap({ onNavigate }: SitemapProps) {
               <button
                 key={index}
                 onClick={() => onNavigate('insurance-types')}
-                className="text-left p-4 rounded-lg border-2 border-gray-200 hover:border-[#148585] transition-colors group"
+                className="text-left p-4 rounded-lg border-2 border-gray-200 hover:border-[#2fc4bf] transition-colors group"
               >
-                <span className="text-gray-700 group-hover:text-[#148585] font-medium">
+                <span className="text-gray-700 group-hover:text-[#2fc4bf] font-medium">
                   {type}
                 </span>
               </button>
@@ -156,25 +156,25 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         </div>
 
         {/* Key Features Section */}
-        <div className="bg-gradient-to-r from-[#2d2f5e] to-[#1f2454] rounded-lg shadow-lg p-8 mb-8">
+        <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-white mb-6 text-center">
-            Why Use Compare Business Cover?
+            Why Use Compare Business Healthcover?
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#148585] mb-2">100% Complimentary</div>
+              <div className="text-3xl font-bold text-[#2fc4bf] mb-2">100% Complimentary</div>
               <p className="text-white/90 text-sm">No fees or charges</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#148585] mb-2">10+ Insurance Partners</div>
+              <div className="text-3xl font-bold text-[#2fc4bf] mb-2">10+ Insurance Partners</div>
               <p className="text-white/90 text-sm">Leading UK providers</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#148585] mb-2">2 Minutes</div>
+              <div className="text-3xl font-bold text-[#2fc4bf] mb-2">2 Minutes</div>
               <p className="text-white/90 text-sm">Quick quote process</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#148585] mb-2">FCA Regulated</div>
+              <div className="text-3xl font-bold text-[#2fc4bf] mb-2">FCA Regulated</div>
               <p className="text-white/90 text-sm">Broker Partners</p>
             </div>
           </div>
@@ -182,7 +182,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
 
         {/* Popular Searches */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-          <h2 className="text-2xl font-bold text-[#2d2f5e] mb-6">Popular Searches</h2>
+          <h2 className="text-2xl font-bold text-[#1D2D50] mb-6">Popular Searches</h2>
           <div className="flex flex-wrap gap-3">
             {[
               'Life insurance quotes',
@@ -198,7 +198,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
               <button
                 key={index}
                 onClick={() => onNavigate('home')}
-                className="bg-gray-100 hover:bg-[#148585] hover:text-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium transition-colors"
+                className="bg-gray-100 hover:bg-[#2fc4bf] hover:text-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium transition-colors"
               >
                 {search}
               </button>
@@ -208,7 +208,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
 
         {/* CTA */}
         <div className="bg-white rounded-lg shadow-sm p-8 text-center mb-8">
-          <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">
+          <h2 className="text-2xl font-bold text-[#1D2D50] mb-4">
             Ready to Compare Insurance Quotes?
           </h2>
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
@@ -216,7 +216,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
           </p>
           <button
             onClick={() => onNavigate('home')}
-            className="bg-[#148585] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
+            className="bg-[#2fc4bf] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
           >
             Get Your Free Quote Now
             <span>→</span>
@@ -226,27 +226,27 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         {/* Footer Links */}
         <div className="bg-gray-100 rounded-lg p-6">
           <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <button onClick={() => onNavigate('about-us')} className="text-gray-600 hover:text-[#148585]">
+            <button onClick={() => onNavigate('about-us')} className="text-gray-600 hover:text-[#2fc4bf]">
               About Us
             </button>
-            <button onClick={() => onNavigate('contact-us')} className="text-gray-600 hover:text-[#148585]">
+            <button onClick={() => onNavigate('contact-us')} className="text-gray-600 hover:text-[#2fc4bf]">
               Contact
             </button>
-            <button onClick={() => onNavigate('privacy-policy')} className="text-gray-600 hover:text-[#148585]">
+            <button onClick={() => onNavigate('privacy-policy')} className="text-gray-600 hover:text-[#2fc4bf]">
               Privacy
             </button>
-            <button onClick={() => onNavigate('terms-conditions')} className="text-gray-600 hover:text-[#148585]">
+            <button onClick={() => onNavigate('terms-conditions')} className="text-gray-600 hover:text-[#2fc4bf]">
               Terms
             </button>
-            <button onClick={() => onNavigate('cookie-policy')} className="text-gray-600 hover:text-[#148585]">
+            <button onClick={() => onNavigate('cookie-policy')} className="text-gray-600 hover:text-[#2fc4bf]">
               Cookies
             </button>
-            <button onClick={() => onNavigate('sitemap')} className="text-gray-600 hover:text-[#148585]">
+            <button onClick={() => onNavigate('sitemap')} className="text-gray-600 hover:text-[#2fc4bf]">
               Sitemap
             </button>
           </div>
           <p className="text-center text-gray-500 text-xs mt-4">
-            © 2026 Compare Business Cover. All rights reserved. ICO Registration Number: ZB592848
+            © 2026 Compare Business Healthcover. All rights reserved. ICO Registration Number: ZB592848
           </p>
         </div>
 
@@ -254,7 +254,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         <div className="mt-8 text-center">
           <button
             onClick={() => onNavigate('home')}
-            className="text-[#148585] hover:text-[#0da5b5] font-medium"
+            className="text-[#2fc4bf] hover:text-[#0da5b5] font-medium"
           >
             ← Back to Home
           </button>
