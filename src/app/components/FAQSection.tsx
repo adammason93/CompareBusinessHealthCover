@@ -8,48 +8,56 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "Is it better to pay monthly or annually for health insurance?",
-    answer: "Paying annually with some insurers can offer a premium saving.  However, monthly payments offer better cash flow management and are more affordable upfront. Annual payments can save you money in the long run and are paid in one lump sum. Consider your budget and financial situation - if you can afford the annual premium, you'll likely save money, but monthly payments offer more flexibility."
+    question: "What is business health insurance for SMEs?",
+    answer: "Business health insurance — also called group private medical insurance (PMI) — is an employee benefit arranged by an employer to give staff access to private healthcare. For UK SMEs, it can help reduce sickness absence, support faster treatment, and strengthen your benefits package when recruiting and retaining talent. Schemes can often be set up from just two employees."
   },
   {
-    question: "Does health insurance cover cancer treatment?",
-    answer: "Yes, most comprehensive private health insurance policies cover cancer treatment, including chemotherapy, radiotherapy, surgery, and consultations with oncologists. However, coverage can vary between policies and providers. Pre-existing cancer conditions are usually excluded. It's crucial to check your policy details and speak with your insurer about specific cancer treatments and any limitations or exclusions that may apply."
+    question: "How many employees do I need to qualify?",
+    answer: "Many group schemes are available from as few as two employees, making cover accessible to micro-businesses and growing SMEs as well as larger companies. Eligibility rules vary by insurer — factors such as company structure, location, and the level of cover required will affect which schemes you can access. Our broker partners can advise on options for your specific headcount."
   },
   {
-    question: "Can I get health insurance with a pre-existing medical condition?",
-    answer: "Yes, you can get health insurance with a pre-existing condition, but that specific condition will typically be excluded from your cover.  The insurer will assess your medical history and decide what's covered. Some conditions may be covered after a certain period (known as a 'moratorium period'), usually 2 years of being symptom-free. Alternatively, 'Full Medical Underwriting' means you disclose all conditions upfront, and the insurer decides what to exclude. You'll still be covered for new conditions that arise after taking out the policy."
+    question: "Is business health insurance tax-efficient?",
+    answer: "In most cases, employer-paid group health insurance is treated as a business expense and is generally an allowable deduction for corporation tax purposes. For employees, PMI is usually a taxable benefit in kind (PBIK) and must be reported via PAYE. Tax treatment depends on your company structure and how the scheme is set up — your broker or accountant can confirm the position for your business."
   },
   {
-    question: "Do I need to review my health insurance every year?",
-    answer: "Yes, it's highly recommended to review your health insurance annually, ideally before your renewal date. Your circumstances, health needs, and budget may change over time. Premium costs often increase at renewal, and comparing the market could help you find better value or more suitable cover. Changes in your health, family situation, or the treatments you need may mean your current policy is no longer the best fit. Regular reviews ensure you're getting the best deal and appropriate coverage for your current needs."
+    question: "Can employees with pre-existing conditions be covered?",
+    answer: "Group schemes handle pre-existing conditions differently to individual policies. Insurers may apply medical underwriting at a group level, use moratorium underwriting, or cover all eligible employees with certain exclusions. The approach depends on scheme size, insurer, and whether cover is compulsory or voluntary. Your broker will explain how each option affects your workforce before you commit."
   },
   {
-    question: "Can I add other people to my health insurance policy?",
-    answer: "Yes, most health insurance providers offer family policies where you can add your spouse/partner and children. Children are typically covered at no extra cost up to a certain age (usually 18-25 if in full-time education). Adding a partner will increase your premium, but a joint policy is usually cheaper than two separate policies. Some policies also allow you to add parents or other dependents. Each person added will undergo medical underwriting, and their pre-existing conditions will be assessed separately."
+    question: "Should we review our group scheme every year?",
+    answer: "Yes. Reviewing your scheme before renewal helps ensure cover still matches your workforce, budget, and business goals. Premiums often increase at renewal, and comparing the market can identify better value or improved benefits. An annual review is especially important if your headcount, employee demographics, or benefits strategy has changed during the year."
   },
   {
-    question: "Do I need a medical exam for health insurance?",
-    answer: "Not always. Many health insurance policies use a 'moratorium' approach where you don't need a medical exam - you simply declare that you understand pre-existing conditions from the last 5 years won't be covered. Alternatively, with 'Full Medical Underwriting' (FMU), you complete a detailed medical questionnaire, and in some cases, may need a medical examination or provide medical records. FMU can be beneficial as it clearly defines what is and isn't covered from the start. The approach depends on your insurer, policy type, age, and the level of cover you're seeking."
-  }
+    question: "Can we add new employees to an existing scheme?",
+    answer: "Yes. Group policies are designed to accommodate changes in your workforce. New starters can typically be added during the policy year or at defined enrolment windows, depending on the insurer and scheme rules. Leavers are removed accordingly. Your broker or scheme administrator handles day-to-day membership changes and will advise on the process for your policy."
+  },
+  {
+    question: "Do employees need a medical exam?",
+    answer: "Most SME and corporate group schemes do not require individual medical examinations. Insurers usually apply underwriting at scheme level — for example, moratorium underwriting or full medical underwriting for the group as a whole. Employees may need to complete a health declaration when joining, but this is typically straightforward and handled as part of the enrolment process."
+  },
+  {
+    question: "What is the difference between corporate and small company cover?",
+    answer: "Corporate schemes typically serve larger workforces with more complex benefits structures, optional tiers of cover, and dedicated account management. Small company and SME schemes are designed for lower headcounts — often from two employees — with simpler administration and flexible cover levels. Both provide group PMI; the main differences are scale, features, and how the scheme is managed."
+  },
 ];
 
 const howWeWorkData: FAQItem[] = [
   {
-    question: "How do I get started with comparing health insurance?",
-    answer: "Getting started is simple! Just click the 'Get A Quote' button and fill out our quick online form. You'll answer a few questions about yourself, your health needs, and your budget. We'll then search the market and present you with personalised quotes from leading UK insurers. The whole process takes just a few minutes, and there's no obligation to buy. Our expert advisers are also available if you need help or have questions."
+    question: "How do I get an SME health insurance quote?",
+    answer: "Click 'Get SME Quote' and complete our short enquiry form with details about your company size, location, and the cover you need. We connect you with FCA-regulated broker partners who compare group schemes from leading UK business insurers. The initial enquiry takes just a few minutes and there is no obligation to proceed."
   },
   {
-    question: "Is your comparison service really free?",
-    answer: "Yes, our service is completely free for you to use. We're paid a commission by the insurance companies when you take out a policy through us, but this doesn't affect the price you pay - you'll pay the same premium whether you go direct to the insurer or use our service. In fact, we often have access to exclusive deals that can save you money. There are no hidden fees or charges."
+    question: "Is your comparison service free for employers?",
+    answer: "Yes. Our comparison and introducer service is free for businesses to use. If you take out a policy through one of our broker partners, they receive a commission from the insurer — this does not increase the premium you pay compared with going direct. In many cases, brokers have access to schemes and rates not available on the open market."
   },
   {
-    question: "What happens after I receive my quotes?",
-    answer: "Once you receive your quotes, you can take your time reviewing them with no pressure. Our broker will be available to explain the differences between policies, answer questions, and help you understand the coverage options. When you're ready, they will help you complete the application process and get your policy set up. They will handle all the paperwork and liaise with the insurer on your behalf. Even after you've purchased your policy, they're here to help with any queries or issues that may arise."
+    question: "What happens after I receive group scheme quotes?",
+    answer: "Your broker will walk you through each option — explaining cover levels, exclusions, employee eligibility, and premium breakdowns. You can take your time with no pressure to buy. When you are ready, they handle the application, insurer liaison, and employee enrolment. Ongoing support is available for renewals, membership changes, and claims queries."
   },
   {
-    question: "Can you help me switch from my current provider?",
-    answer: "Absolutely! Our broker partner can help you switch providers to get better coverage or lower premiums. They will review your current policy, ensure there's no gap in coverage, and help you find a better deal. They will also advise on the best time to switch (usually at renewal to avoid cancellation fees) and handle the entire switching process for you. Switching is often easier than people think, and you could save hundreds of pounds per year while getting better cover."
-  }
+    question: "Can you help us switch or renew our existing group scheme?",
+    answer: "Absolutely. Whether you are approaching renewal or looking to switch providers mid-term, our broker partners can benchmark your current scheme against the wider market. They will advise on the best timing to avoid gaps in cover, manage the transition for your employees, and aim to reduce costs or improve benefits at renewal."
+  },
 ];
 
 export function FAQSection() {
@@ -62,15 +70,14 @@ export function FAQSection() {
   const currentData = activeTab === "faq" ? faqData : howWeWorkData;
   const showAll = activeTab === "faq" ? showAllFAQs : showAllHowWeWork;
   const INITIAL_DISPLAY_COUNT = 6;
-  
-  // Filter data based on search query
+
   const filteredData = searchQuery
-    ? currentData.filter(item => 
+    ? currentData.filter(item =>
         item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.answer.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : currentData;
-  
+
   const displayedData = searchQuery || showAll ? filteredData : filteredData.slice(0, INITIAL_DISPLAY_COUNT);
   const hasMore = !searchQuery && currentData.length > INITIAL_DISPLAY_COUNT;
 
@@ -80,8 +87,8 @@ export function FAQSection() {
 
   const handleTabChange = (tab: "faq" | "howWeWork") => {
     setActiveTab(tab);
-    setOpenIndex(null); // Close any open accordion when switching tabs
-    setSearchQuery(""); // Clear search when switching tabs
+    setOpenIndex(null);
+    setSearchQuery("");
   };
 
   const toggleShowAll = () => {
@@ -90,43 +97,53 @@ export function FAQSection() {
     } else {
       setShowAllHowWeWork(!showAllHowWeWork);
     }
-    setOpenIndex(null); // Close any open accordion when toggling
+    setOpenIndex(null);
   };
 
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Tab Navigation and Search Bar */}
+        <div className="text-center mb-10">
+          <p className="text-brand-teal font-semibold uppercase tracking-wide text-sm mb-2">
+            Employer guidance
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+            SME Health Insurance FAQs
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Common questions from UK employers about group health cover, tax, eligibility, and how our comparison service works.
+          </p>
+        </div>
+
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div className="flex gap-4">
             <button
               onClick={() => handleTabChange("faq")}
               className={`px-6 py-3 rounded-full font-medium transition-colors ${
                 activeTab === "faq"
-                  ? "bg-gray-900 text-white"
+                  ? "bg-brand-navy text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              FAQs ({faqData.length})
+              Employer FAQs ({faqData.length})
             </button>
             <button
               onClick={() => handleTabChange("howWeWork")}
               className={`px-6 py-3 rounded-full font-medium transition-colors ${
                 activeTab === "howWeWork"
-                  ? "bg-gray-900 text-white"
+                  ? "bg-brand-navy text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              How we work ({howWeWorkData.length})
+              Getting a quote ({howWeWorkData.length})
             </button>
           </div>
 
-          {/* Search Bar */}
           <div className="relative w-full sm:w-96">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
-              placeholder="Search questions..."
+              placeholder="Search employer FAQs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/25 transition-all"
@@ -134,21 +151,19 @@ export function FAQSection() {
           </div>
         </div>
 
-        {/* No Results Message */}
         {searchQuery && displayedData.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No results found for "{searchQuery}"</p>
+            <p className="text-gray-500 text-lg">No results found for &ldquo;{searchQuery}&rdquo;</p>
             <p className="text-gray-400 text-sm mt-2">Try different keywords or browse all FAQs</p>
           </div>
         )}
 
-        {/* FAQ Accordion */}
         {displayedData.length > 0 && (
           <div className="space-y-3">
             {displayedData.map((item, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors"
+                className="border border-gray-200 rounded-lg overflow-hidden hover:border-brand-teal/30 transition-colors"
               >
                 <button
                   onClick={() => toggleAccordion(index)}
@@ -165,7 +180,7 @@ export function FAQSection() {
                 </button>
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openIndex === index ? "max-h-96" : "max-h-0"
+                    openIndex === index ? "max-h-[28rem]" : "max-h-0"
                   }`}
                 >
                   <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
@@ -177,7 +192,6 @@ export function FAQSection() {
           </div>
         )}
 
-        {/* Show More / Show Less Button */}
         {hasMore && (
           <div className="flex justify-center mt-8">
             <button
