@@ -13,7 +13,7 @@ import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SITE } from "@/app/config/site";
-import { IMAGES } from "@/app/config/brand";
+import { LOGO } from "@/app/config/brand";
 
 const HERO_SENTENCES = [
   "SME Health Insurance From Just 2 Employees",
@@ -265,8 +265,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
-            src={IMAGES.businessHandshake}
-            alt="Business partners agreeing employee health cover"
+            src={LOGO.businessHandshake}
+            alt="Business team discussing employee health cover"
             className="w-full h-full object-cover object-right"
             loading="eager"
             fetchpriority="high"
@@ -445,7 +445,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             >
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
-                  src={IMAGES.businessHandshake}
+                  src={LOGO.businessHandshake}
                   alt="No-obligation quotes"
                   className="w-full h-full object-cover"
                 />
@@ -532,8 +532,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
-            src={IMAGES.businessHandshake}
-            alt="Professional business handshake over contract documents"
+            src={LOGO.businessHandshake}
+            alt="Business professionals in meeting"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1f2255]/90 via-[#1f2255]/85 to-[#1f2255]/90"></div>
@@ -679,8 +679,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="grid md:grid-cols-2">
           <div className="relative">
             <img 
-              src={IMAGES.businessHandshake}
-              alt="Employer and broker reviewing group health scheme"
+              src={LOGO.businessHandshake}
+              alt="Business team reviewing employee benefits"
               className="w-full h-full object-cover absolute inset-0"
             />
           </div>
