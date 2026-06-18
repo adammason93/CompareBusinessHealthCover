@@ -58,13 +58,13 @@ export function CookieConsent({ onNavigate }: CookieConsentProps) {
       
       {/* Cookie Consent Banner */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 animate-slide-up">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] rounded-lg shadow-2xl border border-teal-500/20 overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
           <div className="p-6 sm:p-8">
             <div className="flex items-start gap-4">
               {/* Cookie Icon */}
               <div className="flex-shrink-0">
-                <div className="bg-teal-500/10 p-3 rounded-full">
-                  <Cookie className="w-6 h-6 text-teal-500" />
+                <div className="bg-brand-teal/10 p-3 rounded-full">
+                  <Cookie className="w-6 h-6 text-brand-teal" />
                 </div>
               </div>
 
@@ -83,14 +83,14 @@ export function CookieConsent({ onNavigate }: CookieConsentProps) {
                   please read our{' '}
                   <button 
                     onClick={() => onNavigate?.('cookie-policy')}
-                    className="text-teal-500 hover:text-teal-400 underline"
+                    className="text-brand-teal hover:text-brand-teal-light underline"
                   >
                     Cookie Policy
                   </button>{' '}
                   and{' '}
                   <button 
                     onClick={() => onNavigate?.('privacy-policy')}
-                    className="text-teal-500 hover:text-teal-400 underline"
+                    className="text-brand-teal hover:text-brand-teal-light underline"
                   >
                     Privacy Policy
                   </button>.
@@ -100,7 +100,7 @@ export function CookieConsent({ onNavigate }: CookieConsentProps) {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={handleAccept}
-                    className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-500/20"
+                    className="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-hover text-white rounded-lg font-semibold transition-colors shadow-lg shadow-brand-teal/20"
                   >
                     Accept All
                   </button>
@@ -112,7 +112,7 @@ export function CookieConsent({ onNavigate }: CookieConsentProps) {
                   </button>
                   <button
                     onClick={handleCustomize}
-                    className="px-6 py-2.5 bg-transparent hover:bg-white/5 text-teal-500 border border-teal-500/50 rounded-lg font-semibold transition-colors"
+                    className="px-6 py-2.5 bg-transparent hover:bg-white/5 text-brand-teal border border-brand-teal/50 rounded-lg font-semibold transition-colors"
                   >
                     Customize
                   </button>

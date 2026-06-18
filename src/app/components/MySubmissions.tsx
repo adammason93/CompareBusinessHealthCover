@@ -98,7 +98,7 @@ export function MySubmissions({ isOpen, onClose, authToken, user }: MySubmission
         <div className="overflow-y-auto max-h-[calc(90vh-120px)] px-6 py-4">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-teal-500" />
+              <Loader2 className="w-8 h-8 animate-spin text-brand-teal" />
               <span className="ml-3 text-gray-600">Loading submissions...</span>
             </div>
           ) : error ? (
@@ -223,14 +223,14 @@ export function MySubmissions({ isOpen, onClose, authToken, user }: MySubmission
               {submissions.map((submission) => (
                 <div
                   key={submission.id}
-                  className="bg-white border border-gray-200 rounded-xl p-5 hover:border-teal-500 hover:shadow-md transition-all cursor-pointer"
+                  className="bg-white border border-gray-200 rounded-xl p-5 hover:border-brand-teal hover:shadow-md transition-all cursor-pointer"
                   onClick={() => setSelectedSubmission(submission)}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
-                          <FileText className="w-5 h-5 text-teal-600" />
+                        <div className="w-10 h-10 bg-brand-teal-muted rounded-full flex items-center justify-center">
+                          <FileText className="w-5 h-5 text-brand-teal-hover" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-gray-900">
@@ -259,7 +259,7 @@ export function MySubmissions({ isOpen, onClose, authToken, user }: MySubmission
                         </div>
                       </div>
                     </div>
-                    <Button variant="ghost" size="sm" className="text-teal-600 hover:text-teal-700">
+                    <Button variant="ghost" size="sm" className="text-brand-teal-hover hover:text-brand-teal-hover">
                       View Details →
                     </Button>
                   </div>

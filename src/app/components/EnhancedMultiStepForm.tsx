@@ -210,20 +210,20 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
       whileTap={{ scale: 0.98 }}
       className={`w-full text-left p-3 sm:p-4 rounded-xl transition-all shadow-sm ${ 
         currentValue === value
-          ? 'bg-gradient-to-r from-teal-50 to-blue-50 border-2 border-teal-500 shadow-md'
-          : 'bg-white border-2 border-gray-200 hover:border-teal-300 hover:shadow-md'
+          ? 'bg-gradient-to-r from-brand-teal-muted to-blue-50 border-2 border-brand-teal shadow-md'
+          : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
       }`}
     >
       <div className="flex items-center gap-2 sm:gap-3">
         {Icon && (
           <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
-            currentValue === value ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-600'
+            currentValue === value ? 'bg-brand-teal text-white' : 'bg-gray-100 text-gray-600'
           }`}>
             <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <div className={`text-sm sm:text-base font-semibold ${currentValue === value ? 'text-teal-700' : 'text-gray-900'}`}>
+          <div className={`text-sm sm:text-base font-semibold ${currentValue === value ? 'text-brand-teal-hover' : 'text-gray-900'}`}>
             {label}
           </div>
           {description && (
@@ -234,7 +234,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
         </div>
         <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center border-2 flex-shrink-0 ${
           currentValue === value 
-            ? 'bg-teal-500 border-teal-500' 
+            ? 'bg-brand-teal border-brand-teal' 
             : 'bg-white border-gray-300'
         }`}>
           {currentValue === value && <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />}
@@ -256,24 +256,24 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
       whileTap={{ scale: 0.95 }}
       className={`p-6 rounded-xl transition-all shadow-sm ${
         currentValue === value
-          ? 'bg-gradient-to-br from-teal-50 to-blue-50 border-2 border-teal-500 shadow-lg'
-          : 'bg-white border-2 border-gray-200 hover:border-teal-300 hover:shadow-md'
+          ? 'bg-gradient-to-br from-brand-teal-muted to-blue-50 border-2 border-brand-teal shadow-lg'
+          : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
       }`}
     >
       <div className="flex flex-col items-center gap-3">
         <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${
-          currentValue === value ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-600'
+          currentValue === value ? 'bg-brand-teal text-white' : 'bg-gray-100 text-gray-600'
         }`}>
           <Icon className="w-10 h-10" strokeWidth={1.5} />
         </div>
         <span className={`font-semibold text-center ${
-          currentValue === value ? 'text-teal-700' : 'text-gray-900'
+          currentValue === value ? 'text-brand-teal-hover' : 'text-gray-900'
         }`}>
           {label}
         </span>
         <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${
           currentValue === value 
-            ? 'bg-teal-500 border-teal-500' 
+            ? 'bg-brand-teal border-brand-teal' 
             : 'bg-white border-gray-300'
         }`}>
           {currentValue === value && <Check className="w-4 h-4 text-white" />}
@@ -283,7 +283,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
   );
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 via-blue-50 to-teal-50 py-2 sm:py-4 px-3 sm:px-6">
+    <div className="bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted py-2 sm:py-4 px-3 sm:px-6">
       <div className="max-w-[95%] mx-auto">
         {/* Header with Progress */}
         <motion.div 
@@ -294,7 +294,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
           <div className="mb-2">
             <div className="flex justify-between items-center mb-2">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-teal-500" />
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-brand-teal" />
                 <span className="text-[10px] sm:text-xs font-semibold text-gray-700">
                   Step {currentStep} of {steps.length}
                 </span>
@@ -308,7 +308,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             {/* Progress Bar */}
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden mb-4">
               <motion.div 
-                className="h-full bg-gradient-to-r from-teal-500 to-blue-500 rounded-full"
+                className="h-full bg-gradient-to-r from-brand-teal to-blue-500 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -332,7 +332,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       whileHover={step.number <= currentStep ? { scale: 1.1 } : {}}
                       className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                         step.number === currentStep
-                          ? 'bg-teal-500 text-white shadow-lg ring-2 ring-teal-200'
+                          ? 'bg-brand-teal text-white shadow-lg ring-2 ring-brand-teal/25'
                           : completedSteps.includes(step.number)
                           ? 'bg-green-500 text-white'
                           : step.number < currentStep
@@ -347,7 +347,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       )}
                     </motion.div>
                     <span className={`text-[10px] font-medium text-center truncate max-w-[50px] ${
-                      step.number === currentStep ? 'text-teal-600' : 'text-gray-600'
+                      step.number === currentStep ? 'text-brand-teal-hover' : 'text-gray-600'
                     }`}>
                       {step.label}
                     </span>
@@ -376,7 +376,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                 >
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                     step.number === currentStep
-                      ? 'bg-teal-500 text-white shadow-lg scale-110'
+                      ? 'bg-brand-teal text-white shadow-lg scale-110'
                       : completedSteps.includes(step.number)
                       ? 'bg-green-500 text-white'
                       : step.number < currentStep
@@ -390,7 +390,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                     )}
                   </div>
                   <span className={`text-xs font-medium ${
-                    step.number === currentStep ? 'text-teal-600' : 'text-gray-600'
+                    step.number === currentStep ? 'text-brand-teal-hover' : 'text-gray-600'
                   }`}>
                     {step.label}
                   </span>
@@ -510,11 +510,11 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         whileTap={{ scale: 0.95 }}
                         className={`p-6 rounded-xl transition-all shadow-sm ${
                           watchedFields.peopleCount === count
-                            ? 'bg-gradient-to-br from-teal-50 to-blue-50 border-2 border-teal-500 shadow-lg'
-                            : 'bg-white border-2 border-gray-200 hover:border-teal-300 hover:shadow-md'
+                            ? 'bg-gradient-to-br from-brand-teal-muted to-blue-50 border-2 border-brand-teal shadow-lg'
+                            : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
                         }`}
                       >
-                        <div className="text-3xl font-bold text-teal-600 mb-2">{count}</div>
+                        <div className="text-3xl font-bold text-brand-teal-hover mb-2">{count}</div>
                         <div className="text-sm text-gray-600">
                           {count === '1' ? 'Person' : 'People'}
                         </div>
@@ -540,7 +540,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         placeholder="Enter number of people"
                         value={watchedFields.peopleCount && !['1', '2', '3', '4+'].includes(watchedFields.peopleCount) ? watchedFields.peopleCount : ''}
                         onChange={(e) => setValue("peopleCount", e.target.value)}
-                        className="h-14 text-lg border-2 border-gray-200 focus:border-teal-500 rounded-xl text-center"
+                        className="h-14 text-lg border-2 border-gray-200 focus:border-brand-teal rounded-xl text-center"
                       />
                     </div>
                   </div>
@@ -563,7 +563,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       placeholder="e.g., 35, 32, 8, 5"
                       value={watchedFields.ages || ''}
                       onChange={(e) => setValue("ages", e.target.value)}
-                      className="h-14 text-lg border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                      className="h-14 text-lg border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                     />
                   </div>
                 </div>
@@ -647,7 +647,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         value={watchedFields.title}
                         onValueChange={(value) => setValue("title", value)}
                       >
-                        <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-teal-500 rounded-xl">
+                        <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-brand-teal rounded-xl">
                           <SelectValue placeholder="Title" />
                         </SelectTrigger>
                         <SelectContent>
@@ -665,7 +665,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                           placeholder="First Name *"
                           value={watchedFields.firstName || ''}
                           onChange={(e) => setValue("firstName", e.target.value)}
-                          className="h-12 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                          className="h-12 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                         />
                       </div>
                     </div>
@@ -675,7 +675,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       placeholder="Last Name"
                       value={watchedFields.lastName || ''}
                       onChange={(e) => setValue("lastName", e.target.value)}
-                      className="h-12 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                      className="h-12 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                     />
 
                     <div className="relative">
@@ -685,7 +685,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         placeholder="Email Address *"
                         value={watchedFields.email || ''}
                         onChange={(e) => setValue("email", e.target.value)}
-                        className="h-12 pl-10 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                        className="h-12 pl-10 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                       />
                     </div>
 
@@ -696,7 +696,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         placeholder="Phone Number *"
                         value={watchedFields.phone || ''}
                         onChange={(e) => setValue("phone", e.target.value)}
-                        className="h-12 pl-10 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                        className="h-12 pl-10 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                       />
                     </div>
 
@@ -707,7 +707,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         placeholder="Postcode"
                         value={watchedFields.postcode || ''}
                         onChange={(e) => setValue("postcode", e.target.value)}
-                        className="h-12 pl-10 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                        className="h-12 pl-10 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                       />
                     </div>
 
@@ -721,7 +721,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                           type="date"
                           value={watchedFields.dateOfBirth || ''}
                           onChange={(e) => setValue("dateOfBirth", e.target.value)}
-                          className="h-12 pl-10 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                          className="h-12 pl-10 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                         />
                       </div>
                     </div>
@@ -800,7 +800,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                               console.log("Button clicked, opening calendar");
                               setCalendarOpen(true);
                             }}
-                            className={`w-full h-12 justify-start text-left font-normal border-2 border-gray-200 hover:border-teal-500 rounded-xl px-4 py-2 bg-white flex items-center ${
+                            className={`w-full h-12 justify-start text-left font-normal border-2 border-gray-200 hover:border-brand-teal rounded-xl px-4 py-2 bg-white flex items-center ${
                               !watchedFields.preferredContactDate && "text-gray-500"
                             }`}
                           >
@@ -839,7 +839,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         value={watchedFields.preferredContactTime}
                         onValueChange={(value) => setValue("preferredContactTime", value)}
                       >
-                        <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-teal-500 rounded-xl">
+                        <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-brand-teal rounded-xl">
                           <SelectValue placeholder="Select a time" />
                         </SelectTrigger>
                         <SelectContent>
@@ -882,7 +882,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
                           <h3 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                            <Briefcase className="w-5 h-5 text-teal-600" />
+                            <Briefcase className="w-5 h-5 text-brand-teal-hover" />
                             Coverage Details
                           </h3>
                           <div className="space-y-2 text-sm">
@@ -899,7 +899,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
 
                         <div>
                           <h3 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                            <UserCircle className="w-5 h-5 text-teal-600" />
+                            <UserCircle className="w-5 h-5 text-brand-teal-hover" />
                             Personal Details
                           </h3>
                           <div className="space-y-2 text-sm">
@@ -928,7 +928,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       {/* Contact Preferences Section */}
                       <div className="pt-4 border-t border-gray-200">
                         <h3 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                          <Clock className="w-5 h-5 text-teal-600" />
+                          <Clock className="w-5 h-5 text-brand-teal-hover" />
                           Contact Preferences
                         </h3>
                         <div className="space-y-2 text-sm">
@@ -952,9 +952,9 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 p-4 bg-teal-50 rounded-xl border border-teal-200">
-                      <Edit2 className="w-5 h-5 text-teal-600" />
-                      <p className="text-sm text-teal-900">
+                    <div className="flex items-center gap-3 p-4 bg-brand-teal-muted rounded-xl border border-brand-teal/20">
+                      <Edit2 className="w-5 h-5 text-brand-teal-hover" />
+                      <p className="text-sm text-brand-teal-hover">
                         Need to make changes? Click on any step above to go back and edit.
                       </p>
                     </div>
@@ -965,7 +965,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         <input
                           type="checkbox"
                           {...register("consentToContact", { required: true })}
-                          className="mt-1 w-5 h-5 text-teal-500 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 cursor-pointer"
+                          className="mt-1 w-5 h-5 text-brand-teal border-gray-300 rounded focus:ring-2 focus:ring-brand-teal cursor-pointer"
                         />
                         <span className="text-sm text-gray-700 leading-relaxed group-hover:text-gray-900">
                           I agree to be contacted by our broker partner who are authorised and regulated by the financial conduct authority FCA.
@@ -1003,7 +1003,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             <Button
               type="submit"
               disabled={!isStepValid()}
-              className="px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="px-8 py-3 bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {currentStep === steps.length ? (
                 <>

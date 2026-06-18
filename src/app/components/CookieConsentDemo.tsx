@@ -41,9 +41,9 @@ export function CookieConsentDemo() {
   }, []);
 
   return (
-    <div className="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 border-2 border-teal-500/30 z-50 max-w-xs">
+    <div className="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 border-2 border-brand-teal/30 z-50 max-w-xs">
       <div className="flex items-center gap-2 mb-3">
-        <Cookie className="w-5 h-5 text-teal-500" />
+        <Cookie className="w-5 h-5 text-brand-teal" />
         <h4 className="font-bold text-sm">Cookie Status</h4>
         <span className="text-xs text-gray-400">(Demo)</span>
       </div>

@@ -55,7 +55,7 @@ export function SEOHead({
     setMetaTag('twitter:image', ogImage);
 
     setMetaTag('viewport', 'width=device-width, initial-scale=1.0');
-    setMetaTag('theme-color', '#2d2f5e');
+    setMetaTag('theme-color', SITE.themeColor);
 
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonicalLink) {

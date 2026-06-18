@@ -8,7 +8,7 @@ interface SuccessPageProps {
 
 export function SuccessPage({ onReset }: SuccessPageProps) {
   return (
-    <div className="bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50 p-4 sm:p-6">
+    <div className="bg-gradient-to-br from-brand-teal-muted via-blue-50 to-purple-50 p-4 sm:p-6">
       <div className="max-w-xl mx-auto text-center">
         {/* Success Animation */}
         <motion.div
@@ -43,7 +43,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
               }}
               className="absolute w-20 h-20 bg-green-300 rounded-full opacity-30"
             />
-            <div className="relative w-16 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center shadow-lg">
+            <div className="relative w-16 h-16 bg-gradient-to-br from-green-400 to-brand-teal rounded-full flex items-center justify-center shadow-lg">
               <CheckCircle className="w-10 h-10 text-white" strokeWidth={2.5} />
             </div>
           </div>
@@ -72,9 +72,9 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex items-start gap-3 p-3 bg-teal-50 rounded-xl"
+                className="flex items-start gap-3 p-3 bg-brand-teal-muted rounded-xl"
               >
-                <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-brand-teal rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
                 <div>
@@ -122,7 +122,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
           </div>
 
           {/* Additional Info */}
-          <div className="bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl p-4 text-white mb-6">
+          <div className="bg-gradient-to-r from-brand-teal to-blue-500 rounded-2xl p-4 text-white mb-6">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Calendar className="w-5 h-5" />
               <h3 className="text-lg font-semibold">Average Response Time</h3>
@@ -140,7 +140,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
             <Button 
               onClick={onReset} 
               size="lg"
-              className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white px-8 py-5 rounded-xl text-base font-semibold shadow-xl w-full sm:w-auto"
+              className="bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white px-8 py-5 rounded-xl text-base font-semibold shadow-xl w-full sm:w-auto"
             >
               Back to Homepage
             </Button>

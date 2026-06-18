@@ -147,7 +147,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
     },
     noObligation: {
       title: "No-Obligation Quotes",
-      icon: <MessageCircle className="w-12 h-12 text-teal-500" />,
+      icon: <MessageCircle className="w-12 h-12 text-brand-teal" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
@@ -169,7 +169,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
     },
     allInsurers: {
       title: "Market Leading Insurance",
-      icon: <TrendingUp className="w-12 h-12 text-teal-500" />,
+      icon: <TrendingUp className="w-12 h-12 text-brand-teal" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
@@ -267,7 +267,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-teal-500">
+            <div className="text-2xl font-bold text-brand-teal">
               {SITE.shortName}
             </div>
             <nav className="hidden lg:flex items-center gap-6">
@@ -276,7 +276,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                 onMouseEnter={() => setHealthDropdownOpen(true)}
                 onMouseLeave={() => setHealthDropdownOpen(false)}
               >
-                <button className="text-gray-900 hover:text-teal-500 flex items-center gap-1 py-2 whitespace-nowrap">
+                <button className="text-gray-900 hover:text-brand-teal flex items-center gap-1 py-2 whitespace-nowrap">
                   Health Insurance
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -287,7 +287,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('health-insurance-guide')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Health Insurance Guide
                           </button>
@@ -295,7 +295,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('business-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Business Health Insurance
                           </button>
@@ -303,7 +303,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('self-employed-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Self Employed Health Insurance
                           </button>
@@ -311,7 +311,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('corporate-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Corporate Health Insurance
                           </button>
@@ -319,7 +319,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('family-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Family Health Insurance
                           </button>
@@ -327,7 +327,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('senior-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Senior Health Insurance
                           </button>
@@ -335,7 +335,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('international-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             International Health Insurance
                           </button>
@@ -343,7 +343,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         <li>
                           <button 
                             onClick={() => onNavigate?.('small-company-health-insurance')}
-                            className="hover:text-teal-500 block w-full text-left"
+                            className="hover:text-brand-teal block w-full text-left"
                           >
                             Small Company Health Insurance
                           </button>
@@ -355,13 +355,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
               <button 
                 onClick={() => onNavigate?.('about-us')}
-                className="text-gray-900 hover:text-teal-500 py-2 whitespace-nowrap"
+                className="text-gray-900 hover:text-brand-teal py-2 whitespace-nowrap"
               >
                 About Us
               </button>
               <button 
                 onClick={() => onNavigate?.('contact-us')}
-                className="text-gray-900 hover:text-teal-500 py-2 whitespace-nowrap"
+                className="text-gray-900 hover:text-brand-teal py-2 whitespace-nowrap"
               >
                 Contact Us
               </button>
@@ -375,11 +375,11 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                     placeholder="Search..." 
                     value={searchQuery} 
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 w-48 xl:w-64 text-sm"
+                    className="border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/25 w-48 xl:w-64 text-sm"
                   />
                   <button 
                     type="submit" 
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-teal-500 transition-colors"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-teal transition-colors"
                   >
                     <Search className="w-5 h-5" />
                   </button>
@@ -389,7 +389,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               {/* Mobile Menu Button */}
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden text-gray-600 hover:text-teal-500 p-2"
+                className="lg:hidden text-gray-600 hover:text-brand-teal p-2"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -418,7 +418,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Health Insurance Guide
                     </button>
@@ -428,7 +428,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Business Health Insurance
                     </button>
@@ -438,7 +438,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Self Employed Health Insurance
                     </button>
@@ -448,7 +448,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Corporate Health Insurance
                     </button>
@@ -458,7 +458,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Family Health Insurance
                     </button>
@@ -468,7 +468,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Senior Health Insurance
                     </button>
@@ -478,7 +478,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       International Health Insurance
                     </button>
@@ -488,7 +488,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                         setMobileMenuOpen(false);
                         setHealthDropdownOpen(false);
                       }}
-                      className="block w-full text-left text-gray-600 hover:text-teal-500 py-2 text-sm"
+                      className="block w-full text-left text-gray-600 hover:text-brand-teal py-2 text-sm"
                     >
                       Small Company Health Insurance
                     </button>
@@ -524,11 +524,11 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                     placeholder="Search..." 
                     value={searchQuery} 
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full border border-gray-300 rounded-full px-4 py-3 pr-10 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full border border-gray-300 rounded-full px-4 py-3 pr-10 focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/25"
                   />
                   <button 
                     type="submit" 
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-teal-500 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-teal transition-colors"
                   >
                     <Search className="w-5 h-5" />
                   </button>
@@ -541,7 +541,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   onGetStarted();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full bg-teal-500 hover:bg-teal-600 text-white rounded-full px-6 py-3 font-medium text-center mt-4"
+                className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 py-3 font-medium text-center mt-4"
               >
                 Get A Complimentary Quote
               </button>
@@ -576,7 +576,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center pb-16 sm:pb-24">
             {/* Left Column - Heading */}
             <div>
-              <p className="text-teal-400 text-sm sm:text-base font-semibold uppercase tracking-wide mb-3">
+              <p className="text-brand-teal-light text-sm sm:text-base font-semibold uppercase tracking-wide mb-3">
                 For UK Small &amp; Medium Businesses
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-extrabold text-white">
@@ -607,7 +607,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                 </button>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
-                  className="button-hover-animate bg-teal-500 hover:bg-teal-600 text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                  className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
                 >
                   Get in touch
                 </button>
@@ -643,7 +643,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
             <div className="flex items-center gap-2 text-gray-900">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-teal-500" />
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal" />
               <span className="text-xs sm:text-sm">Broker Partners FCA Regulated</span>
             </div>
             
@@ -653,12 +653,12 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
-              <Check className="w-4 h-4 sm:w-5 sm:h-5 text-teal-500" />
+              <Check className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal" />
               <span className="text-xs sm:text-sm">Complimentary Impartial Advice</span>
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
-              <Check className="w-4 h-4 sm:w-5 sm:h-5 text-teal-500" />
+              <Check className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal" />
               <span className="text-xs sm:text-sm">No-Obligation Quotes</span>
             </div>
           </div>
@@ -667,25 +667,25 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <div className="flex flex-wrap justify-center gap-2 max-w-6xl mx-auto">
             <button 
               onClick={() => scrollToSection('find-best-cover')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-teal-500 hover:text-teal-500 text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
               Find your best health cover
             </button>
             <button 
               onClick={() => scrollToSection('why-health-insurance')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-teal-500 hover:text-teal-500 text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
               Why take out health insurance?
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-teal-500 hover:text-teal-500 text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
               How does health insurance work?
             </button>
             <button 
               onClick={() => scrollToSection('why-use-us')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-teal-500 hover:text-teal-500 text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
             >
               Why use us?
             </button>
@@ -935,27 +935,27 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           
           <div className="flex flex-wrap justify-center gap-4">
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
-              <Check className="w-5 h-5 text-teal-500" />
+              <Check className="w-5 h-5 text-brand-teal" />
               <span className="text-gray-900">It's Complementary</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
-              <Check className="w-5 h-5 text-teal-500" />
+              <Check className="w-5 h-5 text-brand-teal" />
               <span className="text-gray-900">Quotes From 5-star Defaqto Insurers</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
-              <Check className="w-5 h-5 text-teal-500" />
+              <Check className="w-5 h-5 text-brand-teal" />
               <span className="text-gray-900">Save Time And Money</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
-              <Check className="w-5 h-5 text-teal-500" />
+              <Check className="w-5 h-5 text-brand-teal" />
               <span className="text-gray-900">Best Premiums On The Market</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
-              <Check className="w-5 h-5 text-teal-500" />
+              <Check className="w-5 h-5 text-brand-teal" />
               <span className="text-gray-900">Excellent Customer Feedback</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
-              <Check className="w-5 h-5 text-teal-500" />
+              <Check className="w-5 h-5 text-brand-teal" />
               <span className="text-gray-900">Partnerships With Top Brokers</span>
             </div>
           </div>
@@ -981,19 +981,19 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                 <span className="text-base lg:text-lg">Get Better Cover</span>
               </div>
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                 <span className="text-base lg:text-lg">Make Huge Savings</span>
               </div>
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                 <span className="text-base lg:text-lg">Continue Your Medical History</span>
               </div>
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                 <span className="text-base lg:text-lg">Switch Anytime, Hassle-Free</span>
               </div>
             </div>
@@ -1060,7 +1060,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   setBenefitModalOpen(null);
                   onGetStarted();
                 }}
-                className="px-6 py-2 rounded-full bg-teal-500 hover:bg-teal-600 text-white transition-colors"
+                className="px-6 py-2 rounded-full bg-brand-teal hover:bg-brand-teal-hover text-white transition-colors"
               >
                 Get Started
               </button>
@@ -1079,7 +1079,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         >
           <div 
             className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%]"
-            style={{ backgroundColor: '#00bca7' }}
+            style={{ backgroundColor: '#0f766e' }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
               <div className="flex-1 text-center sm:text-left">

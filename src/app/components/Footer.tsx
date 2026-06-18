@@ -22,7 +22,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('about-us')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   About Us
                 </button>
@@ -30,7 +30,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('insurance-types')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Insurance Types
                 </button>
@@ -38,7 +38,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('partner-insurers')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Partner Insurers
                 </button>
@@ -46,7 +46,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('sitemap')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Sitemap
                 </button>
@@ -54,7 +54,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('disclaimer')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Disclaimer
                 </button>
@@ -62,7 +62,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('privacy-policy')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Privacy Policy
                 </button>
@@ -70,7 +70,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('terms-and-conditions')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Terms & Conditions
                 </button>
@@ -78,7 +78,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               <li>
                 <button 
                   onClick={() => handleNavigation('cookie-policy')}
-                  className="hover:text-teal-500 text-left"
+                  className="hover:text-brand-teal text-left"
                 >
                   Cookie Policy
                 </button>
@@ -93,11 +93,11 @@ export function Footer({ onNavigate }: FooterProps = {}) {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="hover:text-teal-500">{SITE.phoneDisplay}</a>
+                <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="hover:text-brand-teal">{SITE.phoneDisplay}</a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <a href={mailto()} className="hover:text-teal-500 text-sm break-all">
+                <a href={mailto()} className="hover:text-brand-teal text-sm break-all">
                   {SITE.email}
                 </a>
               </div>
@@ -107,19 +107,19 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                 South Yorkshire
               </div>
               <div className="flex items-center gap-4 mt-4">
-                <a href="#" className="hover:text-teal-500">
+                <a href="#" className="hover:text-brand-teal">
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="#" className="hover:text-teal-500">
+                <a href="#" className="hover:text-brand-teal">
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="#" className="hover:text-teal-500">
+                <a href="#" className="hover:text-brand-teal">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="hover:text-teal-500">
+                <a href="#" className="hover:text-brand-teal">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="#" className="hover:text-teal-500">
+                <a href="#" className="hover:text-brand-teal">
                   <MessageCircle className="w-5 h-5" />
                 </a>
               </div>
@@ -146,7 +146,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
 
           {/* Logo */}
           <div className="flex justify-center items-start">
-            <div className="text-2xl font-bold text-teal-500">
+            <div className="text-2xl font-bold text-brand-teal">
               {SITE.shortName}
             </div>
           </div>
@@ -181,9 +181,9 @@ export function Footer({ onNavigate }: FooterProps = {}) {
 
         {/* Bottom Links */}
         <div className="border-t border-gray-800 pt-6 flex flex-wrap justify-center gap-4 text-xs">
-          <a href="#" className="hover:text-teal-500 uppercase">Compare SME Health Insurance</a>
-          <a href="#" className="hover:text-teal-500 uppercase">Compare Business Cover</a>
-          <a href="#" className="hover:text-teal-500 uppercase">Employee Health Benefits</a>
+          <a href="#" className="hover:text-brand-teal uppercase">Compare SME Health Insurance</a>
+          <a href="#" className="hover:text-brand-teal uppercase">Compare Business Cover</a>
+          <a href="#" className="hover:text-brand-teal uppercase">Employee Health Benefits</a>
         </div>
       </div>
     </footer>

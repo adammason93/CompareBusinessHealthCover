@@ -153,9 +153,9 @@ export function GoogleReviews() {
 
         {/* Review Carousel */}
         <div className="relative max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-8 sm:p-12 shadow-lg min-h-[300px] flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-brand-teal-muted to-blue-50 rounded-2xl p-8 sm:p-12 shadow-lg min-h-[300px] flex flex-col justify-between">
             {/* Quote Icon */}
-            <Quote className="w-12 h-12 text-teal-500 mb-4 opacity-50" />
+            <Quote className="w-12 h-12 text-brand-teal mb-4 opacity-50" />
             
             {/* Review Content */}
             <div className="flex-1">
@@ -175,7 +175,7 @@ export function GoogleReviews() {
                       className="w-12 h-12 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-teal-soft to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
                       {reviews[currentIndex].author_name.charAt(0)}
                     </div>
                   )}
@@ -203,7 +203,7 @@ export function GoogleReviews() {
                 onClick={() => handleDotClick(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentIndex
-                    ? "bg-teal-500 w-8"
+                    ? "bg-brand-teal w-8"
                     : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to review ${index + 1}`}
@@ -233,7 +233,7 @@ export function GoogleReviews() {
                     className="w-10 h-10 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 bg-gradient-to-br from-brand-teal-soft to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
                     {review.author_name.charAt(0)}
                   </div>
                 )}
@@ -256,7 +256,7 @@ export function GoogleReviews() {
             href="https://www.google.com/search?q=compare+business+health+cover"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium"
+            className="inline-flex items-center gap-2 text-brand-teal-hover hover:text-brand-teal-hover font-medium"
           >
             Read all reviews on Google
             <Star className="w-4 h-4" />

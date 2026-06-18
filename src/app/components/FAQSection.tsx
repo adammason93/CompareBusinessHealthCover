@@ -129,7 +129,7 @@ export function FAQSection() {
               placeholder="Search questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/25 transition-all"
             />
           </div>
         </div>
@@ -182,7 +182,7 @@ export function FAQSection() {
           <div className="flex justify-center mt-8">
             <button
               onClick={toggleShowAll}
-              className="px-8 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-full font-medium transition-colors"
+              className="px-8 py-3 bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full font-medium transition-colors"
             >
               {showAll ? "Show Less" : `Show ${currentData.length - INITIAL_DISPLAY_COUNT} More`}
             </button>

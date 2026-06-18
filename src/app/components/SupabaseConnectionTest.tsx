@@ -116,14 +116,14 @@ export function SupabaseConnectionTest() {
 
   return (
     <div className="fixed bottom-4 left-4 z-[9999]">
-      <div className="bg-white rounded-lg shadow-2xl p-4 max-w-md border-4 border-teal-500">
-        <h3 className="font-bold text-lg mb-3 text-teal-600">🔧 Supabase Connection Test</h3>
+      <div className="bg-white rounded-lg shadow-2xl p-4 max-w-md border-4 border-brand-teal">
+        <h3 className="font-bold text-lg mb-3 text-brand-teal-hover">🔧 Supabase Connection Test</h3>
         
         {!results && (
           <Button
             onClick={runTests}
             disabled={testing}
-            className="w-full bg-teal-500 hover:bg-teal-600"
+            className="w-full bg-brand-teal hover:bg-brand-teal-hover"
           >
             {testing ? (
               <>

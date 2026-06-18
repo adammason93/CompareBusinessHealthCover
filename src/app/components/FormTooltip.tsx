@@ -16,7 +16,7 @@ export function FormTooltip({ content }: FormTooltipProps) {
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
         onClick={() => setIsOpen(!isOpen)}
-        className="ml-2 text-gray-400 hover:text-teal-500 transition-colors"
+        className="ml-2 text-gray-400 hover:text-brand-teal transition-colors"
       >
         <HelpCircle className="w-5 h-5" />
       </button>

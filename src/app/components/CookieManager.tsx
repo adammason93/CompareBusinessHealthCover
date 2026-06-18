@@ -223,7 +223,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
             <div className="bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Settings className="w-6 h-6 text-teal-500" />
+                  <Settings className="w-6 h-6 text-brand-teal" />
                   <h3 className="text-2xl font-bold text-white">Cookie Preferences</h3>
                 </div>
                 <button
@@ -279,7 +279,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   <button
                     onClick={() => setPreferences({ ...preferences, analytics: !preferences.analytics })}
                     className={`w-12 h-6 rounded-full transition-colors ${
-                      preferences.analytics ? 'bg-teal-500' : 'bg-gray-300'
+                      preferences.analytics ? 'bg-brand-teal' : 'bg-gray-300'
                     } flex items-center ${preferences.analytics ? 'justify-end' : 'justify-start'} px-1`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full" />
@@ -305,7 +305,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   <button
                     onClick={() => setPreferences({ ...preferences, marketing: !preferences.marketing })}
                     className={`w-12 h-6 rounded-full transition-colors ${
-                      preferences.marketing ? 'bg-teal-500' : 'bg-gray-300'
+                      preferences.marketing ? 'bg-brand-teal' : 'bg-gray-300'
                     } flex items-center ${preferences.marketing ? 'justify-end' : 'justify-start'} px-1`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full" />
@@ -331,7 +331,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   <button
                     onClick={() => setPreferences({ ...preferences, functional: !preferences.functional })}
                     className={`w-12 h-6 rounded-full transition-colors ${
-                      preferences.functional ? 'bg-teal-500' : 'bg-gray-300'
+                      preferences.functional ? 'bg-brand-teal' : 'bg-gray-300'
                     } flex items-center ${preferences.functional ? 'justify-end' : 'justify-start'} px-1`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full" />
@@ -349,7 +349,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                       setIsVisible(false);
                       onNavigate?.('cookie-policy');
                     }}
-                    className="text-teal-500 hover:text-teal-600 underline"
+                    className="text-brand-teal hover:text-brand-teal-hover underline"
                   >
                     Cookie Policy
                   </button>
@@ -368,7 +368,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
               </button>
               <button
                 onClick={handleSaveCustom}
-                className="px-6 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-500/20"
+                className="px-6 py-2 bg-brand-teal hover:bg-brand-teal-hover text-white rounded-lg font-semibold transition-colors shadow-lg shadow-brand-teal/20"
               >
                 Save Preferences
               </button>
@@ -386,13 +386,13 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
       
       {/* Cookie Consent Banner */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 animate-slide-up">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] rounded-lg shadow-2xl border border-teal-500/20 overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#1f2454] to-[#2d2f5e] rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
           <div className="p-6 sm:p-8">
             <div className="flex items-start gap-4">
               {/* Cookie Icon */}
               <div className="flex-shrink-0">
-                <div className="bg-teal-500/10 p-3 rounded-full">
-                  <Cookie className="w-6 h-6 text-teal-500" />
+                <div className="bg-brand-teal/10 p-3 rounded-full">
+                  <Cookie className="w-6 h-6 text-brand-teal" />
                 </div>
               </div>
 
@@ -414,7 +414,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                       setIsVisible(false);
                       onNavigate?.('cookie-policy');
                     }}
-                    className="text-teal-500 hover:text-teal-400 underline"
+                    className="text-brand-teal hover:text-brand-teal-light underline"
                   >
                     Cookie Policy
                   </button>{' '}
@@ -424,7 +424,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                       setIsVisible(false);
                       onNavigate?.('privacy-policy');
                     }}
-                    className="text-teal-500 hover:text-teal-400 underline"
+                    className="text-brand-teal hover:text-brand-teal-light underline"
                   >
                     Privacy Policy
                   </button>.
@@ -434,7 +434,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={handleAcceptAll}
-                    className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-teal-500/20"
+                    className="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-hover text-white rounded-lg font-semibold transition-colors shadow-lg shadow-brand-teal/20"
                   >
                     Accept All
                   </button>
@@ -446,7 +446,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   </button>
                   <button
                     onClick={() => setShowCustomize(true)}
-                    className="px-6 py-2.5 bg-transparent hover:bg-white/5 text-teal-500 border border-teal-500/50 rounded-lg font-semibold transition-colors"
+                    className="px-6 py-2.5 bg-transparent hover:bg-white/5 text-brand-teal border border-brand-teal/50 rounded-lg font-semibold transition-colors"
                   >
                     Customize
                   </button>

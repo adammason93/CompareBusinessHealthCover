@@ -67,7 +67,7 @@ export function ReviewSection() {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-teal-50 to-blue-50">
+    <section className="py-16 bg-gradient-to-br from-brand-teal-muted to-blue-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Header */}
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -138,7 +138,7 @@ export function ReviewSection() {
                     href={reviewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors shadow-md hover:shadow-lg"
+                    className="inline-flex items-center gap-2 bg-brand-teal hover:bg-brand-teal-hover text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors shadow-md hover:shadow-lg"
                   >
                     <Star className="w-5 h-5" />
                     Leave a Google Review

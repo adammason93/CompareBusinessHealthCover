@@ -6,12 +6,12 @@ interface TermsConditionsProps {
 
 export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#2d2f5e] to-[#1f2454] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
-            <Scale className="w-12 h-12 text-teal-400" />
+            <Scale className="w-12 h-12 text-brand-teal-light" />
             <h1 className="text-4xl md:text-5xl font-bold">Terms & Conditions</h1>
           </div>
           <div className="text-gray-300 space-y-1">
@@ -29,7 +29,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 1. Introduction */}
           <section>
             <div className="flex items-center gap-3 mb-4">
-              <Info className="w-6 h-6 text-teal-600" />
+              <Info className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">1. Introduction</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -43,7 +43,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 2. About Compare Business Cover */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Building className="w-6 h-6 text-teal-600" />
+              <Building className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">2. About Compare Business Cover</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -73,16 +73,16 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             <div className="bg-gray-50 rounded-xl p-6 space-y-3">
               <p className="font-semibold text-gray-900 mb-3">Contact details:</p>
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-teal-600 mt-1 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Email:</p>
-                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-teal-600 hover:text-teal-700">
+                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
                     info@comparebusinesshealthcover.co.uk
                   </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-teal-600 mt-1 flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Address:</p>
                   <p className="text-gray-700">83, Hall Road Moorgate, Rotherham, South Yorkshire</p>
@@ -94,7 +94,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 3. Our Service */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-teal-600" />
+              <FileText className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">3. Our Service</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -105,15 +105,15 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6 mb-4">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>We may contact you regarding your enquiry</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>We may share your information with selected FCA-regulated brokers and insurance providers</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>These third parties may contact you directly by phone, email, or SMS</span>
               </li>
             </ul>
@@ -126,7 +126,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 4. No Advice Provided */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-teal-600" />
+              <AlertCircle className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">4. No Advice Provided</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -134,15 +134,15 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Any information on this Website is provided for general informational purposes only</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>You are responsible for assessing whether any insurance product is suitable for your needs</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Any insurance contract is entered into directly between you and the insurance broker or provider</span>
               </li>
             </ul>
@@ -151,7 +151,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 5. Regulatory Status */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-teal-600" />
+              <Shield className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">5. Regulatory Status</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -159,11 +159,11 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Insurance brokers and providers we work with are authorised and regulated by the Financial Conduct Authority (FCA)</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Compare Business Cover is not responsible for the advice, recommendations, products, or services provided by third parties</span>
               </li>
             </ul>
@@ -172,7 +172,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 6. Accuracy of Information */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <CheckCircle2 className="w-6 h-6 text-teal-600" />
+              <CheckCircle2 className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">6. Accuracy of Information</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -180,15 +180,15 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>All information you provide is accurate and complete</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>You will not knowingly provide false or misleading information</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>We are not responsible for any consequences arising from inaccurate information provided by you</span>
               </li>
             </ul>
@@ -197,7 +197,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 7. Third-Party Services and Liability */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Users className="w-6 h-6 text-teal-600" />
+              <Users className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">7. Third-Party Services and Liability</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -208,23 +208,23 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6 mb-4">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Insurance products offered</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Quotes provided</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Advice given</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Contracts entered into</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Actions or omissions of third parties</span>
               </li>
             </ul>
@@ -236,7 +236,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 8. Limitation of Liability */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-teal-600" />
+              <AlertCircle className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">8. Limitation of Liability</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -244,23 +244,23 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6 mb-4">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Any indirect or consequential loss</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Loss of profits, business, or opportunity</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Any decisions made based on third-party advice</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Website downtime or technical errors</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Loss resulting from insurance agreements</span>
               </li>
             </ul>
@@ -274,7 +274,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 9. Website Availability */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-teal-600" />
+              <FileText className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">9. Website Availability</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -285,15 +285,15 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Modify or withdraw the Website</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Restrict access</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Suspend or terminate services</span>
               </li>
             </ul>
@@ -303,7 +303,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 10. Intellectual Property Rights */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-teal-600" />
+              <Shield className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">10. Intellectual Property Rights</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -336,7 +336,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 11. Acceptable Use */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <CheckCircle2 className="w-6 h-6 text-teal-600" />
+              <CheckCircle2 className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">11. Acceptable Use</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -366,7 +366,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 12. Privacy and Data Protection */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-teal-600" />
+              <Shield className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">12. Privacy and Data Protection</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -380,7 +380,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 13. Complaints */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Mail className="w-6 h-6 text-teal-600" />
+              <Mail className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">13. Complaints</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -388,10 +388,10 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <div className="bg-gray-50 rounded-xl p-6 mb-4">
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-teal-600 mt-1 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Email:</p>
-                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-teal-600 hover:text-teal-700">
+                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
                     info@comparebusinesshealthcover.co.uk
                   </a>
                 </div>
@@ -408,7 +408,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 14. Indemnity */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-teal-600" />
+              <Shield className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">14. Indemnity</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -416,15 +416,15 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             </p>
             <ul className="space-y-2 ml-6">
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Your misuse of the Website</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>Your breach of these Terms</span>
               </li>
               <li className="text-gray-700 flex items-start gap-2">
-                <span className="text-teal-600 mt-1.5">•</span>
+                <span className="text-brand-teal-hover mt-1.5">•</span>
                 <span>False information you provide</span>
               </li>
             </ul>
@@ -433,7 +433,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 15. Changes to These Terms */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-teal-600" />
+              <FileText className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">15. Changes to These Terms</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -450,7 +450,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 16. Governing Law */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Scale className="w-6 h-6 text-teal-600" />
+              <Scale className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">16. Governing Law</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -464,7 +464,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
           {/* 17. Contact Information */}
           <section className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-4">
-              <Mail className="w-6 h-6 text-teal-600" />
+              <Mail className="w-6 h-6 text-brand-teal-hover" />
               <h2 className="text-2xl font-bold text-gray-900">17. Contact Information</h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4">
@@ -473,16 +473,16 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             <div className="bg-gray-50 rounded-xl p-6 space-y-3">
               <p className="font-semibold text-gray-900 mb-3">Compare Business Cover</p>
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-teal-600 mt-1 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Email:</p>
-                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-teal-600 hover:text-teal-700">
+                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
                     info@comparebusinesshealthcover.co.uk
                   </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-teal-600 mt-1 flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Address:</p>
                   <p className="text-gray-700">123 Insurance Street, London, EC2A 4BX, United Kingdom</p>

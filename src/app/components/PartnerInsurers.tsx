@@ -97,7 +97,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {whyOurPartners.map((item, index) => (
             <div key={index} className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-[#0ebcc8] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#148585] rounded-full flex items-center justify-center mx-auto mb-4">
                 <item.icon className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-lg font-bold text-[#2d2f5e] mb-2">{item.title}</h3>
@@ -113,9 +113,9 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border-2 border-transparent hover:border-[#0ebcc8]">
+              <div key={index} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border-2 border-transparent hover:border-[#148585]">
                 {/* Partner Logo Placeholder */}
-                <div className="h-16 bg-gradient-to-r from-[#2d2f5e] to-[#0ebcc8] rounded-lg flex items-center justify-center mb-4">
+                <div className="h-16 bg-gradient-to-r from-[#2d2f5e] to-[#148585] rounded-lg flex items-center justify-center mb-4">
                   <span className="text-white font-bold text-xl">{partner.name}</span>
                 </div>
 
@@ -139,7 +139,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
                     {partner.specialties.map((specialty, idx) => (
                       <span
                         key={idx}
-                        className="bg-[#f0f9fa] text-[#0ebcc8] px-3 py-1 rounded-full text-xs font-medium"
+                        className="bg-[#f0f9fa] text-[#148585] px-3 py-1 rounded-full text-xs font-medium"
                       >
                         {specialty}
                       </span>
@@ -155,15 +155,15 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         <div className="bg-white rounded-lg shadow-sm p-8 mb-12">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-[#0ebcc8] mb-2">5+</div>
+              <div className="text-4xl font-bold text-[#148585] mb-2">5+</div>
               <p className="text-gray-600">Partner Insurers</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-[#0ebcc8] mb-2">FCA</div>
+              <div className="text-4xl font-bold text-[#148585] mb-2">FCA</div>
               <p className="text-gray-600">Regulated Partners</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-[#0ebcc8] mb-2">100%</div>
+              <div className="text-4xl font-bold text-[#148585] mb-2">100%</div>
               <p className="text-gray-600">Free Comparison</p>
             </div>
           </div>
@@ -177,7 +177,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">1</span>
                 </div>
                 <div>
@@ -186,7 +186,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">2</span>
                 </div>
                 <div>
@@ -195,7 +195,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">3</span>
                 </div>
                 <div>
@@ -206,7 +206,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
             </div>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">4</span>
                 </div>
                 <div>
@@ -215,7 +215,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">5</span>
                 </div>
                 <div>
@@ -224,7 +224,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">6</span>
                 </div>
                 <div>
@@ -246,7 +246,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
           </p>
           <button
             onClick={() => onNavigate('home')}
-            className="bg-[#0ebcc8] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
+            className="bg-[#148585] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
           >
             Get Your Free Quote
             <span>→</span>
@@ -266,7 +266,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         <div className="text-center">
           <button
             onClick={() => onNavigate('home')}
-            className="text-[#0ebcc8] hover:text-[#0da5b5] font-medium"
+            className="text-[#148585] hover:text-[#0da5b5] font-medium"
           >
             ← Back to Home
           </button>

@@ -447,7 +447,7 @@ Submitted at: ${new Date().toISOString()}
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #2d2f5e; border-bottom: 3px solid #0ebcc8; padding-bottom: 10px;">
+            <h2 style="color: #2d2f5e; border-bottom: 3px solid #148585; padding-bottom: 10px;">
               New Contact Form Submission
             </h2>
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
@@ -768,12 +768,12 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 700px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #2d2f5e; border-bottom: 3px solid #0ebcc8; padding-bottom: 10px;">
+            <h2 style="color: #2d2f5e; border-bottom: 3px solid #148585; padding-bottom: 10px;">
               New Insurance Quote Request
             </h2>
             
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
-              <h3 style="color: #0ebcc8; margin-top: 0;">Personal Details</h3>
+              <h3 style="color: #148585; margin-top: 0;">Personal Details</h3>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; width: 40%;">Name:</td>
@@ -801,7 +801,7 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
                 ` : ''}
               </table>
 
-              <h3 style="color: #0ebcc8; margin-top: 30px;">Coverage Requirements</h3>
+              <h3 style="color: #148585; margin-top: 30px;">Coverage Requirements</h3>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; width: 40%;">Insurance Type:</td>
@@ -839,7 +839,7 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
                 ` : ''}
               </table>
 
-              <h3 style="color: #0ebcc8; margin-top: 30px;">Health Information</h3>
+              <h3 style="color: #148585; margin-top: 30px;">Health Information</h3>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; width: 40%;">Smoker/Vaper:</td>
@@ -852,7 +852,7 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
               </table>
 
               ${formData.preferredContactMethod || formData.preferredContactDate || formData.preferredContactTime ? `
-              <h3 style="color: #0ebcc8; margin-top: 30px;">Contact Preferences</h3>
+              <h3 style="color: #148585; margin-top: 30px;">Contact Preferences</h3>
               <table style="width: 100%; border-collapse: collapse;">
                 ${formData.preferredContactMethod ? `
                 <tr>
@@ -1010,7 +1010,7 @@ Submitted at: ${new Date().toISOString()}
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #2d2f5e; border-bottom: 3px solid #0ebcc8; padding-bottom: 10px;">
+            <h2 style="color: #2d2f5e; border-bottom: 3px solid #148585; padding-bottom: 10px;">
               Thank You for Your Insurance Quote Request
             </h2>
             
@@ -1022,7 +1022,7 @@ Submitted at: ${new Date().toISOString()}
               <p>One of our insurance specialists will contact you shortly at <strong>${formData.phone}</strong> or via email at <strong>${formData.email}</strong> to discuss your options and provide you with a personalized quote.</p>
               
               <div style="background-color: #f0f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                <h3 style="color: #0ebcc8; margin-top: 0; font-size: 16px;">Your Request Summary:</h3>
+                <h3 style="color: #148585; margin-top: 0; font-size: 16px;">Your Request Summary:</h3>
                 <p style="margin: 5px 0;"><strong>Insurance Type:</strong> ${formData.compareType?.replace('-', ' ') || "N/A"}</p>
                 <p style="margin: 5px 0;"><strong>Cover Type:</strong> ${formData.coverType?.replace('-', ' ') || "N/A"}</p>
                 <p style="margin: 5px 0;"><strong>Number of People:</strong> ${formData.peopleCount || "N/A"}</p>

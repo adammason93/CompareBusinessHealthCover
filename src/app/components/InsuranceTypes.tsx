@@ -125,7 +125,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
         'Partnership protection',
         'Business loan cover'
       ],
-      color: 'bg-teal-50 border-teal-200'
+      color: 'bg-brand-teal-muted border-brand-teal/20'
     }
   ];
 
@@ -140,7 +140,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
           {/* Back Button */}
           <button
             onClick={() => setSelectedType(null)}
-            className="mb-6 text-[#0ebcc8] hover:text-[#0da5b5] font-medium flex items-center gap-2"
+            className="mb-6 text-[#148585] hover:text-[#0da5b5] font-medium flex items-center gap-2"
           >
             ← Back to All Insurance Types
           </button>
@@ -148,7 +148,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
           {/* Header */}
           <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 bg-[#0ebcc8] rounded-lg flex items-center justify-center">
+              <div className="w-16 h-16 bg-[#148585] rounded-lg flex items-center justify-center">
                 <selectedInsurance.icon className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -172,7 +172,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
               <ul className="space-y-3">
                 {selectedInsurance.whoNeedsIt.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-white text-sm">✓</span>
                     </div>
                     <span className="text-gray-700">{item}</span>
@@ -203,7 +203,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
               </p>
               <button
                 onClick={() => onNavigate('home')}
-                className="bg-[#0ebcc8] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
+                className="bg-[#148585] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#0da5b5] transition-colors inline-flex items-center gap-2"
               >
                 Get Your Free Quote
                 <span>→</span>
@@ -234,11 +234,11 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
           {insuranceTypes.map((type, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 cursor-pointer border-2 border-transparent hover:border-[#0ebcc8]"
+              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 cursor-pointer border-2 border-transparent hover:border-[#148585]"
               onClick={() => setSelectedType(type.slug)}
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-[#0ebcc8] rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-[#148585] rounded-lg flex items-center justify-center flex-shrink-0">
                   <type.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -246,7 +246,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
                 </div>
               </div>
               <p className="text-gray-600 mb-4">{type.description}</p>
-              <button className="text-[#0ebcc8] font-semibold hover:text-[#0da5b5] flex items-center gap-2">
+              <button className="text-[#148585] font-semibold hover:text-[#0da5b5] flex items-center gap-2">
                 Learn More
                 <span>→</span>
               </button>
@@ -265,7 +265,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => onNavigate('contact-us')}
-              className="bg-[#0ebcc8] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0da5b5] transition-colors"
+              className="bg-[#148585] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0da5b5] transition-colors"
             >
               Speak to an Advisor
             </button>
@@ -282,7 +282,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
         <div className="mt-8 text-center">
           <button
             onClick={() => onNavigate('home')}
-            className="text-[#0ebcc8] hover:text-[#0da5b5] font-medium"
+            className="text-[#148585] hover:text-[#0da5b5] font-medium"
           >
             ← Back to Home
           </button>

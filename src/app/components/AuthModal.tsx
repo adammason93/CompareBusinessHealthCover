@@ -124,7 +124,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
       <DialogContent className="max-w-md p-0 bg-white">
         <div className="relative">
           {/* Header */}
-          <div className="bg-gradient-to-r from-teal-500 to-blue-500 p-6 text-white">
+          <div className="bg-gradient-to-r from-brand-teal to-blue-500 p-6 text-white">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -177,7 +177,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="pl-10 h-12 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                    className="pl-10 h-12 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                     required={!isLogin}
                   />
                 </div>
@@ -197,7 +197,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="pl-10 h-12 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                  className="pl-10 h-12 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                   required
                 />
               </div>
@@ -216,7 +216,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
                   }
-                  className="pl-10 h-12 border-2 border-gray-200 focus:border-teal-500 rounded-xl"
+                  className="pl-10 h-12 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                   required
                   minLength={6}
                 />
@@ -231,7 +231,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-12 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white rounded-xl font-semibold"
+              className="w-full h-12 bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white rounded-xl font-semibold"
             >
               {loading ? (
                 <>
@@ -262,7 +262,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
                   setIsLogin(!isLogin);
                   setError("");
                 }}
-                className="text-sm text-teal-600 hover:text-teal-700 font-medium"
+                className="text-sm text-brand-teal-hover hover:text-brand-teal-hover font-medium"
               >
                 {isLogin
                   ? "Don't have an account? Sign up"

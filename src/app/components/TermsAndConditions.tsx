@@ -31,17 +31,17 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           {/* Services */}
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">2. Our Services</h2>
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">2.1 Comparison Service</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">2.1 Comparison Service</h3>
             <p className="text-gray-700 mb-4">
               Compare Business Cover provides a free lead generation and comparison service for health insurance products. We connect you with insurance brokers and providers who can help you compare quotes based on the information you provide. Our brokers will contact you to discuss your requirements and assist you in finding suitable coverage.
             </p>
             
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">2.2 Information Accuracy</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">2.2 Information Accuracy</h3>
             <p className="text-gray-700 mb-4">
               While we strive to provide accurate and up-to-date information, we do not guarantee the accuracy, completeness, or timeliness of the information provided. Insurance quotes are estimates and may vary based on final underwriting by insurance providers.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">2.3 Not Financial Advice</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">2.3 Not Financial Advice</h3>
             <p className="text-gray-700">
               Compare Business Cover is a lead generation service that connects you with insurance brokers and providers. We do not provide financial or insurance advice directly. The brokers and insurance specialists we connect you with are qualified to provide guidance, but you should ensure any advice is suitable for your individual circumstances before making insurance decisions.
             </p>
@@ -50,17 +50,17 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           {/* User Obligations */}
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">3. Your Obligations</h2>
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">3.1 Accurate Information</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">3.1 Accurate Information</h3>
             <p className="text-gray-700 mb-4">
               You agree to provide accurate, current, and complete information when using our services. Providing false or misleading information may result in incorrect quotes and could affect your insurance application.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">3.2 Account Security</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">3.2 Account Security</h3>
             <p className="text-gray-700 mb-4">
               If you create an account, you are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">3.3 Prohibited Uses</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">3.3 Prohibited Uses</h3>
             <p className="text-gray-700 mb-2">You agree not to:</p>
             <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
               <li>Use our services for any unlawful purpose</li>
@@ -75,17 +75,17 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           {/* Quotes and Applications */}
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">4. Quotes and Applications</h2>
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">4.1 Quote Validity</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">4.1 Quote Validity</h3>
             <p className="text-gray-700 mb-4">
               Quotes provided through our service are indicative only and subject to change. Final insurance premiums are determined by the insurance provider based on full underwriting.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">4.2 Application Process</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">4.2 Application Process</h3>
             <p className="text-gray-700 mb-4">
               When you submit a quote request, we will share your information with relevant insurance providers. The insurance provider will contact you directly to complete the application process.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">4.3 No Guarantee</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">4.3 No Guarantee</h3>
             <p className="text-gray-700">
               We do not guarantee that you will be offered insurance cover or that any quote provided will result in a policy being issued. Insurance providers make their own underwriting decisions.
             </p>
@@ -94,12 +94,12 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           {/* Fees and Commission */}
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">5. Fees and Commission</h2>
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">5.1 Free Service</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">5.1 Free Service</h3>
             <p className="text-gray-700 mb-4">
               Our comparison service is free for consumers. You will not be charged any fees for using our website or obtaining quotes.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">5.2 Commission</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">5.2 Commission</h3>
             <p className="text-gray-700">
               We may receive commission from the broker when you purchase a policy through our service. This does not affect the price you pay for insurance.
             </p>
@@ -119,12 +119,12 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           {/* Limitation of Liability */}
           <section>
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">7. Limitation of Liability</h2>
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">7.1 Service Availability</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">7.1 Service Availability</h3>
             <p className="text-gray-700 mb-4">
               We do not guarantee that our website or services will be available at all times or that they will be error-free. We may suspend or restrict access to our services at any time for maintenance or other reasons.
             </p>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">7.2 Liability Exclusions</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">7.2 Liability Exclusions</h3>
             <p className="text-gray-700 mb-4">
               To the fullest extent permitted by law, we exclude all liability for any direct, indirect, incidental, or consequential damages arising from your use of our services, including but not limited to:
             </p>
@@ -152,7 +152,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
               We process your personal data in accordance with UK data protection laws and our{' '}
               <button
                 onClick={() => onNavigate('privacy-policy')}
-                className="text-[#0ebcc8] hover:underline font-medium"
+                className="text-[#148585] hover:underline font-medium"
               >
                 Privacy Policy
               </button>
@@ -165,7 +165,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
             <h2 className="text-2xl font-bold text-[#2d2f5e] mb-4">10. Complaints</h2>
             <p className="text-gray-700 mb-4">
               If you have a complaint about our services, please contact us at{' '}
-              <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-[#0ebcc8] hover:underline">
+              <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-[#148585] hover:underline">
                 info@comparebusinesshealthcover.co.uk
               </a>
             </p>
@@ -199,7 +199,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
             <div className="bg-gray-50 p-6 rounded-lg mt-4">
               <p className="text-gray-700 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-[#0ebcc8] hover:underline">
+                <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-[#148585] hover:underline">
                   info@comparebusinesshealthcover.co.uk
                 </a>
               </p>
@@ -213,7 +213,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
           </section>
 
           {/* Acceptance */}
-          <section className="bg-[#f0f9fa] p-6 rounded-lg border-l-4 border-[#0ebcc8]">
+          <section className="bg-[#f0f9fa] p-6 rounded-lg border-l-4 border-[#148585]">
             <h2 className="text-xl font-bold text-[#2d2f5e] mb-3">Acceptance of Terms</h2>
             <p className="text-gray-700">
               By using our website and services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.
@@ -225,7 +225,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
         <div className="mt-8 text-center">
           <button
             onClick={() => onNavigate('home')}
-            className="bg-[#0ebcc8] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0da5b5] transition-colors"
+            className="bg-[#148585] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0da5b5] transition-colors"
           >
             Back to Home
           </button>

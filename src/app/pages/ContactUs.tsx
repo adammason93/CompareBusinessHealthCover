@@ -84,7 +84,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#2d2f5e] via-[#2d2f5e]/80 to-transparent"></div>
         </div>
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-teal-400 rounded-full blur-3xl"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
         </div>
         
@@ -115,12 +115,12 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-teal-600" />
+                  <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-brand-teal-hover" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:01484773038" className="text-teal-600 hover:text-teal-700 text-lg">
+                    <a href="tel:01484773038" className="text-brand-teal-hover hover:text-brand-teal-hover text-lg">
                       01484 773038
                     </a>
                     <p className="text-sm text-gray-500 mt-1">Mon-Fri: 9am - 5pm</p>
@@ -128,12 +128,12 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-teal-600" />
+                  <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-brand-teal-hover" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-teal-600 hover:text-teal-700">
+                    <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
                       info@comparebusinesshealthcover.co.uk
                     </a>
                     <p className="text-sm text-gray-500 mt-1">We'll respond within 24 hours</p>
@@ -141,8 +141,8 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-teal-600" />
+                  <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-brand-teal-hover" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Location</h3>
@@ -157,23 +157,23 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
               </div>
 
               {/* Why Contact Us */}
-              <div className="mt-10 p-6 bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl">
+              <div className="mt-10 p-6 bg-gradient-to-br from-brand-teal-muted to-blue-50 rounded-xl">
                 <h3 className="font-semibold text-gray-900 mb-3">Why Contact Us?</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-teal-600 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-brand-teal-hover flex-shrink-0" />
                     Free, no-obligation quotes
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-teal-600 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-brand-teal-hover flex-shrink-0" />
                     Expert advice from qualified specialists
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-teal-600 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-brand-teal-hover flex-shrink-0" />
                     Compare all leading UK insurers
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-teal-600 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-brand-teal-hover flex-shrink-0" />
                     Fast, friendly service
                   </li>
                 </ul>
@@ -214,7 +214,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
                       placeholder="John Smith"
                     />
                   </div>
@@ -230,7 +230,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
                       placeholder="john.smith@example.com"
                     />
                   </div>
@@ -246,7 +246,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
                       placeholder="07123 456789"
                     />
                   </div>
@@ -261,7 +261,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
                       placeholder="Your company name"
                     />
                   </div>
@@ -276,7 +276,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent resize-none"
                       placeholder="Tell us how we can help you..."
                     />
                   </div>
@@ -284,7 +284,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-teal-500 hover:bg-teal-600 text-white py-4 text-lg rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full bg-brand-teal hover:bg-brand-teal-hover text-white py-4 text-lg rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>Sending...</>
@@ -307,7 +307,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
       </section>
 
       {/* Quick Quote CTA */}
-      <section className="py-16 bg-gradient-to-br from-teal-50 to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-brand-teal-muted to-blue-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Ready to Get a Quote?
@@ -317,7 +317,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
           </p>
           <Button
             onClick={onGetStarted}
-            className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-6 text-lg rounded-full"
+            className="bg-brand-teal hover:bg-brand-teal-hover text-white px-8 py-6 text-lg rounded-full"
           >
             Get Your Free Quote
           </Button>

@@ -179,7 +179,7 @@ export function ChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 sm:bottom-6 right-6 z-50 bg-teal-500 hover:bg-teal-600 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110"
+          className="fixed bottom-24 sm:bottom-6 right-6 z-50 bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110"
           aria-label="Open chat"
         >
           <MessageCircle className="w-6 h-6" />
@@ -192,7 +192,7 @@ export function ChatBot() {
           {/* Header */}
           <div className="bg-gradient-to-r from-[#2d2f5e] to-[#1f2454] text-white p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="bg-teal-500 rounded-full p-2">
+              <div className="bg-brand-teal rounded-full p-2">
                 <MessageCircle className="w-5 h-5" />
               </div>
               <div>
@@ -222,7 +222,7 @@ export function ChatBot() {
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
                     message.sender === 'user'
-                      ? 'bg-teal-500 text-white'
+                      ? 'bg-brand-teal text-white'
                       : 'bg-white text-gray-800 border border-gray-200'
                   }`}
                 >
@@ -230,7 +230,7 @@ export function ChatBot() {
                   <p
                     className={`text-xs mt-1 ${
                       message.sender === 'user'
-                        ? 'text-teal-100'
+                        ? 'text-white/90'
                         : 'text-gray-500'
                     }`}
                   >
@@ -265,13 +265,13 @@ export function ChatBot() {
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-teal text-sm"
                 disabled={isLoading}
               />
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputMessage.trim() || isLoading}
-                className="bg-teal-500 hover:bg-teal-600 text-white rounded-lg px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-lg px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 type="button"
               >
                 <Send className="w-4 h-4" />

@@ -301,7 +301,7 @@ export function AdminLeads() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-teal focus:border-transparent"
                 placeholder="Enter admin password"
                 autoFocus
               />
@@ -330,7 +330,7 @@ export function AdminLeads() {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#1f2454' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-teal mx-auto"></div>
           <p className="mt-4 text-white">Loading leads...</p>
         </div>
       </div>
@@ -470,7 +470,7 @@ export function AdminLeads() {
                             onChange={(e) => updateEditedField("companyName", e.target.value)}
                             onBlur={saveEdit}
                             placeholder="Company name"
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (
@@ -489,7 +489,7 @@ export function AdminLeads() {
                             value={editedValues[lead.id]?.leadDate ? editedValues[lead.id].leadDate.split('T')[0] : ""}
                             onChange={(e) => updateEditedField("leadDate", e.target.value)}
                             onBlur={saveEdit}
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (
@@ -509,7 +509,7 @@ export function AdminLeads() {
                               value={editedValues[lead.id]?.firstName || ""}
                               onChange={(e) => updateEditedField("firstName", e.target.value)}
                               placeholder="First name"
-                              className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                              className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                               autoFocus
                             />
                             <input
@@ -517,21 +517,21 @@ export function AdminLeads() {
                               value={editedValues[lead.id]?.lastName || ""}
                               onChange={(e) => updateEditedField("lastName", e.target.value)}
                               placeholder="Last name"
-                              className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                              className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             />
                             <input
                               type="email"
                               value={editedValues[lead.id]?.email || ""}
                               onChange={(e) => updateEditedField("email", e.target.value)}
                               placeholder="Email"
-                              className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                              className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             />
                             <input
                               type="tel"
                               value={editedValues[lead.id]?.phone || ""}
                               onChange={(e) => updateEditedField("phone", e.target.value)}
                               placeholder="Phone"
-                              className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                              className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             />
                           </div>
                         ) : (
@@ -553,7 +553,7 @@ export function AdminLeads() {
                             value={editedValues[lead.id]?.coverType || ""}
                             onChange={(e) => updateEditedField("coverType", e.target.value)}
                             onBlur={saveEdit}
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           >
                             <option value="">Select...</option>
@@ -579,7 +579,7 @@ export function AdminLeads() {
                             value={editedValues[lead.id]?.isInsured || ""}
                             onChange={(e) => updateEditedField("isInsured", e.target.value)}
                             onBlur={saveEdit}
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           >
                             <option value="">Select...</option>
@@ -609,7 +609,7 @@ export function AdminLeads() {
                             value={editedValues[lead.id]?.source || ""}
                             onChange={(e) => updateEditedField("source", e.target.value)}
                             onBlur={saveEdit}
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           >
                             <option value="">Select...</option>
@@ -639,7 +639,7 @@ export function AdminLeads() {
                             onChange={(e) => updateEditedField("premiumValue", e.target.value)}
                             onBlur={saveEdit}
                             placeholder="£0.00"
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (
@@ -659,7 +659,7 @@ export function AdminLeads() {
                             onChange={(e) => updateEditedField("commissionPaid", e.target.value)}
                             onBlur={saveEdit}
                             placeholder="£0.00"
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (
@@ -678,7 +678,7 @@ export function AdminLeads() {
                             value={editedValues[lead.id]?.policyStartDate || ""}
                             onChange={(e) => updateEditedField("policyStartDate", e.target.value)}
                             onBlur={saveEdit}
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (
@@ -698,7 +698,7 @@ export function AdminLeads() {
                             onChange={(e) => updateEditedField("insurer", e.target.value)}
                             onBlur={saveEdit}
                             placeholder="Insurer name"
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (
@@ -718,7 +718,7 @@ export function AdminLeads() {
                             onBlur={saveEdit}
                             placeholder="Add comments..."
                             rows={2}
-                            className="w-full px-2 py-1 border-2 border-teal-500 rounded text-sm focus:outline-none"
+                            className="w-full px-2 py-1 border-2 border-brand-teal rounded text-sm focus:outline-none"
                             autoFocus
                           />
                         ) : (

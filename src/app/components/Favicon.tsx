@@ -3,7 +3,7 @@ export const FaviconSVG = () => (
     {/* Shield Background */}
     <path
       d="M16 2L4 8V14C4 22 10 28 16 30C22 28 28 22 28 14V8L16 2Z"
-      fill="#00bca7"
+      fill="#0f766e"
       stroke="#1f2356"
       strokeWidth="1"
     />

@@ -51,7 +51,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 bg-[#0ebcc8] rounded-lg flex items-center justify-center">
+            <div className="w-16 h-16 bg-[#148585] rounded-lg flex items-center justify-center">
               <Cookie className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -97,7 +97,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
               {cookieTypes.map((type, index) => (
                 <div key={index} className="border-2 border-gray-200 rounded-lg p-6">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-[#0ebcc8] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-[#148585] rounded-lg flex items-center justify-center flex-shrink-0">
                       <type.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -186,7 +186,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
                   href="https://policies.google.com/privacy" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-[#0ebcc8] hover:underline text-sm"
+                  className="text-[#148585] hover:underline text-sm"
                 >
                   View Google's Privacy Policy →
                 </a>
@@ -201,7 +201,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
                   href="https://supabase.com/privacy" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-[#0ebcc8] hover:underline text-sm"
+                  className="text-[#148585] hover:underline text-sm"
                 >
                   View Supabase's Privacy Policy →
                 </a>
@@ -216,7 +216,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
               You have several options to manage or disable cookies:
             </p>
             
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">Browser Settings</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">Browser Settings</h3>
             <p className="text-gray-700 mb-3">
               Most web browsers allow you to control cookies through their settings. You can set your browser to:
             </p>
@@ -227,29 +227,29 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
               <li>Notify you when a cookie is set</li>
             </ul>
 
-            <h3 className="text-xl font-semibold text-[#0ebcc8] mb-3">Browser-Specific Instructions</h3>
+            <h3 className="text-xl font-semibold text-[#148585] mb-3">Browser-Specific Instructions</h3>
             <div className="space-y-2 mb-4">
               <p className="text-gray-700">
                 <strong>Chrome:</strong>{' '}
-                <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-[#0ebcc8] hover:underline">
+                <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-[#148585] hover:underline">
                   Cookie settings in Chrome
                 </a>
               </p>
               <p className="text-gray-700">
                 <strong>Firefox:</strong>{' '}
-                <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener noreferrer" className="text-[#0ebcc8] hover:underline">
+                <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener noreferrer" className="text-[#148585] hover:underline">
                   Cookie settings in Firefox
                 </a>
               </p>
               <p className="text-gray-700">
                 <strong>Safari:</strong>{' '}
-                <a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-[#0ebcc8] hover:underline">
+                <a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-[#148585] hover:underline">
                   Cookie settings in Safari
                 </a>
               </p>
               <p className="text-gray-700">
                 <strong>Edge:</strong>{' '}
-                <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" className="text-[#0ebcc8] hover:underline">
+                <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" className="text-[#148585] hover:underline">
                   Cookie settings in Edge
                 </a>
               </p>
@@ -270,26 +270,26 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
             </p>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-6 h-6 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-sm">✓</span>
                 </div>
                 <div>
                   <p className="text-gray-700">
                     <strong>Google Analytics:</strong> Use the{' '}
-                    <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-[#0ebcc8] hover:underline">
+                    <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-[#148585] hover:underline">
                       Google Analytics Opt-out Browser Add-on
                     </a>
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#0ebcc8] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-6 h-6 rounded-full bg-[#148585] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-sm">✓</span>
                 </div>
                 <div>
                   <p className="text-gray-700">
                     <strong>Advertising Cookies:</strong> Visit{' '}
-                    <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-[#0ebcc8] hover:underline">
+                    <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-[#148585] hover:underline">
                       Your Online Choices
                     </a> to opt out of interest-based advertising
                   </p>
@@ -315,7 +315,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
             <div className="bg-gray-50 p-6 rounded-lg">
               <p className="text-gray-700 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-[#0ebcc8] hover:underline">
+                <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-[#148585] hover:underline">
                   info@comparebusinesshealthcover.co.uk
                 </a>
               </p>
@@ -329,18 +329,18 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
           </section>
 
           {/* Related Links */}
-          <section className="bg-[#f0f9fa] p-6 rounded-lg border-l-4 border-[#0ebcc8]">
+          <section className="bg-[#f0f9fa] p-6 rounded-lg border-l-4 border-[#148585]">
             <h3 className="text-xl font-bold text-[#2d2f5e] mb-3">Related Policies</h3>
             <div className="space-y-2">
               <button
                 onClick={() => onNavigate('privacy-policy')}
-                className="text-[#0ebcc8] hover:underline font-medium block"
+                className="text-[#148585] hover:underline font-medium block"
               >
                 → Privacy Policy
               </button>
               <button
                 onClick={() => onNavigate('terms-conditions')}
-                className="text-[#0ebcc8] hover:underline font-medium block"
+                className="text-[#148585] hover:underline font-medium block"
               >
                 → Terms and Conditions
               </button>
@@ -352,7 +352,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
         <div className="mt-8 text-center">
           <button
             onClick={() => onNavigate('home')}
-            className="bg-[#0ebcc8] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0da5b5] transition-colors"
+            className="bg-[#148585] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0da5b5] transition-colors"
           >
             Back to Home
           </button>

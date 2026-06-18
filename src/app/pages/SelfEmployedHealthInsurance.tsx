@@ -21,7 +21,7 @@ export function SelfEmployedHealthInsurance({ onGetStarted }: SelfEmployedHealth
           <div className="absolute inset-0 bg-gradient-to-r from-[#2d2f5e] via-[#2d2f5e]/80 to-transparent"></div>
         </div>
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-teal-400 rounded-full blur-3xl"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
         </div>
         
@@ -36,7 +36,7 @@ export function SelfEmployedHealthInsurance({ onGetStarted }: SelfEmployedHealth
             <Button 
               size="lg" 
               onClick={onGetStarted} 
-              className="bg-teal-500 hover:bg-teal-600 text-white rounded-full px-8 py-6 text-lg"
+              className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-8 py-6 text-lg"
             >
               Get Your Free Quote <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -61,23 +61,23 @@ export function SelfEmployedHealthInsurance({ onGetStarted }: SelfEmployedHealth
               <h2 className="text-3xl mb-6 text-gray-900">Key Advantages</h2>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                   <span className="text-gray-700">Get Back to Work Faster</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                   <span className="text-gray-700">Protect Your Income</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                   <span className="text-gray-700">Flexible Payment Options</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                   <span className="text-gray-700">Tax Deductible Premiums</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
                   <span className="text-gray-700">Tailored Coverage Levels</span>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export function SelfEmployedHealthInsurance({ onGetStarted }: SelfEmployedHealth
       </section>
 
       {/* CTA Section */}
-      <section className="py-16" style={{ backgroundColor: '#0ebcc8' }}>
+      <section className="py-16" style={{ backgroundColor: '#148585' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl text-white mb-6">
             Ready to Compare Self-Employed Health Insurance?

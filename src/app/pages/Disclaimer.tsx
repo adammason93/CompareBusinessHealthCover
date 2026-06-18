@@ -12,7 +12,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <div className="flex justify-center mb-6">
-              <AlertTriangle className="w-16 h-16 text-teal-400" />
+              <AlertTriangle className="w-16 h-16 text-brand-teal-light" />
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
               Disclaimer
@@ -30,9 +30,9 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
           <div className="prose prose-lg max-w-none">
             
             {/* Company Information */}
-            <div className="mb-12 p-6 bg-gray-50 rounded-xl border-l-4 border-teal-500">
+            <div className="mb-12 p-6 bg-gray-50 rounded-xl border-l-4 border-brand-teal">
               <div className="flex items-start gap-3 mb-4">
-                <Info className="w-6 h-6 text-teal-600 flex-shrink-0 mt-1" />
+                <Info className="w-6 h-6 text-brand-teal-hover flex-shrink-0 mt-1" />
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 m-0 mb-4">Company Information</h2>
                   <div className="space-y-2 text-gray-700">
@@ -50,7 +50,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
             {/* Nature of Service */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
-                <Shield className="w-8 h-8 text-teal-500" />
+                <Shield className="w-8 h-8 text-brand-teal" />
                 <h2 className="text-2xl font-bold text-gray-900 m-0">Nature of Our Service</h2>
               </div>
               <p className="text-gray-700 mb-4">
@@ -124,7 +124,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Regulatory Information</h2>
               <p className="text-gray-700 mb-4">
-                Our partner firms are authorized and regulated by the Financial Conduct Authority (FCA). You can verify their regulatory status on the FCA Register at <a href="https://register.fca.org.uk" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:text-teal-700 underline">register.fca.org.uk</a>.
+                Our partner firms are authorized and regulated by the Financial Conduct Authority (FCA). You can verify their regulatory status on the FCA Register at <a href="https://register.fca.org.uk" target="_blank" rel="noopener noreferrer" className="text-brand-teal-hover hover:text-brand-teal-hover underline">register.fca.org.uk</a>.
               </p>
               <p className="text-gray-700">
                 Compare Business Cover itself is not authorized or regulated by the FCA as we do not provide financial advice or arrange insurance contracts.
@@ -140,16 +140,16 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
             </div>
 
             {/* Contact Information */}
-            <div className="mb-12 p-6 bg-teal-50 rounded-xl">
+            <div className="mb-12 p-6 bg-brand-teal-muted rounded-xl">
               <div className="flex items-center gap-3 mb-4">
-                <Mail className="w-8 h-8 text-teal-600" />
+                <Mail className="w-8 h-8 text-brand-teal-hover" />
                 <h2 className="text-2xl font-bold text-gray-900 m-0">Contact Us</h2>
               </div>
               <p className="text-gray-700 mb-4">
                 For more information around anything in this disclaimer statement or to report an issue with the content of this site, please email us:
               </p>
               <div className="space-y-2 text-gray-700">
-                <p><strong>Email:</strong> <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-teal-600 hover:text-teal-700">info@comparebusinesshealthcover.co.uk</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">info@comparebusinesshealthcover.co.uk</a></p>
                 <p><strong>Phone:</strong> 01484 773038</p>
                 <p><strong>Address:</strong> 83, Hall Road Moorgate, Rotherham, South Yorkshire</p>
               </div>

@@ -97,7 +97,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
               placeholder="John Smith"
             />
           </div>
@@ -113,7 +113,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
               placeholder="john.smith@example.com"
             />
           </div>
@@ -129,7 +129,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
               required
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
               placeholder="+44 7700 900000"
             />
           </div>
@@ -144,7 +144,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent"
               placeholder="Company Ltd"
             />
           </div>
@@ -159,7 +159,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent resize-none"
               placeholder="Tell us how we can help..."
             />
           </div>
@@ -187,7 +187,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-6 py-3 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-3 bg-brand-teal text-white rounded-full hover:bg-brand-teal-hover transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Sending..." : "Submit"}
             </button>
