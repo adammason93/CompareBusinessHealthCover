@@ -266,7 +266,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
             src={IMAGES.businessHandshake}
-            alt="Business team discussing employee health cover"
+            alt="Business partners agreeing employee health cover"
             className="w-full h-full object-cover object-right"
             loading="eager"
             fetchpriority="high"
@@ -533,7 +533,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
             src={IMAGES.businessHandshake}
-            alt="Business professionals in meeting"
+            alt="Professional business handshake over contract documents"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1f2255]/90 via-[#1f2255]/85 to-[#1f2255]/90"></div>
@@ -680,7 +680,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <div className="relative">
             <img 
               src={IMAGES.businessHandshake}
-              alt="Business team reviewing employee benefits"
+              alt="Employer and broker reviewing group health scheme"
               className="w-full h-full object-cover absolute inset-0"
             />
           </div>

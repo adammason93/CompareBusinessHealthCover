@@ -18,5 +18,5 @@ export const LOGO = {
 } as const;
 
 export const IMAGES = {
-  businessHandshake: '/images/business-handshake.jpg',
+  businessHandshake: '/images/business-handshake.png',
 } as const;
