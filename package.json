@@ -10,7 +10,7 @@
     "reviews:embed": "npx --yes tsx scripts/generate-reviews-carousel-html.mts",
     "prebuild": "npm run reviews:embed",
     "build": "vite build",
-    "deploy": "wrangler deploy",
+    "deploy": "npm run build && wrangler deploy",
     "dev": "vite",
     "pages:deploy": "npm run build && wrangler pages deploy dist --project-name=healthcovercompare",
     "workers:deploy": "npm run build && npm run deploy",

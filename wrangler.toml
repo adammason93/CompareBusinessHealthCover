@@ -13,6 +13,9 @@
 name = "healthinsuranceleadgenerationfinal"
 main = "worker/index.ts"
 compatibility_date = "2026-03-25"
+
+[build]
+command = "npm run build"
 # Do not set pages_build_output_dir here — it makes Wrangler treat this as a Pages
 # project and warn on `wrangler deploy`. For Pages-only, set output dir "dist" in the dashboard.
 
