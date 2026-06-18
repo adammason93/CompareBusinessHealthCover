@@ -88,10 +88,6 @@
 
 /* Mobile Performance Optimizations */
 @media (max-width: 767px) {
-  .circle-pattern {
-    background-attachment: scroll; /* Fixed backgrounds cause performance issues on mobile */
-  }
-  
   /* Disable hover effects on mobile */
   .button-hover-animate:hover::before {
     width: 0;
@@ -103,10 +99,9 @@
   }
 }
 
-@media (min-width: 768px) {
-  .circle-pattern {
-    background-attachment: fixed;
-  }
+/* Keep backgrounds on the scroll layer — fixed attachment causes scroll jank */
+.circle-pattern {
+  background-attachment: scroll;
 }
 
 /* Performance optimizations for all screen sizes */

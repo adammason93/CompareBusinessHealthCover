@@ -1,18 +1,59 @@
 import { Shield, Check, Star, ArrowRight, ChevronDown, Search, Heart, Home as HomeIcon, Menu, X, LogIn, LogOut, User, FileText } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
 import { ChatBot } from "@/app/components/ChatBot";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
-import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
 import { ReviewSection } from "@/app/components/ReviewSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SITE } from "@/app/config/site";
+
+const HERO_SENTENCES = [
+  "SME Health Insurance From Just 2 Employees",
+  'Compare UK Business Health Cover',
+  'Protect Your Team & Retain Top Talent',
+];
+
+const HeroTypewriter = memo(function HeroTypewriter() {
+  const [typewriterText, setTypewriterText] = useState('');
+  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentSentence = HERO_SENTENCES[currentSentenceIndex];
+    if (!currentSentence) return;
+
+    const typingSpeed = isDeleting ? 50 : 100;
+    const pauseTime = 2000;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && typewriterText === currentSentence) {
+        setTimeout(() => setIsDeleting(true), pauseTime);
+      } else if (isDeleting && typewriterText === '') {
+        setIsDeleting(false);
+        setCurrentSentenceIndex((prev) => (prev + 1) % HERO_SENTENCES.length);
+      } else if (isDeleting) {
+        setTypewriterText(currentSentence.substring(0, typewriterText.length - 1));
+      } else {
+        setTypewriterText(currentSentence.substring(0, typewriterText.length + 1));
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [typewriterText, isDeleting, currentSentenceIndex]);
+
+  return (
+    <div className="flex items-center gap-3 min-h-[28px] sm:min-h-[32px]">
+      <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
+      <span className="text-white text-base sm:text-lg">{typewriterText}</span>
+    </div>
+  );
+});
 
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [healthDropdownOpen, setHealthDropdownOpen] = useState(false);
@@ -21,18 +62,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   const [searchQuery, setSearchQuery] = useState("");
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [benefitModalOpen, setBenefitModalOpen] = useState<string | null>(null);
-  const [typewriterText, setTypewriterText] = useState('');
-  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
   const [showStickyBanner, setShowStickyBanner] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-
-  const sentences = [
-    "SME Health Insurance From Just 2 Employees",
-    'Compare UK Business Health Cover',
-    'Protect Your Team & Retain Top Talent'
-  ];
+  const bannerSentinelRef = useRef<HTMLDivElement>(null);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -64,71 +97,22 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   }, []);
 
   useEffect(() => {
-    let ticking = false;
-    let lastScrollY = window.scrollY;
-    let timeoutId: NodeJS.Timeout | null = null;
-    
-    const handleScroll = () => {
-      // Clear existing timeout
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      
-      // Debounce scroll updates to reduce state changes
-      timeoutId = setTimeout(() => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            const currentScrollY = window.scrollY;
-            
-            // Only update if changed significantly (reduces re-renders)
-            if (Math.abs(currentScrollY - lastScrollY) > 100) {
-              const shouldShow = currentScrollY > 500;
-              setShowStickyBanner(shouldShow);
-              lastScrollY = currentScrollY;
-            }
-            
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, 100); // 100ms debounce
-    };
+    const sentinel = bannerSentinelRef.current;
+    if (!sentinel) return;
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyBanner((prev) => {
+          const next = !entry.isIntersecting;
+          return prev === next ? prev : next;
+        });
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    const currentSentence = sentences[currentSentenceIndex];
-    
-    // Safety check to ensure currentSentence exists
-    if (!currentSentence) return;
-    
-    const typingSpeed = isDeleting ? 50 : 100;
-    const pauseTime = 2000; // Pause at end of sentence
-
-    const timer = setTimeout(() => {
-      if (!isDeleting && typewriterText === currentSentence) {
-        // Finished typing, pause then start deleting
-        setTimeout(() => setIsDeleting(true), pauseTime);
-      } else if (isDeleting && typewriterText === '') {
-        // Finished deleting, move to next sentence
-        setIsDeleting(false);
-        setCurrentSentenceIndex((prev) => (prev + 1) % sentences.length);
-      } else if (isDeleting) {
-        // Continue deleting
-        setTypewriterText(currentSentence.substring(0, typewriterText.length - 1));
-      } else {
-        // Continue typing
-        setTypewriterText(currentSentence.substring(0, typewriterText.length + 1));
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timer);
-  }, [typewriterText, isDeleting, currentSentenceIndex, sentences]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -603,10 +587,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             {/* Right Column - Benefits & Buttons */}
             <div>
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <div className="flex items-center gap-3 min-h-[28px] sm:min-h-[32px]">
-                  <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                  <span className="text-white text-base sm:text-lg">{typewriterText}</span>
-                </div>
+                <HeroTypewriter />
                 <div className="flex items-center gap-3">
                   <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
                   <span className="text-white text-base sm:text-lg">Cover from just 2 employees — built for growing SMEs</span>
@@ -654,6 +635,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             </div>
           </div>
         </div>
+        <div ref={bannerSentinelRef} className="h-px w-full" aria-hidden="true" />
       </section>
 
       {/* Trust Section */}
