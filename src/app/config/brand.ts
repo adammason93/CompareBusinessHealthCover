@@ -16,3 +16,7 @@ export const LOGO = {
   src: '/logo.png',
   iconSrc: '/favicon-icon.png',
 } as const;
+
+export const IMAGES = {
+  businessHandshake: '/images/business-handshake.jpg',
+} as const;

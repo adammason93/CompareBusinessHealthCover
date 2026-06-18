@@ -13,6 +13,7 @@ import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SITE } from "@/app/config/site";
+import { IMAGES } from "@/app/config/brand";
 
 const HERO_SENTENCES = [
   "SME Health Insurance From Just 2 Employees",
@@ -264,7 +265,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=1080"
+            src={IMAGES.businessHandshake}
             alt="Business team discussing employee health cover"
             className="w-full h-full object-cover object-right"
             loading="eager"
@@ -444,7 +445,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             >
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
-                  src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=400"
+                  src={IMAGES.businessHandshake}
                   alt="No-obligation quotes"
                   className="w-full h-full object-cover"
                 />
@@ -531,7 +532,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=600"
+            src={IMAGES.businessHandshake}
             alt="Business professionals in meeting"
             className="w-full h-full object-cover object-center"
           />
@@ -678,7 +679,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="grid md:grid-cols-2">
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1681505526188-b05e68c77582?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGFncmVlbWVudCUyMGNvbnN1bHRhdGlvbnxlbnwxfHx8fDE3NzE1OTQ5NDV8MA&ixlib=rb-4.1.0&q=70&w=800"
+              src={IMAGES.businessHandshake}
               alt="Business team reviewing employee benefits"
               className="w-full h-full object-cover absolute inset-0"
             />
