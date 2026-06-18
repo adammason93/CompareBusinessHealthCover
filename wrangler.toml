@@ -10,7 +10,7 @@
 # SPA routing: worker/index.ts (404 → /index.html, and 307→/ from Assets → /index.html). No public/_redirects /* on Workers.
 # -----------------------------------------------------------------------------
 
-name = "healthinsuranceleadgenerationfinal"
+name = "comparebusinesshealthcover"
 main = "worker/index.ts"
 compatibility_date = "2026-03-25"
 
