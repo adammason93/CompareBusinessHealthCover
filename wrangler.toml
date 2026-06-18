@@ -1,0 +1,23 @@
+# Compare Business Health Cover — Cloudflare Worker
+# Deploy: npm run deploy (or Workers Builds: build npm run build, deploy npx wrangler deploy)
+#
+# Domain: comparebusinesshealthcover.co.uk ONLY — do not add healthcovercomparison.co.uk here.
+
+name = "comparebusinesshealthcover"
+main = "worker/index.ts"
+compatibility_date = "2026-03-25"
+
+[build]
+command = "npm run build"
+
+[[routes]]
+pattern = "comparebusinesshealthcover.co.uk"
+custom_domain = true
+
+[[routes]]
+pattern = "www.comparebusinesshealthcover.co.uk"
+custom_domain = true
+
+[assets]
+directory = "dist"
+binding = "STATIC"
