@@ -356,18 +356,26 @@ export function BlogAdminPage() {
     setMessage(null);
     setError(null);
     try {
+      const payload = {
+        slug: form.slug.trim().toLowerCase() || undefined,
+        title: form.title.trim(),
+        excerpt: form.excerpt,
+        body: form.body,
+        cover_image_url: form.cover_image_url.trim(),
+        published: form.published,
+      };
+      const bodyJson = JSON.stringify(payload);
+      // Supabase/CF often resets oversized Edge Function bodies → browser "Failed to fetch".
+      if (bodyJson.length > 900_000) {
+        throw new Error(
+          "This post is too large to save (often from pasted images). Remove embedded images and use a Cover image URL instead, then try again.",
+        );
+      }
       if (editingId) {
         const res = await fetch(supabaseEdgeUrl(`/admin/blog/posts/${editingId}${blogSiteQuery()}`), {
           method: "PUT",
           headers: authHeaders(),
-          body: JSON.stringify({
-            slug: form.slug.trim().toLowerCase() || undefined,
-            title: form.title.trim(),
-            excerpt: form.excerpt,
-            body: form.body,
-            cover_image_url: form.cover_image_url.trim(),
-            published: form.published,
-          }),
+          body: bodyJson,
         });
         const json = await res.json().catch(() => ({}));
         if (!res.ok) {
@@ -383,14 +391,7 @@ export function BlogAdminPage() {
         const res = await fetch(supabaseEdgeUrl(`/admin/blog/posts${blogSiteQuery()}`), {
           method: "POST",
           headers: authHeaders(),
-          body: JSON.stringify({
-            slug: form.slug.trim().toLowerCase() || undefined,
-            title: form.title.trim(),
-            excerpt: form.excerpt,
-            body: form.body,
-            cover_image_url: form.cover_image_url.trim(),
-            published: form.published,
-          }),
+          body: bodyJson,
         });
         const json = await res.json().catch(() => ({}));
         if (!res.ok) {
@@ -411,7 +412,13 @@ export function BlogAdminPage() {
         await loadPosts();
       }
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Save failed");
+      if (e instanceof TypeError) {
+        setError(
+          "Network error while saving. Try a short text-only draft (no pasted images), disable ad blockers for this site, and confirm BLOG_ADMIN_SECRET is correct.",
+        );
+      } else {
+        setError(e instanceof Error ? e.message : "Save failed");
+      }
     } finally {
       setSaving(false);
     }
