@@ -264,8 +264,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <section className="section-hero relative overflow-hidden">
         <div className="section-hero-image">
           <ImageWithFallback 
-            src={LOGO.businessHandshake}
-            alt="Business team discussing employee health cover"
+            src={LOGO.heroOfficeTeam}
+            alt="Business team collaborating in a modern office"
             className="object-right"
             loading="eager"
             fetchpriority="high"
