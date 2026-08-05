@@ -27,7 +27,7 @@ export const LOGO = {
   src: '/logo-v3.png',
   iconSrc: '/favicon-icon.png',
   businessHandshake: '/images/business-handshake.png',
-  heroOfficeTeam: '/images/hero-office-team-v2.png',
+  heroOfficeTeam: '/images/hero-office-team-v3.png',
   width: 889,
   height: 250,
 } as const;

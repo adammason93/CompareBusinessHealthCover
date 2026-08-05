@@ -270,8 +270,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               className="object-cover object-right"
               loading="eager"
               fetchpriority="high"
-              width={2048}
-              height={1092}
+              width={2400}
+              height={958}
             />
           </div>
           <div className="section-hero-overlay" />
