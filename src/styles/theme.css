@@ -256,6 +256,11 @@
     }
   }
 
+  /* Logo — smooth rendering (dimensions controlled in Logo.tsx) */
+  img[data-logo] {
+    image-rendering: auto;
+  }
+
   /* Optimize image rendering */
   img:not([data-logo]) {
     image-rendering: -webkit-optimize-contrast;

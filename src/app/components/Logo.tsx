@@ -9,12 +9,17 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-/** Width-led sizing with h-auto preserves the logo's natural proportions */
+/**
+ * Height + aspect-ratio sizing keeps the wide logo proportional and readable.
+ * Width is derived from the image ratio (1024×342) — never set both axes independently.
+ */
 const sizes = {
-  sm: 'w-48 h-auto max-w-full',
-  md: 'w-56 sm:w-64 md:w-72 h-auto max-w-full',
-  lg: 'w-64 sm:w-80 h-auto max-w-full',
+  sm: 'h-10 w-auto max-w-[12rem]',
+  md: 'h-12 sm:h-[3.25rem] w-auto max-w-[14rem] sm:max-w-[15rem]',
+  lg: 'h-14 sm:h-16 w-auto max-w-[16rem] sm:max-w-[18rem]',
 } as const;
+
+const aspectRatio = `${LOGO.width} / ${LOGO.height}`;
 
 export const Logo = memo(function Logo({ className = '', onClick, size = 'md' }: LogoProps) {
   const image = (
@@ -23,6 +28,7 @@ export const Logo = memo(function Logo({ className = '', onClick, size = 'md' }:
       alt={SITE.name}
       data-logo
       className={`block shrink-0 object-contain object-left ${sizes[size]} ${className}`}
+      style={{ aspectRatio }}
       width={LOGO.width}
       height={LOGO.height}
       fetchPriority="high"
