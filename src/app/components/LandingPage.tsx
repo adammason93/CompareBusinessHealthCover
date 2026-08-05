@@ -170,7 +170,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">Vitality</div>
             <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">Aviva</div>
             <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">WPA</div>
-            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">The Exeter</div>
           </div>
           <p className="text-gray-700 leading-relaxed">
             By comparing quotes from multiple top-rated insurers in one place, you save time and can be confident you're seeing the full market. Each insurer offers different strengths, policy options, and pricing structures, so comparing ensures you find the perfect fit for your needs and budget.
