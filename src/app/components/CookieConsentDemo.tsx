@@ -80,7 +80,7 @@ export function CookieConsentDemo() {
         </div>
 
         {preferences && (
-          <div className="bg-gray-50 p-2 rounded space-y-1 mt-2">
+          <div className="bg-brand-surface p-2 rounded space-y-1 mt-2">
             <div className="flex items-center justify-between">
               <span className="text-gray-600">Essential:</span>
               <span className="text-green-600 font-semibold">✓ Active</span>

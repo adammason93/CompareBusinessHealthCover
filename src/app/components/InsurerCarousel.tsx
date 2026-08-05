@@ -64,9 +64,9 @@ export function InsurerCarousel() {
   };
 
   return (
-    <section className="py-12 sm:py-16" style={{ backgroundColor: '#e8ecf1' }}>
+    <section className="section-muted py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12" style={{ color: '#1e3a5f' }}>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12">
           Compare Leading Business Insurers
         </h2>
         
@@ -147,7 +147,7 @@ export function InsurerCarousel() {
         }
         
         .insurer-carousel-wrapper .slick-dots li.slick-active div {
-          background-color: #1e3a5f !important;
+          background-color: var(--brand-navy) !important;
           width: 30px;
           border-radius: 4px;
         }
@@ -158,7 +158,18 @@ export function InsurerCarousel() {
             opacity: 0.6;
             transition: opacity 0.3s ease;
           }
-          \n          .insurer-carousel-wrapper .slick-slide.slick-active {\n            opacity: 1;\n          }\n        }\n        \n        /* Mobile optimization - no opacity effects */\n        @media (max-width: 767px) {\n          .insurer-carousel-wrapper .slick-slide {\n            opacity: 1;\n          }\n        }\n      `}</style>
+          .insurer-carousel-wrapper .slick-slide.slick-active {
+            opacity: 1;
+          }
+        }
+        
+        /* Mobile optimization - no opacity effects */
+        @media (max-width: 767px) {
+          .insurer-carousel-wrapper .slick-slide {
+            opacity: 1;
+          }
+        }
+      `}</style>
     </section>
   );
 }

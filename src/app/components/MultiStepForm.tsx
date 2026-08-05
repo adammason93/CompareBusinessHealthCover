@@ -115,7 +115,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
       className={`w-full text-left p-3 rounded-lg transition-all ${
         currentValue === value
           ? 'bg-brand-teal-muted border-2 border-brand-teal'
-          : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+          : 'bg-brand-surface border-2 border-transparent hover:bg-gray-100'
       }`}
     >
       <div className="flex items-start gap-2">
@@ -159,7 +159,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
       className={`p-6 rounded-lg transition-all ${
         currentValue === value
           ? 'bg-brand-teal-muted border-2 border-brand-teal'
-          : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+          : 'bg-brand-surface border-2 border-transparent hover:bg-gray-100'
       }`}
     >
       <div className="flex flex-col items-center gap-3">

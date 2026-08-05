@@ -8,9 +8,9 @@ interface AboutUsProps {
 
 export function AboutUs({ onGetStarted }: AboutUsProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden" style={{ backgroundColor: '#1D2D50' }}>
+      <section className="section-hero relative py-20 overflow-hidden">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
@@ -18,7 +18,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
             alt="Happy family"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D2D50] via-[#1D2D50]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent"></div>
         </div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
@@ -78,7 +78,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
       </section>
 
       {/* Our Values Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="section-muted py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -182,7 +182,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-16" style={{ backgroundColor: '#16233d' }}>
+      <section className="section-cta py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">

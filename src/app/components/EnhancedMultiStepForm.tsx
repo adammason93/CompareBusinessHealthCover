@@ -880,7 +880,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                    <div className="bg-brand-surface rounded-xl p-6 space-y-4">
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
                           <h3 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">
@@ -996,7 +996,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
               type="button"
               onClick={prevStep}
               variant="outline"
-              className="px-6 py-3 rounded-xl border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50"
+              className="px-6 py-3 rounded-xl border-2 border-gray-300 hover:border-gray-400 hover:bg-brand-surface"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
               <span className="hidden sm:inline">Back</span>

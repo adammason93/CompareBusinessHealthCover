@@ -58,7 +58,7 @@ export function CookieConsent({ onNavigate }: CookieConsentProps) {
       
       {/* Cookie Consent Banner */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 animate-slide-up">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#16233d] to-[#1D2D50] rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-brand-navy-dark to-brand-navy rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
           <div className="p-6 sm:p-8">
             <div className="flex items-start gap-4">
               {/* Cookie Icon */}

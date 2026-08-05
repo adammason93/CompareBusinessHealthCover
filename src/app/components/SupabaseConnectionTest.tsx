@@ -139,7 +139,7 @@ export function SupabaseConnectionTest() {
         {results && (
           <div className="space-y-3">
             {/* Health Check */}
-            <div className="flex items-start gap-2 p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-start gap-2 p-3 bg-brand-surface rounded-lg">
               {getStatusIcon(results.health.status)}
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm">Health Endpoint</div>
@@ -150,7 +150,7 @@ export function SupabaseConnectionTest() {
             </div>
 
             {/* Auth Check */}
-            <div className="flex items-start gap-2 p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-start gap-2 p-3 bg-brand-surface rounded-lg">
               {getStatusIcon(results.auth.status)}
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm">Auth Endpoints</div>

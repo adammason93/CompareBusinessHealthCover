@@ -181,7 +181,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex-1 px-6 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-brand-surface transition-colors"
             >
               Cancel
             </button>

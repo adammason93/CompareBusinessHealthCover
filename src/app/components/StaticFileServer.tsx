@@ -58,10 +58,10 @@ export function StaticFileServer({ fileName }: StaticFileServerProps) {
       <div style={{
         position: 'sticky',
         top: 0,
-        background: '#1D2D50',
+        background: 'var(--brand-navy)',
         color: 'white',
         padding: '12px 20px',
-        borderBottom: '2px solid #16233d',
+        borderBottom: '2px solid var(--brand-navy-dark)',
         zIndex: 1000
       }}>
         <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
@@ -76,7 +76,7 @@ export function StaticFileServer({ fileName }: StaticFileServerProps) {
         padding: '20px',
         whiteSpace: 'pre-wrap',
         wordWrap: 'break-word',
-        backgroundColor: '#f8f8f8',
+        backgroundColor: 'var(--brand-surface)',
         border: 'none',
         color: '#333'
       }}>

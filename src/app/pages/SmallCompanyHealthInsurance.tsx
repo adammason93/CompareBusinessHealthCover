@@ -8,9 +8,9 @@ interface SmallCompanyHealthInsuranceProps {
 
 export function SmallCompanyHealthInsurance({ onGetStarted }: SmallCompanyHealthInsuranceProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative text-white py-20 overflow-hidden" style={{ backgroundColor: '#1D2D50' }}>
+      <section className="section-hero relative py-20 overflow-hidden">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
@@ -18,7 +18,7 @@ export function SmallCompanyHealthInsurance({ onGetStarted }: SmallCompanyHealth
             alt="Happy family"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D2D50] via-[#1D2D50]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent"></div>
         </div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
@@ -87,7 +87,7 @@ export function SmallCompanyHealthInsurance({ onGetStarted }: SmallCompanyHealth
       </section>
 
       {/* CTA Section */}
-      <section className="py-16" style={{ backgroundColor: '#2fc4bf' }}>
+      <section className="section-cta py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl text-white mb-6">
             Ready to Compare Small Company Health Insurance?
@@ -97,7 +97,7 @@ export function SmallCompanyHealthInsurance({ onGetStarted }: SmallCompanyHealth
           </p>
           <Button 
             onClick={onGetStarted}
-            className="bg-black hover:bg-gray-800 text-white rounded-full px-12 py-6 text-lg"
+            className="bg-brand-navy hover:bg-brand-navy-dark text-white rounded-full px-12 py-6 text-lg"
           >
             Start Your Free Quote
           </Button>

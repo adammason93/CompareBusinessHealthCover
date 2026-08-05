@@ -165,12 +165,12 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           </p>
           <h4 className="font-semibold text-gray-900 text-lg">Our Partner Insurers Include:</h4>
           <div className="grid grid-cols-2 gap-3 my-4">
-            <div className="bg-gray-50 p-3 rounded-lg text-center font-semibold text-gray-900">Bupa</div>
-            <div className="bg-gray-50 p-3 rounded-lg text-center font-semibold text-gray-900">AXA Health</div>
-            <div className="bg-gray-50 p-3 rounded-lg text-center font-semibold text-gray-900">Vitality</div>
-            <div className="bg-gray-50 p-3 rounded-lg text-center font-semibold text-gray-900">Aviva</div>
-            <div className="bg-gray-50 p-3 rounded-lg text-center font-semibold text-gray-900">WPA</div>
-            <div className="bg-gray-50 p-3 rounded-lg text-center font-semibold text-gray-900">The Exeter</div>
+            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">Bupa</div>
+            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">AXA Health</div>
+            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">Vitality</div>
+            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">Aviva</div>
+            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">WPA</div>
+            <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">The Exeter</div>
           </div>
           <p className="text-gray-700 leading-relaxed">
             By comparing quotes from multiple top-rated insurers in one place, you save time and can be confident you're seeing the full market. Each insurer offers different strengths, policy options, and pricing structures, so comparing ensures you find the perfect fit for your needs and budget.
@@ -250,7 +250,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   };
   
   return (
-    <div className="min-h-screen bg-gray-50 circle-pattern">
+    <div className="min-h-screen bg-background circle-pattern">
       <Header
         onGetStarted={onGetStarted}
         onNavigate={(page) => onNavigate?.(page)}
@@ -261,7 +261,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden circle-pattern" style={{ backgroundColor: '#1D2D50' }}>
+      <section className="section-hero relative overflow-hidden circle-pattern">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
@@ -271,7 +271,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             loading="eager"
             fetchpriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D2D50] via-[#1D2D50]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 z-10">
           {/* Breadcrumb */}
@@ -327,7 +327,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         </div>
         
         {/* Benefits Strip - Dark Background */}
-        <div className="border-t border-gray-600 text-white" style={{ backgroundColor: '#1a2847' }}>
+        <div className="section-strip border-t border-brand-navy-dark/40 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center gap-2 sm:gap-3">
@@ -412,7 +412,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <InsurerCarousel />
 
       {/* How Do We Work Section - Find Your Best Health Cover */}
-      <section id="find-best-cover" className="py-20 pb-0" style={{ backgroundColor: '#f9fafb' }}>
+      <section id="find-best-cover" className="section-muted py-20 pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl text-center text-gray-900 mb-4">
             Compare <span style={{ fontWeight: 900 }}>employee health cover</span> for your business
@@ -528,7 +528,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Why Take Out Health Insurance Section */}
-      <section id="why-health-insurance" className="relative py-32 overflow-hidden -mt-1" style={{ backgroundColor: '#1f2255' }}>
+      <section id="why-health-insurance" className="relative py-32 overflow-hidden -mt-1">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-30">
           <ImageWithFallback 
@@ -536,13 +536,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             alt="Business professionals in meeting"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1f2255]/90 via-[#1f2255]/85 to-[#1f2255]/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy-dark/90 via-brand-navy-dark/85 to-brand-navy-dark/90"></div>
         </div>
         
         {/* Curved top border */}
         <div className="absolute top-0 left-0 right-0 overflow-hidden z-10">
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24">
-            <path d="M0,0 L0,60 Q600,120 1200,60 L1200,0 Z" fill="#f9fafb"></path>
+            <path d="M0,0 L0,60 Q600,120 1200,60 L1200,0 Z" fill="var(--brand-surface)"></path>
           </svg>
         </div>
 
@@ -587,13 +587,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         {/* Curved bottom border */}
         <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24">
-            <path d="M0,120 L0,60 Q600,0 1200,60 L1200,120 Z" fill="#f9fafb"></path>
+            <path d="M0,120 L0,60 Q600,0 1200,60 L1200,120 Z" fill="var(--brand-surface)"></path>
           </svg>
         </div>
       </section>
 
       {/* How Does Health Insurance Work Section */}
-      <section id="how-it-works" className="py-16" style={{ backgroundColor: '#f9fafb' }}>
+      <section id="how-it-works" className="section-muted py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Left Column */}
@@ -636,7 +636,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Why Use Us Section */}
-      <section id="why-use-us" className="py-16" style={{ backgroundColor: '#16233d' }}>
+      <section id="why-use-us" className="section-cta py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl text-center text-white mb-12">
             Why Use Us?
@@ -675,7 +675,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <FAQSection />
 
       {/* Already Covered Section */}
-      <section className="bg-gray-50 py-0">
+      <section className="bg-brand-surface py-0">
         <div className="grid md:grid-cols-2">
           <div className="relative">
             <img 
@@ -684,7 +684,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               className="w-full h-full object-cover absolute inset-0"
             />
           </div>
-          <div className="bg-black text-white p-8 lg:p-12 flex flex-col justify-center" style={{ backgroundColor: '#1D2D50' }}>
+          <div className="bg-brand-navy-dark text-white p-8 lg:p-12 flex flex-col justify-center">
             <h2 className="text-3xl lg:text-4xl mb-4">Renewing Your Group Scheme?<br />Compare &amp; Save</h2>
             <p className="text-lg lg:text-xl mb-6">Review your employee health cover before renewal</p>
             
@@ -738,7 +738,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="sticky top-0 bg-white border-b px-8 py-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(225, 226, 242, 0.3)' }}>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center bg-brand-teal-muted/80">
                   {benefitDetails[benefitModalOpen as keyof typeof benefitDetails].icon}
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">
@@ -757,7 +757,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <div className="px-8 py-6">
               {benefitDetails[benefitModalOpen as keyof typeof benefitDetails].content}
             </div>
-            <div className="sticky bottom-0 bg-gray-50 border-t px-8 py-6 flex justify-end gap-3">
+            <div className="sticky bottom-0 bg-brand-surface border-t px-8 py-6 flex justify-end gap-3">
               <button 
                 onClick={() => setBenefitModalOpen(null)}
                 className="px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-gray-400 transition-colors"
@@ -787,8 +787,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           }}
         >
           <div 
-            className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%]"
-            style={{ backgroundColor: '#26B4AF' }}
+            className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%] bg-brand-teal"
           >
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
               <div className="flex-1 text-center sm:text-left">
@@ -801,7 +800,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
               <button
                 onClick={onGetStarted}
-                className="bg-white hover:bg-gray-50 text-gray-900 rounded-full px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base md:text-lg font-semibold transition-colors whitespace-nowrap shadow-lg w-full sm:w-auto"
+                className="bg-white hover:bg-brand-surface text-gray-900 rounded-full px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base md:text-lg font-semibold transition-colors whitespace-nowrap shadow-lg w-full sm:w-auto"
               >
                 Get SME Quote
               </button>

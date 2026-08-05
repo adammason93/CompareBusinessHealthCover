@@ -189,7 +189,7 @@ export function ChatBot() {
       {isOpen && (
         <div className="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 left-4 sm:left-auto z-50 sm:w-96 sm:max-w-[calc(100vw-2rem)] h-[calc(100vh-8rem)] sm:h-auto sm:max-h-[600px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden border border-gray-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] text-white p-4 flex items-center justify-between flex-shrink-0">
+          <div className="bg-gradient-to-r from-brand-navy to-brand-navy-dark text-white p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="bg-brand-teal rounded-full p-2">
                 <MessageCircle className="w-5 h-5" />
@@ -210,7 +210,7 @@ export function ChatBot() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 min-h-0">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-brand-surface min-h-0">
             {messages.map((message) => (
               <div
                 key={message.id}

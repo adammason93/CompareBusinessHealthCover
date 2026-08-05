@@ -2,9 +2,9 @@
 
 :root {
   --font-size: 16px;
-  --background: #f8fafb;
-  --foreground: oklch(0.145 0 0);
-  /* Brand — logo navy + corporate teal */
+  --background: #f4f8f7;
+  --foreground: #1a2332;
+  /* Brand — logo navy + corporate teal (distinct from consumer comparison sites) */
   --brand-navy: #1D2D50;
   --brand-navy-dark: #16233d;
   --brand-navy-deeper: #111b30;
@@ -21,14 +21,14 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
+  --primary: #1D2D50;
+  --primary-foreground: #ffffff;
+  --secondary: var(--brand-surface-alt);
+  --secondary-foreground: #1D2D50;
+  --muted: #e8eeed;
+  --muted-foreground: #5c6b7a;
+  --accent: var(--brand-teal-muted);
+  --accent-foreground: #1D2D50;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
@@ -235,6 +235,35 @@
 
   .animate-slide-up {
     animation: slide-up 0.5s ease-out forwards;
+  }
+
+  /* Shared marketing section backgrounds */
+  .section-hero {
+    @apply bg-brand-navy text-white;
+  }
+
+  .section-hero-overlay {
+    @apply absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent;
+  }
+
+  .section-muted {
+    @apply bg-brand-surface;
+  }
+
+  .section-dark {
+    @apply bg-brand-navy-dark text-white;
+  }
+
+  .section-strip {
+    @apply bg-brand-navy-strip text-white;
+  }
+
+  .section-cta {
+    @apply bg-brand-teal text-white;
+  }
+
+  .brand-gradient-bar {
+    @apply bg-gradient-to-r from-brand-navy-dark to-brand-navy;
   }
 
   /* Performance optimizations */

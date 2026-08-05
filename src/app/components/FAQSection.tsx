@@ -167,7 +167,7 @@ export function FAQSection() {
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-brand-surface transition-colors"
                 >
                   <span className="font-medium text-gray-900 pr-8">
                     {item.question}
@@ -183,7 +183,7 @@ export function FAQSection() {
                     openIndex === index ? "max-h-[28rem]" : "max-h-0"
                   }`}
                 >
-                  <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                  <div className="px-6 py-4 bg-brand-surface border-t border-gray-200">
                     <p className="text-gray-700 leading-relaxed">{item.answer}</p>
                   </div>
                 </div>

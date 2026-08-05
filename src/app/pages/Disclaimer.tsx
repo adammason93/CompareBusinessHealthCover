@@ -6,9 +6,9 @@ interface DisclaimerProps {
 
 export function Disclaimer({ onGetStarted }: DisclaimerProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-16 overflow-hidden" style={{ backgroundColor: '#202555' }}>
+      <section className="section-hero relative py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -30,7 +30,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
           <div className="prose prose-lg max-w-none">
             
             {/* Company Information */}
-            <div className="mb-12 p-6 bg-gray-50 rounded-xl border-l-4 border-brand-teal">
+            <div className="mb-12 p-6 bg-brand-surface rounded-xl border-l-4 border-brand-teal">
               <div className="flex items-start gap-3 mb-4">
                 <Info className="w-6 h-6 text-brand-teal-hover flex-shrink-0 mt-1" />
                 <div>

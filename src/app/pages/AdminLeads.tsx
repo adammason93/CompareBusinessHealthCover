@@ -283,10 +283,10 @@ export function AdminLeads() {
   // If not authenticated, show password screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 bg-[#1D2D50] rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-brand-navy rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
@@ -318,7 +318,7 @@ export function AdminLeads() {
             
             <button
               type="submit"
-              className="w-full bg-[#1D2D50] text-white py-2 px-4 rounded-lg hover:bg-[#16233d] transition-colors"
+              className="w-full bg-brand-navy text-white py-2 px-4 rounded-lg hover:bg-brand-navy-dark transition-colors"
             >
               Access Admin Panel
             </button>
@@ -331,7 +331,7 @@ export function AdminLeads() {
   // If loading, show spinner
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#16233d' }}>
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-teal mx-auto"></div>
           <p className="mt-4 text-white">Loading leads...</p>
@@ -342,14 +342,14 @@ export function AdminLeads() {
 
   // Main content - authenticated and loaded
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#16233d' }}>
+    <div className="min-h-screen">
       {/* Main Admin Dashboard */}
       <div className="p-3 sm:p-6">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-[#1D2D50] mb-1">Lead Management</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-1">Lead Management</h1>
               <p className="text-sm sm:text-base text-gray-600">
                 {filteredLeads.length} {filteredLeads.length === 1 ? 'lead' : 'leads'} found
               </p>
@@ -431,7 +431,7 @@ export function AdminLeads() {
           {isLoading ? (
             <div className="flex items-center justify-center p-8 sm:p-12">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1D2D50] mx-auto mb-4"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-navy mx-auto mb-4"></div>
                 <p className="text-gray-600 text-sm sm:text-base">Loading leads...</p>
               </div>
             </div>
@@ -442,7 +442,7 @@ export function AdminLeads() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[1320px]">
-                <thead className="bg-[#1D2D50] text-white">
+                <thead className="bg-brand-navy text-white">
                   <tr>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Company</th>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Date</th>
@@ -638,7 +638,7 @@ export function AdminLeads() {
                         ) : (
                           <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                             lead.source === "Organic" ? "bg-green-100 text-green-800" :
-                            lead.source === "PPC" ? "bg-purple-100 text-purple-800" :
+                            lead.source === "PPC" ? "bg-brand-teal-muted text-brand-navy" :
                             "bg-gray-100 text-gray-800"
                           }`}>
                             {lead.source || "-"}

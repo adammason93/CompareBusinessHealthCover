@@ -8,7 +8,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] text-white py-16">
+      <div className="bg-gradient-to-r from-brand-navy to-brand-navy-dark text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
             <Scale className="w-12 h-12 text-brand-teal-light" />
@@ -70,7 +70,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
                 <span>Acts solely as an introducer</span>
               </li>
             </ul>
-            <div className="bg-gray-50 rounded-xl p-6 space-y-3">
+            <div className="bg-brand-surface rounded-xl p-6 space-y-3">
               <p className="font-semibold text-gray-900 mb-3">Contact details:</p>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
@@ -386,7 +386,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             <p className="text-gray-700 leading-relaxed mb-4">
               If you have a complaint about our service, please contact:
             </p>
-            <div className="bg-gray-50 rounded-xl p-6 mb-4">
+            <div className="bg-brand-surface rounded-xl p-6 mb-4">
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
@@ -470,7 +470,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
             <p className="text-gray-700 leading-relaxed mb-4">
               If you have any questions about these Terms and Conditions, please contact us:
             </p>
-            <div className="bg-gray-50 rounded-xl p-6 space-y-3">
+            <div className="bg-brand-surface rounded-xl p-6 space-y-3">
               <p className="font-semibold text-gray-900 mb-3">Compare Business Healthcover</p>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />

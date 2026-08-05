@@ -210,7 +210,7 @@ export function MySubmissions({ isOpen, onClose, authToken, user }: MySubmission
                   {selectedSubmission.data.additionalInfo && (
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-3">Additional Information</h4>
-                      <p className="text-sm text-gray-700 bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-700 bg-brand-surface p-4 rounded-lg">
                         {selectedSubmission.data.additionalInfo}
                       </p>
                     </div>
@@ -269,7 +269,7 @@ export function MySubmissions({ isOpen, onClose, authToken, user }: MySubmission
           )}
         </div>
 
-        <div className="px-6 py-4 border-t bg-gray-50">
+        <div className="px-6 py-4 border-t bg-brand-surface">
           <Button onClick={onClose} variant="outline" className="w-full">
             Close
           </Button>
