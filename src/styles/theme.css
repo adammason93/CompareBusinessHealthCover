@@ -2,33 +2,33 @@
 
 :root {
   --font-size: 16px;
-  --background: #f4f8f7;
-  --foreground: #1a2332;
-  /* Brand — logo navy + corporate teal (distinct from consumer comparison sites) */
-  --brand-navy: #1D2D50;
-  --brand-navy-dark: #16233d;
-  --brand-navy-deeper: #111b30;
-  --brand-navy-strip: #1a2847;
-  --brand-teal: #26B4AF;
-  --brand-teal-hover: #1fa09b;
-  --brand-teal-soft: #2fc4bf;
-  --brand-teal-light: #7fd4d0;
-  --brand-teal-muted: #e8f7f6;
-  --brand-surface: #edf4f3;
-  --brand-surface-alt: #e2eeed;
-  --brand-heading: #1D2D50;
+  --background: #F8F7F5;
+  --foreground: #1F2937;
+  /* Brand — warm charcoal nav + amber/gold accents (distinct from blue-teal comparison sites) */
+  --brand-navy: #252830;
+  --brand-navy-dark: #1A1D24;
+  --brand-navy-deeper: #14161B;
+  --brand-navy-strip: #2F3440;
+  --brand-teal: #D97706;
+  --brand-teal-hover: #B45309;
+  --brand-teal-soft: #F59E0B;
+  --brand-teal-light: #FCD34D;
+  --brand-teal-muted: #FEF3C7;
+  --brand-surface: #F3F1ED;
+  --brand-surface-alt: #EAE6E0;
+  --brand-heading: #252830;
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #1D2D50;
+  --primary: #252830;
   --primary-foreground: #ffffff;
   --secondary: var(--brand-surface-alt);
-  --secondary-foreground: #1D2D50;
-  --muted: #e8eeed;
-  --muted-foreground: #5c6b7a;
+  --secondary-foreground: #252830;
+  --muted: #E5E2DC;
+  --muted-foreground: #6B7280;
   --accent: var(--brand-teal-muted);
-  --accent-foreground: #1D2D50;
+  --accent-foreground: #252830;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
@@ -245,7 +245,7 @@
   }
 
   .section-hero-overlay {
-    @apply absolute inset-0 z-[5] bg-gradient-to-r from-brand-navy via-brand-navy/85 to-brand-navy/40 pointer-events-none;
+    @apply absolute inset-0 z-[5] bg-gradient-to-r from-brand-navy via-brand-navy/90 to-brand-navy/50 pointer-events-none;
   }
 
   .section-hero-image {

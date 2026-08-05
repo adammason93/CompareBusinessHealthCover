@@ -1,18 +1,23 @@
-/** Brand palette aligned with the Compare Business Healthcover logo */
+/**
+ * Site palette — warm charcoal + amber/gold.
+ * Distinct from the sister site's blue-teal look; logo retains its own navy/teal.
+ */
 export const BRAND = {
-  navy: '#1D2D50',
-  navyDark: '#16233d',
-  navyDeeper: '#111b30',
-  navyStrip: '#1a2847',
-  teal: '#26B4AF',
-  tealHover: '#1fa09b',
-  tealSoft: '#2fc4bf',
-  tealLight: '#7fd4d0',
-  tealMuted: '#e8f7f6',
-  /** Soft page panels — teal-grey, replaces generic blue-50 */
-  surface: '#edf4f3',
-  surfaceAlt: '#e2eeed',
-  heading: '#1D2D50',
+  /** Nav, heroes, headings */
+  navy: '#252830',
+  navyDark: '#1A1D24',
+  navyDeeper: '#14161B',
+  navyStrip: '#2F3440',
+  /** CTAs, links, accents */
+  teal: '#D97706',
+  tealHover: '#B45309',
+  tealSoft: '#F59E0B',
+  tealLight: '#FCD34D',
+  tealMuted: '#FEF3C7',
+  /** Soft page panels — warm stone */
+  surface: '#F3F1ED',
+  surfaceAlt: '#EAE6E0',
+  heading: '#252830',
 } as const;
 
 export const LOGO = {
