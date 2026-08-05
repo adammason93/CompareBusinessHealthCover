@@ -1,4 +1,4 @@
-import { CheckCircle, Sparkles, Mail, Phone, Calendar } from "lucide-react";
+import { CheckCircle, Sparkles, Mail, Phone } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { motion } from "motion/react";
 
@@ -119,16 +119,6 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 </div>
               </motion.div>
             </div>
-          </div>
-
-          {/* Additional Info */}
-          <div className="bg-gradient-to-r from-brand-teal to-blue-500 rounded-2xl p-4 text-white mb-6">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Calendar className="w-5 h-5" />
-              <h3 className="text-lg font-semibold">Average Response Time</h3>
-            </div>
-            <p className="text-2xl font-bold mb-1">Under 2 Hours</p>
-            <p className="text-xs opacity-90">During business hours (Mon-Fri, 9am-6pm)</p>
           </div>
 
           {/* CTA Button */}
