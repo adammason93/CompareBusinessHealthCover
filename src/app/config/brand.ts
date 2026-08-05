@@ -1,5 +1,5 @@
 /**
- * Site palette — warm charcoal + amber/gold.
+ * Site palette — charcoal + burgundy (corporate B2B).
  * Distinct from the sister site's blue-teal look; logo retains its own navy/teal.
  */
 export const BRAND = {
@@ -8,15 +8,15 @@ export const BRAND = {
   navyDark: '#1A1D24',
   navyDeeper: '#14161B',
   navyStrip: '#2F3440',
-  /** CTAs, links, accents */
-  teal: '#D97706',
-  tealHover: '#B45309',
-  tealSoft: '#F59E0B',
-  tealLight: '#FCD34D',
-  tealMuted: '#FEF3C7',
-  /** Soft page panels — warm stone */
-  surface: '#F3F1ED',
-  surfaceAlt: '#EAE6E0',
+  /** CTAs, links, accents — deep wine burgundy */
+  teal: '#8B3A4A',
+  tealHover: '#6E2E3B',
+  tealSoft: '#A64D5C',
+  tealLight: '#D4A5AE',
+  tealMuted: '#F5EAEC',
+  /** Soft page panels — warm stone with a blush tint */
+  surface: '#F4F0F1',
+  surfaceAlt: '#EBE4E6',
   heading: '#252830',
 } as const;
 

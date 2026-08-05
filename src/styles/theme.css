@@ -4,18 +4,18 @@
   --font-size: 16px;
   --background: #F8F7F5;
   --foreground: #1F2937;
-  /* Brand — warm charcoal nav + amber/gold accents (distinct from blue-teal comparison sites) */
+  /* Brand — charcoal nav + burgundy accents (corporate B2B, distinct from blue-teal sites) */
   --brand-navy: #252830;
   --brand-navy-dark: #1A1D24;
   --brand-navy-deeper: #14161B;
   --brand-navy-strip: #2F3440;
-  --brand-teal: #D97706;
-  --brand-teal-hover: #B45309;
-  --brand-teal-soft: #F59E0B;
-  --brand-teal-light: #FCD34D;
-  --brand-teal-muted: #FEF3C7;
-  --brand-surface: #F3F1ED;
-  --brand-surface-alt: #EAE6E0;
+  --brand-teal: #8B3A4A;
+  --brand-teal-hover: #6E2E3B;
+  --brand-teal-soft: #A64D5C;
+  --brand-teal-light: #D4A5AE;
+  --brand-teal-muted: #F5EAEC;
+  --brand-surface: #F4F0F1;
+  --brand-surface-alt: #EBE4E6;
   --brand-heading: #252830;
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
