@@ -262,71 +262,73 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
       {/* Hero Section */}
       <section className="section-hero relative overflow-hidden">
-        <div className="section-hero-image">
-          <ImageWithFallback 
-            src={LOGO.heroOfficeTeam}
-            alt="Business team collaborating in a modern office"
-            className="object-right"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-        <div className="section-hero-overlay" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 z-10">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs sm:text-sm mb-8 sm:mb-12 text-gray-300">
-            <HomeIcon className="w-4 h-4" />
-            <span>Home</span>
-            <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
-            <span>SME Health Insurance</span>
+        <div className="relative">
+          <div className="section-hero-image">
+            <ImageWithFallback 
+              src={LOGO.heroOfficeTeam}
+              alt="Business team collaborating in a modern office"
+              className="object-right"
+              loading="eager"
+              fetchpriority="high"
+            />
           </div>
-
-          {/* Hero Content */}
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center pb-16 sm:pb-24">
-            {/* Left Column - Heading */}
-            <div>
-              <p className="text-brand-teal-light text-sm sm:text-base font-semibold uppercase tracking-wide mb-3">
-                For UK Small, Medium and Large Corporate Businesses
-              </p>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-extrabold text-white">
-                Compare SME health insurance and give your team the cover they deserve.
-              </h1>
+          <div className="section-hero-overlay" />
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 z-10">
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-xs sm:text-sm mb-8 sm:mb-12 text-gray-300">
+              <HomeIcon className="w-4 h-4" />
+              <span>Home</span>
+              <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+              <span>SME Health Insurance</span>
             </div>
-            
-            {/* Right Column - Benefits & Buttons */}
-            <div>
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <HeroTypewriter />
-                <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                  <span className="text-white text-base sm:text-lg">Cover from just 2 employees — built for growing SMEs</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                  <span className="text-white text-base sm:text-lg">Attract and retain staff with valued employee benefits</span>
-                </div>
+
+            {/* Hero Content */}
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center pb-16 sm:pb-24">
+              {/* Left Column - Heading */}
+              <div>
+                <p className="text-brand-teal-light text-sm sm:text-base font-semibold uppercase tracking-wide mb-3">
+                  For UK Small, Medium and Large Corporate Businesses
+                </p>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-extrabold text-white">
+                  Compare SME health insurance and give your team the cover they deserve.
+                </h1>
               </div>
               
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <button 
-                  onClick={onGetStarted} 
-                  className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
-                >
-                  Get an SME quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
-                </button>
-                <button 
-                  onClick={() => setIsContactModalOpen(true)}
-                  className="button-hover-animate border-2 border-white/90 text-white hover:bg-white/10 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-transparent"
-                >
-                  Get in touch
-                </button>
+              {/* Right Column - Benefits & Buttons */}
+              <div>
+                <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                  <HeroTypewriter />
+                  <div className="flex items-center gap-3">
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
+                    <span className="text-white text-base sm:text-lg">Cover from just 2 employees — built for growing SMEs</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
+                    <span className="text-white text-base sm:text-lg">Attract and retain staff with valued employee benefits</span>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                  <button 
+                    onClick={onGetStarted} 
+                    className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                  >
+                    Get an SME quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
+                  </button>
+                  <button 
+                    onClick={() => setIsContactModalOpen(true)}
+                    className="button-hover-animate border-2 border-white/90 text-white hover:bg-white/10 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-transparent"
+                  >
+                    Get in touch
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
         
-        {/* Benefits Strip - Dark Background */}
-        <div className="section-strip border-t border-brand-navy-dark/40 text-white">
+        {/* Benefits Strip - solid bar below photo (not under the image) */}
+        <div className="section-strip relative z-10 border-t border-brand-navy-dark/40 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center gap-2 sm:gap-3">
