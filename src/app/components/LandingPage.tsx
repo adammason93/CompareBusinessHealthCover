@@ -638,7 +638,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Why Use Us Section */}
-      <section id="why-use-us" className="section-cta py-16">
+      <section id="why-use-us" className="bg-brand-navy text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl text-center text-white mb-12">
             Why Use Us?
