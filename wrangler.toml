@@ -21,3 +21,5 @@ custom_domain = true
 [assets]
 directory = "dist"
 binding = "STATIC"
+# Without this, unknown paths (e.g. /blog-admin) get 307 → / and never hit the SPA.
+not_found_handling = "single-page-application"
