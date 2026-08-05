@@ -263,13 +263,15 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       {/* Hero Section */}
       <section className="section-hero relative overflow-hidden">
         <div className="relative">
-          <div className="section-hero-image">
+          <div className="section-hero-image section-hero-image-panel">
             <ImageWithFallback 
               src={LOGO.heroOfficeTeam}
               alt="Business team collaborating in a modern office"
-              className="object-right"
+              className="object-cover"
               loading="eager"
               fetchpriority="high"
+              width={1024}
+              height={546}
             />
           </div>
           <div className="section-hero-overlay" />
