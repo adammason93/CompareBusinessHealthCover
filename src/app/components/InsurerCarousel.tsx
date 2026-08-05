@@ -21,7 +21,7 @@ const insurers = [
   },
   {
     name: "Bupa",
-    logo: "/images/insurers/bupa.png",
+    logo: "/images/insurers/bupa-v2.png",
     description: "Leading healthcare provider with strong business schemes",
   },
   {
