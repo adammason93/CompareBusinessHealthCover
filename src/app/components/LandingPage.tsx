@@ -789,7 +789,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           }}
         >
           <div 
-            className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%] bg-brand-teal"
+            className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%] bg-brand-navy"
           >
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
               <div className="flex-1 text-center sm:text-left">
