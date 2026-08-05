@@ -15,7 +15,8 @@ interface LogoProps {
  */
 const sizes = {
   sm: 'h-10 w-auto max-w-[12rem]',
-  md: 'h-12 sm:h-[3.25rem] w-auto max-w-[14rem] sm:max-w-[15rem]',
+  /** Nav — kept compact; slightly lower height reads cleaner in the header bar */
+  md: 'h-11 sm:h-12 w-auto max-w-[13rem] sm:max-w-[14rem]',
   lg: 'h-14 sm:h-16 w-auto max-w-[16rem] sm:max-w-[18rem]',
 } as const;
 
