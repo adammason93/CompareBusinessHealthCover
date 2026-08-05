@@ -157,7 +157,7 @@ export default function App() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, sourceWebsite: SITE.domain }),
       });
 
       const result = await response.json();

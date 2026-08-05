@@ -397,7 +397,7 @@ Allow: /robots.txt`;
 app.post("/make-server-2031af1c/contact", async (c) => {
   try {
     const body = await c.req.json();
-    const { name, email, phone, company, message } = body;
+    const { name, email, phone, company, message, sourceWebsite } = body;
 
     // Validate required fields
     if (!name || !email || !phone) {
@@ -407,6 +407,8 @@ app.post("/make-server-2031af1c/contact", async (c) => {
     // Prepare email content
     const emailContent = `
 New Contact Form Submission from Compare Business Healthcover
+
+Source Website: ${sourceWebsite || "unknown"}
 
 Name: ${name}
 Email: ${email}
@@ -420,7 +422,7 @@ ${message || "No message provided"}
 Submitted at: ${new Date().toISOString()}
     `.trim();
 
-    console.log("Contact form submission received:", { name, email, phone, company });
+    console.log("Contact form submission received:", { name, email, phone, company, sourceWebsite });
 
     // Send email using Resend API
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
@@ -451,6 +453,7 @@ Submitted at: ${new Date().toISOString()}
               New Contact Form Submission
             </h2>
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+              <p><strong>Source Website:</strong> ${sourceWebsite || "unknown"}</p>
               <p><strong>Name:</strong> ${name}</p>
               <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
               <p><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
@@ -467,7 +470,7 @@ Submitted at: ${new Date().toISOString()}
     const emailPayload = {
       from: "Compare Business Healthcover <noreply@comparebusinesshealthcover.co.uk>",
       to: ["info@comparebusinesshealthcover.co.uk"],
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Contact Form Submission from ${name} (${sourceWebsite || "unknown"})`,
       html: htmlContent,
       text: emailContent,
     };
@@ -497,6 +500,7 @@ Submitted at: ${new Date().toISOString()}
         phone,
         company,
         message,
+        sourceWebsite: sourceWebsite || "",
         timestamp: new Date().toISOString(),
         emailError: errorData,
       });
@@ -519,6 +523,7 @@ Submitted at: ${new Date().toISOString()}
       phone,
       company,
       message,
+      sourceWebsite: sourceWebsite || "",
       timestamp: new Date().toISOString(),
     });
 
@@ -735,8 +740,9 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
   try {
     const body = await c.req.json();
     const formData = body;
+    const sourceWebsite = formData.sourceWebsite || "unknown";
 
-    console.log("Insurance form submission received:", formData);
+    console.log("Insurance form submission received:", { ...formData, sourceWebsite });
 
     // Validate required fields
     if (!formData.firstName || !formData.email || !formData.phone) {
@@ -773,6 +779,12 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
             </h2>
             
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; width: 40%;">Source Website:</td>
+                  <td style="padding: 8px 0;">${sourceWebsite}</td>
+                </tr>
+              </table>
               <h3 style="color: #148585; margin-top: 0;">Personal Details</h3>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
@@ -886,6 +898,8 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
     const textContent = `
 New Insurance Quote Request from Compare Business Healthcover
 
+Source Website: ${sourceWebsite}
+
 PERSONAL DETAILS
 Name: ${formData.title || ""} ${formData.firstName} ${formData.lastName || ""}
 Email: ${formData.email}
@@ -935,7 +949,7 @@ Submitted at: ${new Date().toISOString()}
       }, 500);
     }
 
-    const internalSubject = `New Insurance Quote Request from ${formData.firstName} ${formData.lastName || ""}`;
+    const internalSubject = `New Insurance Quote Request from ${formData.firstName} ${formData.lastName || ""} (${sourceWebsite})`;
     const internalFrom = "Compare Business Healthcover <noreply@comparebusinesshealthcover.co.uk>";
     const internalRecipients = [
       "info@comparebusinesshealthcover.co.uk",
@@ -1249,6 +1263,7 @@ app.get("/make-server-2031af1c/admin/leads", async (c) => {
         peopleCount: submission.peopleCount || '',
         isInsured: submission.isInsured || 'pending',
         source: submission.source || '',
+        sourceWebsite: submission.sourceWebsite || '',
         premiumValue: submission.premiumValue || '',
         commissionPaid: submission.commissionPaid || '',
         policyStartDate: submission.policyStartDate || '',

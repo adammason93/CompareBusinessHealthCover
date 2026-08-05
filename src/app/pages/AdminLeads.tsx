@@ -16,6 +16,7 @@ interface Lead {
   // Editable fields
   isInsured: string;
   source: string; // organic or ppc
+  sourceWebsite: string;
   premiumValue: string;
   commissionPaid: string;
   policyStartDate: string;
@@ -223,6 +224,7 @@ export function AdminLeads() {
       "Phone",
       "Cover Type",
       "Is Insured",
+      "Website",
       "Source",
       "Premium Value",
       "Commission Paid",
@@ -240,6 +242,7 @@ export function AdminLeads() {
       lead.phone || "",
       lead.coverType || "",
       lead.isInsured || "",
+      lead.sourceWebsite || "",
       lead.source || "",
       lead.premiumValue || "",
       lead.commissionPaid || "",
@@ -438,7 +441,7 @@ export function AdminLeads() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[1200px]">
+              <table className="w-full min-w-[1320px]">
                 <thead className="bg-[#1D2D50] text-white">
                   <tr>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Company</th>
@@ -446,6 +449,7 @@ export function AdminLeads() {
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Contact Info</th>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Cover Type</th>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Status</th>
+                    <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Website</th>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Source</th>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Premium</th>
                     <th className="px-3 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold">Commission</th>
@@ -597,6 +601,21 @@ export function AdminLeads() {
                             {lead.isInsured || "-"}
                           </span>
                         )}
+                      </td>
+
+                      {/* Source Website - read only */}
+                      <td className="px-4 py-3 text-sm">
+                        <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+                          lead.sourceWebsite === "comparebusinesshealthcover.co.uk"
+                            ? "bg-teal-100 text-teal-800"
+                            : lead.sourceWebsite === "healthcovercomparison.co.uk"
+                            ? "bg-indigo-100 text-indigo-800"
+                            : lead.sourceWebsite
+                            ? "bg-gray-100 text-gray-800"
+                            : "bg-gray-100 text-gray-500"
+                        }`}>
+                          {lead.sourceWebsite || "-"}
+                        </span>
                       </td>
 
                       {/* Source - Editable */}

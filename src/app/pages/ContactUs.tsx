@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { projectId, publicAnonKey } from '/utils/supabase/info';
+import { SITE } from '@/app/config/site';
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 interface ContactUsProps {
@@ -41,7 +42,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${publicAnonKey}`
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({ ...formData, sourceWebsite: SITE.domain })
         }
       );
 

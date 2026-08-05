@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
+import { SITE } from "@/app/config/site";
 
 interface ContactFormModalProps {
   isOpen: boolean;
@@ -37,7 +38,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${publicAnonKey}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, sourceWebsite: SITE.domain })
       });
 
       const result = await response.json();
