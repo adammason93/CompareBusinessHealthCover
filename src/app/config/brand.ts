@@ -24,7 +24,7 @@ export const BRAND = {
 
 export const LOGO = {
   /** Cache-busted filename so browsers/CDN pick up the new green mark */
-  src: '/logo-v5.png',
+  src: '/logo-v6.png',
   iconSrc: '/favicon-icon.png',
   businessHandshake: '/images/business-handshake.png',
   heroOfficeTeam: '/images/hero-office-team-v4.png',
