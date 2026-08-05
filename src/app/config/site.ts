@@ -9,7 +9,7 @@ export const SITE = {
   phoneDisplay: '01484 773038',
   twitterHandle: '@CompareBizHealth',
   defaultImage: 'https://comparebusinesshealthcover.co.uk/og-image.jpg',
-  themeColor: '#252830',
+  themeColor: '#1E5E4A',
   /** Internal lead notification — same broker inbox as sister site */
   leadNotifyEmail: 'matt@myhealthpal.co.uk',
 } as const;

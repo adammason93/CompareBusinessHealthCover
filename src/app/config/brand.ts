@@ -1,23 +1,25 @@
 /**
- * Site palette — charcoal + burgundy (corporate B2B).
- * Distinct from the sister site's blue-teal look; logo retains its own navy/teal.
+ * Premium Healthcare palette — forest green + fresh green CTAs.
+ * Logo retains its own navy/teal on the white nav pill.
  */
 export const BRAND = {
-  /** Nav, heroes, headings */
-  navy: '#252830',
-  navyDark: '#1A1D24',
-  navyDeeper: '#14161B',
-  navyStrip: '#2F3440',
-  /** CTAs, links, accents — softened wine burgundy */
-  teal: '#A04D5E',
-  tealHover: '#854052',
-  tealSoft: '#B86B7A',
-  tealLight: '#E0B8BE',
-  tealMuted: '#FAF2F4',
-  /** Soft page panels — warm stone with a blush tint */
-  surface: '#F4F0F1',
-  surfaceAlt: '#EBE4E6',
-  heading: '#252830',
+  /** Primary — nav, heroes */
+  navy: '#1E5E4A',
+  navyDark: '#174A3A',
+  navyDeeper: '#123528',
+  navyStrip: '#1A5240',
+  /** CTA — fresh green */
+  teal: '#48C774',
+  tealHover: '#3DB866',
+  /** Secondary — emerald */
+  tealSoft: '#3FAF78',
+  /** Accent — sage */
+  tealLight: '#9DC8B3',
+  tealMuted: '#E8F2ED',
+  /** Panels */
+  surface: '#F4F8F6',
+  surfaceAlt: '#EBF3EF',
+  heading: '#2D2D2D',
 } as const;
 
 export const LOGO = {
