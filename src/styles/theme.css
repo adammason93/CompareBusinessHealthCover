@@ -260,17 +260,8 @@
     @apply absolute inset-0 z-0;
   }
 
-  /* Landing hero: pin photo to the right so a ~1024px asset stays sharp */
-  .section-hero-image-panel {
-    @apply absolute inset-y-0 right-0 left-0 z-0 md:left-auto md:w-[58%];
-  }
-
   .section-hero-image img {
     @apply w-full h-full object-cover;
-  }
-
-  .section-hero-image-panel img {
-    @apply object-center md:object-[center_30%];
   }
 
   .section-dark-overlay {
@@ -331,11 +322,5 @@
   /* Logo — smooth rendering (dimensions controlled in Logo.tsx) */
   img[data-logo] {
     image-rendering: auto;
-  }
-
-  /* Optimize image rendering */
-  img:not([data-logo]) {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
   }
 }

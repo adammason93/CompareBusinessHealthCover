@@ -11,7 +11,7 @@ interface LogoProps {
 
 /**
  * Height + aspect-ratio sizing keeps the wide logo proportional and readable.
- * Width is derived from the image ratio (897×247) — never set both axes independently.
+ * Width is derived from the image ratio (889×250) — never set both axes independently.
  */
 const sizes = {
   sm: 'h-10 w-auto max-w-[12rem]',

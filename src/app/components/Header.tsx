@@ -29,9 +29,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
       <header className="bg-brand-navy text-white border-b border-brand-navy-dark shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between gap-4">
-            <div className="bg-white rounded-lg px-3 py-1.5 shadow-sm">
-              <Logo onClick={() => onNavigate('home')} size="md" />
-            </div>
+            <Logo onClick={() => onNavigate('home')} size="md" />
 
             <nav className="hidden lg:flex items-center gap-6">
               <div

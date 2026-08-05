@@ -1,6 +1,6 @@
 /**
  * Premium Healthcare palette — forest green + fresh green CTAs.
- * Logo uses forest/mint greens on the white nav pill.
+ * Logo uses forest/mint greens on the dark header (no white pill).
  */
 export const BRAND = {
   /** Primary — nav, heroes */
@@ -24,10 +24,10 @@ export const BRAND = {
 
 export const LOGO = {
   /** Cache-busted filename so browsers/CDN pick up the new green mark */
-  src: '/logo-v2.png',
+  src: '/logo-v3.png',
   iconSrc: '/favicon-icon.png',
   businessHandshake: '/images/business-handshake.png',
-  heroOfficeTeam: '/images/hero-office-team.png',
-  width: 897,
-  height: 247,
+  heroOfficeTeam: '/images/hero-office-team-v2.png',
+  width: 889,
+  height: 250,
 } as const;
