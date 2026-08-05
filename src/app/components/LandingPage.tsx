@@ -297,29 +297,29 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
               
               {/* Right Column - Benefits & Buttons */}
-              <div>
+              <div className="[text-shadow:0_1px_2px_rgb(0_0_0_/_0.45),0_2px_12px_rgb(30_94_74_/_0.35)]">
                 <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                   <HeroTypewriter />
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                    <span className="text-white text-base sm:text-lg">Cover from just 2 employees — built for growing SMEs</span>
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0 drop-shadow" />
+                    <span className="text-white text-base sm:text-lg font-medium">Cover from just 2 employees — built for growing SMEs</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-                    <span className="text-white text-base sm:text-lg">Attract and retain staff with valued employee benefits</span>
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0 drop-shadow" />
+                    <span className="text-white text-base sm:text-lg font-medium">Attract and retain staff with valued employee benefits</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                   <button 
                     onClick={onGetStarted} 
-                    className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                    className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center [text-shadow:none]"
                   >
                     Get an SME quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
                   </button>
                   <button 
                     onClick={() => setIsContactModalOpen(true)}
-                    className="button-hover-animate border-2 border-white/90 text-white hover:bg-white/10 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-transparent"
+                    className="button-hover-animate border-2 border-white text-white hover:bg-white/15 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-black/20 backdrop-blur-[2px]"
                   >
                     Get in touch
                   </button>

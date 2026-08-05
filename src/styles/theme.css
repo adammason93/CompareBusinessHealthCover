@@ -246,13 +246,15 @@
 
   .section-hero-overlay {
     @apply absolute inset-0 z-[5] pointer-events-none;
-    /* Strong scrim on the left for text; photo shows naturally on the right */
+    /* Strong left scrim for headline; soft green wash on the right keeps CTAs readable */
     background: linear-gradient(
       to right,
       rgb(30 94 74 / 0.94) 0%,
-      rgb(30 94 74 / 0.78) 36%,
-      rgb(30 94 74 / 0.22) 58%,
-      transparent 78%
+      rgb(30 94 74 / 0.82) 34%,
+      rgb(30 94 74 / 0.52) 55%,
+      rgb(30 94 74 / 0.28) 72%,
+      rgb(30 94 74 / 0.12) 88%,
+      transparent 100%
     );
   }
 
