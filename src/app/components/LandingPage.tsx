@@ -535,7 +535,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         <div className="section-hero-image">
           <ImageWithFallback 
             src={LOGO.businessHandshake}
-            alt="Business professionals in meeting"
+            alt="Business professionals shaking hands"
             className="object-center"
           />
         </div>

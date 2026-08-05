@@ -26,7 +26,7 @@ export const LOGO = {
   /** Cache-busted filename so browsers/CDN pick up the new green mark */
   src: '/logo-v6.png',
   iconSrc: '/favicon-icon.png',
-  businessHandshake: '/images/business-handshake.png',
+  businessHandshake: '/images/business-handshake-v2.jpg',
   heroOfficeTeam: '/images/hero-office-team-v4.png',
   width: 1336,
   height: 374,

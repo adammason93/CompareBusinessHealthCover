@@ -268,13 +268,13 @@
 
   .section-dark-overlay {
     @apply absolute inset-0 z-[5] pointer-events-none;
-    /* Lighter vertical scrim — image visible, text still readable */
+    /* Stronger scrim so white copy stays readable on bright photos */
     background: linear-gradient(
       to bottom,
-      rgb(23 74 58 / 0.82) 0%,
-      rgb(23 74 58 / 0.45) 42%,
-      rgb(23 74 58 / 0.45) 58%,
-      rgb(23 74 58 / 0.82) 100%
+      rgb(23 74 58 / 0.88) 0%,
+      rgb(23 74 58 / 0.58) 42%,
+      rgb(23 74 58 / 0.58) 58%,
+      rgb(23 74 58 / 0.88) 100%
     );
   }
 
