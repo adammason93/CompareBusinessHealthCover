@@ -1033,7 +1033,7 @@ Submitted at: ${new Date().toISOString()}
               
               <p>Thank you for requesting a quote from <strong>Compare Business Healthcover</strong>. We have received your information and our team will review your requirements.</p>
               
-              <p>One of our insurance specialists will contact you shortly at <strong>${formData.phone}</strong> or via email at <strong>${formData.email}</strong> to discuss your options and provide you with a personalized quote.</p>
+              <p>One of our insurance specialists will contact you shortly at <strong>${formData.phone}</strong> or via email at <strong>${formData.email}</strong> to discuss your options and provide you with a personalised quote.</p>
               
               <div style="background-color: #f0f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 <h3 style="color: #148585; margin-top: 0; font-size: 16px;">Your Request Summary:</h3>

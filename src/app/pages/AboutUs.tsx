@@ -162,7 +162,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
                 Review Options
               </h3>
               <p className="text-gray-600 text-sm">
-                Receive personalized quotes with clear comparisons of coverage and costs
+                Receive personalised quotes with clear comparisons of coverage and costs
               </p>
             </div>
 
@@ -227,7 +227,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
               <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
               <h3 className="text-lg font-semibold mb-2">Quick & Easy</h3>
               <p className="text-gray-200 text-sm">
-                Get personalized quotes in minutes. No lengthy forms or complicated processes.
+                Get personalised quotes in minutes. No lengthy forms or complicated processes.
               </p>
             </div>
 

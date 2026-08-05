@@ -212,7 +212,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
             Ready to Compare Insurance Quotes?
           </h2>
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Get personalized quotes from leading UK insurers in just 2 minutes. Compare prices and coverage to find the perfect protection for you and your family.
+            Get personalised quotes from leading UK insurers in just 2 minutes. Compare prices and coverage to find the perfect protection for you and your family.
           </p>
           <button
             onClick={() => onNavigate('home')}

@@ -78,7 +78,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Personalized Quote Analysis</h3>
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Personalised Quote Analysis</h3>
                   <p className="text-xs text-gray-600">
                     Our experts are now comparing rates from leading insurers to find your best options
                   </p>
@@ -114,7 +114,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1 text-sm">Expert Contact</h3>
                   <p className="text-xs text-gray-600">
-                    An advisor will contact you within 24 hours to discuss your personalized quotes
+                    An advisor will contact you within 24 hours to discuss your personalised quotes
                   </p>
                 </div>
               </motion.div>

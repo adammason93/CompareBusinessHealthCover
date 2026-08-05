@@ -331,7 +331,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Functional Cookies</h4>
                       <p className="text-sm text-gray-600">
-                        Enable enhanced functionality and personalization, such as remembering preferences.
+                        Enable enhanced functionality and personalisation, such as remembering preferences.
                       </p>
                       <p className="text-xs text-gray-500 mt-2">
                         Examples: Language preferences, user interface customization
@@ -412,7 +412,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
                   🍪 Cookie Consent
                 </h3>
                 <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                  We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. 
+                  We use cookies to enhance your browsing experience, analyse site traffic, and personalise content. 
                   By clicking "Accept All", you consent to our use of cookies. You can manage your preferences or 
                   decline non-essential cookies.
                 </p>

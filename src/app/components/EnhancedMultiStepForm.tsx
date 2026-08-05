@@ -44,6 +44,19 @@ export interface FormData {
   consentToContact?: boolean;
 }
 
+const TITLE_LABELS: Record<string, string> = {
+  mr: 'Mr',
+  mrs: 'Mrs',
+  miss: 'Miss',
+  ms: 'Ms',
+  dr: 'Dr',
+};
+
+function formatTitle(title?: string) {
+  if (!title) return title;
+  return TITLE_LABELS[title.toLowerCase()] ?? title;
+}
+
 const steps = [
   { number: 1, label: "Type", icon: Briefcase, time: "30s" },
   { number: 2, label: "Current", icon: CheckCircle2, time: "15s" },
@@ -178,7 +191,11 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
       if (typeof window !== 'undefined') {
         localStorage.removeItem('businessHealthFormDraft');
       }
-      onSubmit(data);
+      const { dateOfBirth: _removed, ...submitData } = data;
+      onSubmit({
+        ...submitData,
+        title: formatTitle(data.title),
+      });
     }
   };
 
@@ -638,7 +655,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                       Your Contact Details
                     </h2>
-                    <p className="text-gray-600">We'll use these details to send your personalized quotes</p>
+                    <p className="text-gray-600">We'll use these details to send your personalised quotes</p>
                   </div>
                   
                   <div className="space-y-4 max-w-2xl">
@@ -651,11 +668,11 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                           <SelectValue placeholder="Title" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="mr">Mr</SelectItem>
-                          <SelectItem value="mrs">Mrs</SelectItem>
-                          <SelectItem value="miss">Miss</SelectItem>
-                          <SelectItem value="ms">Ms</SelectItem>
-                          <SelectItem value="dr">Dr</SelectItem>
+                          <SelectItem value="Mr">Mr</SelectItem>
+                          <SelectItem value="Mrs">Mrs</SelectItem>
+                          <SelectItem value="Miss">Miss</SelectItem>
+                          <SelectItem value="Ms">Ms</SelectItem>
+                          <SelectItem value="Dr">Dr</SelectItem>
                         </SelectContent>
                       </Select>
                       
@@ -709,21 +726,6 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         onChange={(e) => setValue("postcode", e.target.value)}
                         className="h-12 pl-10 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
                       />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium text-gray-700 pl-1">
-                        Date of Birth
-                      </label>
-                      <div className="relative">
-                        <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                        <Input
-                          type="date"
-                          value={watchedFields.dateOfBirth || ''}
-                          onChange={(e) => setValue("dateOfBirth", e.target.value)}
-                          className="h-12 pl-10 border-2 border-gray-200 focus:border-brand-teal rounded-xl"
-                        />
-                      </div>
                     </div>
 
                     <motion.div 
@@ -905,7 +907,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                           <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
                               <span className="text-gray-600">Name:</span>
-                              <span className="font-medium">{watchedFields.title} {watchedFields.firstName} {watchedFields.lastName}</span>
+                              <span className="font-medium">{formatTitle(watchedFields.title)} {watchedFields.firstName} {watchedFields.lastName}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Email:</span>

@@ -210,7 +210,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           </p>
           <h4 className="font-semibold text-gray-900 text-lg">Our Broker Partners Provide:</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Personalized advice tailored to your unique health needs</li>
+            <li>Personalised advice tailored to your unique health needs</li>
             <li>Clear explanations of policy terms, exclusions, and benefits</li>
             <li>Guidance on the right level of cover for your situation</li>
             <li>Help understanding medical underwriting and pre-existing conditions</li>

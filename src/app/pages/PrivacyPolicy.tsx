@@ -260,7 +260,7 @@ export function PrivacyPolicy({ onGetStarted }: PrivacyPolicyProps) {
               <h2 className="text-2xl font-bold text-gray-900">8. Cookies</h2>
             </div>
             <p className="text-gray-700 leading-relaxed">
-              We may use cookies to improve user experience and website functionality. Cookies help us understand how you use our website, remember your preferences, and provide personalized content. You can control cookie settings through your browser preferences.
+              We may use cookies to improve user experience and website functionality. Cookies help us understand how you use our website, remember your preferences, and provide personalised content. You can control cookie settings through your browser preferences.
             </p>
           </section>
 

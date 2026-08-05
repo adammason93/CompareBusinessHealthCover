@@ -116,7 +116,7 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
             <div className="mb-12 p-6 bg-red-50 border-l-4 border-red-500 rounded-lg">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Not Financial Advice</h2>
               <p className="text-gray-700 mb-0">
-                Any information we provide is for general information purposes only and should <strong>not</strong> be taken as financial advice. For personalized advice on health insurance products, please consult with one of our FCA regulated partner firms or seek independent financial advice.
+                Any information we provide is for general information purposes only and should <strong>not</strong> be taken as financial advice. For personalised advice on health insurance products, please consult with one of our FCA regulated partner firms or seek independent financial advice.
               </p>
             </div>
 

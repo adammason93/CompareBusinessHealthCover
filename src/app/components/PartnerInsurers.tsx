@@ -242,7 +242,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
             Compare Quotes from Leading Insurers
           </h2>
           <p className="text-white/90 mb-6 text-lg max-w-2xl mx-auto">
-            Get personalized quotes from multiple providers in minutes. We'll help you find the best coverage at the best price.
+            Get personalised quotes from multiple providers in minutes. We'll help you find the best coverage at the best price.
           </p>
           <button
             onClick={() => onNavigate('home')}

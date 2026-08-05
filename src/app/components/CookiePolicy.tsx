@@ -22,7 +22,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
     {
       icon: Settings,
       title: 'Functional Cookies',
-      description: 'Enable enhanced functionality and personalization.',
+      description: 'Enable enhanced functionality and personalisation.',
       examples: [
         'Remember your preferences and settings',
         'Store form data to prevent re-entry',
@@ -84,7 +84,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
               <li>Remember your preferences and settings</li>
               <li>Understand how you use our website</li>
               <li>Improve our website performance and user experience</li>
-              <li>Provide personalized content and recommendations</li>
+              <li>Provide personalised content and recommendations</li>
               <li>Analyze website traffic and user behavior</li>
               <li>Enable essential website functionality</li>
             </ul>

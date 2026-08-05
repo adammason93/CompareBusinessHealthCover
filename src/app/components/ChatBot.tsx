@@ -40,7 +40,7 @@ const getSmartResponse = (userMessage: string): string => {
   
   // Pre-existing conditions
   if (message.includes('pre-existing') || message.includes('existing condition') || message.includes('medical history')) {
-    return "Pre-existing conditions can be covered, but it depends on the insurer and your specific situation. Some policies offer full cover, others may exclude certain conditions. It's best to discuss this when getting your quote - call 01484 773038 for personalized advice.";
+    return "Pre-existing conditions can be covered, but it depends on the insurer and your specific situation. Some policies offer full cover, others may exclude certain conditions. It's best to discuss this when getting your quote - call 01484 773038 for personalised advice.";
   }
   
   // Comparison and benefits
@@ -73,7 +73,7 @@ const getSmartResponse = (userMessage: string): string => {
   
   // Mental health
   if (message.includes('mental health') || message.includes('therapy') || message.includes('counselling') || message.includes('counseling')) {
-    return "Many health insurance policies now include mental health coverage, including therapy and counselling sessions. Coverage varies by insurer - get a personalized quote to see specific mental health benefits.";
+    return "Many health insurance policies now include mental health coverage, including therapy and counselling sessions. Coverage varies by insurer - get a personalised quote to see specific mental health benefits.";
   }
   
   // Cancer
@@ -100,7 +100,7 @@ const getSmartResponse = (userMessage: string): string => {
   }
   
   // Default response
-  return "That's a great question! For detailed information specific to your situation, I'd recommend: 1) Getting a free personalized quote by clicking 'Get Your Quote', or 2) Speaking with our expert team at 01484 773038. They can give you tailored advice. Is there anything else I can help with?";
+  return "That's a great question! For detailed information specific to your situation, I'd recommend: 1) Getting a free personalised quote by clicking 'Get Your Quote', or 2) Speaking with our expert team at 01484 773038. They can give you tailored advice. Is there anything else I can help with?";
 };
 
 export function ChatBot() {
