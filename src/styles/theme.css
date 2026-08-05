@@ -245,7 +245,15 @@
   }
 
   .section-hero-overlay {
-    @apply absolute inset-0 z-[5] bg-gradient-to-r from-brand-navy via-brand-navy/90 to-brand-navy/50 pointer-events-none;
+    @apply absolute inset-0 z-[5] pointer-events-none;
+    /* Strong scrim on the left for text; photo shows naturally on the right */
+    background: linear-gradient(
+      to right,
+      rgb(30 94 74 / 0.94) 0%,
+      rgb(30 94 74 / 0.78) 36%,
+      rgb(30 94 74 / 0.22) 58%,
+      transparent 78%
+    );
   }
 
   .section-hero-image {
@@ -253,11 +261,20 @@
   }
 
   .section-hero-image img {
-    @apply w-full h-full object-cover opacity-40;
+    @apply w-full h-full object-cover;
+    opacity: 0.92;
   }
 
   .section-dark-overlay {
-    @apply absolute inset-0 z-[5] bg-gradient-to-b from-brand-navy-dark/95 via-brand-navy-dark/90 to-brand-navy-dark/95 pointer-events-none;
+    @apply absolute inset-0 z-[5] pointer-events-none;
+    /* Lighter vertical scrim — image visible, text still readable */
+    background: linear-gradient(
+      to bottom,
+      rgb(23 74 58 / 0.82) 0%,
+      rgb(23 74 58 / 0.45) 42%,
+      rgb(23 74 58 / 0.45) 58%,
+      rgb(23 74 58 / 0.82) 100%
+    );
   }
 
   .section-muted {
