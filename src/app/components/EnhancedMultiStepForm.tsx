@@ -227,7 +227,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
       whileTap={{ scale: 0.98 }}
       className={`w-full text-left p-3 sm:p-4 rounded-xl transition-all shadow-sm ${ 
         currentValue === value
-          ? 'bg-gradient-to-r from-brand-teal-muted to-blue-50 border-2 border-brand-teal shadow-md'
+          ? 'bg-gradient-to-r from-brand-teal-muted to-brand-surface border-2 border-brand-teal shadow-md'
           : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
       }`}
     >
@@ -273,7 +273,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
       whileTap={{ scale: 0.95 }}
       className={`p-6 rounded-xl transition-all shadow-sm ${
         currentValue === value
-          ? 'bg-gradient-to-br from-brand-teal-muted to-blue-50 border-2 border-brand-teal shadow-lg'
+          ? 'bg-gradient-to-br from-brand-teal-muted to-brand-surface border-2 border-brand-teal shadow-lg'
           : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
       }`}
     >
@@ -300,7 +300,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
   );
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted py-2 sm:py-4 px-3 sm:px-6">
+    <div className="bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted py-2 sm:py-4 px-3 sm:px-6">
       <div className="max-w-[95%] mx-auto">
         {/* Header with Progress */}
         <motion.div 
@@ -325,7 +325,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             {/* Progress Bar */}
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden mb-4">
               <motion.div 
-                className="h-full bg-gradient-to-r from-brand-teal to-blue-500 rounded-full"
+                className="h-full bg-gradient-to-r from-brand-teal to-brand-navy rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -353,7 +353,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                           : completedSteps.includes(step.number)
                           ? 'bg-green-500 text-white'
                           : step.number < currentStep
-                          ? 'bg-blue-500 text-white'
+                          ? 'bg-brand-surface0 text-white'
                           : 'bg-gray-200 text-gray-500'
                       }`}
                     >
@@ -397,7 +397,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       : completedSteps.includes(step.number)
                       ? 'bg-green-500 text-white'
                       : step.number < currentStep
-                      ? 'bg-blue-500 text-white'
+                      ? 'bg-brand-surface0 text-white'
                       : 'bg-gray-200 text-gray-500'
                   }`}>
                     {completedSteps.includes(step.number) ? (
@@ -527,7 +527,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                         whileTap={{ scale: 0.95 }}
                         className={`p-6 rounded-xl transition-all shadow-sm ${
                           watchedFields.peopleCount === count
-                            ? 'bg-gradient-to-br from-brand-teal-muted to-blue-50 border-2 border-brand-teal shadow-lg'
+                            ? 'bg-gradient-to-br from-brand-teal-muted to-brand-surface border-2 border-brand-teal shadow-lg'
                             : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
                         }`}
                       >
@@ -856,11 +856,11 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                     <motion.div 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-200"
+                      className="mt-4 p-4 bg-brand-surface rounded-xl border border-brand-teal/25"
                     >
                       <div className="flex items-start gap-2">
-                        <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                        <div className="text-sm text-blue-900">
+                        <Info className="w-5 h-5 text-brand-teal-hover flex-shrink-0 mt-0.5" />
+                        <div className="text-sm text-brand-navy-deeper">
                           These preferences are optional. If you don't specify, we'll contact you as soon as possible using the details you provided.
                         </div>
                       </div>
@@ -1005,7 +1005,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             <Button
               type="submit"
               disabled={!isStepValid()}
-              className="px-8 py-3 bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="px-8 py-3 bg-gradient-to-r from-brand-teal to-brand-navy hover:from-brand-teal-hover hover:to-brand-navy-dark text-white rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {currentStep === steps.length ? (
                 <>

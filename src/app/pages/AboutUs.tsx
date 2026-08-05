@@ -22,7 +22,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
         </div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-brand-teal/30 rounded-full blur-3xl"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -57,7 +57,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
                 </p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-brand-teal-muted to-blue-50 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-brand-teal-muted to-brand-surface rounded-2xl p-8">
               <div className="grid grid-cols-3 gap-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-brand-teal-hover mb-2">10+</div>
@@ -243,7 +243,7 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-brand-teal-muted to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-brand-teal-muted to-brand-surface">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Ready to Find Your Perfect Health Insurance?

@@ -86,7 +86,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
         </div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-brand-teal-soft/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-brand-teal/30 rounded-full blur-3xl"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -158,7 +158,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
               </div>
 
               {/* Why Contact Us */}
-              <div className="mt-10 p-6 bg-gradient-to-br from-brand-teal-muted to-blue-50 rounded-xl">
+              <div className="mt-10 p-6 bg-gradient-to-br from-brand-teal-muted to-brand-surface rounded-xl">
                 <h3 className="font-semibold text-gray-900 mb-3">Why Contact Us?</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-center gap-2">
@@ -308,7 +308,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
       </section>
 
       {/* Quick Quote CTA */}
-      <section className="py-16 bg-gradient-to-br from-brand-teal-muted to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-brand-teal-muted to-brand-surface">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Ready to Get a Quote?

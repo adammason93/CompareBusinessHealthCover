@@ -254,7 +254,7 @@ export function PartnerInsurers({ onNavigate }: PartnerInsurersProps) {
         </div>
 
         {/* Disclaimer */}
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
+        <div className="bg-brand-surface border-l-4 border-brand-teal p-6 rounded-lg mb-8">
           <p className="text-gray-700 text-sm">
             <strong>Important:</strong> Compare Business Healthcover is an insurance intermediary, not an insurer. 
             We may receive commission from our partner insurers, but this does not affect the price you pay. 

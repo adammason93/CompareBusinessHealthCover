@@ -567,7 +567,7 @@ export function AdminLeads() {
                             <option value="Large Corporate">Large Corporate</option>
                           </select>
                         ) : (
-                          <span className="inline-flex px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                          <span className="inline-flex px-2 py-1 text-xs font-medium bg-brand-teal-muted text-brand-navy rounded-full">
                             {lead.coverType || "-"}
                           </span>
                         )}

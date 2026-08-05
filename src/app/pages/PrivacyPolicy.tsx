@@ -6,7 +6,7 @@ interface PrivacyPolicyProps {
 
 export function PrivacyPolicy({ onGetStarted }: PrivacyPolicyProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -226,15 +226,15 @@ export function PrivacyPolicy({ onGetStarted }: PrivacyPolicyProps) {
                 <span>Lodge a complaint with the ICO</span>
               </li>
             </ul>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-              <ExternalLink className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+            <div className="bg-brand-surface border border-brand-teal/25 rounded-xl p-4 flex items-start gap-3">
+              <ExternalLink className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
               <div>
                 <p className="text-gray-900 font-semibold mb-1">Information Commissioner's Office (ICO)</p>
                 <a 
                   href="https://ico.org.uk" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 underline"
+                  className="text-brand-teal-hover hover:text-brand-navy-dark underline"
                 >
                   https://ico.org.uk
                 </a>

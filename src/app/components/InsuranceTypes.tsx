@@ -25,7 +25,7 @@ export function InsuranceTypes({ onNavigate }: InsuranceTypesProps) {
         'Can be written in trust',
         'Fixed or decreasing cover options'
       ],
-      color: 'bg-blue-50 border-blue-200'
+      color: 'bg-brand-surface border-brand-teal/25'
     },
     {
       icon: Briefcase,

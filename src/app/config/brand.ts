@@ -9,6 +9,9 @@ export const BRAND = {
   tealSoft: '#2fc4bf',
   tealLight: '#7fd4d0',
   tealMuted: '#e8f7f6',
+  /** Soft page panels — teal-grey, replaces generic blue-50 */
+  surface: '#edf4f3',
+  surfaceAlt: '#e2eeed',
   heading: '#1D2D50',
 } as const;
 

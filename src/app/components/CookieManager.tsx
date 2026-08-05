@@ -275,7 +275,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
               <div className="mb-6 pb-6 border-b">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-start gap-3 flex-1">
-                    <BarChart className="w-5 h-5 text-blue-500 mt-1" />
+                    <BarChart className="w-5 h-5 text-brand-teal mt-1" />
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Analytics Cookies</h4>
                       <p className="text-sm text-gray-600">
@@ -301,7 +301,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
               <div className="mb-6 pb-6 border-b">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-start gap-3 flex-1">
-                    <Target className="w-5 h-5 text-purple-500 mt-1" />
+                    <Target className="w-5 h-5 text-brand-navy mt-1" />
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Marketing Cookies</h4>
                       <p className="text-sm text-gray-600">

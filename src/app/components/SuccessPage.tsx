@@ -8,7 +8,7 @@ interface SuccessPageProps {
 
 export function SuccessPage({ onReset }: SuccessPageProps) {
   return (
-    <div className="bg-gradient-to-br from-brand-teal-muted via-blue-50 to-purple-50 p-4 sm:p-6">
+    <div className="bg-gradient-to-br from-brand-teal-muted via-brand-surface to-brand-surface-alt p-4 sm:p-6">
       <div className="max-w-xl mx-auto text-center">
         {/* Success Animation */}
         <motion.div
@@ -89,9 +89,9 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 }}
-                className="flex items-start gap-3 p-3 bg-blue-50 rounded-xl"
+                className="flex items-start gap-3 p-3 bg-brand-surface rounded-xl"
               >
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-brand-surface0 rounded-full flex items-center justify-center flex-shrink-0">
                   <Mail className="w-4 h-4 text-white" />
                 </div>
                 <div>
@@ -106,9 +106,9 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.9 }}
-                className="flex items-start gap-3 p-3 bg-purple-50 rounded-xl"
+                className="flex items-start gap-3 p-3 bg-brand-surface-alt rounded-xl"
               >
-                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-brand-surface-alt0 rounded-full flex items-center justify-center flex-shrink-0">
                   <Phone className="w-4 h-4 text-white" />
                 </div>
                 <div>
@@ -130,7 +130,7 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
             <Button 
               onClick={onReset} 
               size="lg"
-              className="bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white px-8 py-5 rounded-xl text-base font-semibold shadow-xl w-full sm:w-auto"
+              className="bg-gradient-to-r from-brand-teal to-brand-navy hover:from-brand-teal-hover hover:to-brand-navy-dark text-white px-8 py-5 rounded-xl text-base font-semibold shadow-xl w-full sm:w-auto"
             >
               Back to Homepage
             </Button>

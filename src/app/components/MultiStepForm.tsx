@@ -114,18 +114,18 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
       onClick={onClick}
       className={`w-full text-left p-3 rounded-lg transition-all ${
         currentValue === value
-          ? 'bg-blue-100 border-2 border-blue-600'
+          ? 'bg-brand-teal-muted border-2 border-brand-teal'
           : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
       }`}
     >
       <div className="flex items-start gap-2">
         <span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-semibold ${
-          currentValue === value ? 'bg-blue-600 text-white' : 'bg-white text-blue-600 border border-blue-600'
+          currentValue === value ? 'bg-brand-teal text-white' : 'bg-white text-brand-teal-hover border border-brand-teal'
         }`}>
           {id}
         </span>
         <div className="flex-1">
-          <div className={`font-medium text-sm ${currentValue === value ? 'text-blue-700' : 'text-gray-900'}`}>
+          <div className={`font-medium text-sm ${currentValue === value ? 'text-brand-navy-dark' : 'text-gray-900'}`}>
             {label}
           </div>
           {description && (
@@ -158,7 +158,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
       onClick={onClick}
       className={`p-6 rounded-lg transition-all ${
         currentValue === value
-          ? 'bg-blue-100 border-2 border-blue-600'
+          ? 'bg-brand-teal-muted border-2 border-brand-teal'
           : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
       }`}
     >
@@ -170,11 +170,11 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
         </div>
         <div className="flex items-center gap-2">
           <span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-semibold ${
-            currentValue === value ? 'bg-blue-600 text-white' : 'bg-white text-blue-600 border border-blue-600'
+            currentValue === value ? 'bg-brand-teal text-white' : 'bg-white text-brand-teal-hover border border-brand-teal'
           }`}>
             {id}
           </span>
-          <span className={`font-medium text-sm ${currentValue === value ? 'text-blue-700' : 'text-gray-900'}`}>
+          <span className={`font-medium text-sm ${currentValue === value ? 'text-brand-navy-dark' : 'text-gray-900'}`}>
             {label}
           </span>
         </div>
@@ -245,7 +245,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -277,7 +277,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -317,7 +317,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -383,7 +383,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -421,7 +421,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -463,7 +463,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -495,7 +495,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -530,7 +530,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>
@@ -565,7 +565,7 @@ export function MultiStepForm({ onSubmit, onBack }: MultiStepFormProps) {
               <Button
                 type="submit"
                 disabled={!isStepValid()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-full"
+                className="bg-brand-teal hover:bg-brand-navy-dark text-white px-8 py-2 rounded-full"
               >
                 OK
               </Button>

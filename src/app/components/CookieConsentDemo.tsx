@@ -60,8 +60,8 @@ export function CookieConsentDemo() {
             )}
             {consentStatus === 'customized' && (
               <>
-                <CheckCircle className="w-4 h-4 text-blue-500" />
-                <span className="text-blue-700 font-semibold">Customized</span>
+                <CheckCircle className="w-4 h-4 text-brand-teal" />
+                <span className="text-brand-navy-dark font-semibold">Customized</span>
               </>
             )}
             {consentStatus === 'declined' && (

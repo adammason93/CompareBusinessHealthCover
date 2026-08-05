@@ -124,7 +124,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
       <DialogContent className="max-w-md p-0 bg-white">
         <div className="relative">
           {/* Header */}
-          <div className="bg-gradient-to-r from-brand-teal to-blue-500 p-6 text-white">
+          <div className="bg-gradient-to-r from-brand-teal to-brand-navy p-6 text-white">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -231,7 +231,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-12 bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white rounded-xl font-semibold"
+              className="w-full h-12 bg-gradient-to-r from-brand-teal to-brand-navy hover:from-brand-teal-hover hover:to-brand-navy-dark text-white rounded-xl font-semibold"
             >
               {loading ? (
                 <>

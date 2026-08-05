@@ -14,6 +14,8 @@
   --brand-teal-soft: #2fc4bf;
   --brand-teal-light: #7fd4d0;
   --brand-teal-muted: #e8f7f6;
+  --brand-surface: #edf4f3;
+  --brand-surface-alt: #e2eeed;
   --brand-heading: #1D2D50;
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
@@ -137,6 +139,8 @@
   --color-brand-teal-soft: var(--brand-teal-soft);
   --color-brand-teal-light: var(--brand-teal-light);
   --color-brand-teal-muted: var(--brand-teal-muted);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-surface-alt: var(--brand-surface-alt);
   --color-brand-heading: var(--brand-heading);
 }
 

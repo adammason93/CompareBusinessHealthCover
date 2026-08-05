@@ -6,7 +6,7 @@ interface TermsConditionsProps {
 
 export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -264,7 +264,7 @@ export function TermsConditions({ onGetStarted }: TermsConditionsProps) {
                 <span>Loss resulting from insurance agreements</span>
               </li>
             </ul>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="bg-brand-surface border border-brand-teal/25 rounded-xl p-4">
               <p className="text-gray-700">
                 <span className="font-semibold">Legal Note:</span> Nothing in these Terms excludes liability for death or personal injury caused by negligence, fraud, or any liability that cannot be excluded under UK law.
               </p>

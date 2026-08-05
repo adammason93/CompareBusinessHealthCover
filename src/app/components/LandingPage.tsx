@@ -358,12 +358,12 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
-              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal-hover" />
               <span className="text-xs sm:text-sm">Trusted by UK Businesses</span>
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
-              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal-hover" />
               <span className="text-xs sm:text-sm">Leading Business Insurers</span>
             </div>
             

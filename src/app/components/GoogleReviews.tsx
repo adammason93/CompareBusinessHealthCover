@@ -153,7 +153,7 @@ export function GoogleReviews() {
 
         {/* Review Carousel */}
         <div className="relative max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-brand-teal-muted to-blue-50 rounded-2xl p-8 sm:p-12 shadow-lg min-h-[300px] flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-brand-teal-muted to-brand-surface rounded-2xl p-8 sm:p-12 shadow-lg min-h-[300px] flex flex-col justify-between">
             {/* Quote Icon */}
             <Quote className="w-12 h-12 text-brand-teal mb-4 opacity-50" />
             
@@ -175,7 +175,7 @@ export function GoogleReviews() {
                       className="w-12 h-12 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-12 h-12 bg-gradient-to-br from-brand-teal-soft to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-teal-soft to-brand-navy rounded-full flex items-center justify-center text-white font-bold text-lg">
                       {reviews[currentIndex].author_name.charAt(0)}
                     </div>
                   )}
@@ -233,7 +233,7 @@ export function GoogleReviews() {
                     className="w-10 h-10 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-br from-brand-teal-soft to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 bg-gradient-to-br from-brand-teal-soft to-brand-navy rounded-full flex items-center justify-center text-white font-bold">
                     {review.author_name.charAt(0)}
                   </div>
                 )}

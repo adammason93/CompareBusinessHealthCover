@@ -6,7 +6,7 @@ interface PrivacyPolicyPageProps {
 
 export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-brand-teal-muted">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#1D2D50] to-[#16233d] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,15 +229,15 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
                 <span>Lodge a complaint with the ICO</span>
               </li>
             </ul>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-              <ExternalLink className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+            <div className="bg-brand-surface border border-brand-teal/25 rounded-xl p-4 flex items-start gap-3">
+              <ExternalLink className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
               <div>
                 <p className="text-gray-900 font-semibold mb-1">Information Commissioner's Office (ICO)</p>
                 <a 
                   href="https://ico.org.uk" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 underline"
+                  className="text-brand-teal-hover hover:text-brand-navy-dark underline"
                 >
                   https://ico.org.uk
                 </a>
@@ -311,7 +311,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
           <div className="border-t border-gray-200 pt-8">
             <button
               onClick={() => onNavigate('home')}
-              className="w-full sm:w-auto bg-gradient-to-r from-brand-teal to-blue-500 hover:from-brand-teal-hover hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all"
+              className="w-full sm:w-auto bg-gradient-to-r from-brand-teal to-brand-navy hover:from-brand-teal-hover hover:to-brand-navy-dark text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all"
             >
               Back to Home
             </button>
