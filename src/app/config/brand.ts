@@ -24,10 +24,10 @@ export const BRAND = {
 
 export const LOGO = {
   /** Cache-busted filename so browsers/CDN pick up the new green mark */
-  src: '/logo-v3.png',
+  src: '/logo-v4.png',
   iconSrc: '/favicon-icon.png',
   businessHandshake: '/images/business-handshake.png',
-  heroOfficeTeam: '/images/hero-office-team-v3.png',
-  width: 889,
-  height: 250,
+  heroOfficeTeam: '/images/hero-office-team-v4.png',
+  width: 1335,
+  height: 375,
 } as const;
