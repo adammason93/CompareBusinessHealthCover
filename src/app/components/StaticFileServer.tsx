@@ -181,13 +181,6 @@ const SITEMAP_CONTENT = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.8</priority>
   </url>
 
-  <url>
-    <loc>https://comparebusinesshealthcover.co.uk/partner-insurers</loc>
-    <lastmod>2026-03-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
   <!-- Legal Pages -->
   <url>
     <loc>https://comparebusinesshealthcover.co.uk/privacy-policy</loc>
@@ -260,7 +253,6 @@ Allow: /international-health-insurance
 Allow: /corporate-health-insurance
 Allow: /small-company-health-insurance
 Allow: /insurance-types
-Allow: /partner-insurers
 Allow: /privacy-policy
 Allow: /terms-conditions
 Allow: /cookie-policy

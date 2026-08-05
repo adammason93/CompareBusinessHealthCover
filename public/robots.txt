@@ -32,7 +32,6 @@ Allow: /international-health-insurance
 Allow: /corporate-health-insurance
 Allow: /small-company-health-insurance
 Allow: /insurance-types
-Allow: /partner-insurers
 Allow: /privacy-policy
 Allow: /terms-conditions
 Allow: /cookie-policy

@@ -5,7 +5,6 @@ import { useState, useEffect, useRef, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
-import { ChatBot } from "@/app/components/ChatBot";
 import { Header } from "@/app/components/Header";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { ReviewSection } from "@/app/components/ReviewSection";
@@ -732,9 +731,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         isOpen={isContactModalOpen} 
         onClose={() => setIsContactModalOpen(false)}
       />
-
-      {/* ChatBot */}
-      <ChatBot />
 
       {/* Benefit Details Modal */}
       {benefitModalOpen && (

@@ -1,27 +1,44 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const insurers = [
-  { name: "Aviva", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "AXA", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "Vitality", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "Bupa", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
-  { name: "WPA", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop" },
+  {
+    name: "Aviva",
+    logo: "/images/insurers/aviva.png",
+    description: "Trusted UK insurer for business and employee health cover",
+  },
+  {
+    name: "AXA",
+    logo: "/images/insurers/axa.png",
+    description: "Comprehensive private medical insurance for UK companies",
+  },
+  {
+    name: "Vitality",
+    logo: "/images/insurers/vitality.png",
+    description: "Health cover that rewards healthier living for your team",
+  },
+  {
+    name: "Bupa",
+    logo: "/images/insurers/bupa.png",
+    description: "Leading healthcare provider with strong business schemes",
+  },
+  {
+    name: "WPA",
+    logo: "/images/insurers/wpa.png",
+    description: "Specialist health insurance for businesses of all sizes",
+  },
 ];
 
 export function InsurerCarousel() {
-  const [isMobile, setIsMobile] = useState(false);
   const [slidesToShow, setSlidesToShow] = useState(3);
 
   // Detect mobile and set slides dynamically
   useEffect(() => {
     const updateSlides = () => {
       const width = window.innerWidth;
-      setIsMobile(width < 768);
-      
+
       if (width < 768) {
         setSlidesToShow(1); // Mobile: 1 card
       } else if (width < 1024) {
@@ -30,10 +47,10 @@ export function InsurerCarousel() {
         setSlidesToShow(3); // Desktop: 3 cards
       }
     };
-    
+
     updateSlides();
-    window.addEventListener('resize', updateSlides);
-    return () => window.removeEventListener('resize', updateSlides);
+    window.addEventListener("resize", updateSlides);
+    return () => window.removeEventListener("resize", updateSlides);
   }, []);
 
   const settings = {
@@ -57,7 +74,7 @@ export function InsurerCarousel() {
     customPaging: () => (
       <div className="w-2 h-2 rounded-full bg-gray-400 hover:bg-gray-600 transition-colors mt-4"></div>
     ),
-    dotsClass: "slick-dots !flex !justify-center !gap-2 !static"
+    dotsClass: "slick-dots !flex !justify-center !gap-2 !static",
   };
 
   return (
@@ -66,28 +83,27 @@ export function InsurerCarousel() {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12">
           Compare Leading Business Insurers
         </h2>
-        
+
         <div className="insurer-carousel-wrapper">
           <Slider {...settings}>
-            {insurers.map((insurer, index) => (
-              <div key={index} className="px-2 sm:px-3">
+            {insurers.map((insurer) => (
+              <div key={insurer.name} className="px-2 sm:px-3">
                 <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 h-64 sm:h-72 md:h-80 flex flex-col items-center justify-between shadow-md hover:shadow-xl transition-shadow">
                   <div className="flex-1 flex items-center justify-center w-full p-4">
-                    <img 
-                      src={insurer.logo} 
+                    <img
+                      src={insurer.logo}
                       alt={`${insurer.name} logo`}
                       className="max-w-full max-h-full object-contain"
-                      style={{ maxHeight: '140px' }}
+                      style={{ maxHeight: "140px" }}
+                      loading="lazy"
                     />
                   </div>
-                  
+
                   <div className="text-center mt-4 sm:mt-6">
                     <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2 text-gray-900">
                       {insurer.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                      {insurer.description}
-                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{insurer.description}</p>
                   </div>
                 </div>
               </div>

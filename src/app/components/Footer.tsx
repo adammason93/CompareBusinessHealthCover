@@ -54,14 +54,6 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               </li>
               <li>
                 <button 
-                  onClick={() => handleNavigation('partner-insurers')}
-                  className="hover:text-brand-teal text-left"
-                >
-                  Partner Insurers
-                </button>
-              </li>
-              <li>
-                <button 
                   onClick={() => handleNavigation('sitemap')}
                   className="hover:text-brand-teal text-left"
                 >

@@ -23,7 +23,6 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       icon: Shield,
       links: [
         { label: 'Insurance Types Explained', page: 'insurance-types' },
-        { label: 'Partner Insurers', page: 'partner-insurers' },
         { label: 'Life Insurance', page: 'insurance-types' },
         { label: 'Income Protection', page: 'insurance-types' },
         { label: 'Mortgage Protection', page: 'insurance-types' }

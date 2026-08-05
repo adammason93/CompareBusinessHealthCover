@@ -25,7 +25,6 @@ import { TermsConditions } from "@/app/pages/TermsConditions";
 import { CookiePolicy } from "@/app/components/CookiePolicy";
 import { TermsAndConditions } from "@/app/components/TermsAndConditions";
 import { InsuranceTypes } from "@/app/components/InsuranceTypes";
-import { PartnerInsurers } from "@/app/components/PartnerInsurers";
 import { Sitemap } from "@/app/components/Sitemap";
 import { Disclaimer } from "@/app/pages/Disclaimer";
 import { AdminLeads } from "@/app/pages/AdminLeads";
@@ -296,8 +295,6 @@ export default function App() {
         return <TermsAndConditions onGetStarted={handleGetStarted} />;
       case 'insurance-types':
         return <InsuranceTypes onGetStarted={handleGetStarted} />;
-      case 'partner-insurers':
-        return <PartnerInsurers onGetStarted={handleGetStarted} />;
       case 'sitemap':
         return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':

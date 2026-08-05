@@ -313,13 +313,6 @@ app.get("/make-server-2031af1c/sitemap.xml", (c) => {
     <priority>0.8</priority>
   </url>
 
-  <url>
-    <loc>https://comparebusinesshealthcover.co.uk/partner-insurers</loc>
-    <lastmod>2026-03-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
   <!-- Legal Pages -->
   <url>
     <loc>https://comparebusinesshealthcover.co.uk/privacy-policy</loc>

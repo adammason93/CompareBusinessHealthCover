@@ -81,13 +81,6 @@ export const SEO_CONFIG = {
       keywords: 'types of business health insurance UK, SME PMI options, employee medical cover categories',
     },
 
-    'partner-insurers': {
-      title: 'Our Partner Business Insurers',
-      description:
-        "Work with the UK's leading business health insurance providers. All broker partners are FCA-regulated for your protection.",
-      keywords: 'UK business health insurance providers, FCA regulated insurance brokers, SME medical insurers',
-    },
-
     'about-us': {
       title: `About ${SITE.name}`,
       description: `${SITE.name} helps UK SMEs compare business health insurance from FCA-regulated brokers. We simplify employee medical cover comparison so you can find the right plan for your team.`,
