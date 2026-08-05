@@ -257,7 +257,7 @@
   }
 
   /* Optimize image rendering */
-  img {
+  img:not([data-logo]) {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
   }

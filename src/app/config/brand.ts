@@ -16,4 +16,6 @@ export const LOGO = {
   src: '/logo.png',
   iconSrc: '/favicon-icon.png',
   businessHandshake: '/images/business-handshake.png',
+  width: 1024,
+  height: 342,
 } as const;

@@ -147,7 +147,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
 
           {/* Logo */}
           <div className="flex justify-center items-start">
-            <div className="bg-white rounded-lg px-4 py-2">
+            <div className="inline-flex bg-white rounded-lg px-5 py-3">
               <Logo onClick={() => handleNavigation('home')} size="lg" />
             </div>
           </div>

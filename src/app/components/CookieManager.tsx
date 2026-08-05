@@ -12,8 +12,14 @@ interface CookiePreferences {
   functional: boolean;
 }
 
+function hasCookieConsentChoice(): boolean {
+  return Boolean(
+    localStorage.getItem('cookieConsent') || sessionStorage.getItem('cookieConsent')
+  );
+}
+
 export function CookieManager({ onNavigate }: CookieManagerProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => !hasCookieConsentChoice());
   const [showCustomize, setShowCustomize] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
     essential: true,
@@ -23,21 +29,25 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
   });
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem('cookieConsent');
-    const sessionConsent = sessionStorage.getItem('cookieConsent');
-    
-    if (!consent && !sessionConsent) {
-      // Show banner after a brief delay for better UX
-      setTimeout(() => setIsVisible(true), 1000);
+    if (!hasCookieConsentChoice()) {
+      setIsVisible(true);
     } else {
-      // Load existing preferences
       loadPreferences();
     }
 
-    // Listen for storage changes (cross-tab sync)
+    const handleOpenPreferences = () => {
+      loadPreferences();
+      setShowCustomize(true);
+      setIsVisible(true);
+    };
+
+    window.addEventListener('open-cookie-preferences', handleOpenPreferences);
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('open-cookie-preferences', handleOpenPreferences);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const handleStorageChange = (e: StorageEvent) => {
@@ -214,10 +224,10 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
     return (
       <>
         {/* Overlay */}
-        <div className="fixed inset-0 bg-black/60 z-40" />
+        <div className="fixed inset-0 bg-black/60 z-[9998]" />
         
         {/* Customize Panel */}
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] p-4">
           <div className="max-w-2xl w-full bg-white rounded-xl shadow-2xl overflow-hidden animate-slide-up">
             {/* Header */}
             <div className="bg-gradient-to-r from-[#16233d] to-[#1D2D50] p-6">
@@ -382,10 +392,10 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
   return (
     <>
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-40" />
+      <div className="fixed inset-0 bg-black/50 z-[9998]" />
       
       {/* Cookie Consent Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 animate-slide-up">
+      <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 sm:p-6 animate-slide-up">
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#16233d] to-[#1D2D50] rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
           <div className="p-6 sm:p-8">
             <div className="flex items-start gap-4">

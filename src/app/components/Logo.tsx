@@ -9,10 +9,11 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const widths = {
-  sm: 'w-48 max-w-none',
-  md: 'w-52 sm:w-64 max-w-none',
-  lg: 'w-64 sm:w-80 max-w-none',
+/** Height-led sizing keeps the wide logo proportional in header/footer layouts */
+const sizes = {
+  sm: 'h-8 w-auto max-w-[11rem]',
+  md: 'h-9 sm:h-10 w-auto max-w-[12.5rem] sm:max-w-[15rem]',
+  lg: 'h-12 sm:h-14 w-auto max-w-[16rem] sm:max-w-[19rem]',
 } as const;
 
 export const Logo = memo(function Logo({ className = '', onClick, size = 'md' }: LogoProps) {
@@ -20,20 +21,22 @@ export const Logo = memo(function Logo({ className = '', onClick, size = 'md' }:
     <img
       src={LOGO.src}
       alt={SITE.name}
-      className={`${widths[size]} h-auto object-contain object-left ${className}`}
-      width={320}
-      height={107}
+      data-logo
+      className={`block shrink-0 object-contain object-left ${sizes[size]} ${className}`}
+      width={LOGO.width}
+      height={LOGO.height}
       fetchPriority="high"
+      decoding="async"
     />
   );
 
   if (onClick) {
     return (
-      <button type="button" onClick={onClick} className="shrink-0 cursor-pointer" aria-label={`${SITE.name} home`}>
+      <button type="button" onClick={onClick} className="inline-flex shrink-0 cursor-pointer" aria-label={`${SITE.name} home`}>
         {image}
       </button>
     );
   }
 
-  return <div className="shrink-0">{image}</div>;
+  return <div className="inline-flex shrink-0">{image}</div>;
 });

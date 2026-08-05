@@ -9,10 +9,8 @@ export function CookieSettingsButton() {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
-    console.log('🍪 Opening cookie settings');
     resetCookieConsent();
-    // Force reload to show banner
-    window.location.reload();
+    window.dispatchEvent(new CustomEvent('open-cookie-preferences'));
   };
 
   return (
