@@ -8,12 +8,12 @@ export const BRAND = {
   navyDark: '#1A1D24',
   navyDeeper: '#14161B',
   navyStrip: '#2F3440',
-  /** CTAs, links, accents — deep wine burgundy */
-  teal: '#8B3A4A',
-  tealHover: '#6E2E3B',
-  tealSoft: '#A64D5C',
-  tealLight: '#D4A5AE',
-  tealMuted: '#F5EAEC',
+  /** CTAs, links, accents — softened wine burgundy */
+  teal: '#A04D5E',
+  tealHover: '#854052',
+  tealSoft: '#B86B7A',
+  tealLight: '#E0B8BE',
+  tealMuted: '#FAF2F4',
   /** Soft page panels — warm stone with a blush tint */
   surface: '#F4F0F1',
   surfaceAlt: '#EBE4E6',
