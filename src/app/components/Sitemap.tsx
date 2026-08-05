@@ -12,6 +12,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       icon: FileText,
       links: [
         { label: 'Home', page: 'home' },
+        { label: 'Blog', page: 'blog' },
         { label: 'About Us', page: 'about-us' },
         { label: 'Contact Us', page: 'contact-us' },
         { label: 'My Submissions', page: 'my-submissions' }

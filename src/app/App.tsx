@@ -7,7 +7,6 @@ import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { AuthModal } from "@/app/components/AuthModal";
 import { MySubmissions } from "@/app/components/MySubmissions";
-import { SupabaseConnectionTest } from "@/app/components/SupabaseConnectionTest";
 import { Dialog, DialogContent } from "@/app/components/ui/dialog";
 import { CookieManager } from "@/app/components/CookieManager";
 import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
@@ -30,11 +29,19 @@ import { PartnerInsurers } from "@/app/components/PartnerInsurers";
 import { Sitemap } from "@/app/components/Sitemap";
 import { Disclaimer } from "@/app/pages/Disclaimer";
 import { AdminLeads } from "@/app/pages/AdminLeads";
+import { BlogIndexPage } from "@/app/pages/BlogIndexPage";
+import { BlogPostPage } from "@/app/pages/BlogPostPage";
+import { BlogAdminPage } from "@/app/pages/BlogAdminPage";
 import { StaticFileServer } from "@/app/components/StaticFileServer";
 import { SEOHead } from "@/app/components/SEOHead";
 import { getSEOConfig } from "@/app/config/seo";
 import { SITE } from "@/app/config/site";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
+
+/** `/blog-admin/` must match `blog-admin` (hosts often normalize with a trailing slash). */
+function routeKeyFromPathname(pathname: string): string {
+  return pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
+}
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -43,61 +50,61 @@ export default function App() {
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPage, setCurrentPage] = useState(() => {
-    // Check pathname first (for SEO-friendly URLs like /about-us)
-    const pathname = window.location.pathname.slice(1); // Remove leading slash
-    
-    // Handle static file requests - serve them directly
+    const pathname = routeKeyFromPathname(window.location.pathname);
+
     if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
-      console.log('🔍 Static file requested:', pathname, '- Will serve from /static/ route');
       return `static/${pathname}`;
     }
-    
-    if (pathname && pathname !== '' && pathname !== 'index.html') {
-      console.log('🎯 Initial page from pathname:', pathname);
+
+    if (pathname) {
       return pathname;
     }
-    
-    // Check query params (for mobile)
+
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = urlParams.get('page');
     if (pageParam) {
-      console.log('🎯 Initial page from query param:', pageParam);
       return pageParam;
     }
-    
-    // Fallback to hash
+
     const hash = window.location.hash.slice(1);
-    console.log('🎯 Initial hash:', hash);
     return hash || 'home';
   });
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
+  const [blogSeoOverride, setBlogSeoOverride] = useState<{ title: string; description: string } | null>(null);
 
-  // Handle URL hash navigation
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1); // Remove the #
-      console.log('🔗 Hash changed to:', hash);
-      console.log('🔗 Full URL:', window.location.href);
-      console.log('🔗 Window location hash:', window.location.hash);
-      if (hash) {
-        setCurrentPage(hash);
-      } else {
-        setCurrentPage('home');
+    if (!currentPage.startsWith("blog/") || currentPage === "blog") {
+      setBlogSeoOverride(null);
+    }
+  }, [currentPage]);
+
+  // Prefer path-based URLs; only use hash when there is no real path.
+  useEffect(() => {
+    const syncFromLocation = () => {
+      const pathname = routeKeyFromPathname(window.location.pathname);
+      if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
+        setCurrentPage(`static/${pathname}`);
+        window.scrollTo(0, 0);
+        return;
       }
-      // Scroll to top when page changes
+      if (pathname) {
+        setCurrentPage(pathname);
+        window.scrollTo(0, 0);
+        return;
+      }
+      const hash = window.location.hash.slice(1);
+      setCurrentPage(hash || 'home');
       window.scrollTo(0, 0);
     };
 
-    // Force check hash multiple times for mobile
-    handleHashChange();
-    setTimeout(handleHashChange, 100);
-    setTimeout(handleHashChange, 500);
-    setTimeout(handleHashChange, 1000);
-
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    syncFromLocation();
+    window.addEventListener('hashchange', syncFromLocation);
+    window.addEventListener('popstate', syncFromLocation);
+    return () => {
+      window.removeEventListener('hashchange', syncFromLocation);
+      window.removeEventListener('popstate', syncFromLocation);
+    };
   }, []);
 
   // Debug current page
@@ -193,18 +200,21 @@ export default function App() {
   };
 
   const handleNavigate = (page: string) => {
-    console.log('🔄 Navigation requested to:', page);
-    console.log('🔄 Current page before:', currentPage);
-    setCurrentPage(page);
-    console.log('🔄 setCurrentPage called with:', page);
-    
-    // Use requestAnimationFrame to ensure scroll happens after render
+    const target = page.replace(/\/+$/, "") || "home";
+    setCurrentPage(target);
+    if (target.startsWith('static/')) {
+      const file = target.replace('static/', '');
+      window.history.pushState({ page: target }, '', `/${file}`);
+    } else if (target === 'home') {
+      window.history.pushState({ page: 'home' }, '', '/');
+    } else {
+      window.history.pushState({ page: target }, '', `/${target}`);
+    }
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
-        console.log('📜 Force scrolled to top');
       });
     });
   };
@@ -242,8 +252,11 @@ export default function App() {
     );
   };
 
-  // Get SEO config for current page
-  const seoConfig = getSEOConfig(currentPage);
+  const baseSeo = getSEOConfig(currentPage);
+  const seoConfig =
+    blogSeoOverride && currentPage.startsWith("blog/") && currentPage !== "blog"
+      ? { ...baseSeo, title: blogSeoOverride.title, description: blogSeoOverride.description }
+      : baseSeo;
 
   const renderPage = () => {
     // Handle static file requests
@@ -286,18 +299,35 @@ export default function App() {
       case 'partner-insurers':
         return <PartnerInsurers onGetStarted={handleGetStarted} />;
       case 'sitemap':
-        return <Sitemap onGetStarted={handleGetStarted} />;
+        return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':
         return <Disclaimer onGetStarted={handleGetStarted} />;
+      case 'blog':
+        return <BlogIndexPage onNavigate={handleNavigate} onGetStarted={handleGetStarted} />;
+      case 'blog-admin':
+        return null; // Rendered with chrome separately
       case 'home':
         return null; // Home is handled separately in the main render
-      default:
-        // If no match found, redirect to home
+      default: {
+        if (currentPage.startsWith('blog/')) {
+          const slug = currentPage.slice('blog/'.length);
+          if (slug) {
+            return (
+              <BlogPostPage
+                slug={slug}
+                onNavigate={handleNavigate}
+                onGetStarted={handleGetStarted}
+                onMetaLoaded={setBlogSeoOverride}
+              />
+            );
+          }
+        }
         console.warn('⚠️ Unknown page:', currentPage, '- Redirecting to home');
         if (currentPage !== 'home') {
           setTimeout(() => setCurrentPage('home'), 0);
         }
         return null;
+      }
     }
   };
 
@@ -331,6 +361,19 @@ export default function App() {
       
       {currentPage === 'admin-leads' ? (
         <AdminLeads />
+      ) : currentPage === 'blog-admin' ? (
+        <>
+          <Header
+            onGetStarted={handleGetStarted}
+            onNavigate={handleNavigate}
+            onOpenAuth={handleOpenAuthModal}
+            onLogout={handleLogout}
+            onViewSubmissions={handleViewSubmissions}
+            user={user}
+          />
+          <BlogAdminPage />
+          <Footer onNavigate={handleNavigate} />
+        </>
       ) : currentPage.startsWith('static/') ? (
         // Render static files without header/footer
         renderPage()

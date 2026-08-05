@@ -1,0 +1,171 @@
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
+import { Loader2, BookOpen } from "lucide-react";
+import { Button } from "@/app/components/ui/button";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { supabaseEdgeUrl } from "/utils/supabase/edge";
+import { publicAnonKey } from "/utils/supabase/info";
+import { blogSiteQuery } from "@/app/config/blog";
+
+export interface BlogListItem {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  cover_image_url?: string | null;
+  published_at: string | null;
+  updated_at: string;
+}
+
+interface BlogIndexPageProps {
+  onNavigate: (page: string) => void;
+  onGetStarted: () => void;
+}
+
+export function BlogIndexPage({ onNavigate, onGetStarted }: BlogIndexPageProps) {
+  const [posts, setPosts] = useState<BlogListItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(supabaseEdgeUrl(`/blog/posts${blogSiteQuery()}`), {
+          headers: { Authorization: `Bearer ${publicAnonKey}` },
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const msg =
+            (typeof json.error === "string" && json.error) ||
+            (typeof json.message === "string" && json.message) ||
+            "Could not load posts";
+          throw new Error(msg);
+        }
+        if (!cancelled) {
+          setPosts(json.posts ?? []);
+        }
+      } catch (e: unknown) {
+        if (!cancelled) {
+          setError(e instanceof Error ? e.message : "Could not load posts");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <section className="bg-brand-navy text-white py-14 sm:py-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 mb-4">
+            <BookOpen className="w-7 h-7 text-brand-teal-light" aria-hidden />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Blog</h1>
+          <p className="mt-3 text-lg text-gray-200">
+            Guides and updates on business health insurance for UK SMEs.
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {loading && (
+          <div className="flex justify-center py-16 text-gray-500">
+            <Loader2 className="w-8 h-8 animate-spin" aria-hidden />
+            <span className="sr-only">Loading posts</span>
+          </div>
+        )}
+
+        {!loading && error && (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 text-amber-900 px-4 py-3 text-sm max-w-3xl mx-auto">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && posts.length === 0 && (
+          <p className="text-gray-600 text-center py-8">No posts yet. Check back soon.</p>
+        )}
+
+        {!loading && !error && posts.length > 0 && (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 list-none p-0 m-0">
+            {posts.map((p) => {
+              const dateStr = p.published_at || p.updated_at;
+              const dateLabel = dateStr
+                ? format(new Date(dateStr), "d MMMM yyyy")
+                : "";
+              return (
+                <li key={p.id} className="min-w-0">
+                  <article className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:border-brand-teal/40 hover:shadow-md transition-all h-full flex flex-col">
+                    {p.cover_image_url ? (
+                      <button
+                        type="button"
+                        onClick={() => onNavigate(`blog/${p.slug}`)}
+                        className="block w-full aspect-[4/3] sm:aspect-[16/10] bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal shrink-0"
+                      >
+                        <ImageWithFallback
+                          src={p.cover_image_url}
+                          alt={p.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => onNavigate(`blog/${p.slug}`)}
+                        className="block w-full aspect-[4/3] sm:aspect-[16/10] bg-gradient-to-br from-slate-100 to-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal shrink-0"
+                        aria-label={p.title}
+                      />
+                    )}
+                    <div className="p-4 flex flex-col flex-1 min-h-0">
+                      <p className="text-[11px] text-gray-500 uppercase tracking-wide mb-1">{dateLabel}</p>
+                      <h2 className="text-base font-semibold text-gray-900 leading-snug">
+                        <button
+                          type="button"
+                          onClick={() => onNavigate(`blog/${p.slug}`)}
+                          className="text-left w-full hover:text-brand-teal focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal rounded line-clamp-2"
+                        >
+                          {p.title}
+                        </button>
+                      </h2>
+                      {p.excerpt ? (
+                        <p className="mt-2 text-gray-600 text-sm leading-relaxed line-clamp-2">{p.excerpt}</p>
+                      ) : null}
+                      <div className="mt-auto pt-3">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="w-full text-brand-navy border-brand-teal/30 hover:bg-brand-teal/10"
+                          onClick={() => onNavigate(`blog/${p.slug}`)}
+                        >
+                          Read more
+                        </Button>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        <div className="mt-12 text-center">
+          <Button
+            type="button"
+            className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-8"
+            onClick={onGetStarted}
+          >
+            Get SME Quote
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}

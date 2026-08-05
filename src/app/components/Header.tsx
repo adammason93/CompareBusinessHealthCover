@@ -50,6 +50,12 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                 )}
               </div>
               <button
+                onClick={() => onNavigate('blog')}
+                className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
+              >
+                Blog
+              </button>
+              <button
                 onClick={() => onNavigate('about-us')}
                 className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
               >
@@ -101,6 +107,15 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                 )}
               </div>
 
+              <button
+                onClick={() => {
+                  onNavigate('blog');
+                  closeMobileMenu();
+                }}
+                className="block w-full text-left text-white font-medium py-2"
+              >
+                Blog
+              </button>
               <button
                 onClick={() => {
                   onNavigate('about-us');

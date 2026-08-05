@@ -9,6 +9,7 @@ import { ChatBot } from "@/app/components/ChatBot";
 import { Header } from "@/app/components/Header";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
 import { ReviewSection } from "@/app/components/ReviewSection";
+import { HomeBlogSection } from "@/app/components/HomeBlogSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -720,6 +721,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
       {/* Review Section */}
       <ReviewSection />
+
+      <HomeBlogSection onNavigate={onNavigate} />
 
       {/* Footer */}
       <Footer onNavigate={onNavigate} />

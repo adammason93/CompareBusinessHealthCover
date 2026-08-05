@@ -134,9 +134,27 @@ export const SEO_CONFIG = {
       description: `Complete sitemap of ${SITE.name}. Browse all business health insurance guides and resources.`,
       keywords: 'site map, SME health insurance pages UK',
     },
+
+    blog: {
+      title: `Business Health Insurance Blog | ${SITE.name}`,
+      description:
+        'Guides and updates on business health insurance for UK SMEs — employee cover, costs, tax benefits, and choosing the right plan for your team.',
+      keywords:
+        'business health insurance blog, SME medical cover guides UK, employee health benefits articles',
+    },
+
+    'blog-admin': {
+      title: 'Blog Admin',
+      description: 'Manage blog posts for Compare Business Healthcover.',
+      keywords: '',
+      noindex: true,
+    },
   },
 };
 
 export function getSEOConfig(page: string) {
+  if (page.startsWith('blog/') && page !== 'blog') {
+    return SEO_CONFIG.pages.blog;
+  }
   return SEO_CONFIG.pages[page as keyof typeof SEO_CONFIG.pages] || SEO_CONFIG.pages.home;
 }
