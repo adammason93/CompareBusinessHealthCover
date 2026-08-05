@@ -9,11 +9,11 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-/** Height-led sizing keeps the wide logo proportional in header/footer layouts */
+/** Width-led sizing with h-auto preserves the logo's natural proportions */
 const sizes = {
-  sm: 'h-8 w-auto max-w-[11rem]',
-  md: 'h-9 sm:h-10 w-auto max-w-[12.5rem] sm:max-w-[15rem]',
-  lg: 'h-12 sm:h-14 w-auto max-w-[16rem] sm:max-w-[19rem]',
+  sm: 'w-48 h-auto max-w-full',
+  md: 'w-56 sm:w-64 md:w-72 h-auto max-w-full',
+  lg: 'w-64 sm:w-80 h-auto max-w-full',
 } as const;
 
 export const Logo = memo(function Logo({ className = '', onClick, size = 'md' }: LogoProps) {
