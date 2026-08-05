@@ -531,7 +531,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Why Take Out Health Insurance Section */}
-      <section id="why-health-insurance" className="relative py-32 overflow-hidden -mt-1 bg-brand-navy-dark text-white">
+      <section id="why-health-insurance" className="relative pt-32 overflow-hidden -mt-1 bg-brand-navy-dark text-white">
         <div className="section-hero-image">
           <ImageWithFallback 
             src={LOGO.businessHandshake}
@@ -553,7 +553,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             Why offer employee health cover?
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-12 pb-24">
+          <div className="grid md:grid-cols-3 gap-12 pb-16">
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <Users className="w-12 h-12 text-brand-teal-light" />
@@ -586,10 +586,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           </div>
         </div>
         
-        {/* Curved bottom border */}
-        <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24">
-            <path d="M0,120 L0,60 Q600,0 1200,60 L1200,120 Z" fill="var(--brand-surface)"></path>
+        {/* Curved bottom — in flow so no straight navy strip under the wave */}
+        <div className="relative z-10 -mb-px leading-[0]">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-20 sm:h-24 block" aria-hidden="true">
+            <path d="M0,120 L0,60 Q600,0 1200,60 L1200,120 Z" fill="var(--brand-surface)" />
           </svg>
         </div>
       </section>
