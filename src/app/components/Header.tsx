@@ -26,10 +26,12 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
 
   return (
     <>
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-brand-navy text-white border-b border-brand-navy-dark shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between gap-4">
-            <Logo onClick={() => onNavigate('home')} size="md" />
+            <div className="bg-white rounded-lg px-3 py-1.5 shadow-sm">
+              <Logo onClick={() => onNavigate('home')} size="md" />
+            </div>
 
             <nav className="hidden lg:flex items-center gap-6">
               <div
@@ -37,13 +39,13 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                 onMouseEnter={() => setCoverDropdownOpen(true)}
                 onMouseLeave={() => setCoverDropdownOpen(false)}
               >
-                <button className="text-gray-900 hover:text-brand-teal flex items-center gap-1 py-2 whitespace-nowrap font-medium">
+                <button className="text-white/90 hover:text-brand-teal-light flex items-center gap-1 py-2 whitespace-nowrap font-medium">
                   {BUSINESS_COVER_NAV_LABEL}
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {coverDropdownOpen && (
                   <div className="absolute top-full left-0 pt-2 z-50">
-                    <div className="bg-brand-navy text-white rounded-lg shadow-lg py-4 px-6 min-w-[300px]">
+                    <div className="bg-brand-navy-dark text-white rounded-lg shadow-lg py-4 px-6 min-w-[300px] border border-brand-teal/20">
                       <BusinessCoverNavMenu onNavigate={onNavigate} />
                     </div>
                   </div>
@@ -51,19 +53,19 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               </div>
               <button
                 onClick={() => onNavigate('about-us')}
-                className="text-gray-900 hover:text-brand-teal py-2 whitespace-nowrap"
+                className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
               >
                 About Us
               </button>
               <button
                 onClick={() => onNavigate('contact-us')}
-                className="text-gray-900 hover:text-brand-teal py-2 whitespace-nowrap"
+                className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
               >
                 Contact Us
               </button>
               <button
                 onClick={onGetStarted}
-                className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 py-2.5 text-sm font-medium whitespace-nowrap"
+                className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 py-2.5 text-sm font-semibold whitespace-nowrap shadow-md"
               >
                 Get SME Quote
               </button>
@@ -71,7 +73,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-gray-600 hover:text-brand-teal p-2"
+              className="lg:hidden text-white/80 hover:text-brand-teal-light p-2"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -80,12 +82,12 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
+          <div className="lg:hidden bg-brand-navy-dark border-t border-brand-teal/20">
             <div className="px-4 py-6 space-y-4 max-h-[80vh] overflow-y-auto">
               <div>
                 <button
                   onClick={() => setCoverDropdownOpen(!coverDropdownOpen)}
-                  className="flex items-center justify-between w-full text-gray-900 font-medium py-2"
+                  className="flex items-center justify-between w-full text-white font-medium py-2"
                 >
                   {BUSINESS_COVER_NAV_LABEL}
                   <ChevronDown className={`w-5 h-5 transition-transform ${coverDropdownOpen ? 'rotate-180' : ''}`} />
@@ -106,7 +108,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                   onNavigate('about-us');
                   closeMobileMenu();
                 }}
-                className="block w-full text-left text-gray-900 font-medium py-2"
+                className="block w-full text-left text-white font-medium py-2"
               >
                 About Us
               </button>
@@ -115,7 +117,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                   onNavigate('contact-us');
                   closeMobileMenu();
                 }}
-                className="block w-full text-left text-gray-900 font-medium py-2"
+                className="block w-full text-left text-white font-medium py-2"
               >
                 Contact Us
               </button>

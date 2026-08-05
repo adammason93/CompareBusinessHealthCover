@@ -58,8 +58,20 @@
   transition: all 0.1s ease;
 }
 
+/* Never apply page background wash on hero sections */
+.section-hero.circle-pattern,
+.hero-with-image {
+  background-color: var(--brand-navy);
+  background-image: none;
+}
+
+.hero-with-image {
+  @apply relative overflow-hidden text-white;
+  background-color: var(--brand-navy);
+}
+
 /* Background Pattern — soft teal-grey wash (distinct from generic blue-grey sites) */
-.circle-pattern {
+.circle-pattern:not(.section-hero) {
   background-color: var(--background);
   background-image: 
     radial-gradient(circle at 20% 30%, rgba(38, 180, 175, 0.06) 0%, transparent 50%),

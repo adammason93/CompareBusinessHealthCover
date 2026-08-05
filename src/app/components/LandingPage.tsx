@@ -261,18 +261,17 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       />
 
       {/* Hero Section */}
-      <section className="section-hero relative overflow-hidden circle-pattern">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0 opacity-30">
+      <section className="section-hero relative overflow-hidden">
+        <div className="section-hero-image">
           <ImageWithFallback 
             src={LOGO.businessHandshake}
             alt="Business team discussing employee health cover"
-            className="w-full h-full object-cover object-right"
+            className="object-right"
             loading="eager"
             fetchpriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent"></div>
         </div>
+        <div className="section-hero-overlay" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 z-10">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs sm:text-sm mb-8 sm:mb-12 text-gray-300">
@@ -311,13 +310,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                 <button 
                   onClick={onGetStarted} 
-                  className="button-hover-animate bg-white hover:bg-gray-100 text-black rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                  className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
                 >
                   Get an SME quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
                 </button>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
-                  className="button-hover-animate bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center"
+                  className="button-hover-animate border-2 border-white/90 text-white hover:bg-white/10 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-transparent"
                 >
                   Get in touch
                 </button>
@@ -382,25 +381,25 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <div className="flex flex-wrap justify-center gap-2 max-w-6xl mx-auto">
             <button 
               onClick={() => scrollToSection('find-best-cover')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-brand-navy/20 bg-brand-teal-muted/40 text-brand-navy hover:border-brand-teal hover:bg-brand-teal-muted hover:text-brand-navy text-xs sm:text-sm transition-colors whitespace-nowrap font-medium"
             >
               Compare business cover options
             </button>
             <button 
               onClick={() => scrollToSection('why-health-insurance')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-brand-navy/20 bg-brand-teal-muted/40 text-brand-navy hover:border-brand-teal hover:bg-brand-teal-muted hover:text-brand-navy text-xs sm:text-sm transition-colors whitespace-nowrap font-medium"
             >
               Why offer employee cover?
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-brand-navy/20 bg-brand-teal-muted/40 text-brand-navy hover:border-brand-teal hover:bg-brand-teal-muted hover:text-brand-navy text-xs sm:text-sm transition-colors whitespace-nowrap font-medium"
             >
               How group schemes work
             </button>
             <button 
               onClick={() => scrollToSection('why-use-us')}
-              className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-brand-teal hover:text-brand-teal text-xs sm:text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-full border border-brand-navy/20 bg-brand-teal-muted/40 text-brand-navy hover:border-brand-teal hover:bg-brand-teal-muted hover:text-brand-navy text-xs sm:text-sm transition-colors whitespace-nowrap font-medium"
             >
               Why use us?
             </button>
@@ -528,16 +527,15 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       </section>
 
       {/* Why Take Out Health Insurance Section */}
-      <section id="why-health-insurance" className="relative py-32 overflow-hidden -mt-1">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0 opacity-30">
+      <section id="why-health-insurance" className="relative py-32 overflow-hidden -mt-1 bg-brand-navy-dark text-white">
+        <div className="section-hero-image">
           <ImageWithFallback 
             src={LOGO.businessHandshake}
             alt="Business professionals in meeting"
-            className="w-full h-full object-cover object-center"
+            className="object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy-dark/90 via-brand-navy-dark/85 to-brand-navy-dark/90"></div>
         </div>
+        <div className="section-dark-overlay" />
         
         {/* Curved top border */}
         <div className="absolute top-0 left-0 right-0 overflow-hidden z-10">

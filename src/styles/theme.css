@@ -240,10 +240,24 @@
   /* Shared marketing section backgrounds */
   .section-hero {
     @apply bg-brand-navy text-white;
+    background-image: none;
+    background-color: var(--brand-navy);
   }
 
   .section-hero-overlay {
-    @apply absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent;
+    @apply absolute inset-0 z-[5] bg-gradient-to-r from-brand-navy via-brand-navy/85 to-brand-navy/40 pointer-events-none;
+  }
+
+  .section-hero-image {
+    @apply absolute inset-0 z-0;
+  }
+
+  .section-hero-image img {
+    @apply w-full h-full object-cover opacity-40;
+  }
+
+  .section-dark-overlay {
+    @apply absolute inset-0 z-[5] bg-gradient-to-b from-brand-navy-dark/95 via-brand-navy-dark/90 to-brand-navy-dark/95 pointer-events-none;
   }
 
   .section-muted {
