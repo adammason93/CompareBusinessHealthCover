@@ -287,7 +287,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             {/* Left Column - Heading */}
             <div>
               <p className="text-brand-teal-light text-sm sm:text-base font-semibold uppercase tracking-wide mb-3">
-                For UK Small &amp; Medium Businesses
+                For UK Small, Medium and Large Corporate Businesses
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-extrabold text-white">
                 Compare SME health insurance and give your team the cover they deserve.
