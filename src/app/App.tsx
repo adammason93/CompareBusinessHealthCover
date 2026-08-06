@@ -437,8 +437,10 @@ export default function App() {
       
       {/* Form Overlay */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="!max-w-[95vw] sm:!max-w-[75vw] !w-[95vw] sm:!w-[75vw] !h-[90vh] sm:!h-[85vh] overflow-hidden !p-0 bg-white" style={{ maxWidth: '95vw', width: '95vw', height: '90vh' }}>
-          <div className="h-full overflow-y-auto">
+        <DialogContent
+          className="!fixed !inset-x-2 !top-2 !bottom-2 !left-2 !right-2 !translate-x-0 !translate-y-0 !max-w-none !w-auto !h-auto max-h-[calc(100dvh-1rem)] sm:!inset-auto sm:!top-[50%] sm:!left-[50%] sm:!bottom-auto sm:!right-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:!max-w-[75vw] sm:!w-[75vw] sm:!h-[85vh] overflow-hidden !p-0 bg-white rounded-xl"
+        >
+          <div className="h-full max-h-[calc(100dvh-1rem)] sm:max-h-[85vh] overflow-y-auto overscroll-contain">
             <EnhancedMultiStepForm onSubmit={handleFormSubmit} onBack={handleBackToLanding} />
           </div>
         </DialogContent>

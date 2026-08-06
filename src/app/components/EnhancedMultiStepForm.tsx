@@ -74,6 +74,8 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [savedDraft, setSavedDraft] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [peopleCountMode, setPeopleCountMode] = useState<"preset" | "custom">("preset");
+  const [customPeopleCount, setCustomPeopleCount] = useState("");
   
   const { register, handleSubmit, watch, setValue, formState: { errors, touchedFields } } = useForm<FormData>({
     mode: "onChange",
@@ -87,6 +89,17 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
   });
 
   const watchedFields = watch();
+
+  // Restore custom people-count mode when draft has a non-preset value
+  useEffect(() => {
+    const count = watchedFields.peopleCount;
+    if (count && !["1", "2", "3", "4+"].includes(count)) {
+      setPeopleCountMode("custom");
+      setCustomPeopleCount(count);
+    }
+    // Only on mount / when loading draft into step 3
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Auto-save draft every 3 seconds
   useEffect(() => {
@@ -300,7 +313,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
   );
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted py-2 sm:py-4 px-3 sm:px-6">
+    <div className="bg-gradient-to-br from-gray-50 via-brand-surface to-brand-teal-muted py-2 sm:py-4 px-3 sm:px-6 pt-10 sm:pt-4">
       <div className="max-w-[95%] mx-auto">
         {/* Header with Progress */}
         <motion.div 
@@ -309,7 +322,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
           className="bg-white rounded-xl shadow-lg p-3 sm:p-4 mb-2 sm:mb-3"
         >
           <div className="mb-2">
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center mb-2 pr-6 sm:pr-0">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-brand-teal" />
                 <span className="text-[10px] sm:text-xs font-semibold text-gray-700">
@@ -323,7 +336,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             </div>
             
             {/* Progress Bar */}
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden mb-4">
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden mb-3 sm:mb-4">
               <motion.div 
                 className="h-full bg-gradient-to-r from-brand-teal to-brand-navy rounded-full"
                 initial={{ width: 0 }}
@@ -378,41 +391,43 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
               ))}
             </div>
 
-            {/* Step Indicators - Mobile */}
-            <div className="lg:hidden flex gap-2 overflow-x-auto pb-2">
-              {steps.map((step) => (
-                <button
-                  key={step.number}
-                  onClick={() => goToStep(step.number)}
-                  disabled={step.number > currentStep && !completedSteps.includes(step.number - 1)}
-                  className={`flex flex-col items-center gap-1 min-w-[60px] ${
-                    step.number <= currentStep || completedSteps.includes(step.number)
-                      ? 'cursor-pointer'
-                      : 'cursor-not-allowed opacity-40'
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-                    step.number === currentStep
-                      ? 'bg-brand-teal text-white shadow-lg scale-110'
-                      : completedSteps.includes(step.number)
-                      ? 'bg-green-500 text-white'
-                      : step.number < currentStep
-                      ? 'bg-brand-surface0 text-white'
-                      : 'bg-gray-200 text-gray-500'
-                  }`}>
-                    {completedSteps.includes(step.number) ? (
-                      <Check className="w-5 h-5" />
-                    ) : (
-                      <step.icon className="w-5 h-5" />
-                    )}
-                  </div>
-                  <span className={`text-xs font-medium ${
-                    step.number === currentStep ? 'text-brand-teal-hover' : 'text-gray-600'
-                  }`}>
-                    {step.label}
-                  </span>
-                </button>
-              ))}
+            {/* Step Indicators - Mobile (compact, current step only + dots) */}
+            <div className="lg:hidden flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-9 h-9 rounded-full flex items-center justify-center bg-brand-teal text-white shadow shrink-0">
+                  {(() => {
+                    const step = steps.find((s) => s.number === currentStep);
+                    const Icon = step?.icon;
+                    return Icon ? <Icon className="w-4 h-4" /> : null;
+                  })()}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-brand-teal-hover truncate">
+                    {steps.find((s) => s.number === currentStep)?.label}
+                  </p>
+                  <p className="text-[10px] text-gray-500">
+                    {completedSteps.length} of {steps.length} complete
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 shrink-0">
+                {steps.map((step) => (
+                  <button
+                    key={step.number}
+                    type="button"
+                    aria-label={`Go to step ${step.number}`}
+                    onClick={() => goToStep(step.number)}
+                    disabled={step.number > currentStep && !completedSteps.includes(step.number - 1)}
+                    className={`h-2 rounded-full transition-all ${
+                      step.number === currentStep
+                        ? "w-4 bg-brand-teal"
+                        : completedSteps.includes(step.number) || step.number < currentStep
+                        ? "w-2 bg-green-400"
+                        : "w-2 bg-gray-300"
+                    } disabled:opacity-40`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
@@ -522,11 +537,15 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       <motion.button
                         key={count}
                         type="button"
-                        onClick={() => setValue("peopleCount", count)}
+                        onClick={() => {
+                          setPeopleCountMode("preset");
+                          setCustomPeopleCount("");
+                          setValue("peopleCount", count);
+                        }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className={`p-6 rounded-xl transition-all shadow-sm ${
-                          watchedFields.peopleCount === count
+                          peopleCountMode === "preset" && watchedFields.peopleCount === count
                             ? 'bg-gradient-to-br from-brand-teal-muted to-brand-surface border-2 border-brand-teal shadow-lg'
                             : 'bg-white border-2 border-gray-200 hover:border-brand-teal/40 hover:shadow-md'
                         }`}
@@ -552,12 +571,23 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
                       </label>
                       <Input
                         type="number"
+                        inputMode="numeric"
                         min="1"
                         max="99"
                         placeholder="Enter number of people"
-                        value={watchedFields.peopleCount && !['1', '2', '3', '4+'].includes(watchedFields.peopleCount) ? watchedFields.peopleCount : ''}
-                        onChange={(e) => setValue("peopleCount", e.target.value)}
-                        className="h-14 text-lg border-2 border-gray-200 focus:border-brand-teal rounded-xl text-center"
+                        value={peopleCountMode === "custom" ? customPeopleCount : ""}
+                        onFocus={() => setPeopleCountMode("custom")}
+                        onChange={(e) => {
+                          const raw = e.target.value.replace(/[^\d]/g, "").slice(0, 2);
+                          setPeopleCountMode("custom");
+                          setCustomPeopleCount(raw);
+                          setValue("peopleCount", raw);
+                        }}
+                        className={`h-14 text-lg border-2 rounded-xl text-center ${
+                          peopleCountMode === "custom"
+                            ? "border-brand-teal"
+                            : "border-gray-200 focus:border-brand-teal"
+                        }`}
                       />
                     </div>
                   </div>
