@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Cookie, Settings, X, Check, Info, Shield, BarChart, Target } from 'lucide-react';
+import { setOpenaiPixelConsent } from '@/app/config/openaiPixel';
 
 interface CookieManagerProps {
   onNavigate?: (page: string) => void;
@@ -143,6 +144,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
     
     // Clear tracking cookies
     clearTrackingCookies();
+    setOpenaiPixelConsent(false);
     
     setPreferences(essentialOnly);
     setIsVisible(false);
@@ -193,6 +195,9 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
           'ad_storage': 'granted'
         });
       }
+      setOpenaiPixelConsent(true);
+    } else {
+      setOpenaiPixelConsent(false);
     }
   };
 

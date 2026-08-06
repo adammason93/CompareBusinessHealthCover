@@ -2,6 +2,8 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
 import { SITE } from "@/app/config/site";
+import { leadAttributionPayload } from "@/app/config/tracking";
+import { measureLeadCreated } from "@/app/config/openaiPixel";
 
 interface ContactFormModalProps {
   isOpen: boolean;
@@ -38,7 +40,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${publicAnonKey}`
         },
-        body: JSON.stringify({ ...formData, sourceWebsite: SITE.domain })
+        body: JSON.stringify({ ...formData, sourceWebsite: SITE.domain, ...leadAttributionPayload() })
       });
 
       const result = await response.json();
@@ -50,6 +52,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
       }
 
       setSubmitStatus("success");
+      measureLeadCreated();
       setFormData({
         name: "",
         email: "",

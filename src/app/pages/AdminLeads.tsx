@@ -437,6 +437,7 @@ export function AdminLeads() {
                 <option value="all">All Sources</option>
                 <option value="Organic">Organic</option>
                 <option value="PPC">PPC</option>
+                <option value="ChatGPT">ChatGPT</option>
               </select>
 
               <select
@@ -674,11 +675,13 @@ export function AdminLeads() {
                             <option value="">Select...</option>
                             <option value="Organic">Organic</option>
                             <option value="PPC">PPC</option>
+                            <option value="ChatGPT">ChatGPT</option>
                           </select>
                         ) : (
                           <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                             lead.source === "Organic" ? "bg-green-100 text-green-800" :
                             lead.source === "PPC" ? "bg-brand-teal-muted text-brand-navy" :
+                            lead.source === "ChatGPT" ? "bg-violet-100 text-violet-900" :
                             "bg-gray-100 text-gray-800"
                           }`}>
                             {lead.source || "-"}

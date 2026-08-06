@@ -35,11 +35,46 @@ import { StaticFileServer } from "@/app/components/StaticFileServer";
 import { SEOHead } from "@/app/components/SEOHead";
 import { getSEOConfig } from "@/app/config/seo";
 import { SITE } from "@/app/config/site";
+import { captureLeadAttributionFromLocation, leadAttributionPayload } from "@/app/config/tracking";
+import { measureLeadCreated } from "@/app/config/openaiPixel";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
 
 /** `/blog-admin/` must match `blog-admin` (hosts often normalize with a trailing slash). */
 function routeKeyFromPathname(pathname: string): string {
   return pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
+}
+
+const CHATGPT_LANDING_PATHS = new Set(["chatgpt", "chatgpt-ads"]);
+
+function resolveInitialPage(): string {
+  // Stamp attribution from vanity paths / UTMs before normalising the route
+  captureLeadAttributionFromLocation();
+
+  const pathname = routeKeyFromPathname(window.location.pathname);
+
+  if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
+    return `static/${pathname}`;
+  }
+
+  // ChatGPT ad landing → home (attribution already stored)
+  if (CHATGPT_LANDING_PATHS.has(pathname)) {
+    const keep = window.location.search;
+    window.history.replaceState({ page: 'home' }, '', keep ? `/${keep}` : '/');
+    return 'home';
+  }
+
+  if (pathname) {
+    return pathname;
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const pageParam = urlParams.get('page');
+  if (pageParam) {
+    return pageParam;
+  }
+
+  const hash = window.location.hash.slice(1);
+  return hash || 'home';
 }
 
 export default function App() {
@@ -48,26 +83,7 @@ export default function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [currentPage, setCurrentPage] = useState(() => {
-    const pathname = routeKeyFromPathname(window.location.pathname);
-
-    if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
-      return `static/${pathname}`;
-    }
-
-    if (pathname) {
-      return pathname;
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageParam = urlParams.get('page');
-    if (pageParam) {
-      return pageParam;
-    }
-
-    const hash = window.location.hash.slice(1);
-    return hash || 'home';
-  });
+  const [currentPage, setCurrentPage] = useState(resolveInitialPage);
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [blogSeoOverride, setBlogSeoOverride] = useState<{ title: string; description: string } | null>(null);
@@ -81,9 +97,17 @@ export default function App() {
   // Prefer path-based URLs; only use hash when there is no real path.
   useEffect(() => {
     const syncFromLocation = () => {
+      captureLeadAttributionFromLocation();
       const pathname = routeKeyFromPathname(window.location.pathname);
       if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
         setCurrentPage(`static/${pathname}`);
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (CHATGPT_LANDING_PATHS.has(pathname)) {
+        const keep = window.location.search;
+        window.history.replaceState({ page: 'home' }, '', keep ? `/${keep}` : '/');
+        setCurrentPage('home');
         window.scrollTo(0, 0);
         return;
       }
@@ -163,7 +187,11 @@ export default function App() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ ...data, sourceWebsite: SITE.domain }),
+        body: JSON.stringify({
+          ...data,
+          sourceWebsite: SITE.domain,
+          ...leadAttributionPayload(),
+        }),
       });
 
       const result = await response.json();
@@ -174,8 +202,10 @@ export default function App() {
         if (result.note) {
           console.log(result.note);
         }
+        measureLeadCreated();
       } else {
         console.log('Form submitted successfully:', result);
+        measureLeadCreated();
       }
 
       setIsFormOpen(false);

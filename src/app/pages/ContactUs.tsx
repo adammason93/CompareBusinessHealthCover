@@ -3,6 +3,8 @@ import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { projectId, publicAnonKey } from '/utils/supabase/info';
 import { SITE } from '@/app/config/site';
+import { leadAttributionPayload } from '@/app/config/tracking';
+import { measureLeadCreated } from '@/app/config/openaiPixel';
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 interface ContactUsProps {
@@ -42,7 +44,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${publicAnonKey}`
           },
-          body: JSON.stringify({ ...formData, sourceWebsite: SITE.domain })
+          body: JSON.stringify({ ...formData, sourceWebsite: SITE.domain, ...leadAttributionPayload() })
         }
       );
 
@@ -51,6 +53,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
       }
 
       setSubmitSuccess(true);
+      measureLeadCreated();
       setFormData({
         name: "",
         email: "",

@@ -14,6 +14,9 @@ Crawl-delay: 5
 Disallow: /admin-leads
 Disallow: /api/
 Disallow: /*.json$
+# Ad landing (tracked in-app; no need to index)
+Disallow: /chatgpt
+Disallow: /chatgpt-ads
 
 # Explicitly allow sitemap and robots.txt
 Allow: /sitemap.xml
