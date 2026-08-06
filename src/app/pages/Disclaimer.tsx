@@ -1,4 +1,5 @@
 import { AlertTriangle, Info, Mail, Shield } from "lucide-react";
+import { SITE } from "@/app/config/site";
 
 interface DisclaimerProps {
   onGetStarted: () => void;
@@ -149,7 +150,11 @@ export function Disclaimer({ onGetStarted }: DisclaimerProps) {
                 For more information around anything in this disclaimer statement or to report an issue with the content of this site, please email us:
               </p>
               <div className="space-y-2 text-gray-700">
-                <p><strong>Email:</strong> <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">info@comparebusinesshealthcover.co.uk</a></p>
+                <p><strong>Email:</strong> {SITE.showPublicEmail ? (
+                  <a href={`mailto:${SITE.email}`} className="text-brand-teal-hover hover:text-brand-teal-hover">{SITE.email}</a>
+                ) : (
+                  <span>Please use the contact form on our website</span>
+                )}</p>
                 <p><strong>Phone:</strong> 01484 773038</p>
                 <p><strong>Address:</strong> 83, Hall Road Moorgate, Rotherham, South Yorkshire</p>
               </div>

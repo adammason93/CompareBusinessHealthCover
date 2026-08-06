@@ -1,5 +1,6 @@
 import React from 'react';
 import { FileText, Users, Shield, Mail, Phone, MapPin } from 'lucide-react';
+import { SITE } from '@/app/config/site';
 
 interface SitemapProps {
   onNavigate: (page: string) => void;
@@ -51,17 +52,24 @@ export function Sitemap({ onNavigate }: SitemapProps) {
   ];
 
   const quickLinks = [
-    {
-      icon: Mail,
-      title: 'Email Us',
-      content: 'info@comparebusinesshealthcover.co.uk',
-      action: () => window.location.href = 'mailto:info@comparebusinesshealthcover.co.uk'
-    },
+    ...(SITE.showPublicEmail
+      ? [{
+          icon: Mail,
+          title: 'Email Us',
+          content: SITE.email,
+          action: () => { window.location.href = `mailto:${SITE.email}`; }
+        }]
+      : [{
+          icon: Mail,
+          title: 'Message Us',
+          content: 'Use our contact form',
+          action: () => onNavigate('contact-us')
+        }]),
     {
       icon: Phone,
       title: 'Call Us',
-      content: '01484 773038',
-      action: () => window.location.href = 'tel:01484773038'
+      content: SITE.phoneDisplay,
+      action: () => { window.location.href = `tel:${SITE.phone.replace(/\s/g, '')}`; }
     },
     {
       icon: MapPin,

@@ -50,9 +50,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
                 <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Email:</p>
-                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
-                    info@comparebusinesshealthcover.co.uk
-                  </a>
+                  Please use the contact form on our website
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -292,9 +290,7 @@ export function PrivacyPolicyPage({ onNavigate }: PrivacyPolicyPageProps) {
                 <Mail className="w-5 h-5 text-brand-teal-hover mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Email:</p>
-                  <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
-                    info@comparebusinesshealthcover.co.uk
-                  </a>
+                  Please use the contact form on our website
                 </div>
               </div>
               <div className="flex items-start gap-3">

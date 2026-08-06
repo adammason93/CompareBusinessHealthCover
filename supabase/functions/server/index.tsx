@@ -29,6 +29,58 @@ async function sendResend(
   return { ok: res.ok, status: res.status, body };
 }
 
+/** Shared edge function serves sister sites — brand Resend mail from sourceWebsite. */
+type SiteBrand = {
+  id: "cbhc" | "hcc";
+  name: string;
+  domain: string;
+  /** Shown to customers in confirmation emails (can be a future inbox). */
+  email: string;
+  /** Where internal lead notifications are delivered now. */
+  notifyEmails: string[];
+  noreply: string;
+  phone: string;
+  accent: string;
+  heading: string;
+};
+
+const BRAND_CBHC: SiteBrand = {
+  id: "cbhc",
+  name: "Compare Business Healthcover",
+  domain: "comparebusinesshealthcover.co.uk",
+  email: "info@comparebusinesshealthcover.co.uk",
+  // Temporary: no info@ mailbox yet
+  notifyEmails: ["matt@myhealthpal.co.uk", "adammason93@live.co.uk"],
+  noreply: "noreply@comparebusinesshealthcover.co.uk",
+  phone: "01484 773038",
+  accent: "#26B4AF",
+  heading: "#1D2D50",
+};
+
+const BRAND_HCC: SiteBrand = {
+  id: "hcc",
+  name: "HealthCoverComparison",
+  domain: "healthcovercomparison.co.uk",
+  email: "info@healthcovercomparison.co.uk",
+  notifyEmails: ["info@healthcovercomparison.co.uk", "matt@myhealthpal.co.uk"],
+  noreply: "noreply@healthcovercomparison.co.uk",
+  phone: "01484 773038",
+  accent: "#26B4AF",
+  heading: "#1D2D50",
+};
+
+function resolveBrand(sourceWebsite?: string | null): SiteBrand {
+  const w = (sourceWebsite || "").toLowerCase();
+  if (w.includes("comparebusinesshealthcover")) return BRAND_CBHC;
+  if (w.includes("healthcovercomparison")) return BRAND_HCC;
+  // Default to this site when source is missing
+  return BRAND_CBHC;
+}
+
+function emailFrom(brand: SiteBrand): string {
+  return `${brand.name} <${brand.noreply}>`;
+}
+
 async function handleSignup(email: string, password: string, name: string) {
   try {
     console.log('=== SIGNUP ATTEMPT ===');
@@ -391,6 +443,7 @@ app.post("/make-server-2031af1c/contact", async (c) => {
   try {
     const body = await c.req.json();
     const { name, email, phone, company, message, sourceWebsite } = body;
+    const brand = resolveBrand(sourceWebsite);
 
     // Validate required fields
     if (!name || !email || !phone) {
@@ -399,7 +452,7 @@ app.post("/make-server-2031af1c/contact", async (c) => {
 
     // Prepare email content
     const emailContent = `
-New Contact Form Submission from Compare Business Healthcover
+New Contact Form Submission from ${brand.name}
 
 Source Website: ${sourceWebsite || "unknown"}
 
@@ -415,7 +468,7 @@ ${message || "No message provided"}
 Submitted at: ${new Date().toISOString()}
     `.trim();
 
-    console.log("Contact form submission received:", { name, email, phone, company, sourceWebsite });
+    console.log("Contact form submission received:", { name, email, phone, company, sourceWebsite, brand: brand.id });
 
     // Send email using Resend API
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
@@ -442,8 +495,8 @@ Submitted at: ${new Date().toISOString()}
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #1D2D50; border-bottom: 3px solid #26B4AF; padding-bottom: 10px;">
-              New Contact Form Submission
+            <h2 style="color: ${brand.heading}; border-bottom: 3px solid ${brand.accent}; padding-bottom: 10px;">
+              New Contact Form Submission — ${brand.name}
             </h2>
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
               <p><strong>Source Website:</strong> ${sourceWebsite || "unknown"}</p>
@@ -461,13 +514,12 @@ Submitted at: ${new Date().toISOString()}
     `;
 
     const emailPayload = {
-      from: "Compare Business Healthcover <noreply@comparebusinesshealthcover.co.uk>",
-      to: ["info@comparebusinesshealthcover.co.uk"],
-      subject: `New Contact Form Submission from ${name} (${sourceWebsite || "unknown"})`,
+      from: emailFrom(brand),
+      to: brand.notifyEmails,
+      subject: `New Contact Form Submission from ${name} (${sourceWebsite || brand.domain})`,
       html: htmlContent,
       text: emailContent,
     };
-
     console.log("Email payload prepared:", JSON.stringify({ ...emailPayload, html: "[HTML content]" }));
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
@@ -734,8 +786,9 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
     const body = await c.req.json();
     const formData = body;
     const sourceWebsite = formData.sourceWebsite || "unknown";
+    const brand = resolveBrand(sourceWebsite);
 
-    console.log("Insurance form submission received:", { ...formData, sourceWebsite });
+    console.log("Insurance form submission received:", { ...formData, sourceWebsite, brand: brand.id });
 
     // Validate required fields
     if (!formData.firstName || !formData.email || !formData.phone) {
@@ -767,8 +820,8 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 700px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #1D2D50; border-bottom: 3px solid #26B4AF; padding-bottom: 10px;">
-              New Insurance Quote Request
+            <h2 style="color: ${brand.heading}; border-bottom: 3px solid ${brand.accent}; padding-bottom: 10px;">
+              New Insurance Quote Request — ${brand.name}
             </h2>
             
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
@@ -889,7 +942,7 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
     `;
 
     const textContent = `
-New Insurance Quote Request from Compare Business Healthcover
+New Insurance Quote Request from ${brand.name}
 
 Source Website: ${sourceWebsite}
 
@@ -943,11 +996,8 @@ Submitted at: ${new Date().toISOString()}
     }
 
     const internalSubject = `New Insurance Quote Request from ${formData.firstName} ${formData.lastName || ""} (${sourceWebsite})`;
-    const internalFrom = "Compare Business Healthcover <noreply@comparebusinesshealthcover.co.uk>";
-    const internalRecipients = [
-      "info@comparebusinesshealthcover.co.uk",
-      "matt@myhealthpal.co.uk",
-    ] as const;
+    const internalFrom = emailFrom(brand);
+    const internalRecipients = [...new Set(brand.notifyEmails)];
 
     const internalErrors: string[] = [];
     let internalSuccessCount = 0;
@@ -1017,30 +1067,30 @@ Submitted at: ${new Date().toISOString()}
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #1D2D50; border-bottom: 3px solid #26B4AF; padding-bottom: 10px;">
+            <h2 style="color: ${brand.heading}; border-bottom: 3px solid ${brand.accent}; padding-bottom: 10px;">
               Thank You for Your Insurance Quote Request
             </h2>
             
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
               <p>Dear ${formData.firstName},</p>
               
-              <p>Thank you for requesting a quote from <strong>Compare Business Healthcover</strong>. We have received your information and our team will review your requirements.</p>
+              <p>Thank you for requesting a quote from <strong>${brand.name}</strong>. We have received your information and our team will review your requirements.</p>
               
               <p>One of our insurance specialists will contact you shortly at <strong>${formData.phone}</strong> or via email at <strong>${formData.email}</strong> to discuss your options and provide you with a personalised quote.</p>
               
               <div style="background-color: #f0f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                <h3 style="color: #26B4AF; margin-top: 0; font-size: 16px;">Your Request Summary:</h3>
+                <h3 style="color: ${brand.accent}; margin-top: 0; font-size: 16px;">Your Request Summary:</h3>
                 <p style="margin: 5px 0;"><strong>Insurance Type:</strong> ${formData.compareType?.replace('-', ' ') || "N/A"}</p>
                 <p style="margin: 5px 0;"><strong>Cover Type:</strong> ${formData.coverType?.replace('-', ' ') || "N/A"}</p>
                 <p style="margin: 5px 0;"><strong>Number of People:</strong> ${formData.peopleCount || "N/A"}</p>
               </div>
               
               <p>If you have any immediate questions, please don't hesitate to contact us:</p>
-              <p style="margin: 5px 0;">📧 Email: <a href="mailto:info@comparebusinesshealthcover.co.uk">info@comparebusinesshealthcover.co.uk</a></p>
-              <p style="margin: 5px 0;">📞 Phone: 01484 773038</p>
+              <p style="margin: 5px 0;">📞 Phone: ${brand.phone}</p>
+              ${brand.notifyEmails.includes(brand.email) ? `<p style="margin: 5px 0;">📧 Email: <a href="mailto:${brand.email}">${brand.email}</a></p>` : ""}
               
               <p style="margin-top: 20px;">Best regards,<br/>
-              <strong>The Compare Business Healthcover Team</strong></p>
+              <strong>The ${brand.name} Team</strong></p>
             </div>
             
             <p style="color: #666; font-size: 11px; text-align: center; margin-top: 20px;">
@@ -1052,12 +1102,11 @@ Submitted at: ${new Date().toISOString()}
     `;
 
     const customerEmailPayload = {
-      from: "Compare Business Healthcover <noreply@comparebusinesshealthcover.co.uk>",
+      from: emailFrom(brand),
       to: [formData.email],
-      subject: "Thank You for Your Insurance Quote Request",
+      subject: `Thank You for Your Insurance Quote Request — ${brand.name}`,
       html: customerHtmlContent,
     };
-
     const customerEmailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {

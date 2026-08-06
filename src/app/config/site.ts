@@ -4,6 +4,8 @@ export const SITE = {
   domain: 'comparebusinesshealthcover.co.uk',
   url: 'https://comparebusinesshealthcover.co.uk',
   email: 'info@comparebusinesshealthcover.co.uk',
+  /** Hide public info@ until the mailbox is set up — use contact form + phone instead */
+  showPublicEmail: false,
   noreply: 'noreply@comparebusinesshealthcover.co.uk',
   phone: '01484 773038',
   phoneDisplay: '01484 773038',

@@ -165,9 +165,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
             <h2 className="text-2xl font-bold text-brand-navy mb-4">10. Complaints</h2>
             <p className="text-gray-700 mb-4">
               If you have a complaint about our services, please contact us at{' '}
-              <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal hover:underline">
-                info@comparebusinesshealthcover.co.uk
-              </a>
+              Please use the contact form on our website
             </p>
             <p className="text-gray-700">
               We will acknowledge your complaint within 5 business days and aim to resolve it within 8 weeks. If you are not satisfied with our response, you may refer your complaint to the Financial Ombudsman Service.
@@ -199,9 +197,7 @@ export function TermsAndConditions({ onNavigate }: TermsAndConditionsProps) {
             <div className="bg-brand-surface p-6 rounded-lg mt-4">
               <p className="text-gray-700 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal hover:underline">
-                  info@comparebusinesshealthcover.co.uk
-                </a>
+                Please use the contact form on our website
               </p>
               <p className="text-gray-700 mb-2">
                 <strong>Phone:</strong> 01484 773038

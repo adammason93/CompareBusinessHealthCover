@@ -315,9 +315,7 @@ export function CookiePolicy({ onNavigate }: CookiePolicyProps) {
             <div className="bg-brand-surface p-6 rounded-lg">
               <p className="text-gray-700 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal hover:underline">
-                  info@comparebusinesshealthcover.co.uk
-                </a>
+                Please use the contact form on our website
               </p>
               <p className="text-gray-700 mb-2">
                 <strong>Phone:</strong> 01484 773038

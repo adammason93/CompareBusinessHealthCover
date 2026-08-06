@@ -1,4 +1,4 @@
-import { Shield, Heart, TrendingUp, Users, Award, CheckCircle, Phone, Mail } from "lucide-react";
+import { Shield, Heart, TrendingUp, Users, Award, CheckCircle, Phone } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
@@ -191,50 +191,50 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
-              <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
-              <h3 className="text-lg font-semibold mb-2">100% Complimentary Service</h3>
-              <p className="text-gray-200 text-sm">
+            <div className="bg-white rounded-lg p-6 shadow-sm text-gray-900">
+              <CheckCircle className="w-8 h-8 text-brand-teal mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">100% Complimentary Service</h3>
+              <p className="text-gray-600 text-sm">
                 No hidden charges, no fees. Our comparison service is completely free with no obligation to buy.
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
-              <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
-              <h3 className="text-lg font-semibold mb-2">Independent & Impartial</h3>
-              <p className="text-gray-200 text-sm">
+            <div className="bg-white rounded-lg p-6 shadow-sm text-gray-900">
+              <CheckCircle className="w-8 h-8 text-brand-teal mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Independent & Impartial</h3>
+              <p className="text-gray-600 text-sm">
                 Our FCA regulated broker partners aren't tied to any insurer. Their advice is unbiased and focused solely on your needs.
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
-              <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
-              <h3 className="text-lg font-semibold mb-2">All Major Insurers</h3>
-              <p className="text-gray-200 text-sm">
+            <div className="bg-white rounded-lg p-6 shadow-sm text-gray-900">
+              <CheckCircle className="w-8 h-8 text-brand-teal mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">All Major Insurers</h3>
+              <p className="text-gray-600 text-sm">
                 Our broker partners compare quotes from Bupa, AXA, Aviva, Vitality, and many more leading providers.
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
-              <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
-              <h3 className="text-lg font-semibold mb-2">Expert Guidance</h3>
-              <p className="text-gray-200 text-sm">
+            <div className="bg-white rounded-lg p-6 shadow-sm text-gray-900">
+              <CheckCircle className="w-8 h-8 text-brand-teal mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Expert Guidance</h3>
+              <p className="text-gray-600 text-sm">
                 Our FCA regulated broker partners have the knowledge and expertise to answer your questions and guide you through the process.
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
-              <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
-              <h3 className="text-lg font-semibold mb-2">Quick & Easy</h3>
-              <p className="text-gray-200 text-sm">
+            <div className="bg-white rounded-lg p-6 shadow-sm text-gray-900">
+              <CheckCircle className="w-8 h-8 text-brand-teal mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">Quick & Easy</h3>
+              <p className="text-gray-600 text-sm">
                 Get personalised quotes in minutes. No lengthy forms or complicated processes.
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
-              <CheckCircle className="w-8 h-8 text-brand-teal-light mb-3" />
-              <h3 className="text-lg font-semibold mb-2">FCA Regulated Partners</h3>
-              <p className="text-gray-200 text-sm">
+            <div className="bg-white rounded-lg p-6 shadow-sm text-gray-900">
+              <CheckCircle className="w-8 h-8 text-brand-teal mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">FCA Regulated Partners</h3>
+              <p className="text-gray-600 text-sm">
                 Our broker partners are fully authorized and regulated by the Financial Conduct Authority for your peace of mind.
               </p>
             </div>
@@ -266,13 +266,6 @@ export function AboutUs({ onGetStarted }: AboutUsProps) {
                 01484 773038
               </a>
             </div>
-          </div>
-
-          <div className="flex items-center justify-center gap-2 text-gray-600">
-            <Mail className="w-5 h-5 text-brand-teal-hover" />
-            <a href="mailto:info@comparebusinesshealthcover.co.uk" className="hover:text-brand-teal-hover">
-              info@comparebusinesshealthcover.co.uk
-            </a>
           </div>
         </div>
       </section>

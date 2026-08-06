@@ -104,12 +104,14 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                 <Phone className="w-4 h-4" />
                 <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="hover:text-brand-teal">{SITE.phoneDisplay}</a>
               </div>
+              {SITE.showPublicEmail && (
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 <a href={mailto()} className="hover:text-brand-teal text-sm break-all">
                   {SITE.email}
                 </a>
               </div>
+              )}
               <div className="text-sm text-gray-400 mt-2">
                 83, Hall Road Moorgate<br />
                 Rotherham<br />

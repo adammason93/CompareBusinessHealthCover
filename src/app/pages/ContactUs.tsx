@@ -131,16 +131,30 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                   </div>
                 </div>
 
+                {SITE.showPublicEmail && (
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
                     <Mail className="w-6 h-6 text-brand-teal-hover" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:info@comparebusinesshealthcover.co.uk" className="text-brand-teal-hover hover:text-brand-teal-hover">
-                      info@comparebusinesshealthcover.co.uk
+                    <a href={`mailto:${SITE.email}`} className="text-brand-teal-hover hover:text-brand-teal-hover">
+                      {SITE.email}
                     </a>
                     <p className="text-sm text-gray-500 mt-1">We'll respond within 24 hours</p>
+                  </div>
+                </div>
+                )}
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
+                    <Send className="w-6 h-6 text-brand-teal-hover" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-1">Send a message</h3>
+                    <p className="text-gray-600">
+                      Use the contact form and we&apos;ll get back to you within 24 hours.
+                    </p>
                   </div>
                 </div>
 
