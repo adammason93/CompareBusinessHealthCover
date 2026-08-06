@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { projectId, publicAnonKey } from '/utils/supabase/info';
 import { SITE } from '@/app/config/site';
@@ -130,21 +130,6 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
                     <p className="text-sm text-gray-500 mt-1">Mon-Fri: 9am - 5pm</p>
                   </div>
                 </div>
-
-                {SITE.showPublicEmail && (
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-brand-teal-hover" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href={`mailto:${SITE.email}`} className="text-brand-teal-hover hover:text-brand-teal-hover">
-                      {SITE.email}
-                    </a>
-                    <p className="text-sm text-gray-500 mt-1">We'll respond within 24 hours</p>
-                  </div>
-                </div>
-                )}
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-brand-teal-muted rounded-full flex items-center justify-center flex-shrink-0">
