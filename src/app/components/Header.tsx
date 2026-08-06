@@ -1,5 +1,5 @@
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { BusinessCoverNavMenu } from "@/app/components/BusinessCoverNavMenu";
 import { Logo } from "@/app/components/Logo";
@@ -19,6 +19,8 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(72);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -29,6 +31,16 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const update = () => setHeaderHeight(el.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isScrolled, mobileMenuOpen]);
+
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setCoverDropdownOpen(false);
@@ -37,7 +49,8 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
   return (
     <>
       <header
-        className={`sticky top-0 z-50 bg-brand-navy text-white border-b border-brand-navy-dark transition-[padding,box-shadow] duration-200 ${
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-50 bg-brand-navy text-white border-b border-brand-navy-dark transition-[padding,box-shadow] duration-200 ${
           isScrolled ? "shadow-lg" : "shadow-md"
         }`}
       >
@@ -168,6 +181,9 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
           </div>
         )}
       </header>
+
+      {/* Reserve space so content isn't hidden under the fixed header */}
+      <div style={{ height: headerHeight }} aria-hidden="true" />
 
       <ContactFormModal
         isOpen={isContactModalOpen}

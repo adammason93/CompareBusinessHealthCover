@@ -304,14 +304,14 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Optimize scrolling performance */
+  /* Optimize scrolling performance — clip (not hidden) so sticky/fixed headers work */
   html {
     scroll-behavior: auto;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* Reduce layout thrashing */
