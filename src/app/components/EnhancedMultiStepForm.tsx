@@ -1039,8 +1039,7 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             >
               {currentStep === steps.length ? (
                 <>
-                  <span className="hidden sm:inline">Submit Application</span>
-                  <span className="sm:hidden">Submit</span>
+                  Submit
                   <Sparkles className="w-5 h-5 ml-2" />
                 </>
               ) : (
