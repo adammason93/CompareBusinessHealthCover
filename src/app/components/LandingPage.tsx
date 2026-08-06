@@ -1,4 +1,4 @@
-import { Shield, Check, Star, ArrowRight, ChevronDown, Heart, Home as HomeIcon, FileText } from "lucide-react";
+import { Shield, Check, Star, ArrowRight, ChevronDown, ChevronUp, Heart, Home as HomeIcon, FileText, X } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect, useRef, memo } from "react";
@@ -14,6 +14,8 @@ import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SITE } from "@/app/config/site";
 import { LOGO } from "@/app/config/brand";
+
+const STICKY_BANNER_MINIMIZED_KEY = "cbhc_sticky_quote_minimized";
 
 const HERO_SENTENCES = [
   "SME Health Insurance From Just 2 Employees",
@@ -62,7 +64,32 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [benefitModalOpen, setBenefitModalOpen] = useState<string | null>(null);
   const [showStickyBanner, setShowStickyBanner] = useState(false);
+  const [stickyBannerMinimized, setStickyBannerMinimized] = useState(() => {
+    try {
+      return sessionStorage.getItem(STICKY_BANNER_MINIMIZED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
   const bannerSentinelRef = useRef<HTMLDivElement>(null);
+
+  const minimizeStickyBanner = () => {
+    setStickyBannerMinimized(true);
+    try {
+      sessionStorage.setItem(STICKY_BANNER_MINIMIZED_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const expandStickyBanner = () => {
+    setStickyBannerMinimized(false);
+    try {
+      sessionStorage.removeItem(STICKY_BANNER_MINIMIZED_KEY);
+    } catch {
+      /* ignore */
+    }
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -778,35 +805,59 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         </div>
       )}
 
-      {/* Sticky Bottom Banner */}
+      {/* Sticky Bottom Banner — can be minimised so it does not block the page */}
       {showStickyBanner && (
-        <div 
-          className="fixed bottom-4 sm:bottom-6 left-0 right-0 z-40 transition-transform duration-300 flex justify-center px-2 sm:px-4"
-          style={{
-            transform: showStickyBanner ? 'translateY(0)' : 'translateY(100%)'
-          }}
-        >
-          <div 
-            className="py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%] bg-brand-navy"
-          >
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
-              <div className="flex-1 text-center sm:text-left">
-                <h3 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1">
-                  Get an SME health insurance quote
-                </h3>
-                <p className="text-white text-xs sm:text-sm md:text-base">
-                  Compare group cover options for your business — free and no obligation
-                </p>
-              </div>
+        stickyBannerMinimized ? (
+          <div className="fixed bottom-4 sm:bottom-6 right-3 sm:right-6 z-40 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onGetStarted}
+              className="bg-brand-navy hover:bg-brand-navy-dark text-white rounded-full px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base font-semibold shadow-2xl transition-colors"
+            >
+              Get SME Quote
+            </button>
+            <button
+              type="button"
+              onClick={expandStickyBanner}
+              className="bg-white text-brand-navy border border-brand-navy/20 hover:bg-brand-surface rounded-full p-2.5 shadow-lg transition-colors"
+              aria-label="Expand quote banner"
+              title="Expand"
+            >
+              <ChevronUp className="w-5 h-5" aria-hidden />
+            </button>
+          </div>
+        ) : (
+          <div className="fixed bottom-4 sm:bottom-6 left-0 right-0 z-40 transition-transform duration-300 flex justify-center px-2 sm:px-4">
+            <div className="relative py-3 px-4 sm:py-5 sm:px-6 rounded-2xl shadow-2xl w-full max-w-[95%] sm:max-w-[85%] bg-brand-navy">
               <button
-                onClick={onGetStarted}
-                className="bg-white hover:bg-brand-surface text-gray-900 rounded-full px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base md:text-lg font-semibold transition-colors whitespace-nowrap shadow-lg w-full sm:w-auto"
+                type="button"
+                onClick={minimizeStickyBanner}
+                className="absolute top-2 right-2 sm:top-3 sm:right-3 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Minimise quote banner"
+                title="Minimise"
               >
-                Get SME Quote
+                <X className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden />
               </button>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6 pr-6 sm:pr-8">
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1">
+                    Get an SME health insurance quote
+                  </h3>
+                  <p className="text-white text-xs sm:text-sm md:text-base">
+                    Compare group cover options for your business — free and no obligation
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={onGetStarted}
+                  className="bg-white hover:bg-brand-surface text-gray-900 rounded-full px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base md:text-lg font-semibold transition-colors whitespace-nowrap shadow-lg w-full sm:w-auto"
+                >
+                  Get SME Quote
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )
       )}
     </div>
   );
