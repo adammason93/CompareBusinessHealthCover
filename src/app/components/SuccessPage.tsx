@@ -4,9 +4,10 @@ import { motion } from "motion/react";
 
 interface SuccessPageProps {
   onReset: () => void;
+  referenceNumber?: string | null;
 }
 
-export function SuccessPage({ onReset }: SuccessPageProps) {
+export function SuccessPage({ onReset, referenceNumber }: SuccessPageProps) {
   return (
     <div className="bg-gradient-to-br from-brand-teal-muted via-brand-surface to-brand-surface-alt p-4 sm:p-6">
       <div className="max-w-xl mx-auto text-center">
@@ -97,7 +98,9 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1 text-sm">Email Confirmation</h3>
                   <p className="text-xs text-gray-600">
-                    Check your inbox - we've sent a confirmation with your reference number
+                    {referenceNumber
+                      ? `Check your inbox — we've sent a confirmation with reference ${referenceNumber}`
+                      : "Check your inbox — we've sent a confirmation with your reference number"}
                   </p>
                 </div>
               </motion.div>
@@ -120,6 +123,13 @@ export function SuccessPage({ onReset }: SuccessPageProps) {
               </motion.div>
             </div>
           </div>
+
+          {referenceNumber ? (
+            <div className="bg-white rounded-xl border border-brand-teal/30 px-4 py-3 mb-6">
+              <p className="text-xs text-gray-600 mb-1">Your reference number</p>
+              <p className="text-lg font-bold tracking-wide text-gray-900">{referenceNumber}</p>
+            </div>
+          ) : null}
 
           {/* CTA Button */}
           <motion.div

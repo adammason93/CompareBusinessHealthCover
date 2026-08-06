@@ -80,6 +80,7 @@ function resolveInitialPage(): string {
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [submissionReference, setSubmissionReference] = useState<string | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -172,6 +173,7 @@ export default function App() {
     }
 
     setIsSubmitting(true);
+    setSubmissionReference(null);
     
     try {
       console.log("Form submitted:", data);
@@ -205,6 +207,9 @@ export default function App() {
         measureLeadCreated();
       } else {
         console.log('Form submitted successfully:', result);
+        if (result.referenceNumber) {
+          setSubmissionReference(result.referenceNumber);
+        }
         measureLeadCreated();
       }
 
@@ -222,6 +227,7 @@ export default function App() {
 
   const handleReset = () => {
     setIsSuccessOpen(false);
+    setSubmissionReference(null);
   };
 
   const handleBackToLanding = () => {
@@ -441,7 +447,7 @@ export default function App() {
       {/* Success Overlay */}
       <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
         <DialogContent className="!max-w-[95vw] sm:!max-w-[500px] md:!max-w-[600px] !w-auto p-0 bg-white overflow-y-auto max-h-[90vh]">
-          <SuccessPage onReset={handleReset} />
+          <SuccessPage onReset={handleReset} referenceNumber={submissionReference} />
         </DialogContent>
       </Dialog>
 
