@@ -7,7 +7,8 @@ import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
 import { Header } from "@/app/components/Header";
 import { LandingPageProps } from "@/app/components/LandingPageProps";
-import { ReviewSection } from "@/app/components/ReviewSection";
+// Temporarily hidden — Google review account not set up for this site yet
+// import { ReviewSection } from "@/app/components/ReviewSection";
 import { HomeBlogSection } from "@/app/components/HomeBlogSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
@@ -745,8 +746,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         </div>
       </section>
 
-      {/* Review Section */}
-      <ReviewSection />
+      {/* Review Section — temporarily hidden until Google review account is set up */}
+      {/* <ReviewSection /> */}
 
       <HomeBlogSection onNavigate={onNavigate} />
 
