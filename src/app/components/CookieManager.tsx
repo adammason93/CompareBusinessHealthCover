@@ -12,14 +12,30 @@ interface CookiePreferences {
   functional: boolean;
 }
 
-function hasCookieConsentChoice(): boolean {
-  return Boolean(
+const COOKIE_CONSENT_TTL_MS = 24 * 60 * 60 * 1000; // re-prompt every 24 hours for now
+
+function getConsentTimestamp(): number | null {
+  const raw =
+    localStorage.getItem('cookieConsentDate') || sessionStorage.getItem('cookieConsentDate');
+  if (!raw) return null;
+  const t = Date.parse(raw);
+  return Number.isFinite(t) ? t : null;
+}
+
+/** True if user has a consent choice that is still within the 24h window. */
+function hasFreshCookieConsentChoice(): boolean {
+  const hasChoice = Boolean(
     localStorage.getItem('cookieConsent') || sessionStorage.getItem('cookieConsent')
   );
+  if (!hasChoice) return false;
+  const ts = getConsentTimestamp();
+  // No date = treat as stale so banner reappears
+  if (ts == null) return false;
+  return Date.now() - ts < COOKIE_CONSENT_TTL_MS;
 }
 
 export function CookieManager({ onNavigate }: CookieManagerProps) {
-  const [isVisible, setIsVisible] = useState(() => !hasCookieConsentChoice());
+  const [isVisible, setIsVisible] = useState(() => !hasFreshCookieConsentChoice());
   const [showCustomize, setShowCustomize] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
     essential: true,
@@ -29,7 +45,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
   });
 
   useEffect(() => {
-    if (!hasCookieConsentChoice()) {
+    if (!hasFreshCookieConsentChoice()) {
       setIsVisible(true);
     } else {
       loadPreferences();
@@ -44,9 +60,17 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
     window.addEventListener('open-cookie-preferences', handleOpenPreferences);
     window.addEventListener('storage', handleStorageChange);
 
+    // Re-check when the 24h window elapses while the tab stays open
+    const interval = window.setInterval(() => {
+      if (!hasFreshCookieConsentChoice()) {
+        setIsVisible(true);
+      }
+    }, 60_000);
+
     return () => {
       window.removeEventListener('open-cookie-preferences', handleOpenPreferences);
       window.removeEventListener('storage', handleStorageChange);
+      window.clearInterval(interval);
     };
   }, []);
 
@@ -108,13 +132,14 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
       functional: false,
     };
     
-    // Store in sessionStorage (temporary)
+    // Store in sessionStorage (temporary) — still stamp a date so 24h re-prompt works
     sessionStorage.setItem('cookieConsent', 'declined');
     sessionStorage.setItem('cookieConsentDate', new Date().toISOString());
     
     // Clear localStorage consent
     localStorage.removeItem('cookieConsent');
     localStorage.removeItem('cookiePreferences');
+    localStorage.removeItem('cookieConsentDate');
     
     // Clear tracking cookies
     clearTrackingCookies();
