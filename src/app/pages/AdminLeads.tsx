@@ -24,6 +24,21 @@ interface Lead {
   comments: string;
 }
 
+/** Shared lead table — tag which sister site the enquiry came from. */
+function websiteTag(sourceWebsite?: string): { label: string; className: string } {
+  const w = (sourceWebsite || "").toLowerCase().trim();
+  if (w.includes("comparebusinesshealthcover")) {
+    return { label: "Business Healthcover", className: "bg-emerald-100 text-emerald-900" };
+  }
+  if (w.includes("healthcovercomparison")) {
+    return { label: "Health Cover Compare", className: "bg-indigo-100 text-indigo-900" };
+  }
+  if (!w) {
+    return { label: "Unknown", className: "bg-gray-100 text-gray-500" };
+  }
+  return { label: sourceWebsite!.replace(/^www\./, ""), className: "bg-gray-100 text-gray-800" };
+}
+
 export function AdminLeads() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [filteredLeads, setFilteredLeads] = useState<Lead[]>([]);
@@ -32,6 +47,7 @@ export function AdminLeads() {
   const [editedValues, setEditedValues] = useState<{ [key: string]: any }>({});
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSource, setFilterSource] = useState<string>("all");
+  const [filterWebsite, setFilterWebsite] = useState<string>("all");
   const [filterInsured, setFilterInsured] = useState<string>("all");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
@@ -102,12 +118,24 @@ export function AdminLeads() {
       filtered = filtered.filter(lead => lead.source === filterSource);
     }
 
+    if (filterWebsite !== "all") {
+      filtered = filtered.filter((lead) => {
+        const w = (lead.sourceWebsite || "").toLowerCase();
+        if (filterWebsite === "cbhc") return w.includes("comparebusinesshealthcover");
+        if (filterWebsite === "hcc") return w.includes("healthcovercomparison");
+        if (filterWebsite === "unknown") {
+          return !w || (!w.includes("comparebusinesshealthcover") && !w.includes("healthcovercomparison"));
+        }
+        return true;
+      });
+    }
+
     if (filterInsured !== "all") {
       filtered = filtered.filter(lead => lead.isInsured === filterInsured);
     }
 
     setFilteredLeads(filtered);
-  }, [leads, searchTerm, filterSource, filterInsured]);
+  }, [leads, searchTerm, filterSource, filterWebsite, filterInsured]);
 
   const fetchLeads = async () => {
     try {
@@ -391,6 +419,17 @@ export function AdminLeads() {
             {/* Filters */}
             <div className="flex flex-col sm:flex-row gap-3">
               <select
+                value={filterWebsite}
+                onChange={(e) => setFilterWebsite(e.target.value)}
+                className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg text-sm sm:text-base min-w-[180px]"
+              >
+                <option value="all">All Websites</option>
+                <option value="cbhc">Business Healthcover</option>
+                <option value="hcc">Health Cover Compare</option>
+                <option value="unknown">Unknown</option>
+              </select>
+
+              <select
                 value={filterSource}
                 onChange={(e) => setFilterSource(e.target.value)}
                 className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg text-sm sm:text-base min-w-[150px]"
@@ -415,6 +454,7 @@ export function AdminLeads() {
                 onClick={() => {
                   setSearchTerm("");
                   setFilterSource("all");
+                  setFilterWebsite("all");
                   setFilterInsured("all");
                 }}
                 className="px-4 py-2 sm:py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
@@ -603,19 +643,19 @@ export function AdminLeads() {
                         )}
                       </td>
 
-                      {/* Source Website - read only */}
+                      {/* Source Website - read only tag */}
                       <td className="px-4 py-3 text-sm">
-                        <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                          lead.sourceWebsite === "comparebusinesshealthcover.co.uk"
-                            ? "bg-teal-100 text-teal-800"
-                            : lead.sourceWebsite === "healthcovercomparison.co.uk"
-                            ? "bg-indigo-100 text-indigo-800"
-                            : lead.sourceWebsite
-                            ? "bg-gray-100 text-gray-800"
-                            : "bg-gray-100 text-gray-500"
-                        }`}>
-                          {lead.sourceWebsite || "-"}
-                        </span>
+                        {(() => {
+                          const tag = websiteTag(lead.sourceWebsite);
+                          return (
+                            <span
+                              className={`inline-flex px-2.5 py-1 text-xs font-semibold rounded-full whitespace-nowrap ${tag.className}`}
+                              title={lead.sourceWebsite || "No website recorded"}
+                            >
+                              {tag.label}
+                            </span>
+                          );
+                        })()}
                       </td>
 
                       {/* Source - Editable */}
