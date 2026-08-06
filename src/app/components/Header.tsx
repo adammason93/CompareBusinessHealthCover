@@ -1,5 +1,5 @@
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useState, memo } from "react";
+import { useState, useEffect, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { BusinessCoverNavMenu } from "@/app/components/BusinessCoverNavMenu";
 import { Logo } from "@/app/components/Logo";
@@ -18,6 +18,16 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
   const [coverDropdownOpen, setCoverDropdownOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 16);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
@@ -26,10 +36,18 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
 
   return (
     <>
-      <header className="bg-brand-navy text-white border-b border-brand-navy-dark shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header
+        className={`sticky top-0 z-50 bg-brand-navy text-white border-b border-brand-navy-dark transition-[padding,box-shadow] duration-200 ${
+          isScrolled ? "shadow-lg" : "shadow-md"
+        }`}
+      >
+        <div
+          className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-[padding] duration-200 ${
+            isScrolled ? "py-2 sm:py-2.5" : "py-4"
+          }`}
+        >
           <div className="flex items-center justify-between gap-4">
-            <Logo onClick={() => onNavigate('home')} size="md" />
+            <Logo onClick={() => onNavigate("home")} size={isScrolled ? "sm" : "md"} />
 
             <nav className="hidden lg:flex items-center gap-6">
               <div
@@ -50,26 +68,28 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                 )}
               </div>
               <button
-                onClick={() => onNavigate('blog')}
+                onClick={() => onNavigate("blog")}
                 className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
               >
                 Blog
               </button>
               <button
-                onClick={() => onNavigate('about-us')}
+                onClick={() => onNavigate("about-us")}
                 className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
               >
                 About Us
               </button>
               <button
-                onClick={() => onNavigate('contact-us')}
+                onClick={() => onNavigate("contact-us")}
                 className="text-white/90 hover:text-brand-teal-light py-2 whitespace-nowrap"
               >
                 Contact Us
               </button>
               <button
                 onClick={onGetStarted}
-                className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-6 py-2.5 text-sm font-semibold whitespace-nowrap shadow-md"
+                className={`bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full font-semibold whitespace-nowrap shadow-md transition-all duration-200 ${
+                  isScrolled ? "px-5 py-2 text-sm" : "px-6 py-2.5 text-sm"
+                }`}
               >
                 Get SME Quote
               </button>
@@ -78,7 +98,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden text-white/80 hover:text-brand-teal-light p-2"
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -94,7 +114,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
                   className="flex items-center justify-between w-full text-white font-medium py-2"
                 >
                   {BUSINESS_COVER_NAV_LABEL}
-                  <ChevronDown className={`w-5 h-5 transition-transform ${coverDropdownOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 transition-transform ${coverDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {coverDropdownOpen && (
                   <div className="pl-4 mt-2">
@@ -109,7 +129,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
 
               <button
                 onClick={() => {
-                  onNavigate('blog');
+                  onNavigate("blog");
                   closeMobileMenu();
                 }}
                 className="block w-full text-left text-white font-medium py-2"
@@ -118,7 +138,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               </button>
               <button
                 onClick={() => {
-                  onNavigate('about-us');
+                  onNavigate("about-us");
                   closeMobileMenu();
                 }}
                 className="block w-full text-left text-white font-medium py-2"
@@ -127,7 +147,7 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               </button>
               <button
                 onClick={() => {
-                  onNavigate('contact-us');
+                  onNavigate("contact-us");
                   closeMobileMenu();
                 }}
                 className="block w-full text-left text-white font-medium py-2"
