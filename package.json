@@ -7,7 +7,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "vite build && node scripts/inject-crawler-html.mjs",
+    "build": "vite build && node scripts/inject-crawler-html.mjs && node scripts/ping-indexnow.mjs",
     "deploy": "npm run build && wrangler deploy",
     "dev": "vite",
     "workers:deploy": "npm run deploy"

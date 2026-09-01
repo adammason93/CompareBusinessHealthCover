@@ -46,10 +46,26 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               </li>
               <li>
                 <button 
+                  onClick={() => handleNavigation('sme-health-insurance-2-employees')}
+                  className="hover:text-brand-teal text-left"
+                >
+                  Cover from 2 employees
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('sme-health-insurance-cost')}
+                  className="hover:text-brand-teal text-left"
+                >
+                  SME cost guide
+                </button>
+              </li>
+              <li>
+                <button 
                   onClick={() => handleNavigation('insurance-types')}
                   className="hover:text-brand-teal text-left"
                 >
-                  Insurance Types
+                  Types of business PMI
                 </button>
               </li>
               <li>

@@ -10,21 +10,13 @@ import { MySubmissions } from "@/app/components/MySubmissions";
 import { Dialog, DialogContent } from "@/app/components/ui/dialog";
 import { CookieManager } from "@/app/components/CookieManager";
 import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
-import { HealthInsuranceGuide } from "@/app/pages/HealthInsuranceGuide";
-import { BusinessHealthInsurance } from "@/app/pages/BusinessHealthInsurance";
-import { SelfEmployedHealthInsurance } from "@/app/pages/SelfEmployedHealthInsurance";
-import { CorporateHealthInsurance } from "@/app/pages/CorporateHealthInsurance";
-import { FamilyHealthInsurance } from "@/app/pages/FamilyHealthInsurance";
-import { SeniorHealthInsurance } from "@/app/pages/SeniorHealthInsurance";
-import { InternationalHealthInsurance } from "@/app/pages/InternationalHealthInsurance";
-import { SmallCompanyHealthInsurance } from "@/app/pages/SmallCompanyHealthInsurance";
-import { AboutUs } from "@/app/pages/AboutUs";
 import { ContactUs } from "@/app/pages/ContactUs";
+import { GeoGuidePage } from "@/app/components/GeoGuidePage";
+import { getGeoGuide } from "@/app/content/geo-guides.mjs";
 import { PrivacyPolicy } from "@/app/pages/PrivacyPolicy";
 import { TermsConditions } from "@/app/pages/TermsConditions";
 import { CookiePolicy } from "@/app/components/CookiePolicy";
 import { TermsAndConditions } from "@/app/components/TermsAndConditions";
-import { InsuranceTypes } from "@/app/components/InsuranceTypes";
 import { Sitemap } from "@/app/components/Sitemap";
 import { Disclaimer } from "@/app/pages/Disclaimer";
 import { AdminLeads } from "@/app/pages/AdminLeads";
@@ -300,25 +292,17 @@ export default function App() {
       return <StaticFileServer fileName={fileName} />;
     }
 
+    if (currentPage !== 'contact-us' && getGeoGuide(currentPage)) {
+      return (
+        <GeoGuidePage
+          slug={currentPage}
+          onGetStarted={handleGetStarted}
+          onNavigate={handleNavigate}
+        />
+      );
+    }
+
     switch (currentPage) {
-      case 'health-insurance-guide':
-        return <HealthInsuranceGuide onGetStarted={handleGetStarted} />;
-      case 'business-health-insurance':
-        return <BusinessHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'self-employed-health-insurance':
-        return <SelfEmployedHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'corporate-health-insurance':
-        return <CorporateHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'family-health-insurance':
-        return <FamilyHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'senior-health-insurance':
-        return <SeniorHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'international-health-insurance':
-        return <InternationalHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'small-company-health-insurance':
-        return <SmallCompanyHealthInsurance onGetStarted={handleGetStarted} />;
-      case 'about-us':
-        return <AboutUs onGetStarted={handleGetStarted} />;
       case 'contact-us':
         return <ContactUs onGetStarted={handleGetStarted} />;
       case 'privacy-policy':
@@ -329,8 +313,6 @@ export default function App() {
         return <CookiePolicy onGetStarted={handleGetStarted} />;
       case 'terms-and-conditions':
         return <TermsAndConditions onGetStarted={handleGetStarted} />;
-      case 'insurance-types':
-        return <InsuranceTypes onGetStarted={handleGetStarted} />;
       case 'sitemap':
         return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':

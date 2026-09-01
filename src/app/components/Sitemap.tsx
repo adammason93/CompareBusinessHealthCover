@@ -20,13 +20,19 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       ]
     },
     {
-      title: 'Insurance Information',
+      title: 'SME health insurance',
       icon: Shield,
       links: [
-        { label: 'Insurance Types Explained', page: 'insurance-types' },
-        { label: 'Life Insurance', page: 'insurance-types' },
-        { label: 'Income Protection', page: 'insurance-types' },
-        { label: 'Mortgage Protection', page: 'insurance-types' }
+        { label: 'Business health insurance', page: 'business-health-insurance' },
+        { label: 'Small company cover', page: 'small-company-health-insurance' },
+        { label: 'From 2 employees', page: 'sme-health-insurance-2-employees' },
+        { label: 'Cost guide', page: 'sme-health-insurance-cost' },
+        { label: 'Tax treatment', page: 'business-health-insurance-tax' },
+        { label: 'Renewals', page: 'business-health-insurance-renewals' },
+        { label: 'Directors', page: 'director-group-health-insurance' },
+        { label: 'Providers compared', page: 'small-business-health-insurance-providers' },
+        { label: 'SME guide', page: 'health-insurance-guide' },
+        { label: 'Types of business PMI', page: 'insurance-types' }
       ]
     },
     {

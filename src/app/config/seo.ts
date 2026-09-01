@@ -1,4 +1,5 @@
 import { SITE } from './site';
+import { getGeoGuide } from '@/app/content/geo-guides.mjs';
 
 export const SEO_CONFIG = {
   siteName: SITE.name,
@@ -149,5 +150,15 @@ export function getSEOConfig(page: string) {
   if (page.startsWith('blog/') && page !== 'blog') {
     return SEO_CONFIG.pages.blog;
   }
-  return SEO_CONFIG.pages[page as keyof typeof SEO_CONFIG.pages] || SEO_CONFIG.pages.home;
+  const fromConfig = SEO_CONFIG.pages[page as keyof typeof SEO_CONFIG.pages];
+  if (fromConfig) return fromConfig;
+  const guide = getGeoGuide(page === 'home' ? 'home' : page);
+  if (guide) {
+    return {
+      title: guide.title,
+      description: guide.description,
+      keywords: guide.keywords,
+    };
+  }
+  return SEO_CONFIG.pages.home;
 }
