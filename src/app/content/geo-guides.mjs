@@ -290,8 +290,13 @@ export const GEO_GUIDES = [
       { label: "From 2 employees", slug: "sme-health-insurance-2-employees" },
       { label: "Small company schemes", slug: "small-company-health-insurance" },
       { label: "Tax treatment", slug: "business-health-insurance-tax" },
-      { label: "About us", slug: "about-us" },
+      { label: "How we compare", slug: "how-we-compare" },
+      { label: "Bupa SME cover", slug: "bupa-business-health-insurance" },
+      { label: "AXA Health SME cover", slug: "axa-business-health-insurance" },
+      { label: "Aviva SME cover", slug: "aviva-business-health-insurance" },
+      { label: "Vitality SME cover", slug: "vitality-business-health-insurance" },
       { label: "How providers differ", slug: "small-business-health-insurance-providers" },
+      { label: "About us", slug: "about-us" },
     ],
   },
   {
@@ -691,11 +696,12 @@ export const GEO_GUIDES = [
       },
     ],
     related: [
+      { label: "Employee health insurance", slug: "business-health-insurance" },
+      { label: "How we compare", slug: "how-we-compare" },
       { label: "Bupa SME cover", slug: "bupa-business-health-insurance" },
       { label: "AXA Health SME cover", slug: "axa-business-health-insurance" },
       { label: "Aviva SME cover", slug: "aviva-business-health-insurance" },
       { label: "Vitality SME cover", slug: "vitality-business-health-insurance" },
-      { label: "Business PMI", slug: "business-health-insurance" },
       { label: "Cost", slug: "sme-health-insurance-cost" },
     ],
     sources: [
@@ -767,11 +773,12 @@ export const GEO_GUIDES = [
       },
     ],
     related: [
+      { label: "Business health insurance", slug: "business-health-insurance" },
+      { label: "How we compare", slug: "how-we-compare" },
       { label: "How providers differ", slug: "small-business-health-insurance-providers" },
       { label: "AXA Health", slug: "axa-business-health-insurance" },
       { label: "Aviva", slug: "aviva-business-health-insurance" },
       { label: "Vitality", slug: "vitality-business-health-insurance" },
-      { label: "What cover includes", slug: "insurance-types" },
       { label: "Cost", slug: "sme-health-insurance-cost" },
     ],
     sources: [
@@ -831,11 +838,12 @@ export const GEO_GUIDES = [
       },
     ],
     related: [
+      { label: "Business health insurance UK", slug: "business-health-insurance" },
+      { label: "How we compare", slug: "how-we-compare" },
       { label: "How providers differ", slug: "small-business-health-insurance-providers" },
       { label: "Bupa", slug: "bupa-business-health-insurance" },
       { label: "Aviva", slug: "aviva-business-health-insurance" },
       { label: "Vitality", slug: "vitality-business-health-insurance" },
-      { label: "From 2 employees", slug: "sme-health-insurance-2-employees" },
       { label: "Cost", slug: "sme-health-insurance-cost" },
     ],
     sources: [
@@ -889,11 +897,12 @@ export const GEO_GUIDES = [
       },
     ],
     related: [
+      { label: "Company health insurance", slug: "business-health-insurance" },
+      { label: "How we compare", slug: "how-we-compare" },
       { label: "How providers differ", slug: "small-business-health-insurance-providers" },
       { label: "Bupa", slug: "bupa-business-health-insurance" },
       { label: "AXA Health", slug: "axa-business-health-insurance" },
       { label: "Vitality", slug: "vitality-business-health-insurance" },
-      { label: "Corporate cover", slug: "corporate-health-insurance" },
       { label: "Cost", slug: "sme-health-insurance-cost" },
     ],
     sources: [
@@ -950,11 +959,12 @@ export const GEO_GUIDES = [
       },
     ],
     related: [
+      { label: "Group private medical insurance", slug: "business-health-insurance" },
+      { label: "How we compare", slug: "how-we-compare" },
       { label: "How providers differ", slug: "small-business-health-insurance-providers" },
       { label: "Bupa", slug: "bupa-business-health-insurance" },
       { label: "AXA Health", slug: "axa-business-health-insurance" },
       { label: "Aviva", slug: "aviva-business-health-insurance" },
-      { label: "What cover includes", slug: "insurance-types" },
       { label: "Cost", slug: "sme-health-insurance-cost" },
     ],
     sources: [

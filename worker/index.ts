@@ -34,6 +34,21 @@ function redirectPointsToSiteRoot(locationHeader: string | null, baseUrl: URL): 
 }
 
 const HASHED_ASSET = /\.(js|mjs|css|woff2?|ttf|otf|svg|png|jpe?g|gif|webp|ico|json|map)$/i
+const CANONICAL_HOST = 'comparebusinesshealthcover.co.uk'
+
+function canonicalHostRedirect(url: URL): string | null {
+  const next = new URL(url.href)
+  let changed = false
+  if (next.hostname.toLowerCase() === `www.${CANONICAL_HOST}`) {
+    next.hostname = CANONICAL_HOST
+    changed = true
+  }
+  if (next.protocol === 'http:') {
+    next.protocol = 'https:'
+    changed = true
+  }
+  return changed ? next.toString() : null
+}
 
 const PATH_REDIRECTS: Record<string, string> = {
   "/terms-and-conditions": "/terms-conditions/",
@@ -100,6 +115,10 @@ export default {
     }
 
     const original = new URL(request.url)
+    const hostRedirect = canonicalHostRedirect(original)
+    if (hostRedirect) {
+      return Response.redirect(hostRedirect, 301)
+    }
     const redirectTo = htmlPathRedirect(original.pathname)
     if (redirectTo) {
       return permanentRedirect(original, redirectTo)

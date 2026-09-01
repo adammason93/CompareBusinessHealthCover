@@ -110,7 +110,7 @@ function llmsTxt(blogLines) {
 
 > Free UK comparison of SME and business health insurance (group private medical insurance) from 2 employees. Introducer to FCA-regulated brokers — not an insurer.
 
-Compare Business Healthcover is a trading name of MASON & HALL DIGITAL LTD. We help UK employers compare employee medical cover. Phone 01484 773038. Site: ${ORIGIN}
+Compare Business Healthcover is a trading name of MASON & HALL DIGITAL LTD (Company No. 17086378). We help UK employers compare SME health insurance and group private medical insurance. We are an introducer, not an insurer; FCA-regulated broker partners obtain quotes. Phone 01484 773038. Site: ${ORIGIN}
 
 ## Target queries
 ${KEYWORDS.map((k) => `- ${k}`).join("\n")}

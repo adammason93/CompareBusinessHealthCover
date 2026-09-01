@@ -44,6 +44,7 @@ const navLinks = `
   <a href="${pageUrl("/health-insurance-guide")}">Guide</a>
   <a href="${pageUrl("/about-us")}">About</a>
   <a href="${pageUrl("/how-we-compare")}">How we compare</a>
+  <a href="${pageUrl("/editorial-policy")}">Editorial policy</a>
   <a href="${pageUrl("/blog")}">Blog</a>
   <a href="${pageUrl("/contact-us")}">Contact</a>
 </nav>`;
@@ -119,7 +120,7 @@ export function articleHtml(page, extraInner = "") {
   ${sections}
   ${extraInner}
   <footer>
-    <p>Compare Business Healthcover is an introducer, not an insurer. Call 01484 773038. <a href="${ORIGIN}/llms.txt">llms.txt</a></p>
+    <p>Compare Business Healthcover is a trading name of MASON &amp; HALL DIGITAL LTD (Company No. 17086378). Introducer, not an insurer. Quotes are arranged by FCA-regulated broker partners. Call 01484 773038. <a href="${pageUrl("/how-we-compare")}">How we compare</a> · <a href="${pageUrl("/editorial-policy")}">Editorial policy</a> · <a href="${ORIGIN}/llms.txt">llms.txt</a></p>
   </footer>
 </article>`;
 }
@@ -130,6 +131,32 @@ export function jsonLd(page) {
   if (page.path !== "/") {
     crumbs.push({ "@type": "ListItem", position: 2, name: page.h1, item: url });
   }
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Compare Business Healthcover",
+    legalName: "MASON & HALL DIGITAL LTD",
+    description:
+      "Introducer for UK SME group private medical insurance. Not an insurer. Not FCA authorised. FCA-regulated broker partners obtain quotes.",
+    url: ORIGIN,
+    telephone: "01484-773038",
+    logo: `${ORIGIN}/logo-v6.png`,
+    identifier: {
+      "@type": "PropertyValue",
+      name: "Company Number",
+      value: "17086378",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Rotherham",
+      addressCountry: "GB",
+    },
+    areaServed: { "@type": "Country", name: "United Kingdom" },
+    knowsAbout: [
+      "UK SME group private medical insurance",
+      "business health insurance comparison",
+    ],
+  };
   const graph = [
     {
       "@context": "https://schema.org",
@@ -139,8 +166,10 @@ export function jsonLd(page) {
       url,
       ...(page.lastReviewed ? { dateModified: "2026-09-01" } : {}),
       isPartOf: { "@type": "WebSite", name: "Compare Business Healthcover", url: ORIGIN },
+      publisher: { "@type": "Organization", name: "Compare Business Healthcover", url: ORIGIN },
     },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: crumbs },
+    organization,
   ];
   if (page.faqs?.length) {
     graph.push({
@@ -151,29 +180,6 @@ export function jsonLd(page) {
         name: item.q,
         acceptedAnswer: { "@type": "Answer", text: item.a },
       })),
-    });
-  }
-  if (page.path === "/") {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Compare Business Healthcover",
-      legalName: "MASON & HALL DIGITAL LTD",
-      description:
-        "Introducer for UK SME group private medical insurance. Not an insurer. Not FCA authorised. FCA-regulated broker partners obtain quotes.",
-      url: ORIGIN,
-      telephone: "01484-773038",
-      logo: `${ORIGIN}/logo-v6.png`,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Rotherham",
-        addressCountry: "GB",
-      },
-      areaServed: { "@type": "Country", name: "United Kingdom" },
-      knowsAbout: [
-        "UK SME group private medical insurance",
-        "business health insurance comparison",
-      ],
     });
   }
   return graph;
