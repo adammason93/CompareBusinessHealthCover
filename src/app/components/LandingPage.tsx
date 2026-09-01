@@ -141,58 +141,50 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   }, []);
 
   const benefitDetails = {
-    priceMatch: {
-      title: "Price Match Guarantee",
+    freeEnquire: {
+      title: "Free to enquire",
       icon: <PiggyBank className="w-12 h-12 text-yellow-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            Our brokers are so confident in their ability to find you the best deals that they offer a comprehensive price match guarantee. If you find a cheaper quote for the same level of cover elsewhere, they'll match it or beat it.
+            The introduction on this site is free for the employer. You submit company facts; we pass the enquiry to FCA-regulated broker partners. There is no obligation to buy.
           </p>
-          <h4 className="font-semibold text-gray-900 text-lg">How It Works:</h4>
+          <h4 className="font-semibold text-gray-900 text-lg">If you take a policy</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Find a cheaper quote for identical cover with the same insurer</li>
-            <li>Provide our brokers with proof of the competing quote within 7 days</li>
-            <li>They'll verify the details and match or beat the price</li>
-            <li>Your new policy will include all the same benefits and coverage</li>
+            <li>Quotes and policies are arranged by the broker and/or insurer, not by Compare Business Healthcover</li>
+            <li>The broker is typically paid by the insurer as commission</li>
+            <li>That commission does not usually increase the premium versus going to the same insurer direct</li>
+            <li>You can walk away at any stage</li>
           </ul>
-          <p className="text-gray-700 leading-relaxed">
-            Our brokers' price match guarantee ensures you always get the most competitive rates available in the market, giving you complete peace of mind that you're getting the best value for your money.
-          </p>
         </div>
       )
     },
     noObligation: {
-      title: "No-Obligation Quotes",
+      title: "No-obligation quotes",
       icon: <MessageCircle className="w-12 h-12 text-brand-teal" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            Getting a quote from us is completely complimentary and comes with absolutely no obligation to purchase. We believe in empowering you to make informed decisions without any pressure or commitment.
+            Completing the enquiry does not commit you to a policy. Broker partners should explain options so you can review them with your leadership team in your own time.
           </p>
-          <h4 className="font-semibold text-gray-900 text-lg">What This Means For You:</h4>
+          <h4 className="font-semibold text-gray-900 text-lg">What this means</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Compare quotes at your own pace with zero pressure</li>
-            <li>Take time to review options with your leadership team</li>
-            <li>No sales calls or pushy follow-ups - we respect your time</li>
-            <li>Complete transparency with no hidden fees or charges</li>
-            <li>Walk away at any time with no consequences</li>
+            <li>Compare quotes without a purchase obligation</li>
+            <li>Cover, exclusions and eligibility still depend on the insurer</li>
+            <li>Compare Business Healthcover is an introducer, not an insurer</li>
           </ul>
-          <p className="text-gray-700 leading-relaxed">
-            Our goal is to provide you with the information you need to make the right choice for your health insurance needs. You're in control every step of the way.
-          </p>
         </div>
       )
     },
     allInsurers: {
-      title: "Market Leading Insurance",
+      title: "UK group PMI insurers",
       icon: <TrendingUp className="w-12 h-12 text-brand-teal" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            We work with all of the UK's leading health insurance providers to ensure you have access to the widest range of policies and the most competitive prices available.
+            Broker partners compare group schemes from insurers willing to quote for your workforce. Panels change. Naming an insurer here is not a recommendation to buy them, and we do not claim to cover every provider in the market.
           </p>
-          <h4 className="font-semibold text-gray-900 text-lg">Our Partner Insurers Include:</h4>
+          <h4 className="font-semibold text-gray-900 text-lg">Names that often appear on SME panels</h4>
           <div className="grid grid-cols-2 gap-3 my-4">
             <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">Bupa</div>
             <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">AXA Health</div>
@@ -201,76 +193,52 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <div className="bg-brand-teal-muted p-3 rounded-lg text-center font-semibold text-gray-900">WPA</div>
           </div>
           <p className="text-gray-700 leading-relaxed">
-            By comparing quotes from multiple top-rated insurers in one place, you save time and can be confident you're seeing the full market. Each insurer offers different strengths, policy options, and pricing structures, so comparing ensures you find the perfect fit for your needs and budget.
+            Availability depends on headcount, occupations, location and the broker’s panel at the time of quote.
           </p>
         </div>
       )
     },
     independent: {
-      title: "Independent & Impartial",
+      title: "Introducer, not an insurer",
       icon: <Shield className="w-12 h-12 text-yellow-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            As an independent comparison service, our FCA regulated broker partners are not tied to any single insurance provider. Their advice is impartial and focused on finding the right group scheme for your business and workforce.
+            Compare Business Healthcover is not tied to a single insurer and is not FCA authorised. Personalised advice sits with the FCA-regulated broker who arranges the policy. Brokers are typically paid by insurers if you take cover — that is normal in UK PMI, and it should be disclosed at quote stage.
           </p>
-          <h4 className="font-semibold text-gray-900 text-lg">Why Independence Matters:</h4>
+          <h4 className="font-semibold text-gray-900 text-lg">What we will not claim</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Our broker partners have no bias towards any particular insurer or product</li>
-            <li>Their recommendations are based purely on your needs and budget</li>
-            <li>They're not incentivized to sell you more expensive policies</li>
-            <li>Complete transparency in how they present options to you</li>
-            <li>They work for you, not the insurance companies</li>
+            <li>We do not invent “best buy” scores or guaranteed savings</li>
+            <li>We do not pretend this website is the regulated adviser</li>
+            <li>We do not underwrite or bind policies</li>
           </ul>
-          <p className="text-gray-700 leading-relaxed">
-            This independence ensures you receive honest, objective guidance that puts your interests first. Our FCA regulated broker partners are here to help you navigate the complex world of health insurance with confidence.
-          </p>
         </div>
       )
     },
     expertAdvice: {
-      title: "Expert Advice",
+      title: "Broker partners",
       icon: <Headphones className="w-12 h-12 text-pink-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            Our FCA regulated broker partners are qualified health insurance specialists with years of industry experience to help you understand your options and make informed decisions about your health cover.
+            After an enquiry, an FCA-regulated broker partner can explain group scheme options, exclusions, underwriting and renewal. That advice is theirs, not Compare Business Healthcover’s.
           </p>
-          <h4 className="font-semibold text-gray-900 text-lg">Our Broker Partners Provide:</h4>
+          <h4 className="font-semibold text-gray-900 text-lg">They can typically help with</h4>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Personalised advice tailored to your unique health needs</li>
-            <li>Clear explanations of policy terms, exclusions, and benefits</li>
-            <li>Guidance on the right level of cover for your situation</li>
-            <li>Help understanding medical underwriting and pre-existing conditions</li>
-            <li>Ongoing support even after you've purchased your policy</li>
-            <li>Assistance with claims processes and policy queries</li>
+            <li>Like-for-like comparisons (same excess, hospital list and outpatient cap)</li>
+            <li>Moratorium versus full medical underwriting</li>
+            <li>Membership changes and renewal timing</li>
           </ul>
-          <p className="text-gray-700 leading-relaxed">
-            Whether you're buying health insurance for the first time or looking to switch providers, our FCA regulated broker partners are available to answer your questions and guide you through every step of the process.
-          </p>
         </div>
       )
     },
     saveHassle: {
-      title: "Save Yourself the Hassle",
+      title: "One enquiry",
       icon: <Check className="w-12 h-12 text-pink-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            We understand that comparing health insurance policies can be time-consuming and overwhelming. That's why we do all the hard work for you, making the entire process simple, quick, and stress-free.
-          </p>
-          <h4 className="font-semibold text-gray-900 text-lg">We Handle Everything:</h4>
-          <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Thousands of policy options in minutes, not hours</li>
-            <li>We contact multiple insurers on your behalf</li>
-            <li>Simplified comparison tables showing key differences</li>
-            <li>All quotes presented in one easy-to-understand format</li>
-            <li>We handle all the paperwork and administration</li>
-            <li>Smooth transition if you're switching providers</li>
-            <li>Ongoing support for renewals and policy changes</li>
-          </ul>
-          <p className="text-gray-700 leading-relaxed">
-            Instead of spending hours researching and contacting individual insurers, you can complete one simple form and let us do the rest. We'll present you with the best options matched to your needs, saving you valuable time and effort.
+            Complete one form with company size, location and the cover you want. We introduce you to a broker who obtains quotes. You still decide whether to proceed; administration of any policy sits with the broker and insurer.
           </p>
         </div>
       )
@@ -320,8 +288,11 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   For UK Small, Medium and Large Corporate Businesses
                 </p>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-extrabold text-white">
-                  Compare SME health insurance and give your team the cover they deserve.
+                  Compare business health insurance for UK SMEs
                 </h1>
+                <p className="mt-4 text-white/90 text-base sm:text-lg font-medium">
+                  Group private medical insurance for employers, typically from two employees. Free introduction to FCA-regulated brokers — we are not an insurer.
+                </p>
               </div>
               
               {/* Right Column - Benefits & Buttons */}
@@ -363,7 +334,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center gap-2 sm:gap-3">
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-white" />
-                <span className="text-white">Tax-efficient employee health benefits for UK SMEs</span>
+                <span className="text-white">Employer-paid premiums are often a business expense — confirm tax with your accountant</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-white" />
@@ -371,7 +342,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-white" />
-                <span className="text-white">Compare quotes from leading UK business insurers</span>
+                <span className="text-white">Compare group PMI quotes via FCA-regulated broker partners</span>
               </div>
             </div>
           </div>
@@ -390,12 +361,12 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             
             <div className="flex items-center gap-2 text-gray-900">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal-hover" />
-              <span className="text-xs sm:text-sm">Trusted by UK Businesses</span>
+              <span className="text-xs sm:text-sm">UK employers, from two staff</span>
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 text-brand-teal-hover" />
-              <span className="text-xs sm:text-sm">Leading Business Insurers</span>
+              <span className="text-xs sm:text-sm">Group PMI insurers via brokers</span>
             </div>
             
             <div className="flex items-center gap-2 text-gray-900">
@@ -436,6 +407,24 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               Why use us?
             </button>
           </div>
+
+          <nav className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto mt-6" aria-label="Key guides">
+            {[
+              { label: "Business health insurance", page: "business-health-insurance" },
+              { label: "How much it costs", page: "sme-health-insurance-cost" },
+              { label: "From 2 employees", page: "sme-health-insurance-2-employees" },
+              { label: "Tax treatment", page: "business-health-insurance-tax" },
+            ].map((item) => (
+              <button
+                key={item.page}
+                type="button"
+                onClick={() => onNavigate?.(item.page)}
+                className="px-4 py-2 rounded-full bg-brand-navy text-white hover:bg-brand-navy-dark text-xs sm:text-sm font-medium"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
         </div>
       </section>
 
@@ -449,24 +438,24 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             Compare <span style={{ fontWeight: 900 }}>employee health cover</span> for your business
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-            UK employers use us to compare group health insurance from leading providers — saving time, controlling costs, and building benefits packages that help attract and retain staff.
+            Compare group private medical insurance for UK SMEs through FCA-regulated broker partners. One enquiry, no obligation to buy. We are an introducer, not an insurer.
           </p>
           
           <div className="grid sm:grid-cols-3 gap-8 pb-32">
             <div 
-              onClick={() => setBenefitModalOpen('priceMatch')}
+              onClick={() => setBenefitModalOpen('freeEnquire')}
               className="bg-white rounded-lg p-8 shadow-sm text-center cursor-pointer hover:shadow-lg transition-shadow"
             >
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
                   src="https://images.unsplash.com/photo-1580508174046-170816f65662?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmslMjBzYXZpbmdzJTIwbW9uZXl8ZW58MXx8fHwxNzcxNTk0OTQ0fDA&ixlib=rb-4.1.0&q=70&w=400"
-                  alt="Price Match Guarantee"
+                  alt="Free to enquire"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl mb-3 font-semibold text-gray-900">Price Match Guarantee</h3>
+              <h3 className="text-xl mb-3 font-semibold text-gray-900">Free to enquire</h3>
               <p className="text-gray-600">
-                Get a better price elsewhere? We'll match or beat it.
+                Introduction is free. No obligation to take a policy.
               </p>
             </div>
 
@@ -494,13 +483,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
                   src="https://images.unsplash.com/photo-1583521214690-73421a1829a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbnN1cmFuY2UlMjBkb2N1bWVudHMlMjBjb21wYXJpc29uJTIwcGFwZXJ3b3JrfGVufDF8fHx8MTc3MTU5NDk0NXww&ixlib=rb-4.1.0&q=70&w=400"
-                  alt="All leading insurers"
+                  alt="UK group PMI insurers"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl mb-3 font-semibold text-gray-900">Market Leading Insurance</h3>
+              <h3 className="text-xl mb-3 font-semibold text-gray-900">UK group PMI insurers</h3>
               <p className="text-gray-600">
-                Compare quotes from the top health insurers.
+                Brokers compare schemes from insurers willing to quote your workforce.
               </p>
             </div>
 
@@ -511,13 +500,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
                   src="https://images.unsplash.com/photo-1721352794721-9a2f91f8dcbd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWxhbmNlJTIwc2NhbGVzJTIwanVzdGljZSUyMGZhaXJuZXNzJTIwaW1wYXJ0aWFsfGVufDF8fHx8MTc3MTU5NTkyMXww&ixlib=rb-4.1.0&q=70&w=400"
-                  alt="Independent & impartial"
+                  alt="Introducer, not an insurer"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl mb-3 font-semibold text-gray-900">Independent & impartial</h3>
+              <h3 className="text-xl mb-3 font-semibold text-gray-900">Introducer, not an insurer</h3>
               <p className="text-gray-600">
-                Our FCA regulated broker partners provide advice based on what's best for you.
+                We are not FCA authorised. Advice sits with the broker who arranges cover.
               </p>
             </div>
 
@@ -528,13 +517,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
                   src="https://images.unsplash.com/photo-1647866427893-0057366e91b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdXN0b21lciUyMHNlcnZpY2UlMjBzdXBwb3J0JTIwaGVhZHBob25lcyUyMGhlbHB8ZW58MXx8fHwxNzcxNTk0OTQ5fDA&ixlib=rb-4.1.0&q=70&w=400"
-                  alt="Expert Advice"
+                  alt="FCA-regulated broker partners"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl mb-3 font-semibold text-gray-900">Expert Advice</h3>
+              <h3 className="text-xl mb-3 font-semibold text-gray-900">Broker partners</h3>
               <p className="text-gray-600">
-                Expert advisers give you free, impartial help.
+                FCA-regulated brokers explain quotes, exclusions and underwriting.
               </p>
             </div>
 
@@ -545,13 +534,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               <div className="w-full h-40 rounded-xl mx-auto mb-6 overflow-hidden">
                 <ImageWithFallback 
                   src="https://images.unsplash.com/photo-1737505191896-8e3cb72e4df9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbG9jayUyMHRpbWUlMjBlZmZpY2llbmN5JTIwcHJvZHVjdGl2aXR5fGVufDF8fHx8MTc3MTU1MzEyOXww&ixlib=rb-4.1.0&q=70&w=400"
-                  alt="Save yourself the hassle"
+                  alt="One enquiry"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl mb-3 font-semibold text-gray-900">Save yourself the hassle</h3>
+              <h3 className="text-xl mb-3 font-semibold text-gray-900">One enquiry</h3>
               <p className="text-gray-600">
-                All the hard work done for you.
+                One form. Brokers obtain the quotes. You decide whether to proceed.
               </p>
             </div>
           </div>
@@ -636,10 +625,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   A group health insurance policy covers eligible employees under a single scheme arranged by the employer. Cover levels, eligibility rules, and cost-sharing can be tailored to your business size and budget.
                 </p>
                 <p>
-                  Premiums are typically paid by the employer, often with tax-efficient treatment as a business expense. Employees may receive cover as a core benefit or on a voluntary basis, depending on the scheme structure.
+                  Premiums are typically paid by the employer and are often treated as a business expense. Employees usually have a taxable benefit in kind. Confirm the position with your accountant — it is not automatic for every structure.
                 </p>
                 <p>
-                  Our FCA-regulated broker partners help you compare options from leading UK insurers, explain underwriting requirements, and find a scheme suited to your workforce — from small teams of two upwards.
+                  Our FCA-regulated broker partners help you compare options from UK group PMI insurers willing to quote, explain underwriting requirements, and find a scheme suited to your workforce — from small teams of two upwards.
                 </p>
               </div>
             </div>
@@ -651,13 +640,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  Tell us about your company size, location, and the level of cover you need. We connect you with specialist brokers who compare group schemes from the UK&apos;s leading business health insurers.
+                  Tell us about your company size, location, and the cover you need. We introduce you to FCA-regulated brokers who compare group schemes from insurers willing to quote.
                 </p>
                 <p>
-                  Whether you&apos;re setting up cover for the first time or reviewing an existing scheme at renewal, we simplify the process — one enquiry, multiple competitive quotes, expert guidance throughout.
-                </p>
-                <p>
-                  There is no obligation to proceed. Start with a free SME quote and see what employee health cover could cost your business.
+                  Whether you&apos;re setting up cover for the first time or reviewing an existing scheme at renewal, one enquiry is enough to start. There is no obligation to proceed.
                 </p>
               </div>
             </div>
@@ -679,19 +665,19 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">5-Star Defaqto Rated Insurers</span>
+              <span className="text-gray-900">Established UK group PMI insurers</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Expert Broker Guidance</span>
+              <span className="text-gray-900">Broker explains quotes and exclusions</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Competitive Group Premiums</span>
+              <span className="text-gray-900">Like-for-like quote comparison</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
-              <span className="text-gray-900">Trusted by UK Employers</span>
+              <span className="text-gray-900">Used by UK employers</span>
             </div>
             <div className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-sm">
               <Check className="w-5 h-5 text-brand-teal" />
@@ -719,8 +705,8 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
             />
           </div>
           <div className="bg-brand-navy-dark text-white p-8 lg:p-12 flex flex-col justify-center">
-            <h2 className="text-3xl lg:text-4xl mb-4">Renewing Your Group Scheme?<br />Compare &amp; Save</h2>
-            <p className="text-lg lg:text-xl mb-6">Review your employee health cover before renewal</p>
+            <h2 className="text-3xl lg:text-4xl mb-4">Renewing your group scheme?<br />Compare before you accept</h2>
+            <p className="text-lg lg:text-xl mb-6">Review employee health cover before the renewal date</p>
             
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3">
@@ -729,7 +715,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               </div>
               <div className="flex items-center gap-3">
                 <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />
-                <span className="text-base lg:text-lg">Reduce group premium costs</span>
+                <span className="text-base lg:text-lg">See whether like-for-like quotes change the premium</span>
               </div>
               <div className="flex items-center gap-3">
                 <Check className="w-5 h-5 text-brand-teal flex-shrink-0" />

@@ -11,7 +11,7 @@ export const SEO_CONFIG = {
     home: {
       title: 'Compare SME Business Health Insurance UK',
       description:
-        'Compare business health insurance for UK SMEs and small companies. Employee medical cover from FCA-regulated brokers. Free quotes for teams from 2 employees.',
+        'Compare business health insurance for UK SMEs from two employees. Free, no-obligation introductions to FCA-regulated brokers. We are an introducer, not an insurer.',
       keywords:
         'SME health insurance UK, business health insurance, small company medical cover, employee health benefits, compare business health cover',
     },
@@ -25,11 +25,11 @@ export const SEO_CONFIG = {
     },
 
     'business-health-insurance': {
-      title: 'Business Health Insurance for UK Companies',
+      title: 'Business Health Insurance UK',
       description:
-        'Compare business health insurance for UK companies. Protect your team with private medical cover from FCA-regulated providers. Get competitive SME quotes today.',
+        'What UK business health insurance is, how group PMI works, who can buy it, and how to compare. Free introduction to FCA-regulated brokers. We are not an insurer.',
       keywords:
-        'business health insurance UK, company medical insurance, SME health cover, corporate health insurance',
+        'business health insurance UK, company medical insurance, group PMI, SME health cover, employee private medical insurance',
     },
 
     'family-health-insurance': {
@@ -84,7 +84,7 @@ export const SEO_CONFIG = {
 
     'about-us': {
       title: `About ${SITE.name}`,
-      description: `${SITE.name} helps UK SMEs compare business health insurance from FCA-regulated brokers. We simplify employee medical cover comparison so you can find the right plan for your team.`,
+      description: `${SITE.name} is an introducer for UK SME group health insurance, operated by MASON & HALL DIGITAL LTD. FCA-regulated broker partners arrange policies. We are not an insurer.`,
       keywords: 'about compare business health cover, UK SME insurance comparison, business health insurance brokers',
     },
 

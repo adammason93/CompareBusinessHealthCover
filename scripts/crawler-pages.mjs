@@ -34,6 +34,7 @@ export const FAQS = GEO_GUIDES.find((g) => g.slug === "home")?.faqs || [];
 const navLinks = `
 <nav>
   <a href="${ORIGIN}/">Home</a>
+  <a href="${pageUrl("/business-health-insurance")}">Business PMI</a>
   <a href="${pageUrl("/small-company-health-insurance")}">Small company</a>
   <a href="${pageUrl("/sme-health-insurance-2-employees")}">From 2 employees</a>
   <a href="${pageUrl("/sme-health-insurance-cost")}">Cost</a>
@@ -79,6 +80,7 @@ export const PAGES = GEO_GUIDES.map((g) => ({
   description: g.description,
   keywords: g.keywords,
   h1: g.h1,
+  lastReviewed: g.lastReviewed,
   faqs: g.faqs || [],
   sections: [
     `<p>${g.intro}</p>`,
@@ -98,6 +100,7 @@ export function articleHtml(page, extraInner = "") {
     <p>Compare Business Healthcover</p>
     <h1>${page.h1}</h1>
     <p>${page.description}</p>
+    ${page.lastReviewed ? `<p>Written by Compare Business Healthcover. Last reviewed ${page.lastReviewed}.</p>` : ""}
   </header>
   ${sections}
   ${extraInner}
@@ -120,6 +123,7 @@ export function jsonLd(page) {
       name: page.title,
       description: page.description,
       url,
+      ...(page.lastReviewed ? { dateModified: "2026-09-01" } : {}),
       isPartOf: { "@type": "WebSite", name: "Compare Business Healthcover", url: ORIGIN },
     },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: crumbs },

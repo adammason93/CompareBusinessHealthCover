@@ -44,11 +44,11 @@ const faqData: FAQItem[] = [
 const howWeWorkData: FAQItem[] = [
   {
     question: "How do I get an SME health insurance quote?",
-    answer: "Click 'Get SME Quote' and complete our short enquiry form with details about your company size, location, and the cover you need. We connect you with FCA-regulated broker partners who compare group schemes from leading UK business insurers. The initial enquiry takes just a few minutes and there is no obligation to proceed."
+    answer: "Click 'Get SME Quote' and complete the enquiry form with company size, location, and the cover you need. We introduce you to FCA-regulated broker partners who compare group schemes. There is no obligation to proceed."
   },
   {
     question: "Is your comparison service free for employers?",
-    answer: "Yes. Our comparison and introducer service is free for businesses to use. If you take out a policy through one of our broker partners, they receive a commission from the insurer — this does not increase the premium you pay compared with going direct. In many cases, brokers have access to schemes and rates not available on the open market."
+    answer: "Yes. The introduction is free for employers. If you take a policy through a broker partner, they typically receive commission from the insurer. That does not usually increase the premium compared with going to the same insurer direct."
   },
   {
     question: "What happens after I receive group scheme quotes?",
@@ -56,7 +56,7 @@ const howWeWorkData: FAQItem[] = [
   },
   {
     question: "Can you help us switch or renew our existing group scheme?",
-    answer: "Absolutely. Whether you are approaching renewal or looking to switch providers mid-term, our broker partners can benchmark your current scheme against the wider market. They will advise on the best timing to avoid gaps in cover, manage the transition for your employees, and aim to reduce costs or improve benefits at renewal."
+    answer: "Yes. Our broker partners can benchmark an existing group scheme against other insurers on their panel. They should time any switch so cover does not lapse. That is not a promise the premium will fall."
   },
 ];
 

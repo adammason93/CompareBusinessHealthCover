@@ -53,6 +53,7 @@ export const GEO_GUIDES = [
       },
     ],
     related: [
+      { label: "Business health insurance", slug: "business-health-insurance" },
       { label: "Health insurance from 2 employees", slug: "sme-health-insurance-2-employees" },
       { label: "SME health insurance cost", slug: "sme-health-insurance-cost" },
       { label: "Tax treatment of group PMI", slug: "business-health-insurance-tax" },
@@ -129,56 +130,136 @@ export const GEO_GUIDES = [
   {
     slug: "business-health-insurance",
     path: "/business-health-insurance",
-    title: "Business Health Insurance UK | Group PMI for Companies",
+    title: "Business Health Insurance UK | Compare Group Cover",
     description:
-      "Compare business health insurance (group PMI) for UK companies. Employee medical cover via FCA-regulated brokers. Free SME quotes, typically from two employees.",
+      "What UK business health insurance is, how group PMI works, what it covers, who can buy it, and how to compare. Free introduction to FCA-regulated brokers. We are not an insurer.",
     keywords:
-      "business health insurance UK, company medical insurance, group PMI, SME health cover, employee private medical insurance",
-    h1: "Business health insurance for UK companies",
+      "business health insurance UK, company health insurance, group PMI, SME health cover, employee private medical insurance",
+    h1: "Business health insurance",
+    lastReviewed: "September 2026",
     intro:
-      "Business health insurance is group private medical insurance arranged by an employer. It is not life insurance, not income protection, and not a consumer family plan. Compare Business Healthcover helps UK companies compare group PMI through FCA-regulated broker partners.",
+      "Business health insurance is group private medical insurance (PMI) arranged by an employer for employees — and sometimes dependants. It is also called company, corporate or SME health insurance. It is not life insurance, not income protection, and not a consumer family plan bought in a company name.",
     sections: [
       {
-        h2: "What group PMI covers (and what it does not)",
+        h2: "What is business health insurance?",
         paragraphs: [
-          "Core cover is usually inpatient and day-patient treatment in private facilities, with consultant fees and hospital charges within the policy wording. Many SMEs add outpatient consultations, diagnostics (MRI/CT), therapies and mental health. Cancer pathways and chronic-condition rules differ by insurer — read the exclusions.",
-          "It does not pay sick pay. It does not replace NHS emergency care. Pre-existing conditions may be excluded or waiting-period based depending on underwriting.",
+          "It is a group policy in the employer’s name. Eligible staff are members of one scheme rather than each buying their own individual PMI. Compare Business Healthcover introduces UK employers to FCA-regulated broker partners who obtain quotes. We do not underwrite policies or give personalised financial advice.",
         ],
       },
       {
-        h2: "Business reasons to offer it",
+        h2: "How does business health insurance work?",
         paragraphs: [
-          "Faster access to treatment can cut long-term absence. Candidates compare benefits, not only salary. Some employers use it as part of a wider wellbeing policy. Tax treatment is a reason to speak to your accountant, not a reason to buy cover you do not need.",
+          "The employer chooses a benefit design (for example inpatient-only or comprehensive outpatient), an excess, and a hospital list. A broker places the scheme with an insurer willing to quote for that workforce. Staff are enrolled; joiners and leavers are updated during the year. Claims are made against the group policy under the insurer’s wording, not against this website.",
+        ],
+      },
+      {
+        h2: "What does business health insurance cover?",
+        paragraphs: [
+          "Core cover is usually inpatient and day-patient treatment in private facilities, with consultant fees and hospital charges within the policy limits. Many SMEs add outpatient consultations, diagnostics such as MRI or CT, therapies and mental health. Cancer pathways and chronic-condition rules differ by insurer — always read the exclusions on the quote.",
+        ],
+      },
+      {
+        h2: "What isn’t normally covered?",
+        paragraphs: [
+          "It does not pay sick pay. It does not replace NHS emergency care. Pre-existing conditions may be excluded or subject to a waiting period, depending on underwriting. Cosmetic treatment, routine dental and optical, and some chronic conditions are often excluded or sold as extras. The schedule on your quote is the authority, not a generic web list.",
+        ],
+      },
+      {
+        h2: "Who can get business health insurance?",
+        paragraphs: [
+          "UK limited companies, LLPs and similar employers with a genuine workforce. A director plus staff, or two working directors, is a normal SME enquiry. Sole traders with no employees usually need individual PMI instead. Occupations, company structure and insurer minima still decide eligibility — a quote confirms it.",
+        ],
+      },
+      {
+        h2: "How many employees do you need?",
+        paragraphs: [
+          "Many UK SME group schemes start at two employees. That is common, not universal. Five used to be a folklore minimum and is no longer a reliable rule. Unpaid spouses who are not employed usually cannot be “employee number two”. See our two-employee guide for who counts.",
+        ],
+      },
+      {
+        h2: "How much does business health insurance cost?",
+        paragraphs: [
+          "There is no universal price. A young two-person professional firm will not pay the same as a mixed-age team of forty on comprehensive outpatient cover. Age, headcount, cover level, excess, hospital list, underwriting and claims history (at renewal) all move the premium. Treat “from £X a week” adverts as marketing, not a quote. Our cost guide explains the drivers; a broker prices your actual people.",
+        ],
+      },
+      {
+        h2: "Benefits for employers and employees",
+        paragraphs: [
+          "Employers use group PMI to support recruitment, retention and absence: private diagnostics can shorten waits for some elective care. Employees get a defined pathway to private treatment within the wording, often including dependants if the scheme allows. It is a benefit, not a guarantee of faster care for every condition.",
         ],
         bullets: [
-          "Recruitment and retention signal",
-          "Potential reduction in waiting-time absence",
-          "One scheme instead of ad-hoc individual policies",
-          "Renewal is a chance to re-broke the market each year",
+          "One scheme instead of staff buying individual policies ad hoc",
+          "Membership can usually add joiners and remove leavers in-year",
+          "Renewal is the point to re-broke the market, not only to accept the incumbent",
         ],
       },
       {
-        h2: "How companies should compare",
+        h2: "Is business health insurance tax deductible?",
         paragraphs: [
-          "Fix the benefit design first (inpatient only vs comprehensive). Then compare insurers on hospital list, outpatient limits, cancer cover, mental health, and claims service — not headline premium alone. A cheap scheme with a restricted hospital list in your region is not cheaper in practice.",
-          "Use a broker who can place SME and corporate panels. Compare Business Healthcover is the introduction layer: you stay with regulated advice at quote stage.",
+          "For many UK limited companies, employer-paid group PMI is treated as a staff cost for corporation tax where it is wholly and exclusively for the trade. Employees — including employee-directors — usually have a taxable benefit in kind reported on form P11D. National Insurance and salary-sacrifice rules can also apply. This is a general outline, not tax advice. Confirm with your accountant and read our tax page.",
+        ],
+      },
+      {
+        h2: "Business health insurance vs individual private health insurance",
+        paragraphs: [
+          "Group cover is in the employer’s name for a defined membership. Individual PMI is in a person’s name. Directors sometimes mix both — for example group cover for staff and a separate personal policy. A one-person company with no employees is usually an individual product, not a “group of one”. Mixing wrappers without advice is how firms buy the wrong thing.",
+        ],
+      },
+      {
+        h2: "Types of underwriting",
+        paragraphs: [
+          "Moratorium typically excludes conditions from a recent period until you are symptom-free for a set time. Full medical underwriting uses declarations up front and may exclude or load specific conditions. Larger groups may get medical history disregarded. The right method depends on workforce health and the insurer, not on which phrase sounds friendlier. Employees on SME schemes do not usually attend a GP exam.",
+        ],
+      },
+      {
+        h2: "How to compare providers",
+        paragraphs: [
+          "Fix the benefit design first (inpatient-only versus comprehensive outpatient, same excess, same hospital list). Then compare cancer cover, mental health, outpatient caps, claims service and regional hospital access — not headline premium alone. A cheap scheme with a restricted list in your area is not cheaper in practice. Panels change; we do not publish a fake “best insurer” ranking.",
+        ],
+      },
+      {
+        h2: "How Compare Business Healthcover works",
+        paragraphs: [
+          "You submit company size, location and what you want covered. We introduce you to FCA-regulated broker partners. They compare group schemes, explain exclusions and underwriting, and arrange any policy you choose. Compare Business Healthcover is a trading name of MASON & HALL DIGITAL LTD. We are an introducer, not an insurer, and we are not FCA authorised. If a policy is taken, the broker is typically paid by insurer commission; that does not usually increase the premium versus going direct. There is no obligation to buy.",
         ],
       },
     ],
     faqs: [
+      {
+        q: "What is business health insurance?",
+        a: "Group private medical insurance arranged by an employer for staff (and sometimes dependants). It is company-paid employee medical cover, not a consumer family policy and not life insurance.",
+      },
+      {
+        q: "How much does it cost?",
+        a: "It depends on ages, headcount, cover level, excess, hospital list and underwriting. There is no honest single figure. Compare like-for-like quotes rather than advertised “from” prices.",
+      },
+      {
+        q: "Is business health insurance tax deductible?",
+        a: "Employer-paid premiums are often an allowable business expense; employees usually have a P11D benefit in kind. Confirm with an accountant. See our tax guide for the outline, not a personal calculation.",
+      },
+      {
+        q: "Is business health insurance a Benefit in Kind?",
+        a: "Usually yes, when provided by reason of employment. The taxable amount relates to the cost of the benefit HMRC requires you to report. Payroll should be set up before the first year ends.",
+      },
+      {
+        q: "How many employees do you need?",
+        a: "Many SME schemes start at two lives. Insurer rules vary. A sole trader with no staff is typically quoted on individual PMI instead.",
+      },
       {
         q: "Do employees need a medical exam?",
         a: "Usually not on SME group schemes. Underwriting is typically moratorium or full medical underwriting at group level. Individuals may complete a declaration.",
       },
       {
         q: "Can we switch insurer at renewal?",
-        a: "Yes, subject to underwriting and avoiding cover gaps. See our renewals guide. Do not cancel an existing policy until the new one is on risk.",
+        a: "Yes, subject to underwriting and avoiding cover gaps. Do not cancel an existing policy until the new one is on risk. See the renewals guide.",
       },
     ],
     related: [
+      { label: "SME cost guide", slug: "sme-health-insurance-cost" },
+      { label: "From 2 employees", slug: "sme-health-insurance-2-employees" },
       { label: "Small company schemes", slug: "small-company-health-insurance" },
-      { label: "Renewals", slug: "business-health-insurance-renewals" },
-      { label: "Tax", slug: "business-health-insurance-tax" },
+      { label: "Tax treatment", slug: "business-health-insurance-tax" },
+      { label: "About us", slug: "about-us" },
     ],
   },
   {
@@ -518,6 +599,7 @@ export const GEO_GUIDES = [
     keywords:
       "about compare business health cover, MASON & HALL DIGITAL, SME insurance introducer UK, FCA broker introduction",
     h1: "About Compare Business Healthcover",
+    lastReviewed: "September 2026",
     intro:
       "Compare Business Healthcover is a UK website for employers who want to compare group private medical insurance. We are not an insurer and we do not advise on which policy you should buy. We introduce enquiries to FCA-regulated broker partners.",
     sections: [
@@ -528,20 +610,28 @@ export const GEO_GUIDES = [
         ],
       },
       {
-        h2: "What “compare” means here",
+        h2: "How we compare",
         paragraphs: [
-          "You submit business facts. A broker compares group schemes from insurers willing to quote. You choose whether to proceed. If a policy is taken, the broker’s remuneration is typically insurer commission. The service is free to the employer for the introduction.",
+          "You submit business facts such as headcount, location and the cover you want. We pass the enquiry to FCA-regulated broker partners who arrange group PMI for UK SMEs. Those brokers compare schemes from insurers on their panels, explain exclusions and underwriting, and place any policy you choose. Partner availability can vary. We do not bind cover on this site.",
+          "Compare Business Healthcover is an introducer. We are not FCA authorised and we do not give personalised insurance or tax advice. If a policy is taken, the broker is typically paid by the insurer as commission. That does not usually increase the premium compared with going to the same insurer direct. The introduction is free to the employer.",
+        ],
+      },
+      {
+        h2: "How we write this site",
+        paragraphs: [
+          "Guides are written by Compare Business Healthcover as general information for UK employers, not as a personal recommendation. We do not invent prices, insurer rankings, review scores or savings. Tax and regulation are described in outline and should be checked with HMRC, the FCA, the insurer wording and a qualified adviser. Pages that carry a last-reviewed date were checked in that month; they are not a substitute for current professional advice.",
         ],
       },
       {
         h2: "Who we are not",
         paragraphs: [
-          "We are not a family PMI supermarket. Consumer wording on older page templates is being replaced with SME-only copy so search and answer engines do not mis-file this brand.",
+          "We are not a family PMI supermarket and not an insurer. Consumer wording on older templates should not be read as our current service. This domain is for UK businesses comparing employee medical cover.",
         ],
       },
     ],
     faqs: [],
     related: [
+      { label: "Business health insurance", slug: "business-health-insurance" },
       { label: "Contact", slug: "contact-us" },
       { label: "Disclaimer", slug: "disclaimer" },
     ],

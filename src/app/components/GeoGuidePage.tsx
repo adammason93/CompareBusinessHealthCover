@@ -103,7 +103,12 @@ export function GeoGuidePage({ slug, onGetStarted, onNavigate }: GeoGuidePagePro
       <section className="section-hero relative py-16 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-4xl sm:text-5xl mb-6 text-white">{guide.h1}</h1>
-          <p className="text-xl text-white/90 mb-8">{guide.intro}</p>
+          <p className={`text-xl text-white/90 ${guide.lastReviewed ? "mb-4" : "mb-8"}`}>{guide.intro}</p>
+          {guide.lastReviewed ? (
+            <p className="text-sm text-white/70 mb-8">
+              Written by Compare Business Healthcover · Last reviewed {guide.lastReviewed}
+            </p>
+          ) : null}
           <Button
             size="lg"
             onClick={onGetStarted}
