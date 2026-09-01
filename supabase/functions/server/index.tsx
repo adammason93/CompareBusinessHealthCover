@@ -442,7 +442,7 @@ Allow: /robots.txt`;
 app.post("/make-server-2031af1c/contact", async (c) => {
   try {
     const body = await c.req.json();
-    const { name, email, phone, company, message, sourceWebsite } = body;
+    const { name, email, phone, company, message, sourceWebsite, source, referrer, landingUrl, landingPath, utmSource, utmMedium, utmCampaign } = body;
     const brand = resolveBrand(sourceWebsite);
 
     // Validate required fields
@@ -455,6 +455,10 @@ app.post("/make-server-2031af1c/contact", async (c) => {
 New Contact Form Submission from ${brand.name}
 
 Source Website: ${sourceWebsite || "unknown"}
+${source ? `Lead source: ${source}` : ""}
+${referrer ? `Referrer: ${referrer}` : ""}
+${landingUrl || landingPath ? `Landing: ${landingUrl || landingPath}` : ""}
+${utmSource || utmCampaign ? `UTM: ${[utmSource, utmMedium, utmCampaign].filter(Boolean).join(" / ")}` : ""}
 
 Name: ${name}
 Email: ${email}
@@ -500,6 +504,10 @@ Submitted at: ${new Date().toISOString()}
             </h2>
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
               <p><strong>Source Website:</strong> ${sourceWebsite || "unknown"}</p>
+              ${source ? `<p><strong>Lead source:</strong> ${source}</p>` : ""}
+              ${referrer ? `<p><strong>Referrer:</strong> ${referrer}</p>` : ""}
+              ${landingUrl || landingPath ? `<p><strong>Landing:</strong> ${landingUrl || landingPath}</p>` : ""}
+              ${utmSource || utmCampaign ? `<p><strong>UTM:</strong> ${[utmSource, utmMedium, utmCampaign].filter(Boolean).join(" / ")}</p>` : ""}
               <p><strong>Name:</strong> ${name}</p>
               <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
               <p><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
@@ -830,6 +838,10 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
                   <td style="padding: 8px 0; font-weight: bold; width: 40%;">Source Website:</td>
                   <td style="padding: 8px 0;">${sourceWebsite}</td>
                 </tr>
+                ${formData.source ? `<tr><td style="padding: 8px 0; font-weight: bold;">Lead source:</td><td style="padding: 8px 0;">${formData.source}</td></tr>` : ""}
+                ${formData.referrer ? `<tr><td style="padding: 8px 0; font-weight: bold;">Referrer:</td><td style="padding: 8px 0;">${formData.referrer}</td></tr>` : ""}
+                ${formData.landingUrl || formData.landingPath ? `<tr><td style="padding: 8px 0; font-weight: bold;">Landing:</td><td style="padding: 8px 0;">${formData.landingUrl || formData.landingPath}</td></tr>` : ""}
+                ${formData.utmSource || formData.utmCampaign ? `<tr><td style="padding: 8px 0; font-weight: bold;">UTM:</td><td style="padding: 8px 0;">${[formData.utmSource, formData.utmMedium, formData.utmCampaign].filter(Boolean).join(" / ")}</td></tr>` : ""}
               </table>
               <h3 style="color: #26B4AF; margin-top: 0;">Personal Details</h3>
               <table style="width: 100%; border-collapse: collapse;">
@@ -945,6 +957,10 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
 New Insurance Quote Request from ${brand.name}
 
 Source Website: ${sourceWebsite}
+${formData.source ? `Lead source: ${formData.source}` : ""}
+${formData.referrer ? `Referrer: ${formData.referrer}` : ""}
+${formData.landingUrl || formData.landingPath ? `Landing: ${formData.landingUrl || formData.landingPath}` : ""}
+${formData.utmSource || formData.utmCampaign ? `UTM: ${[formData.utmSource, formData.utmMedium, formData.utmCampaign].filter(Boolean).join(" / ")}` : ""}
 
 PERSONAL DETAILS
 Name: ${formData.title || ""} ${formData.firstName} ${formData.lastName || ""}
@@ -1306,6 +1322,11 @@ app.get("/make-server-2031af1c/admin/leads", async (c) => {
         isInsured: submission.isInsured || 'pending',
         source: submission.source || '',
         sourceWebsite: submission.sourceWebsite || '',
+        landingPath: submission.landingPath || '',
+        landingUrl: submission.landingUrl || '',
+        referrer: submission.referrer || '',
+        utmSource: submission.utmSource || '',
+        utmCampaign: submission.utmCampaign || '',
         premiumValue: submission.premiumValue || '',
         commissionPaid: submission.commissionPaid || '',
         policyStartDate: submission.policyStartDate || '',

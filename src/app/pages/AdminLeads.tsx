@@ -15,8 +15,11 @@ interface Lead {
   coverType: string;
   // Editable fields
   isInsured: string;
-  source: string; // organic or ppc
+  source: string; // organic, ppc, chatgpt, grok, etc
   sourceWebsite: string;
+  landingPath?: string;
+  landingUrl?: string;
+  referrer?: string;
   premiumValue: string;
   commissionPaid: string;
   policyStartDate: string;
@@ -254,6 +257,8 @@ export function AdminLeads() {
       "Is Insured",
       "Website",
       "Source",
+      "Landing",
+      "Referrer",
       "Premium Value",
       "Commission Paid",
       "Policy Start Date",
@@ -272,6 +277,8 @@ export function AdminLeads() {
       lead.isInsured || "",
       lead.sourceWebsite || "",
       lead.source || "",
+      lead.landingUrl || lead.landingPath || "",
+      lead.referrer || "",
       lead.premiumValue || "",
       lead.commissionPaid || "",
       lead.policyStartDate || "",
@@ -438,6 +445,10 @@ export function AdminLeads() {
                 <option value="Organic">Organic</option>
                 <option value="PPC">PPC</option>
                 <option value="ChatGPT">ChatGPT</option>
+                <option value="Grok">Grok</option>
+                <option value="Perplexity">Perplexity</option>
+                <option value="Claude">Claude</option>
+                <option value="Direct">Direct</option>
               </select>
 
               <select
@@ -676,14 +687,23 @@ export function AdminLeads() {
                             <option value="Organic">Organic</option>
                             <option value="PPC">PPC</option>
                             <option value="ChatGPT">ChatGPT</option>
+                            <option value="Grok">Grok</option>
+                            <option value="Perplexity">Perplexity</option>
+                            <option value="Claude">Claude</option>
+                            <option value="Direct">Direct</option>
+                            <option value="Social">Social</option>
                           </select>
                         ) : (
-                          <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+                          <span
+                            className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                             lead.source === "Organic" ? "bg-green-100 text-green-800" :
                             lead.source === "PPC" ? "bg-brand-teal-muted text-brand-navy" :
                             lead.source === "ChatGPT" ? "bg-violet-100 text-violet-900" :
+                            lead.source === "Grok" ? "bg-slate-200 text-slate-900" :
                             "bg-gray-100 text-gray-800"
-                          }`}>
+                          }`}
+                            title={[lead.referrer, lead.landingUrl || lead.landingPath].filter(Boolean).join(" → ") || undefined}
+                          >
                             {lead.source || "-"}
                           </span>
                         )}

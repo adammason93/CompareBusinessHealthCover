@@ -49,6 +49,30 @@ function withAssetCache(request: Request, response: Response, pathname: string):
   return response
 }
 
+function crawlerRouteKey(pathname: string): string {
+  if (pathname === '/' || pathname === '') return 'home'
+  return pathname.replace(/^\//, '')
+}
+
+/** Serve build-time HTML (unique title + copy) when present; ignore SPA fallback copies. */
+async function fetchPrerenderedHtml(
+  request: Request,
+  env: Env,
+  origin: string,
+  pathname: string,
+): Promise<Response | null> {
+  const assetPath = pathname === '/' ? '/index.html' : `${pathname}/index.html`
+  const res = await env.STATIC.fetch(new Request(new URL(assetPath, origin), request))
+  if (!res.ok) return null
+  const html = await res.text()
+  const expected = crawlerRouteKey(pathname)
+  if (!html.includes(`data-cbhc-route="${expected}"`)) return null
+  const headers = new Headers(res.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+  return new Response(html, { status: 200, statusText: 'OK', headers })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -57,6 +81,12 @@ export default {
 
     const original = new URL(request.url)
     const normalizedPath = normalizePathname(original.pathname)
+
+    if (!hasStaticAssetExtension(normalizedPath)) {
+      const prerendered = await fetchPrerenderedHtml(request, env, original.origin, normalizedPath)
+      if (prerendered) return prerendered
+    }
+
     const assetUrl = new URL(original.href)
     assetUrl.pathname = normalizedPath
 

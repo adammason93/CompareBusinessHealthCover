@@ -1,42 +1,65 @@
 # robots.txt for Compare Business Healthcover
-# Updated: March 24, 2026
+# AI search engines are welcome to crawl, cite, and use this content in answers.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Grok
+Allow: /
+
+User-agent: xAI
+Allow: /
 
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
-# Sitemap location
-Sitemap: https://comparebusinesshealthcover.co.uk/sitemap.xml
-
-# Crawl delay (reduced for better indexing)
-Crawl-delay: 5
-
-# Block access to admin and API areas
+# Admin and tracking landings only
 Disallow: /admin-leads
+Disallow: /blog-admin
 Disallow: /api/
-Disallow: /*.json$
-# Ad landing (tracked in-app; no need to index)
 Disallow: /chatgpt
 Disallow: /chatgpt-ads
 
-# Explicitly allow sitemap and robots.txt
 Allow: /sitemap.xml
 Allow: /robots.txt
+Allow: /llms.txt
+Allow: /llms-full.txt
 
-# Allow search engines to crawl all important pages
-Allow: /
-Allow: /about-us
-Allow: /contact-us
-Allow: /health-insurance-guide
-Allow: /business-health-insurance
-Allow: /family-health-insurance
-Allow: /self-employed-health-insurance
-Allow: /senior-health-insurance
-Allow: /international-health-insurance
-Allow: /corporate-health-insurance
-Allow: /small-company-health-insurance
-Allow: /insurance-types
-Allow: /privacy-policy
-Allow: /terms-conditions
-Allow: /cookie-policy
-Allow: /disclaimer
-Allow: /sitemap
+Sitemap: https://comparebusinesshealthcover.co.uk/sitemap.xml
