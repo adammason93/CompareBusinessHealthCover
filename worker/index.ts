@@ -35,6 +35,25 @@ function redirectPointsToSiteRoot(locationHeader: string | null, baseUrl: URL): 
 
 const HASHED_ASSET = /\.(js|mjs|css|woff2?|ttf|otf|svg|png|jpe?g|gif|webp|ico|json|map)$/i
 
+const PATH_REDIRECTS: Record<string, string> = {
+  "/terms-and-conditions": "/terms-conditions/",
+}
+
+function permanentRedirect(fromUrl: URL, toPath: string): Response {
+  const target = new URL(fromUrl.href)
+  target.pathname = toPath
+  return Response.redirect(target.toString(), 301)
+}
+
+function htmlPathRedirect(pathname: string): string | null {
+  const normalized = normalizePathname(pathname)
+  if (PATH_REDIRECTS[normalized]) return PATH_REDIRECTS[normalized]
+  if (pathname === "/" || pathname === "") return null
+  if (hasStaticAssetExtension(normalized)) return null
+  if (!pathname.endsWith("/")) return `${normalized}/`
+  return null
+}
+
 function withAssetCache(request: Request, response: Response, pathname: string): Response {
   if (pathname.startsWith('/assets/') && HASHED_ASSET.test(pathname)) {
     const headers = new Headers(response.headers)
@@ -80,6 +99,11 @@ export default {
     }
 
     const original = new URL(request.url)
+    const redirectTo = htmlPathRedirect(original.pathname)
+    if (redirectTo) {
+      return permanentRedirect(original, redirectTo)
+    }
+
     const normalizedPath = normalizePathname(original.pathname)
 
     if (!hasStaticAssetExtension(normalizedPath)) {

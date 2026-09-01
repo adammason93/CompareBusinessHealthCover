@@ -5,8 +5,8 @@ const KEY = "4e7c1a9b8f2d46e0a5c3b8d1e6f0a247";
 const HOST = "comparebusinesshealthcover.co.uk";
 const ORIGIN = `https://${HOST}`;
 
-const extra = [`${ORIGIN}/`, `${ORIGIN}/llms.txt`, `${ORIGIN}/llms-full.txt`, `${ORIGIN}/sitemap.xml`, `${ORIGIN}/blog`];
-const urls = [...new Set([...extra, ...GEO_GUIDES.map((g) => `${ORIGIN}${g.path === "/" ? "/" : g.path}`)])];
+const extra = [`${ORIGIN}/`, `${ORIGIN}/llms.txt`, `${ORIGIN}/llms-full.txt`, `${ORIGIN}/sitemap.xml`, `${ORIGIN}/blog/`];
+const urls = [...new Set([...extra, ...GEO_GUIDES.map((g) => (g.path === "/" ? `${ORIGIN}/` : `${ORIGIN}${g.path.replace(/\/+$/, "")}/`))])];
 
 const payload = {
   host: HOST,

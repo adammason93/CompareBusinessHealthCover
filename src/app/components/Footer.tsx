@@ -38,14 +38,6 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               </li>
               <li>
                 <button 
-                  onClick={() => handleNavigation('blog-admin')}
-                  className="hover:text-brand-teal text-left"
-                >
-                  Blog admin
-                </button>
-              </li>
-              <li>
-                <button 
                   onClick={() => handleNavigation('sme-health-insurance-2-employees')}
                   className="hover:text-brand-teal text-left"
                 >
@@ -94,7 +86,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               </li>
               <li>
                 <button 
-                  onClick={() => handleNavigation('terms-and-conditions')}
+                  onClick={() => handleNavigation('terms-conditions')}
                   className="hover:text-brand-teal text-left"
                 >
                   Terms & Conditions

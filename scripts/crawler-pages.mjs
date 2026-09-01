@@ -2,6 +2,14 @@ import { GEO_GUIDES } from "../src/app/content/geo-guides.mjs";
 
 export const ORIGIN = "https://comparebusinesshealthcover.co.uk";
 
+/** Canonical HTML URL. Homepage is `/`; other pages use a trailing slash. */
+export function pageUrl(path) {
+  if (!path || path === "/") return `${ORIGIN}/`;
+  const clean = String(path).replace(/\/+$/, "");
+  const withSlash = clean.startsWith("/") ? clean : `/${clean}`;
+  return `${ORIGIN}${withSlash}/`;
+}
+
 export const KEYWORDS = [
   "SME health insurance UK",
   "business health insurance",
@@ -26,13 +34,13 @@ export const FAQS = GEO_GUIDES.find((g) => g.slug === "home")?.faqs || [];
 const navLinks = `
 <nav>
   <a href="${ORIGIN}/">Home</a>
-  <a href="${ORIGIN}/small-company-health-insurance">Small company</a>
-  <a href="${ORIGIN}/sme-health-insurance-2-employees">From 2 employees</a>
-  <a href="${ORIGIN}/sme-health-insurance-cost">Cost</a>
-  <a href="${ORIGIN}/business-health-insurance-tax">Tax</a>
-  <a href="${ORIGIN}/health-insurance-guide">Guide</a>
-  <a href="${ORIGIN}/blog">Blog</a>
-  <a href="${ORIGIN}/contact-us">Contact</a>
+  <a href="${pageUrl("/small-company-health-insurance")}">Small company</a>
+  <a href="${pageUrl("/sme-health-insurance-2-employees")}">From 2 employees</a>
+  <a href="${pageUrl("/sme-health-insurance-cost")}">Cost</a>
+  <a href="${pageUrl("/business-health-insurance-tax")}">Tax</a>
+  <a href="${pageUrl("/health-insurance-guide")}">Guide</a>
+  <a href="${pageUrl("/blog")}">Blog</a>
+  <a href="${pageUrl("/contact-us")}">Contact</a>
 </nav>`;
 
 function sectionHtml(section) {
@@ -58,7 +66,7 @@ function relatedHtml(related) {
   if (!related?.length) return "";
   const links = related
     .map((r) => {
-      const href = r.slug === "home" ? `${ORIGIN}/` : `${ORIGIN}/${r.slug}`;
+      const href = r.slug === "home" ? `${ORIGIN}/` : pageUrl(`/${r.slug}`);
       return `<a href="${href}">${r.label}</a>`;
     })
     .join(" · ");
@@ -100,7 +108,7 @@ export function articleHtml(page, extraInner = "") {
 }
 
 export function jsonLd(page) {
-  const url = `${ORIGIN}${page.path === "/" ? "/" : page.path}`;
+  const url = pageUrl(page.path);
   const crumbs = [{ "@type": "ListItem", position: 1, name: "Home", item: `${ORIGIN}/` }];
   if (page.path !== "/") {
     crumbs.push({ "@type": "ListItem", position: 2, name: page.h1, item: url });
@@ -141,3 +149,58 @@ export function jsonLd(page) {
   }
   return graph;
 }
+
+/** Legal/utility HTML for crawlers. Not listed in the sitemap. */
+export const NOINDEX_PAGES = [
+  {
+    path: "/privacy-policy",
+    title: "Privacy Policy",
+    description:
+      "How Compare Business Healthcover collects, uses and protects personal data under UK GDPR.",
+    keywords: "privacy policy, GDPR, data protection UK",
+    h1: "Privacy Policy",
+    noindex: true,
+    sections: [
+      "<p>Compare Business Healthcover is a trading name of MASON &amp; HALL DIGITAL LTD (Company No. 17086378). This page explains how we collect, use and protect personal information in line with UK GDPR and the Data Protection Act 2018.</p>",
+      "<p>The full policy on this URL covers who we are, what data we collect from quote enquiries, how we share introductions with FCA-regulated broker partners, retention, and your rights. Last updated February 2026.</p>",
+    ],
+  },
+  {
+    path: "/terms-conditions",
+    title: "Terms & Conditions",
+    description:
+      "Terms for using Compare Business Healthcover, an introducer to FCA-regulated broker partners.",
+    keywords: "terms and conditions, service terms UK",
+    h1: "Terms &amp; Conditions",
+    noindex: true,
+    sections: [
+      "<p>These terms apply to use of comparebusinesshealthcover.co.uk. Compare Business Healthcover is an introducer and comparison service, not an insurer, and does not give personalised financial advice.</p>",
+      "<p>Quotes and policies are arranged by FCA-regulated broker partners and/or insurers and remain subject to their eligibility, underwriting and terms. Effective date February 2026.</p>",
+    ],
+  },
+  {
+    path: "/cookie-policy",
+    title: "Cookie Policy",
+    description: "How Compare Business Healthcover uses cookies and how to manage consent.",
+    keywords: "cookie policy UK, cookie consent",
+    h1: "Cookie Policy",
+    noindex: true,
+    sections: [
+      "<p>This site uses cookies to remember consent, run essential functions, and — if you accept — analytics and marketing measurement. You can change preferences at any time via the cookie settings control.</p>",
+    ],
+  },
+  {
+    path: "/disclaimer",
+    title: "Disclaimer",
+    description:
+      "Compare Business Healthcover is an introducer, not an insurer. We connect UK businesses with FCA-regulated brokers.",
+    keywords: "insurance disclaimer, introducer, FCA brokers",
+    h1: "Disclaimer",
+    noindex: true,
+    sections: [
+      "<p>Compare Business Healthcover does not sell insurance policies itself. We introduce UK businesses to FCA-regulated broker partners who obtain quotes. Information on this site is general and is not personalised advice.</p>",
+      "<p>Cover, exclusions, premiums and tax treatment depend on the insurer, the scheme and your circumstances. Confirm details with the broker and a qualified adviser before buying.</p>",
+    ],
+  },
+];
+

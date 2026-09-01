@@ -16,6 +16,13 @@ export const SITE = {
   leadNotifyEmail: 'matt@myhealthpal.co.uk',
 } as const;
 
+/** Canonical HTML URL with a trailing slash (homepage is `/`). Matches Cloudflare auto-trailing-slash. */
+export function canonicalPageUrl(page: string): string {
+  const slug = page.replace(/^\/+/, "").replace(/\/+$/, "");
+  if (!slug || slug === "home") return `${SITE.url}/`;
+  return `${SITE.url}/${slug}/`;
+}
+
 export function mailto(email = SITE.email) {
   return `mailto:${email}`;
 }

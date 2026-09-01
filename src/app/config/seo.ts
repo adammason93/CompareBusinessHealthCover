@@ -108,6 +108,13 @@ export const SEO_CONFIG = {
       noindex: true,
     },
 
+    'terms-and-conditions': {
+      title: 'Terms & Conditions',
+      description: `Terms and conditions for using ${SITE.name}. Read our service terms, disclaimers, and legal information.`,
+      keywords: 'terms and conditions, service terms, legal disclaimer UK',
+      noindex: true,
+    },
+
     'cookie-policy': {
       title: 'Cookie Policy',
       description: `Learn how ${SITE.name} uses cookies. Manage your cookie preferences anytime.`,

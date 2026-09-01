@@ -16,7 +16,6 @@ import { getGeoGuide } from "@/app/content/geo-guides.mjs";
 import { PrivacyPolicy } from "@/app/pages/PrivacyPolicy";
 import { TermsConditions } from "@/app/pages/TermsConditions";
 import { CookiePolicy } from "@/app/components/CookiePolicy";
-import { TermsAndConditions } from "@/app/components/TermsAndConditions";
 import { Sitemap } from "@/app/components/Sitemap";
 import { Disclaimer } from "@/app/pages/Disclaimer";
 import { AdminLeads } from "@/app/pages/AdminLeads";
@@ -26,14 +25,32 @@ import { BlogAdminPage } from "@/app/pages/BlogAdminPage";
 import { StaticFileServer } from "@/app/components/StaticFileServer";
 import { SEOHead } from "@/app/components/SEOHead";
 import { getSEOConfig } from "@/app/config/seo";
-import { SITE } from "@/app/config/site";
+import { SITE, canonicalPageUrl } from "@/app/config/site";
 import { captureLeadAttributionFromLocation, leadAttributionPayload } from "@/app/config/tracking";
 import { measureLeadCreated } from "@/app/config/openaiPixel";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
 
 /** `/blog-admin/` must match `blog-admin` (hosts often normalize with a trailing slash). */
 function routeKeyFromPathname(pathname: string): string {
-  return pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
+  const key = pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
+  if (key === "terms-and-conditions") return "terms-conditions";
+  return key;
+}
+
+function pathForPage(page: string): string {
+  if (!page || page === "home") return "/";
+  if (page.startsWith("static/")) return `/${page.replace("static/", "")}`;
+  return `/${page.replace(/^\/+|\/+$/g, "")}/`;
+}
+
+function rewriteLegacyTermsUrl(): void {
+  if (/^\/terms-and-conditions\/?$/i.test(window.location.pathname)) {
+    window.history.replaceState(
+      { page: "terms-conditions" },
+      "",
+      `/terms-conditions/${window.location.search}`,
+    );
+  }
 }
 
 const CHATGPT_LANDING_PATHS = new Set(["chatgpt", "chatgpt-ads"]);
@@ -41,6 +58,7 @@ const CHATGPT_LANDING_PATHS = new Set(["chatgpt", "chatgpt-ads"]);
 function resolveInitialPage(): string {
   // Stamp attribution from vanity paths / UTMs before normalising the route
   captureLeadAttributionFromLocation();
+  rewriteLegacyTermsUrl();
 
   const pathname = routeKeyFromPathname(window.location.pathname);
 
@@ -91,6 +109,7 @@ export default function App() {
   useEffect(() => {
     const syncFromLocation = () => {
       captureLeadAttributionFromLocation();
+      rewriteLegacyTermsUrl();
       const pathname = routeKeyFromPathname(window.location.pathname);
       if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
         setCurrentPage(`static/${pathname}`);
@@ -227,16 +246,10 @@ export default function App() {
   };
 
   const handleNavigate = (page: string) => {
-    const target = page.replace(/\/+$/, "") || "home";
+    let target = page.replace(/^\/+|\/+$/g, "") || "home";
+    if (target === "terms-and-conditions") target = "terms-conditions";
     setCurrentPage(target);
-    if (target.startsWith('static/')) {
-      const file = target.replace('static/', '');
-      window.history.pushState({ page: target }, '', `/${file}`);
-    } else if (target === 'home') {
-      window.history.pushState({ page: 'home' }, '', '/');
-    } else {
-      window.history.pushState({ page: target }, '', `/${target}`);
-    }
+    window.history.pushState({ page: target }, "", pathForPage(target));
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -311,8 +324,6 @@ export default function App() {
         return <TermsConditions onGetStarted={handleGetStarted} />;
       case 'cookie-policy':
         return <CookiePolicy onGetStarted={handleGetStarted} />;
-      case 'terms-and-conditions':
-        return <TermsAndConditions onGetStarted={handleGetStarted} />;
       case 'sitemap':
         return <Sitemap onNavigate={handleNavigate} />;
       case 'disclaimer':
@@ -354,26 +365,9 @@ export default function App() {
         description={seoConfig.description}
         keywords={seoConfig.keywords}
         noindex={seoConfig.noindex}
-        canonical={`${SITE.url}/${currentPage === 'home' ? '' : currentPage}`}
+        canonical={canonicalPageUrl(currentPage)}
       />
 
-      {/* Debug Info - Minimized */}
-      <div style={{ 
-        position: 'fixed', 
-        bottom: 0, 
-        left: 0, 
-        background: 'rgba(0,0,0,0.6)', 
-        color: 'white', 
-        padding: '4px 8px', 
-        zIndex: 9999, 
-        fontSize: '9px',
-        maxWidth: '120px',
-        borderTopRightRadius: '4px',
-        opacity: 0.5
-      }}>
-        <div>Page: <strong>{currentPage}</strong></div>
-      </div>
-      
       {currentPage === 'admin-leads' ? (
         <AdminLeads />
       ) : currentPage === 'blog-admin' ? (

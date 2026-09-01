@@ -9,10 +9,12 @@ import { fileURLToPath } from "node:url";
 import {
   FAQS,
   KEYWORDS,
+  NOINDEX_PAGES,
   ORIGIN,
   PAGES,
   articleHtml,
   jsonLd,
+  pageUrl,
 } from "./crawler-pages.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -76,19 +78,20 @@ function injectArticle(html, article) {
 }
 
 function applyPage(template, page, extraInner = "") {
-  const url = `${ORIGIN}${page.path === "/" ? "/" : page.path}`;
+  const url = pageUrl(page.path);
   let html = template;
   html = setTitle(html, page.title);
   html = setMeta(html, "name", "title", `${page.title} | Compare Business Healthcover`);
   html = setMeta(html, "name", "description", page.description);
   html = setMeta(html, "name", "keywords", page.keywords);
+  html = setMeta(html, "name", "robots", page.noindex ? "noindex, nofollow" : "index, follow");
   html = setCanonical(html, url);
   html = setMeta(html, "property", "og:url", url);
   html = setMeta(html, "property", "og:title", `${page.title} | Compare Business Healthcover`);
   html = setMeta(html, "property", "og:description", page.description);
   html = setMeta(html, "name", "twitter:title", `${page.title} | Compare Business Healthcover`);
   html = setMeta(html, "name", "twitter:description", page.description);
-  html = injectJsonLd(html, jsonLd(page));
+  html = injectJsonLd(html, page.noindex ? [] : jsonLd(page));
   html = injectArticle(html, articleHtml(page, extraInner));
   return html;
 }
@@ -100,7 +103,7 @@ function outPathFor(pagePath) {
 
 function llmsTxt(blogLines) {
   const pageLines = PAGES.map((p) => {
-    const url = `${ORIGIN}${p.path === "/" ? "/" : p.path}`;
+    const url = pageUrl(p.path);
     return `- [${p.h1}](${url}): ${p.description}`;
   });
   return `# Compare Business Healthcover
@@ -118,13 +121,13 @@ ${blogLines.length ? `\n## Blog\n${blogLines.join("\n")}\n` : ""}
 ## Optional
 - [Full text for models](${ORIGIN}/llms-full.txt)
 - [Sitemap](${ORIGIN}/sitemap.xml)
-- [Contact](${ORIGIN}/contact-us)
+- [Contact](${pageUrl("/contact-us")})
 `;
 }
 
 function llmsFull(blogBlocks) {
   const pageBlocks = PAGES.map((p) => {
-    const url = `${ORIGIN}${p.path === "/" ? "/" : p.path}`;
+    const url = pageUrl(p.path);
     const text = `${p.h1}\n${p.description}\n${p.sections.join("\n").replace(/<[^>]+>/g, " ")}`;
     return `### ${p.h1}\n${url}\n\n${text.replace(/\s+/g, " ").trim()}`;
   });
@@ -148,13 +151,11 @@ function sitemapXml(extraUrls) {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
     ...PAGES.map((p) => ({
-      loc: `${ORIGIN}${p.path === "/" ? "/" : p.path}`,
+      loc: pageUrl(p.path),
       lastmod: today,
       changefreq: p.path === "/" ? "daily" : "weekly",
       priority: p.path === "/" ? "1.0" : "0.8",
     })),
-    { loc: `${ORIGIN}/llms.txt`, lastmod: today, changefreq: "weekly", priority: "0.4" },
-    { loc: `${ORIGIN}/llms-full.txt`, lastmod: today, changefreq: "weekly", priority: "0.3" },
     ...extraUrls,
   ];
   const body = urls
@@ -217,6 +218,13 @@ async function main() {
     await writeFile(dest, html);
   }
 
+  for (const page of NOINDEX_PAGES) {
+    const html = applyPage(template, page);
+    const dest = outPathFor(page.path);
+    await mkdir(dirname(dest), { recursive: true });
+    await writeFile(dest, html);
+  }
+
   const blogLines = [];
   const blogBlocks = [];
   const sitemapExtras = [];
@@ -236,17 +244,17 @@ async function main() {
       sections: [
         post.excerpt ? `<p>${escapeAttr(post.excerpt)}</p>` : "",
         mdToHtml(post.body || ""),
-        `<p><a href="${ORIGIN}/blog">More SME health insurance guides</a></p>`,
+        `<p><a href="${pageUrl("/blog")}">More SME health insurance guides</a></p>`,
       ],
     };
     const html = applyPage(template, page);
     const dest = outPathFor(path);
     await mkdir(dirname(dest), { recursive: true });
     await writeFile(dest, html);
-    blogLines.push(`- [${title}](${ORIGIN}${path}): ${description}`);
-    blogBlocks.push(`### ${title}\n${ORIGIN}${path}\n\n${description}`);
+    blogLines.push(`- [${title}](${pageUrl(path)}): ${description}`);
+    blogBlocks.push(`### ${title}\n${pageUrl(path)}\n\n${description}`);
     sitemapExtras.push({
-      loc: `${ORIGIN}${path}`,
+      loc: pageUrl(path),
       lastmod: (post.updated_at || post.published_at || new Date().toISOString()).slice(0, 10),
       changefreq: "monthly",
       priority: "0.7",
@@ -265,7 +273,7 @@ async function main() {
   await writeFile(join(publicDir, "sitemap.xml"), sitemap);
 
   console.log(
-    `Crawler HTML: ${PAGES.length} pages, ${posts.length} blog posts → dist/ + public/llms.txt`,
+    `Crawler HTML: ${PAGES.length} pages, ${NOINDEX_PAGES.length} noindex, ${posts.length} blog posts → dist/ + public/llms.txt`,
   );
 }
 
