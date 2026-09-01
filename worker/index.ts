@@ -37,6 +37,7 @@ const HASHED_ASSET = /\.(js|mjs|css|woff2?|ttf|otf|svg|png|jpe?g|gif|webp|ico|js
 
 const PATH_REDIRECTS: Record<string, string> = {
   "/terms-and-conditions": "/terms-conditions/",
+  "/providers": "/small-business-health-insurance-providers/",
 }
 
 function permanentRedirect(fromUrl: URL, toPath: string): Response {

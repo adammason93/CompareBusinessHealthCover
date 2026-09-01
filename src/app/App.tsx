@@ -34,6 +34,7 @@ import { projectId, publicAnonKey } from "/utils/supabase/info";
 function routeKeyFromPathname(pathname: string): string {
   const key = pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
   if (key === "terms-and-conditions") return "terms-conditions";
+  if (key === "providers") return "small-business-health-insurance-providers";
   return key;
 }
 
@@ -53,12 +54,23 @@ function rewriteLegacyTermsUrl(): void {
   }
 }
 
+function rewriteLegacyProvidersUrl(): void {
+  if (/^\/providers\/?$/i.test(window.location.pathname)) {
+    window.history.replaceState(
+      { page: "small-business-health-insurance-providers" },
+      "",
+      `/small-business-health-insurance-providers/${window.location.search}`,
+    );
+  }
+}
+
 const CHATGPT_LANDING_PATHS = new Set(["chatgpt", "chatgpt-ads"]);
 
 function resolveInitialPage(): string {
   // Stamp attribution from vanity paths / UTMs before normalising the route
   captureLeadAttributionFromLocation();
   rewriteLegacyTermsUrl();
+  rewriteLegacyProvidersUrl();
 
   const pathname = routeKeyFromPathname(window.location.pathname);
 
@@ -110,6 +122,7 @@ export default function App() {
     const syncFromLocation = () => {
       captureLeadAttributionFromLocation();
       rewriteLegacyTermsUrl();
+      rewriteLegacyProvidersUrl();
       const pathname = routeKeyFromPathname(window.location.pathname);
       if (pathname === 'sitemap.xml' || pathname === 'robots.txt' || pathname === 'test-static.txt') {
         setCurrentPage(`static/${pathname}`);

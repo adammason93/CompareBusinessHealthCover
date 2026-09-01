@@ -4,6 +4,7 @@ export const BUSINESS_COVER_NAV_LABEL = 'Business Cover';
 export const BUSINESS_COVER_LINKS = [
   { label: 'Business Health Insurance', page: 'business-health-insurance' },
   { label: 'What Cover Includes', page: 'insurance-types' },
+  { label: 'Providers', page: 'small-business-health-insurance-providers' },
   { label: 'Small Company Health Insurance', page: 'small-company-health-insurance' },
   { label: 'From 2 Employees', page: 'sme-health-insurance-2-employees' },
   { label: 'SME Cost Guide', page: 'sme-health-insurance-cost' },

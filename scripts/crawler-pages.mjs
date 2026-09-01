@@ -39,6 +39,7 @@ const navLinks = `
   <a href="${pageUrl("/sme-health-insurance-2-employees")}">From 2 employees</a>
   <a href="${pageUrl("/sme-health-insurance-cost")}">Cost</a>
   <a href="${pageUrl("/insurance-types")}">Cover</a>
+  <a href="${pageUrl("/small-business-health-insurance-providers")}">Providers</a>
   <a href="${pageUrl("/business-health-insurance-tax")}">Tax</a>
   <a href="${pageUrl("/health-insurance-guide")}">Guide</a>
   <a href="${pageUrl("/blog")}">Blog</a>
@@ -64,6 +65,14 @@ function faqsHtml(faqs) {
   return `<h2>Frequently asked questions</h2>${faqs.map((f) => `<section><h3>${f.q}</h3><p>${f.a}</p></section>`).join("\n")}`;
 }
 
+function sourcesHtml(sources) {
+  if (!sources?.length) return "";
+  const links = sources
+    .map((s) => `<li><a href="${s.href}" rel="noopener noreferrer">${s.label}</a></li>`)
+    .join("");
+  return `<h2>Sources</h2><p>Primary insurer pages. Product details change; the quote wording is the authority.</p><ul>${links}</ul>`;
+}
+
 function relatedHtml(related) {
   if (!related?.length) return "";
   const links = related
@@ -82,12 +91,14 @@ export const PAGES = GEO_GUIDES.map((g) => ({
   keywords: g.keywords,
   h1: g.h1,
   lastReviewed: g.lastReviewed,
+  sources: g.sources || [],
   faqs: g.faqs || [],
   sections: [
     `<p>${g.intro}</p>`,
     ...g.sections.map(sectionHtml),
     faqsHtml(g.faqs),
     relatedHtml(g.related),
+    sourcesHtml(g.sources),
   ],
 }));
 

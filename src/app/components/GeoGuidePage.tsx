@@ -77,7 +77,7 @@ export function GeoGuideBody({
         </section>
       ) : null}
       {guide.related?.length && onNavigate ? (
-        <nav className="flex flex-wrap gap-3 text-sm">
+        <nav className="flex flex-wrap gap-3 text-sm mb-10">
           {guide.related.map((r) => (
             <button
               key={r.slug}
@@ -89,6 +89,23 @@ export function GeoGuideBody({
             </button>
           ))}
         </nav>
+      ) : null}
+      {guide.sources?.length ? (
+        <section className="border-t border-gray-200 pt-8">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Sources</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Primary insurer pages. Product details change; the quote wording is the authority.
+          </p>
+          <ul className="list-disc pl-5 space-y-2 text-gray-700">
+            {guide.sources.map((s) => (
+              <li key={s.href}>
+                <a href={s.href} className="text-brand-teal hover:underline" rel="noopener noreferrer" target="_blank">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       ) : null}
     </article>
   );

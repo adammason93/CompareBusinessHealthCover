@@ -413,6 +413,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               { label: "Business health insurance", page: "business-health-insurance" },
               { label: "What it covers", page: "insurance-types" },
               { label: "How much it costs", page: "sme-health-insurance-cost" },
+              { label: "Providers", page: "small-business-health-insurance-providers" },
               { label: "From 2 employees", page: "sme-health-insurance-2-employees" },
               { label: "Tax treatment", page: "business-health-insurance-tax" },
             ].map((item) => (

@@ -66,6 +66,14 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                   Types of cover
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => handleNavigation("small-business-health-insurance-providers")}
+                  className="hover:text-brand-teal text-left"
+                >
+                  Providers
+                </button>
+              </li>
             </ul>
           </div>
 

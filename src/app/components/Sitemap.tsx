@@ -30,7 +30,11 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: 'Tax treatment', page: 'business-health-insurance-tax' },
         { label: 'Renewals', page: 'business-health-insurance-renewals' },
         { label: 'Directors', page: 'director-group-health-insurance' },
-        { label: 'Providers compared', page: 'small-business-health-insurance-providers' },
+        { label: 'How providers differ', page: 'small-business-health-insurance-providers' },
+        { label: 'Bupa SME cover', page: 'bupa-business-health-insurance' },
+        { label: 'AXA Health SME cover', page: 'axa-business-health-insurance' },
+        { label: 'Aviva SME cover', page: 'aviva-business-health-insurance' },
+        { label: 'Vitality SME cover', page: 'vitality-business-health-insurance' },
         { label: 'SME guide', page: 'health-insurance-guide' },
         { label: 'Types of business PMI', page: 'insurance-types' }
       ]
