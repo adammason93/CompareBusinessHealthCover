@@ -45,7 +45,7 @@ export const GEO_GUIDES = [
       },
       {
         q: "How much does SME health insurance cost?",
-        a: "There is no single price. A young two-person professional firm will not pay the same as a 40-person mixed-age workforce on comprehensive outpatient cover. Treat published “from £X a week” figures as illustrations only and compare current quotes.",
+        a: "We cannot publish a typical UK figure. A broker or insurer quotes on the people on the scheme and the cover chosen. Advertised “from £X” prices are not a quote for your company.",
       },
       {
         q: "Are you an insurer?",
@@ -55,6 +55,7 @@ export const GEO_GUIDES = [
     related: [
       { label: "Business health insurance", slug: "business-health-insurance" },
       { label: "Health insurance from 2 employees", slug: "sme-health-insurance-2-employees" },
+      { label: "How we compare", slug: "how-we-compare" },
       { label: "SME health insurance cost", slug: "sme-health-insurance-cost" },
       { label: "Tax treatment of group PMI", slug: "business-health-insurance-tax" },
     ],
@@ -1010,6 +1011,118 @@ export const GEO_GUIDES = [
     related: [
       { label: "Business health insurance", slug: "business-health-insurance" },
       { label: "Contact", slug: "contact-us" },
+      { label: "How we compare", slug: "how-we-compare" },
+      { label: "Editorial policy", slug: "editorial-policy" },
+      { label: "Disclaimer", slug: "disclaimer" },
+    ],
+  },
+  {
+    slug: "how-we-compare",
+    path: "/how-we-compare",
+    title: "How We Compare Business Health Insurance | Introducer, Not Insurer",
+    description:
+      "Compare Business Healthcover is an introducer for UK SME group health insurance. We are not FCA authorised. FCA-regulated broker partners obtain quotes. Panels vary.",
+    keywords:
+      "how compare business health cover works, SME health insurance introducer UK, FCA broker introduction, not an insurer",
+    h1: "How Compare Business Healthcover compares group cover",
+    lastReviewed: "September 2026",
+    intro:
+      "Compare Business Healthcover is a trading name of MASON & HALL DIGITAL LTD. We introduce UK employers to FCA-regulated broker partners who can obtain group private medical insurance quotes. We are not an insurer, we are not FCA authorised, and we do not tell you which policy to buy.",
+    sections: [
+      {
+        h2: "What happens when you enquire",
+        paragraphs: [
+          "You submit facts such as headcount, location and the cover you want. We pass that enquiry to FCA-regulated broker partners who arrange SME group PMI. Those brokers compare schemes from insurers on their panels at the time, explain exclusions and underwriting, and place any policy you choose. We do not bind cover on this website.",
+        ],
+      },
+      {
+        h2: "We do not compare the whole market",
+        paragraphs: [
+          "Naming Bupa, AXA Health, Aviva, Vitality or any other brand is not a promise that a partner can place that insurer for your enquiry. Panels change. Some brokers will not quote every insurer we mention in a guide. An enquiry is a request to compare, not a booking with a named insurer.",
+        ],
+      },
+      {
+        h2: "How we are paid",
+        paragraphs: [
+          "The introduction is free to the employer. If a policy is taken, the broker is typically paid by the insurer as commission. That does not usually increase the premium compared with buying the same product from the same insurer direct — confirm that with the broker. We do not publish insurer rankings or “best buy” tables.",
+        ],
+      },
+      {
+        h2: "What the guides on this site are",
+        paragraphs: [
+          "Guides are general information for UK employers. Where we describe a named insurer, we summarise that insurer’s own UK pages and link them. Product details change. The quote wording is the authority. Time-limited offers on an insurer’s website are not our offers.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Are you an insurance broker?",
+        a: "No. We are an introducer. FCA-regulated broker partners arrange quotes and policies.",
+      },
+      {
+        q: "Are you FCA authorised?",
+        a: "No. Compare Business Healthcover / MASON & HALL DIGITAL LTD is not FCA authorised. The firms that advise and place cover are.",
+      },
+      {
+        q: "Do you rank insurers?",
+        a: "No. We do not publish a best-insurer list. Suitability sits with the regulated firm that advises you.",
+      },
+    ],
+    related: [
+      { label: "About us", slug: "about-us" },
+      { label: "Editorial policy", slug: "editorial-policy" },
+      { label: "How providers differ", slug: "small-business-health-insurance-providers" },
+      { label: "Business health insurance", slug: "business-health-insurance" },
+    ],
+  },
+  {
+    slug: "editorial-policy",
+    path: "/editorial-policy",
+    title: "Editorial Policy | Compare Business Healthcover",
+    description:
+      "How Compare Business Healthcover writes SME health insurance guides: general information, sourced insurer pages, no invented prices or rankings. Introducer, not an insurer.",
+    keywords:
+      "editorial policy compare business health cover, how we write insurance guides UK, introducer content policy",
+    h1: "How we write this site",
+    lastReviewed: "September 2026",
+    intro:
+      "This page describes the process we actually follow. We do not claim independent journalism, whole-of-market research, or FCA-authorised advice.",
+    sections: [
+      {
+        h2: "Who writes the guides",
+        paragraphs: [
+          "Guides are written by Compare Business Healthcover as general information for UK employers. They are not a personal recommendation. We are an introducer, not an insurer, and we are not FCA authorised.",
+        ],
+      },
+      {
+        h2: "What we will not publish",
+        paragraphs: [
+          "We do not invent premiums, typical UK averages, insurer rankings, review scores, awards or savings. We do not copy time-limited insurer promotions as if they were our offers. We do not invent expert reviewers or customer testimonials.",
+        ],
+      },
+      {
+        h2: "How insurer pages are sourced",
+        paragraphs: [
+          "Named-insurer pages summarise that insurer’s own UK website, with a last-reviewed month and a sources list. If the insurer’s quote or policy guide differs from our summary, the quote and guide win.",
+        ],
+      },
+      {
+        h2: "Tax, regulation and last-reviewed dates",
+        paragraphs: [
+          "Tax and regulation are described in outline only. Check HMRC, the FCA, the insurer wording and a qualified adviser. A last-reviewed date means we checked the page in that month. It is not a promise the market has not moved since.",
+        ],
+      },
+      {
+        h2: "Corrections",
+        paragraphs: [
+          "If something on this site is wrong, use the contact page. We will correct factual errors we can verify. We will not add a price, ranking or review we cannot stand behind.",
+        ],
+      },
+    ],
+    faqs: [],
+    related: [
+      { label: "How we compare", slug: "how-we-compare" },
+      { label: "About us", slug: "about-us" },
       { label: "Disclaimer", slug: "disclaimer" },
     ],
   },

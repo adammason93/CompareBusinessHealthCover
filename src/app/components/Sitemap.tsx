@@ -15,6 +15,8 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: 'Home', page: 'home' },
         { label: 'Blog', page: 'blog' },
         { label: 'About Us', page: 'about-us' },
+        { label: 'How we compare', page: 'how-we-compare' },
+        { label: 'Editorial policy', page: 'editorial-policy' },
         { label: 'Contact Us', page: 'contact-us' },
         { label: 'My Submissions', page: 'my-submissions' }
       ]

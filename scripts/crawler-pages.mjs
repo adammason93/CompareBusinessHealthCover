@@ -42,6 +42,8 @@ const navLinks = `
   <a href="${pageUrl("/small-business-health-insurance-providers")}">Providers</a>
   <a href="${pageUrl("/business-health-insurance-tax")}">Tax</a>
   <a href="${pageUrl("/health-insurance-guide")}">Guide</a>
+  <a href="${pageUrl("/about-us")}">About</a>
+  <a href="${pageUrl("/how-we-compare")}">How we compare</a>
   <a href="${pageUrl("/blog")}">Blog</a>
   <a href="${pageUrl("/contact-us")}">Contact</a>
 </nav>`;
@@ -154,13 +156,24 @@ export function jsonLd(page) {
   if (page.path === "/") {
     graph.push({
       "@context": "https://schema.org",
-      "@type": "FinancialService",
+      "@type": "Organization",
       name: "Compare Business Healthcover",
-      description: page.description,
+      legalName: "MASON & HALL DIGITAL LTD",
+      description:
+        "Introducer for UK SME group private medical insurance. Not an insurer. Not FCA authorised. FCA-regulated broker partners obtain quotes.",
       url: ORIGIN,
       telephone: "01484-773038",
+      logo: `${ORIGIN}/logo-v6.png`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Rotherham",
+        addressCountry: "GB",
+      },
       areaServed: { "@type": "Country", name: "United Kingdom" },
-      serviceType: ["Business Health Insurance Comparison", "SME Medical Insurance"],
+      knowsAbout: [
+        "UK SME group private medical insurance",
+        "business health insurance comparison",
+      ],
     });
   }
   return graph;

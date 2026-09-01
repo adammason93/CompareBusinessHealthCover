@@ -90,6 +90,22 @@ export function Footer({ onNavigate }: FooterProps = {}) {
               </li>
               <li>
                 <button
+                  onClick={() => handleNavigation("how-we-compare")}
+                  className="hover:text-brand-teal text-left"
+                >
+                  How we compare
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNavigation("editorial-policy")}
+                  className="hover:text-brand-teal text-left"
+                >
+                  Editorial policy
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => handleNavigation("blog")}
                   className="hover:text-brand-teal text-left"
                 >
