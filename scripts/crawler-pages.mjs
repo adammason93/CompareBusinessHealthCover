@@ -38,6 +38,7 @@ const navLinks = `
   <a href="${pageUrl("/small-company-health-insurance")}">Small company</a>
   <a href="${pageUrl("/sme-health-insurance-2-employees")}">From 2 employees</a>
   <a href="${pageUrl("/sme-health-insurance-cost")}">Cost</a>
+  <a href="${pageUrl("/insurance-types")}">Cover</a>
   <a href="${pageUrl("/business-health-insurance-tax")}">Tax</a>
   <a href="${pageUrl("/health-insurance-guide")}">Guide</a>
   <a href="${pageUrl("/blog")}">Blog</a>

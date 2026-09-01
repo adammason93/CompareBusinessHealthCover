@@ -62,19 +62,26 @@ export const GEO_GUIDES = [
   {
     slug: "small-company-health-insurance",
     path: "/small-company-health-insurance",
-    title: "Small Company Health Insurance UK From 2 Employees",
+    title: "Small Company Health Insurance UK | SME Group PMI",
     description:
-      "Small company and SME group health insurance in the UK, often from two employees. Compare affordable employee medical cover for startups and firms up to around 50 staff.",
+      "Small company and SME group health insurance in the UK, often from two employees. Who qualifies, whether it is worthwhile, and how micro-businesses compare cover.",
     keywords:
-      "small company health insurance, SME medical cover UK, health insurance 2 employees, startup group PMI, small business health benefits",
+      "small company health insurance, small business health insurance UK, SME medical cover, health insurance 2 employees, startup group PMI",
     h1: "Small company health insurance UK",
+    lastReviewed: "September 2026",
     intro:
-      "Small company health insurance is group private medical insurance designed for low headcounts — commonly two to 50 employees. It is the product most UK startups and micro-businesses should compare first, not an individual family policy in the company name.",
+      "Small company health insurance is group private medical insurance for low headcounts — commonly two to around 50 employees. It is the product most UK startups and micro-businesses should compare first, not an individual family policy in the company name.",
     sections: [
       {
-        h2: "Who qualifies",
+        h2: "What is small business health insurance?",
         paragraphs: [
-          "Insurers set their own minima. Two employees is a common threshold for SME group PMI. A director plus one staff member can be enough. A sole trader with no employees is usually quoted on an individual policy instead. If everyone on the scheme is a director-shareholder, ask the broker how the insurer treats “group of two”.",
+          "It is employer-arranged group PMI for a small workforce. Staff (and sometimes dependants) are members of one scheme. Compare Business Healthcover introduces you to FCA-regulated brokers; we do not underwrite policies. Larger corporate flex schemes and one-person individual PMI are different products — use those pages if they fit better than this one.",
+        ],
+      },
+      {
+        h2: "Who qualifies?",
+        paragraphs: [
+          "Insurers set their own minima. Two employees is a common threshold. A director plus one member of staff can be enough. A sole trader with no employees is usually quoted on individual PMI. If everyone on the scheme is a director-shareholder, ask how the insurer treats a “group of two” — some accept it, some want a wider workforce.",
         ],
         table: {
           headers: ["Situation", "Typical product"],
@@ -87,44 +94,66 @@ export const GEO_GUIDES = [
         },
       },
       {
-        h2: "Why small firms buy it",
+        h2: "Can a husband-and-wife limited company get cover?",
         paragraphs: [
-          "Group rates can be more efficient than sending each employee to buy their own cover. Administration sits with the employer or broker. Cover can usually add joiners and remove leavers during the year. It is a visible benefit when you cannot match corporate salary bands.",
-        ],
-        bullets: [
-          "Often simpler administration than corporate flex schemes",
-          "Can scale when you hire",
-          "Helps with absence: private diagnostics may get people treated faster",
-          "Does not replace employer’s liability or income protection",
+          "Often yes, if both work in the company and the insurer accepts director-only groups of two. An unpaid spouse who is not employed usually cannot be counted as the second employee. Disclose the relationship at quote stage. Detail sits on our two-employee page rather than repeating it here.",
         ],
       },
       {
-        h2: "What drives the premium",
+        h2: "Can SMEs get the same insurers as larger businesses?",
         paragraphs: [
-          "Age profile dominates. A scheme of 28-year-olds is cheaper than one with several employees over 55. Outpatient limits, therapies, mental health, hospital lists (for example London weighting) and excess all move the price. Medical history is usually handled at group level (moratorium or full medical underwriting), not with a GP exam for every member on small schemes.",
+          "Sometimes the same brands appear on SME and corporate panels (for example household PMI names). The product, hospital list, underwriting and minimum lives still differ. A corporate scheme for 200 staff is not what a five-person firm is buying, even if the logo looks familiar. Availability changes; a broker’s panel on the day of quote is what matters.",
+        ],
+      },
+      {
+        h2: "Is it worthwhile for a small company?",
+        paragraphs: [
+          "It can be, when you want a single employee medical benefit, simpler administration than everyone buying their own policy, and a recruitment signal you cannot match with salary alone. It is not worthwhile if you only need sick pay, employer’s liability, or a consumer family plan. Tax treatment is a reason to speak to your accountant, not a reason to buy cover you do not need.",
+        ],
+        bullets: [
+          "Joiners and leavers can usually be updated in-year",
+          "Does not replace employer’s liability or income protection",
+          "Private diagnostics may shorten some elective waits — not a guarantee for every condition",
+        ],
+      },
+      {
+        h2: "What does it cost for a small firm?",
+        paragraphs: [
+          "Age profile dominates on tiny schemes because there is little risk pooling. Two older directors will not price like two people in their thirties. Cover level, excess and hospital list then move the figure. There is no honest “typical SME premium” without those facts. See the cost guide, then get a live quote.",
         ],
       },
       {
         h2: "How to compare without wasting time",
         paragraphs: [
-          "Decide inpatient-only versus comprehensive outpatient. Note any employees in high-risk occupations. Have last year’s scheme details if you are renewing. Then obtain like-for-like quotes: same excess, same outpatient cap, same hospital list. Compare Business Healthcover introduces FCA-regulated brokers who can do that comparison. We do not sell the policy ourselves.",
+          "Decide inpatient-only versus comprehensive outpatient. Note high-risk occupations. If you are renewing, have last year’s schedule. Then compare like-for-like: same excess, same outpatient cap, same hospital list. We introduce FCA-regulated brokers who can do that. We do not sell the policy ourselves.",
         ],
       },
     ],
     faqs: [
       {
+        q: "Can a company with two employees get health insurance?",
+        a: "Often yes. Many UK SME group schemes start at two lives. Eligibility still depends on company structure, occupations and the insurer’s minimums. See the two-employee guide for who counts.",
+      },
+      {
+        q: "Can directors get company health insurance?",
+        a: "Directors who are employees of a company with a genuine workforce usually sit on the group scheme. A one-person company with no staff is typically individual PMI. Director-only groups of two are a grey zone — ask at quote stage.",
+      },
+      {
         q: "Is there a minimum of five employees?",
-        a: "Not always. Five used to be a common folklore minimum. Many current SME schemes start at two. Always check the insurer, not a blog from 2018.",
+        a: "Not as a universal rule. Five used to be folklore. Many current SME schemes start at two. Check the insurer, not an old blog.",
       },
       {
         q: "Can I add my spouse on a two-person company scheme?",
-        a: "Sometimes, as a dependant, if the insurer allows it and they are eligible. That is a scheme rule, not automatic. Ask at quote stage so the premium includes or excludes dependants clearly.",
+        a: "Sometimes, as a dependant, if the insurer allows it and they are eligible. That is a scheme rule, not automatic. Ask so the premium includes or excludes dependants clearly.",
       },
     ],
     related: [
       { label: "From 2 employees", slug: "sme-health-insurance-2-employees" },
+      { label: "Directors", slug: "director-group-health-insurance" },
       { label: "Cost guide", slug: "sme-health-insurance-cost" },
+      { label: "What cover includes", slug: "insurance-types" },
       { label: "Business health insurance", slug: "business-health-insurance" },
+      { label: "Tax", slug: "business-health-insurance-tax" },
     ],
   },
   {
@@ -256,6 +285,7 @@ export const GEO_GUIDES = [
     ],
     related: [
       { label: "SME cost guide", slug: "sme-health-insurance-cost" },
+      { label: "What cover includes", slug: "insurance-types" },
       { label: "From 2 employees", slug: "sme-health-insurance-2-employees" },
       { label: "Small company schemes", slug: "small-company-health-insurance" },
       { label: "Tax treatment", slug: "business-health-insurance-tax" },
@@ -366,60 +396,103 @@ export const GEO_GUIDES = [
   {
     slug: "sme-health-insurance-cost",
     path: "/sme-health-insurance-cost",
-    title: "SME Health Insurance Cost UK 2026 | What Affects the Price",
+    title: "Business Health Insurance Cost UK | What Affects the Price",
     description:
-      "What drives small business and SME group health insurance premiums in the UK: age, headcount, cover level, excess, hospital list and claims. Illustrative only — get a current quote.",
+      "How much UK business and SME group health insurance costs: there is no universal price. Age, headcount, cover, excess and hospital list drive the premium. Get a current quote.",
     keywords:
-      "SME health insurance cost UK, small business PMI price, group medical insurance per employee, company health insurance quotes 2026",
-    h1: "How much does SME health insurance cost in the UK?",
+      "business health insurance cost, company health insurance cost UK, SME health insurance cost, health insurance cost per employee, corporate health insurance cost",
+    h1: "How much does business health insurance cost in the UK?",
+    lastReviewed: "September 2026",
     intro:
-      "There is no honest single figure. Group PMI is priced on the people and the benefit design. Anyone quoting a universal “£X per employee per month” without ages and cover level is marketing, not quoting. Use the drivers below to brief a broker, then compare live figures.",
+      "There is no universal price. Group private medical insurance is priced on the people on the scheme and the benefit design. A young two-person professional firm will not pay the same as a mixed-age team of forty on comprehensive outpatient cover. Anyone quoting a single “£X per employee per month” without ages and cover level is marketing, not quoting.",
     sections: [
       {
-        h2: "The main price drivers",
+        h2: "How much does business health insurance cost?",
         paragraphs: [
-          "Age is first. Headcount is second (small groups have less risk pooling). Cover level is third (outpatient and London hospitals move cost quickly). Then excess, claims inflation at renewal, and insurer appetite for your trade.",
+          "A broker prices your actual dates of birth, occupations, postcode and chosen cover — not a website average. Treat “from £X a week” adverts as a floor for a young, tightly designed, non-London scheme. For a working budget, ask for two like-for-like quotes: inpatient-only and comprehensive outpatient, same excess, same hospital list. Compare Business Healthcover does not publish invented price ranges.",
+        ],
+      },
+      {
+        h2: "What affects the price?",
+        paragraphs: [
+          "Age is usually the strongest driver, then headcount (small groups pool less risk), then how rich the cover is. Location matters because hospital lists and consultant fees differ, especially in and around London. Insurer appetite for your trade and, at renewal, claims history also move the number.",
         ],
         table: {
-          headers: ["Driver", "Effect"],
+          headers: ["Factor", "Why it changes the premium"],
           rows: [
-            ["Average age / oldest lives", "Strongest effect on premium"],
-            ["Inpatient-only vs full outpatient", "Comprehensive cover costs more, often a lot more"],
-            ["Hospital list", "Central London lists cost more than regional lists"],
-            ["Excess", "Higher excess usually lowers premium"],
-            ["Prior claims (at renewal)", "Poor claims ratio pushes renewal loadings"],
+            ["Employee ages", "Oldest and average age dominate small schemes"],
+            ["Number of employees", "Fewer lives means less pooling; two-life quotes are sensitive"],
+            ["Location", "London and some regional hospital lists cost more"],
+            ["Cover level", "Inpatient-only is cheaper than full outpatient"],
+            ["Excess", "A higher excess usually lowers premium"],
+            ["Hospital list", "National / central London lists cost more than local lists"],
+            ["Outpatient cover", "Consultations, diagnostics and therapies add cost quickly"],
+            ["Mental health cover", "Often an add-on or inner limit — check the wording"],
+            ["Dental / optical options", "Usually extras, not core PMI"],
+            ["Underwriting", "Moratorium vs full medical underwriting can change price and exclusions"],
+            ["Claims history", "At renewal, a poor claims ratio often loads the premium"],
+            ["Insurer", "Panels and appetite differ; the cheapest logo is not always the right list"],
           ],
         },
       },
       {
-        h2: "How to read “from £X a week” adverts",
+        h2: "What about cost per employee?",
         paragraphs: [
-          "Those figures usually assume young lives, tight cover, and a non-London hospital list. They are a floor, not a forecast. For a working budget, ask for quotes at two designs: inpatient-only and comprehensive outpatient, same excess, same hospital list.",
+          "Dividing last year’s total premium by headcount is a rough internal budget line, not a market rate. Adding one older joiner, moving to a London hospital list, or unlocking outpatient diagnostics can swing the “per head” figure more than hiring two young staff. Compare total scheme cost on a like-for-like design.",
         ],
       },
       {
-        h2: "Renewal inflation",
+        h2: "Ways companies may reduce premiums",
         paragraphs: [
-          "Medical inflation and scheme claims mean renewals often rise even if you change nothing. That is why re-broking before renewal matters. See the renewals guide. Do not use last year’s premium as next year’s budget without a buffer.",
+          "None of these is a guaranteed saving. They change the product. A cheaper premium with a restricted hospital list in your region can cost more in practice if staff cannot use it.",
+        ],
+        bullets: [
+          "Raise the excess if the business can fund small claims",
+          "Choose inpatient-only if outpatient is unused",
+          "Use a regional hospital list if you do not need central London",
+          "Drop unused extras (dental, optical, travel add-ons)",
+          "Re-broke before renewal rather than only accepting the incumbent",
+          "Keep membership data accurate so you are not paying for leavers",
         ],
       },
       {
-        h2: "Get a real number",
+        h2: "Tax is not a discount on the premium",
         paragraphs: [
-          "Compare Business Healthcover collects the facts a broker needs and introduces you to FCA-regulated partners. We do not publish fake instant prices. The useful output is a comparable quote pack, not a web calculator guessing your workforce.",
+          "Corporation tax treatment and employee Benefit in Kind are separate from the insurer’s price. Confirm both with your accountant. The tax page is an outline, not a calculation.",
+        ],
+      },
+      {
+        h2: "How to get a real figure",
+        paragraphs: [
+          "Submit company size, location and the cover you want. We introduce FCA-regulated broker partners who quote your people. There is no obligation to buy. We do not run a fake instant calculator.",
         ],
       },
     ],
     faqs: [
       {
+        q: "How much does business health insurance cost?",
+        a: "It depends on ages, headcount, cover level, excess, hospital list and underwriting. There is no honest single UK figure. Compare like-for-like quotes rather than advertised “from” prices.",
+      },
+      {
+        q: "How much is health insurance per employee?",
+        a: "Per-head averages hide age mix and benefit design. Use them only as an internal budget split after you have a real scheme quote, not as a shopping price.",
+      },
+      {
         q: "Is group cover cheaper than everyone buying individual PMI?",
-        a: "Often, especially with several lives, but not always for two older directors. Compare both if the group is tiny and high-age.",
+        a: "Often, once several lives are on one scheme — but not always for two older directors. Compare both if the group is tiny and high-age.",
+      },
+      {
+        q: "Will the premium go up at renewal?",
+        a: "Often, even with no claims, because of medical inflation. Claims on your scheme can add more. Start comparing 8–12 weeks before the renewal date. See the renewals guide.",
       },
     ],
     related: [
-      { label: "Two employees", slug: "sme-health-insurance-2-employees" },
-      { label: "Renewals", slug: "business-health-insurance-renewals" },
+      { label: "Business health insurance", slug: "business-health-insurance" },
       { label: "Small company", slug: "small-company-health-insurance" },
+      { label: "Two employees", slug: "sme-health-insurance-2-employees" },
+      { label: "What cover includes", slug: "insurance-types" },
+      { label: "Tax", slug: "business-health-insurance-tax" },
+      { label: "Renewals", slug: "business-health-insurance-renewals" },
     ],
   },
   {
@@ -788,32 +861,90 @@ export const GEO_GUIDES = [
   {
     slug: "insurance-types",
     path: "/insurance-types",
-    title: "Types of Business Health Insurance UK",
+    title: "What Does Business Health Insurance Cover? | Types of Group PMI",
     description:
-      "Types of UK business medical cover: SME group PMI, corporate schemes, director arrangements and international employee cover. Not life insurance.",
+      "What UK business health insurance typically covers and does not: inpatient, outpatient, cancer, mental health, hospital lists and extras. The quote wording is the authority.",
     keywords:
-      "types of business health insurance UK, SME vs corporate PMI, group medical cover categories",
-    h1: "Types of business health insurance",
+      "what does business health insurance cover, types of group PMI UK, SME medical insurance inclusions exclusions, outpatient vs inpatient company PMI",
+    h1: "What does business health insurance cover?",
+    lastReviewed: "September 2026",
     intro:
-      "On this site, “types” means flavours of private medical insurance for employers — not life, income protection or mortgages. Those products are out of scope.",
+      "UK business health insurance (group PMI) usually pays for eligible private treatment in line with the policy schedule: typically inpatient and day-patient care, with outpatient, therapies and mental health added if you buy those modules. It is not sick pay, not NHS emergency cover, and not life insurance. Exact inclusions are on the insurer’s wording, not on a generic web list.",
     sections: [
       {
-        h2: "The four buckets we use",
+        h2: "What does business health insurance cover?",
+        paragraphs: [
+          "Core cover is usually consultant-led treatment as an inpatient or day-patient in a private facility on the hospital list, plus the associated hospital charges and surgeon/anaesthetist fees within limits. Many SME schemes add outpatient consultations and diagnostics (for example MRI or CT) up to an annual cap. Cancer pathways, mental health and therapies vary widely — read those sections on the quote before you compare price.",
+        ],
+      },
+      {
+        h2: "What isn’t normally covered?",
+        paragraphs: [
+          "Emergency A&E remains NHS. Pre-existing conditions may be excluded or waiting-period based, depending on underwriting. Cosmetic treatment is typically excluded. Routine dental and optical are usually optional extras or a different product. Chronic conditions that need ongoing maintenance (rather than acute flare treatment) are often limited. The schedule beats this paragraph if they conflict.",
+        ],
+      },
+      {
+        h2: "Inpatient-only versus comprehensive outpatient",
+        paragraphs: [
+          "Inpatient-only is cheaper and is aimed at the expensive hospital spells. Comprehensive outpatient is what employees notice day to day (seeing a consultant quickly, scans, physio). Mixing a cheap inpatient premium with no outpatient cap is a different product from a full outpatient scheme — compare them separately.",
+        ],
+        table: {
+          headers: ["Module", "Typical role on an SME scheme"],
+          rows: [
+            ["Inpatient / day-patient", "Core: private hospital treatment on the list"],
+            ["Outpatient", "Consultations and diagnostics, often capped"],
+            ["Therapies", "Physio and similar, inner limits common"],
+            ["Mental health", "Talking therapies and/or inpatient psychiatry — check limits"],
+            ["Cancer cover", "Pathway, drugs and hospital access differ by insurer"],
+            ["Dental / optical", "Usually extras, not core PMI"],
+            ["Hospital list", "Which sites and consultants you can use"],
+          ],
+        },
+      },
+      {
+        h2: "Hospital lists",
+        paragraphs: [
+          "The list decides where staff can be treated and strongly affects price. A national or central London list costs more than a local list. A cheap premium on a list that does not include hospitals your team can actually reach is not cheaper in practice.",
+        ],
+      },
+      {
+        h2: "Types of employer medical cover on this site",
+        paragraphs: [
+          "We group products by who they are for, not by insurer brand. Individual self-employed PMI sits beside these when there is no group. Dependant add-ons sit on a group scheme; they are not a separate consumer family supermarket.",
+        ],
         bullets: [
           "SME / small company group PMI (often from two employees)",
           "General business group PMI",
           "Corporate schemes for larger headcounts",
           "International / expatriate medical cover for overseas lives",
         ],
+      },
+      {
+        h2: "How to compare cover, not just price",
         paragraphs: [
-          "Individual self-employed PMI sits beside these when there is no group. Dependant (family) add-ons sit on top of a group scheme; they are not a separate “family insurance” product in our navigation.",
+          "Fix the modules first, then compare insurers. Compare Business Healthcover introduces FCA-regulated brokers who can put like-for-like wordings side by side. We are not an insurer and we do not rank a “best” policy with fake scores.",
         ],
       },
     ],
-    faqs: [],
+    faqs: [
+      {
+        q: "What does business health insurance cover?",
+        a: "Typically eligible private inpatient and day-patient treatment on the hospital list, plus any outpatient, mental health or extras you buy. Exclusions and inner limits are in the wording. It does not replace NHS emergency care or sick pay.",
+      },
+      {
+        q: "Does it cover pre-existing conditions?",
+        a: "Often not immediately. Moratorium and full medical underwriting treat history differently. Disclose accurately; concealment causes claim problems later.",
+      },
+      {
+        q: "Is dental included?",
+        a: "Usually not in core group PMI. It may be an optional extra or a separate cash-plan style benefit. Ask at quote stage so you are not comparing two different products.",
+      },
+    ],
     related: [
-      { label: "SME guide", slug: "health-insurance-guide" },
+      { label: "Business health insurance", slug: "business-health-insurance" },
       { label: "Small company", slug: "small-company-health-insurance" },
+      { label: "Cost", slug: "sme-health-insurance-cost" },
+      { label: "SME guide", slug: "health-insurance-guide" },
     ],
   },
   {

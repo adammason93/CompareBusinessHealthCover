@@ -70,16 +70,16 @@ export const SEO_CONFIG = {
     'small-company-health-insurance': {
       title: 'Small Company Health Insurance UK',
       description:
-        'Affordable health insurance for small businesses and SMEs in the UK. Flexible plans starting from 2 employees. Compare quotes from top providers.',
+        'Group health insurance for UK small companies and SMEs, often from two employees. How micro-businesses compare employee medical cover. Introducer, not an insurer.',
       keywords:
-        'small company health insurance, SME medical cover UK, small business health benefits, startup health insurance',
+        'small company health insurance, SME medical cover UK, small business health benefits, startup group PMI',
     },
 
     'insurance-types': {
-      title: 'Types of Business Health Insurance UK',
+      title: 'What Does Business Health Insurance Cover?',
       description:
-        'Explore business health insurance options for UK SMEs — from small team cover to corporate schemes. Find the right employee benefit for your company.',
-      keywords: 'types of business health insurance UK, SME PMI options, employee medical cover categories',
+        'What UK group PMI typically covers and excludes: inpatient, outpatient, cancer, mental health, hospital lists and optional extras. Wording on the quote is the authority.',
+      keywords: 'what does business health insurance cover, types of group PMI UK, SME medical cover inclusions',
     },
 
     'about-us': {

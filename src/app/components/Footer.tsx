@@ -63,7 +63,7 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                   onClick={() => handleNavigation("insurance-types")}
                   className="hover:text-brand-teal text-left"
                 >
-                  Types of business PMI
+                  Types of cover
                 </button>
               </li>
             </ul>

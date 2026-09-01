@@ -411,6 +411,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
           <nav className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto mt-6" aria-label="Key guides">
             {[
               { label: "Business health insurance", page: "business-health-insurance" },
+              { label: "What it covers", page: "insurance-types" },
               { label: "How much it costs", page: "sme-health-insurance-cost" },
               { label: "From 2 employees", page: "sme-health-insurance-2-employees" },
               { label: "Tax treatment", page: "business-health-insurance-tax" },
