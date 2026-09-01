@@ -399,92 +399,92 @@ export const GEO_GUIDES = [
     path: "/sme-health-insurance-cost",
     title: "Business Health Insurance Cost UK | What Affects the Price",
     description:
-      "How much UK business and SME group health insurance costs: there is no universal price. Age, headcount, cover, excess and hospital list drive the premium. Get a current quote.",
+      "There is no single UK price for business or SME group health insurance. This is general information for employers. A broker quote is the figure that matters. We are an introducer, not an insurer.",
     keywords:
       "business health insurance cost, company health insurance cost UK, SME health insurance cost, health insurance cost per employee, corporate health insurance cost",
     h1: "How much does business health insurance cost in the UK?",
     lastReviewed: "September 2026",
     intro:
-      "There is no universal price. Group private medical insurance is priced on the people on the scheme and the benefit design. A young two-person professional firm will not pay the same as a mixed-age team of forty on comprehensive outpatient cover. Anyone quoting a single “£X per employee per month” without ages and cover level is marketing, not quoting.",
+      "There is no single UK price we can publish, and we do not try. Group private medical insurance is quoted on the people on the scheme and the cover chosen. Compare Business Healthcover is an introducer, not an insurer, and is not FCA authorised. We do not give personalised insurance or tax advice. Advertised “from £X” figures are not a quote for your company. The figure that matters is the one on a current broker or insurer quote.",
     sections: [
       {
         h2: "How much does business health insurance cost?",
         paragraphs: [
-          "A broker prices your actual dates of birth, occupations, postcode and chosen cover — not a website average. Treat “from £X a week” adverts as a floor for a young, tightly designed, non-London scheme. For a working budget, ask for two like-for-like quotes: inpatient-only and comprehensive outpatient, same excess, same hospital list. Compare Business Healthcover does not publish invented price ranges.",
+          "We do not publish typical premiums, averages or price ranges. Two firms of the same size can be quoted differently. If you need a working budget, ask an FCA-regulated broker to price your actual dates of birth, occupations, postcode and chosen cover — for example two like-for-like designs, same excess, same hospital list. The wording on that quote is the authority, not this page.",
         ],
       },
       {
-        h2: "What affects the price?",
+        h2: "What a quote typically asks for",
         paragraphs: [
-          "Age is usually the strongest driver, then headcount (small groups pool less risk), then how rich the cover is. Location matters because hospital lists and consultant fees differ, especially in and around London. Insurer appetite for your trade and, at renewal, claims history also move the number.",
+          "Brokers and insurers commonly collect the items below. Whether any of them changes the premium, and by how much, is decided on the quote. We are not stating that they will, or ranking which matters most.",
         ],
         table: {
-          headers: ["Factor", "Why it changes the premium"],
+          headers: ["Often requested", "What to check on the quote — not on this site"],
           rows: [
-            ["Employee ages", "Oldest and average age dominate small schemes"],
-            ["Number of employees", "Fewer lives means less pooling; two-life quotes are sensitive"],
-            ["Location", "London and some regional hospital lists cost more"],
-            ["Cover level", "Inpatient-only is cheaper than full outpatient"],
-            ["Excess", "A higher excess usually lowers premium"],
-            ["Hospital list", "National / central London lists cost more than local lists"],
-            ["Outpatient cover", "Consultations, diagnostics and therapies add cost quickly"],
-            ["Mental health cover", "Often an add-on or inner limit — check the wording"],
-            ["Dental / optical options", "Usually extras, not core PMI"],
-            ["Underwriting", "Moratorium vs full medical underwriting can change price and exclusions"],
-            ["Claims history", "At renewal, a poor claims ratio often loads the premium"],
-            ["Insurer", "Panels and appetite differ; the cheapest logo is not always the right list"],
+            ["Employee ages", "Ask how the quote treats older and younger lives"],
+            ["Number of employees", "Confirm who is counted as a member"],
+            ["Location / postcode", "Ask which hospital list applies in your area"],
+            ["Cover level", "Inpatient-only and broader outpatient are different designs"],
+            ["Excess", "Ask what happens to premium and claims if the excess changes"],
+            ["Hospital list", "Check which hospitals and consultants are included"],
+            ["Outpatient cover", "Check limits for consultations, diagnostics and therapies"],
+            ["Mental health cover", "Check whether it is included, limited or optional"],
+            ["Dental / optical options", "Ask whether these are extras rather than core cover"],
+            ["Underwriting method", "Ask which method applies and what it means for exclusions"],
+            ["Claims history", "May be asked at renewal; the insurer explains how it is used"],
+            ["Insurer / panel", "Availability varies. Naming a brand is not a recommendation"],
           ],
         },
       },
       {
         h2: "What about cost per employee?",
         paragraphs: [
-          "Dividing last year’s total premium by headcount is a rough internal budget line, not a market rate. Adding one older joiner, moving to a London hospital list, or unlocking outpatient diagnostics can swing the “per head” figure more than hiring two young staff. Compare total scheme cost on a like-for-like design.",
+          "Some employers divide a scheme total by headcount for an internal budget line. That is their arithmetic, not a market rate we can stand behind, and not a shopping price. A quote should be compared on the same benefit design, not on a per-head average from a website.",
         ],
       },
       {
-        h2: "Ways companies may reduce premiums",
+        h2: "Questions you can ask a broker about the premium",
         paragraphs: [
-          "None of these is a guaranteed saving. They change the product. A cheaper premium with a restricted hospital list in your region can cost more in practice if staff cannot use it.",
+          "If the quoted premium is more than you want to spend, you can ask what optional changes to the design would do to the figure. None of the following is a recommendation, a guaranteed saving, or advice that you should cut cover. Changing the product can also change what staff can claim.",
         ],
         bullets: [
-          "Raise the excess if the business can fund small claims",
-          "Choose inpatient-only if outpatient is unused",
-          "Use a regional hospital list if you do not need central London",
-          "Drop unused extras (dental, optical, travel add-ons)",
-          "Re-broke before renewal rather than only accepting the incumbent",
-          "Keep membership data accurate so you are not paying for leavers",
+          "What happens if the excess is higher or lower?",
+          "What is the difference between inpatient-only and a more comprehensive outpatient option?",
+          "Which hospital lists are available for our postcode?",
+          "Which extras (for example dental, optical or travel) are optional?",
+          "What would a comparison look like before renewal, rather than only accepting the incumbent?",
+          "Is membership up to date so leavers are not still included?",
         ],
       },
       {
-        h2: "Tax is not a discount on the premium",
+        h2: "Tax is separate from the premium",
         paragraphs: [
-          "Corporation tax treatment and employee Benefit in Kind are separate from the insurer’s price. Confirm both with your accountant. The tax page is an outline, not a calculation.",
+          "How your accountant treats the cost for corporation tax, and how payroll treats any employee Benefit in Kind, is not something we calculate. Confirm both with your accountant. Our tax page is a short outline only, not tax advice and not a discount on the insurer’s price.",
         ],
       },
       {
-        h2: "How to get a real figure",
+        h2: "How to get a figure for your company",
         paragraphs: [
-          "Submit company size, location and the cover you want. We introduce FCA-regulated broker partners who quote your people. There is no obligation to buy. We do not run a fake instant calculator.",
+          "Submit company size, location and the cover you want. We introduce FCA-regulated broker partners who can quote your people. There is no obligation to buy. We do not run a price calculator and we do not bind cover on this site.",
         ],
       },
     ],
     faqs: [
       {
         q: "How much does business health insurance cost?",
-        a: "It depends on ages, headcount, cover level, excess, hospital list and underwriting. There is no honest single UK figure. Compare like-for-like quotes rather than advertised “from” prices.",
+        a: "We cannot give a UK figure. It is quoted on your people and your chosen cover. Use a current like-for-like quote, not advertised “from” prices or anything on this page.",
       },
       {
         q: "How much is health insurance per employee?",
-        a: "Per-head averages hide age mix and benefit design. Use them only as an internal budget split after you have a real scheme quote, not as a shopping price.",
+        a: "We do not publish a per-head rate. A per-head split is only an internal budget line after you have a real scheme quote, not a price to shop with.",
       },
       {
         q: "Is group cover cheaper than everyone buying individual PMI?",
-        a: "Often, once several lives are on one scheme — but not always for two older directors. Compare both if the group is tiny and high-age.",
+        a: "We cannot say. Group and individual products are quoted differently. If the company is very small, ask a broker to explain both options rather than assuming one is cheaper.",
       },
       {
         q: "Will the premium go up at renewal?",
-        a: "Often, even with no claims, because of medical inflation. Claims on your scheme can add more. Start comparing 8–12 weeks before the renewal date. See the renewals guide.",
+        a: "We cannot say what will happen to your premium. Ask the incumbent and a broker when they want facts for a renewal comparison. See the renewals guide for the process, not a prediction.",
       },
     ],
     related: [
