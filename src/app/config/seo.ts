@@ -9,27 +9,27 @@ export const SEO_CONFIG = {
 
   pages: {
     home: {
-      title: 'Compare SME Business Health Insurance UK',
+      title: 'Compare Business Health Insurance UK | Company PMI',
       description:
-        'Compare business health insurance for UK SMEs from two employees. Free, no-obligation introductions to FCA-regulated brokers. We are an introducer, not an insurer.',
+        'Compare business health insurance for UK companies from 2 employees. Free company health insurance quotes via FCA-regulated brokers. Introducer, not an insurer.',
       keywords:
-        'SME health insurance UK, business health insurance, small company medical cover, employee health benefits, compare business health cover',
+        'compare business health insurance, company health insurance, business health insurance UK, SME business insurance, company health insurance plans',
     },
 
     'health-insurance-guide': {
-      title: 'Business Health Insurance Guide for UK SMEs',
+      title: 'Company Health Insurance Guide UK | SME Group PMI',
       description:
-        'Guide to business health insurance for UK SMEs. Learn about employee cover options, costs, tax benefits, and how to choose the right plan for your team.',
+        'Plain-English company health insurance guide for UK employers: plans, tax, underwriting, and health insurance for company employees. Information, not personal advice.',
       keywords:
-        'SME health insurance guide, business medical insurance UK, employee health cover explained, company PMI guide',
+        'company health insurance guide, SME health insurance guide, group PMI explained UK, health insurance for company employees',
     },
 
     'business-health-insurance': {
-      title: 'Business Health Insurance UK',
+      title: 'Business Health Insurance UK | Company Medical Cover',
       description:
-        'What UK business health insurance is, how group PMI works, who can buy it, and how to compare. Free introduction to FCA-regulated brokers. We are not an insurer.',
+        'What business health insurance covers and who qualifies. Compare company health insurance plans for UK employees. Free SME quotes via FCA-regulated brokers.',
       keywords:
-        'business health insurance UK, company medical insurance, group PMI, SME health cover, employee private medical insurance',
+        'business health insurance UK, company health insurance, company health insurance plans, group PMI, health insurance for company employees',
     },
 
     'family-health-insurance': {
@@ -68,11 +68,11 @@ export const SEO_CONFIG = {
     },
 
     'small-company-health-insurance': {
-      title: 'Small Company Health Insurance UK',
+      title: 'Small Company Health Insurance UK | From 2 Employees',
       description:
-        'Group health insurance for UK small companies and SMEs, often from two employees. How micro-businesses compare employee medical cover. Introducer, not an insurer.',
+        'Company health insurance plans for UK small businesses and SMEs. Compare group PMI for employees from 2 staff — free broker introduction, no obligation.',
       keywords:
-        'small company health insurance, SME medical cover UK, small business health benefits, startup group PMI',
+        'small company health insurance, company health insurance plans, SME business insurance, health insurance for company employees, group PMI from 2 employees',
     },
 
     'insurance-types': {

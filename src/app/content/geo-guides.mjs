@@ -4,11 +4,11 @@ export const GEO_GUIDES = [
   {
     slug: "home",
     path: "/",
-    title: "Compare SME Business Health Insurance UK",
+    title: "Compare Business Health Insurance UK | Company PMI",
     description:
-      "Compare group private medical insurance for UK SMEs from two employees. Free, no-obligation introductions to FCA-regulated brokers. We are an introducer, not an insurer.",
+      "Compare business health insurance for UK companies from 2 employees. Free company health insurance quotes via FCA-regulated brokers. Introducer, not an insurer.",
     keywords:
-      "SME health insurance UK, business health insurance, small company medical cover, group PMI from 2 employees, compare business health cover",
+      "compare business health insurance, company health insurance, business health insurance UK, SME business insurance, company health insurance plans",
     h1: "Compare business health insurance for UK SMEs",
     intro:
       "Compare Business Healthcover helps UK employers compare group private medical insurance (PMI) for small and medium-sized companies. Many insurers will consider schemes from two employees. The enquiry is free. We introduce you to FCA-regulated broker partners who obtain quotes; we do not underwrite policies or give personalised financial advice.",
@@ -63,11 +63,11 @@ export const GEO_GUIDES = [
   {
     slug: "small-company-health-insurance",
     path: "/small-company-health-insurance",
-    title: "Small Company Health Insurance UK | SME Group PMI",
+    title: "Small Company Health Insurance UK | From 2 Employees",
     description:
-      "Small company and SME group health insurance in the UK, often from two employees. Who qualifies, whether it is worthwhile, and how micro-businesses compare cover.",
+      "Company health insurance plans for UK small businesses and SMEs. Compare group PMI for employees from 2 staff — free broker introduction, no obligation.",
     keywords:
-      "small company health insurance, small business health insurance UK, SME medical cover, health insurance 2 employees, startup group PMI",
+      "small company health insurance, company health insurance plans, SME business insurance, health insurance for company employees, group PMI from 2 employees",
     h1: "Small company health insurance UK",
     lastReviewed: "September 2026",
     intro:
@@ -160,11 +160,11 @@ export const GEO_GUIDES = [
   {
     slug: "business-health-insurance",
     path: "/business-health-insurance",
-    title: "Business Health Insurance UK | Compare Group Cover",
+    title: "Business Health Insurance UK | Company Medical Cover",
     description:
-      "What UK business health insurance is, how group PMI works, what it covers, who can buy it, and how to compare. Free introduction to FCA-regulated brokers. We are not an insurer.",
+      "What business health insurance covers and who qualifies. Compare company health insurance plans for UK employees. Free SME quotes via FCA-regulated brokers.",
     keywords:
-      "business health insurance UK, company health insurance, group PMI, SME health cover, employee private medical insurance",
+      "business health insurance UK, company health insurance, company health insurance plans, group PMI, health insurance for company employees",
     h1: "Business health insurance",
     lastReviewed: "September 2026",
     intro:
@@ -302,11 +302,11 @@ export const GEO_GUIDES = [
   {
     slug: "health-insurance-guide",
     path: "/health-insurance-guide",
-    title: "SME Health Insurance Guide UK | Group PMI Explained",
+    title: "Company Health Insurance Guide UK | SME Group PMI",
     description:
-      "Plain-English guide to business and SME health insurance in the UK: eligibility, cost drivers, tax, underwriting, and how to choose a group scheme.",
+      "Plain-English company health insurance guide for UK employers: plans, tax, underwriting, and health insurance for company employees. Information, not personal advice.",
     keywords:
-      "SME health insurance guide, group PMI explained UK, company medical insurance guide, employee health cover UK",
+      "company health insurance guide, SME health insurance guide, group PMI explained UK, health insurance for company employees",
     h1: "Business health insurance guide for UK SMEs",
     intro:
       "This guide explains group private medical insurance for UK employers: who it is for, how quotes are built, tax in outline, and how to choose a scheme. It is information for comparison, not personal advice. Policies are arranged by FCA-regulated firms.",
@@ -351,11 +351,11 @@ export const GEO_GUIDES = [
   {
     slug: "sme-health-insurance-2-employees",
     path: "/sme-health-insurance-2-employees",
-    title: "Health Insurance for a UK Company With 2 Employees",
+    title: "Company Health Insurance From 2 Employees UK",
     description:
-      "Yes — many UK group health insurance schemes start at two employees. How two-person limited companies compare SME PMI, who counts as an employee, and when individual cover is the right product.",
+      "Can a UK company with 2 employees get group health insurance? How two-person businesses compare health insurance for company employees. Free broker introduction.",
     keywords:
-      "health insurance 2 employees UK, group PMI two staff, small limited company medical insurance, micro business health cover",
+      "company health insurance 2 employees, health insurance for company employees, group PMI two staff, small limited company medical insurance, SME business insurance",
     h1: "Can a UK company with 2 employees get group health insurance?",
     intro:
       "Yes. A large share of SME group private medical insurance is built for two lives and up. A two-director company, or a director plus one employee, is a normal enquiry. The mistake is buying a consumer family policy and calling it “business cover”.",
@@ -403,11 +403,11 @@ export const GEO_GUIDES = [
   {
     slug: "sme-health-insurance-cost",
     path: "/sme-health-insurance-cost",
-    title: "Business Health Insurance Cost UK | What Affects the Price",
+    title: "Business Health Insurance Cost UK | SME Price Guide",
     description:
-      "There is no single UK price for business or SME group health insurance. This is general information for employers. A broker quote is the figure that matters. We are an introducer, not an insurer.",
+      "What drives business health insurance cost for UK companies? No misleading averages — understand pricing before you compare company health insurance quotes.",
     keywords:
-      "business health insurance cost, company health insurance cost UK, SME health insurance cost, health insurance cost per employee, corporate health insurance cost",
+      "business health insurance cost, company health insurance cost UK, SME health insurance cost, company health insurance plans cost, health insurance cost per employee",
     h1: "How much does business health insurance cost in the UK?",
     lastReviewed: "September 2026",
     intro:
