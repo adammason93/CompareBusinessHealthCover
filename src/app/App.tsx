@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { LandingPage } from "@/app/components/LandingPage";
 import { EnhancedMultiStepForm } from "@/app/components/EnhancedMultiStepForm";
 import { SuccessPage } from "@/app/components/SuccessPage";
@@ -155,9 +155,22 @@ export default function App() {
     };
   }, []);
 
-  // Debug current page
+  // Debug current page, and tell Google Tag Manager about in-app navigations.
+  // The first view is sent by the GTM container itself.
+  const skipInitialPageView = useRef(true);
   useEffect(() => {
     console.log('📄 Current page:', currentPage);
+    if (skipInitialPageView.current) {
+      skipInitialPageView.current = false;
+      return;
+    }
+    const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+    dataLayer.push({
+      event: 'page_view',
+      page_location: window.location.href,
+      page_path: window.location.pathname + window.location.search,
+      page_title: document.title,
+    });
   }, [currentPage]);
 
   // Scroll to top whenever the page changes

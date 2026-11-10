@@ -144,6 +144,7 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
     
     // Clear tracking cookies
     clearTrackingCookies();
+    applyGoogleConsent(essentialOnly);
     setOpenaiPixelConsent(false);
     
     setPreferences(essentialOnly);
@@ -170,35 +171,32 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
     setShowCustomize(false);
   };
 
+  const applyGoogleConsent = (prefs: CookiePreferences) => {
+    if (typeof (window as any).gtag !== 'function') return;
+    console.log('📊 Updating Google consent', {
+      analytics: prefs.analytics,
+      marketing: prefs.marketing,
+    });
+    (window as any).gtag('consent', 'update', {
+      analytics_storage: prefs.analytics ? 'granted' : 'denied',
+      ad_storage: prefs.marketing ? 'granted' : 'denied',
+      ad_user_data: prefs.marketing ? 'granted' : 'denied',
+      ad_personalization: prefs.marketing ? 'granted' : 'denied',
+    });
+  };
+
   const initializeTracking = (prefs: CookiePreferences) => {
+    applyGoogleConsent(prefs);
+
     if (prefs.analytics) {
       // Initialize Microsoft Clarity
       if (typeof window !== 'undefined' && (window as any).initClarity) {
         console.log('📊 Initializing Microsoft Clarity');
         (window as any).initClarity();
       }
-      
-      // Initialize Google Analytics if present
-      if (typeof (window as any).gtag === 'function') {
-        console.log('📊 Initializing Google Analytics');
-        (window as any).gtag('consent', 'update', {
-          'analytics_storage': 'granted'
-        });
-      }
     }
-    
-    if (prefs.marketing) {
-      // Initialize marketing cookies
-      if (typeof (window as any).gtag === 'function') {
-        console.log('🎯 Initializing Marketing cookies');
-        (window as any).gtag('consent', 'update', {
-          'ad_storage': 'granted'
-        });
-      }
-      setOpenaiPixelConsent(true);
-    } else {
-      setOpenaiPixelConsent(false);
-    }
+
+    setOpenaiPixelConsent(prefs.marketing);
   };
 
   const clearTrackingCookies = () => {
