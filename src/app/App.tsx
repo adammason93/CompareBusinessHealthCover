@@ -99,13 +99,58 @@ function resolveInitialPage(): string {
   return hash || 'home';
 }
 
+
+const QUOTE_SUBMISSION_ID_KEY = "businessHealthFormSubmissionId";
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function createQuoteSubmissionId(): string {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
+      const random = (Math.random() * 16) | 0;
+      const value = char === "x" ? random : (random & 0x3) | 0x8;
+      return value.toString(16);
+    });
+  }
+}
+
+function getOrCreateQuoteSubmissionId(): string {
+  try {
+    const existing = localStorage.getItem(QUOTE_SUBMISSION_ID_KEY);
+    if (existing && UUID_PATTERN.test(existing)) {
+      return existing.toLowerCase();
+    }
+  } catch {
+    // Ignore storage errors and create a fresh id
+  }
+  const id = createQuoteSubmissionId();
+  try {
+    localStorage.setItem(QUOTE_SUBMISSION_ID_KEY, id);
+  } catch {
+    // Still submit with an in-memory id
+  }
+  return id;
+}
+
+function clearQuoteSubmissionId() {
+  try {
+    localStorage.removeItem(QUOTE_SUBMISSION_ID_KEY);
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [submissionReference, setSubmissionReference] = useState<string | null>(null);
+  const [confirmationEmailSent, setConfirmationEmailSent] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const isSubmittingRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(resolveInitialPage);
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
@@ -199,27 +244,27 @@ export default function App() {
   }, []);
 
   const handleGetStarted = () => {
+    setSubmitError(null);
     setIsFormOpen(true);
   };
 
   const handleFormSubmit = async (data: any) => {
-    // Prevent duplicate submissions
-    if (isSubmitting) {
-      console.log('⚠️ Submission already in progress, ignoring duplicate request');
+    if (isSubmittingRef.current) {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
+    setSubmitError(null);
     setSubmissionReference(null);
-    
+    setConfirmationEmailSent(true);
+
+    const quoteSubmitError = `Sorry, we couldn't send your quote just now. Your answers are still here — please try again. If it keeps happening, call us on ${SITE.phoneDisplay}.`;
+
     try {
-      console.log("Form submitted:", data);
-      
       // Use user's auth token if logged in, otherwise use public anon key
       const token = authToken || publicAnonKey;
-      console.log('Submitting with token type:', authToken ? 'User JWT' : 'Anon Key');
-      
-      // Send form data to backend
+
       const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/submit-form`, {
         method: 'POST',
         headers: {
@@ -228,36 +273,41 @@ export default function App() {
         },
         body: JSON.stringify({
           ...data,
+          submissionId: getOrCreateQuoteSubmissionId(),
           sourceWebsite: SITE.domain,
           ...leadAttributionPayload(),
         }),
       });
 
-      const result = await response.json();
+      let result: { referenceNumber?: string; emailSent?: boolean } | null = null;
+      try {
+        result = await response.json();
+      } catch {
+        result = null;
+      }
 
       if (!response.ok) {
         console.error('Failed to submit form:', result);
-        // Still show success page even if email fails, as data is saved
-        if (result.note) {
-          console.log(result.note);
-        }
-        measureLeadCreated();
-      } else {
-        console.log('Form submitted successfully:', result);
-        if (result.referenceNumber) {
-          setSubmissionReference(result.referenceNumber);
-        }
-        measureLeadCreated();
+        setSubmitError(quoteSubmitError);
+        return;
       }
 
+      if (result?.referenceNumber) {
+        setSubmissionReference(result.referenceNumber);
+      }
+      setConfirmationEmailSent(result?.emailSent !== false);
+      measureLeadCreated();
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('businessHealthFormDraft');
+      }
+      clearQuoteSubmissionId();
       setIsFormOpen(false);
       setIsSuccessOpen(true);
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Still show success page as failsafe
-      setIsFormOpen(false);
-      setIsSuccessOpen(true);
+      setSubmitError(quoteSubmitError);
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   };
@@ -265,9 +315,12 @@ export default function App() {
   const handleReset = () => {
     setIsSuccessOpen(false);
     setSubmissionReference(null);
+    setConfirmationEmailSent(true);
   };
 
   const handleBackToLanding = () => {
+    if (isSubmittingRef.current) return;
+    setSubmitError(null);
     setIsFormOpen(false);
   };
 
@@ -438,12 +491,24 @@ export default function App() {
       )}
       
       {/* Form Overlay */}
-      <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+      <Dialog
+        open={isFormOpen}
+        onOpenChange={(open) => {
+          if (isSubmitting) return;
+          setIsFormOpen(open);
+          if (!open) setSubmitError(null);
+        }}
+      >
         <DialogContent
           className="!fixed !inset-x-2 !top-2 !bottom-2 !left-2 !right-2 !translate-x-0 !translate-y-0 !max-w-none !w-auto !h-auto max-h-[calc(100dvh-1rem)] sm:!inset-auto sm:!top-[50%] sm:!left-[50%] sm:!bottom-auto sm:!right-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:!max-w-[75vw] sm:!w-[75vw] sm:!h-[85vh] overflow-hidden !p-0 bg-white rounded-xl"
         >
           <div className="h-full max-h-[calc(100dvh-1rem)] sm:max-h-[85vh] overflow-y-auto overscroll-contain">
-            <EnhancedMultiStepForm onSubmit={handleFormSubmit} onBack={handleBackToLanding} />
+            <EnhancedMultiStepForm
+              onSubmit={handleFormSubmit}
+              onBack={handleBackToLanding}
+              isSubmitting={isSubmitting}
+              submitError={submitError}
+            />
           </div>
         </DialogContent>
       </Dialog>
@@ -451,7 +516,7 @@ export default function App() {
       {/* Success Overlay */}
       <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
         <DialogContent className="!max-w-[95vw] sm:!max-w-[500px] md:!max-w-[600px] !w-auto p-0 bg-white overflow-y-auto max-h-[90vh]">
-          <SuccessPage onReset={handleReset} referenceNumber={submissionReference} />
+          <SuccessPage onReset={handleReset} referenceNumber={submissionReference} emailSent={confirmationEmailSent} />
         </DialogContent>
       </Dialog>
 

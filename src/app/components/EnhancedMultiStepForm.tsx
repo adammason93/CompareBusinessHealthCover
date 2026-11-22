@@ -15,10 +15,24 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 
 interface MultiStepFormProps {
-  onSubmit: (data: FormData) => void;
+  onSubmit: (data: FormData) => void | Promise<void>;
   onBack: () => void;
   user?: any;
   onOpenAuth?: () => void;
+  isSubmitting?: boolean;
+  submitError?: string | null;
+}
+
+function readFormDraft(): Partial<FormData> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem("businessHealthFormDraft");
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
 }
 
 export interface FormData {
@@ -69,7 +83,7 @@ const steps = [
   { number: 9, label: "Review", icon: Check, time: "30s" },
 ];
 
-export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: MultiStepFormProps) {
+export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth, isSubmitting = false, submitError = null }: MultiStepFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [savedDraft, setSavedDraft] = useState(false);
@@ -79,13 +93,10 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
   
   const { register, handleSubmit, watch, setValue, formState: { errors, touchedFields } } = useForm<FormData>({
     mode: "onChange",
-    defaultValues:
-      typeof window !== 'undefined'
-        ? {
-            compareType: 'sme-health',
-            ...JSON.parse(localStorage.getItem('businessHealthFormDraft') || '{}'),
-          }
-        : { compareType: 'sme-health' },
+    defaultValues: {
+      compareType: 'sme-health',
+      ...readFormDraft(),
+    },
   });
 
   const watchedFields = watch();
@@ -201,11 +212,15 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
     if (currentStep < steps.length) {
       nextStep();
     } else {
+      if (isSubmitting) {
+        return;
+      }
+      // Keep the latest answers until the server confirms the submission.
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('businessHealthFormDraft');
+        localStorage.setItem('businessHealthFormDraft', JSON.stringify(data));
       }
       const { dateOfBirth: _removed, ...submitData } = data;
-      onSubmit({
+      void onSubmit({
         ...submitData,
         title: formatTitle(data.title),
       });
@@ -1020,12 +1035,22 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             </motion.div>
           </AnimatePresence>
 
+          {currentStep === steps.length && submitError ? (
+            <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-left">
+              <p className="text-red-800 text-sm flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>{submitError}</span>
+              </p>
+            </div>
+          ) : null}
+
           {/* Navigation Buttons */}
           <div className="flex justify-between mt-6 gap-4">
             <Button
               type="button"
               onClick={prevStep}
               variant="outline"
+              disabled={isSubmitting}
               className="px-6 py-3 rounded-xl border-2 border-gray-300 hover:border-gray-400 hover:bg-brand-surface"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
@@ -1034,14 +1059,21 @@ export function EnhancedMultiStepForm({ onSubmit, onBack, user, onOpenAuth }: Mu
             
             <Button
               type="submit"
-              disabled={!isStepValid()}
+              disabled={!isStepValid() || isSubmitting}
               className="px-8 py-3 bg-gradient-to-r from-brand-teal to-brand-navy hover:from-brand-teal-hover hover:to-brand-navy-dark text-white rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {currentStep === steps.length ? (
-                <>
-                  Submit
-                  <Sparkles className="w-5 h-5 ml-2" />
-                </>
+                isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Submit
+                    <Sparkles className="w-5 h-5 ml-2" />
+                  </>
+                )
               ) : (
                 <>
                   <span className="hidden sm:inline">Continue</span>
