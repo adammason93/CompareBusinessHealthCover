@@ -106,6 +106,8 @@ export default function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const isSubmittingRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(resolveInitialPage);
   const [user, setUser] = useState<any>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
@@ -199,27 +201,26 @@ export default function App() {
   }, []);
 
   const handleGetStarted = () => {
+    setSubmitError(null);
     setIsFormOpen(true);
   };
 
   const handleFormSubmit = async (data: any) => {
-    // Prevent duplicate submissions
-    if (isSubmitting) {
-      console.log('⚠️ Submission already in progress, ignoring duplicate request');
+    if (isSubmittingRef.current) {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
+    setSubmitError(null);
     setSubmissionReference(null);
-    
+
+    const quoteSubmitError = `Sorry, we couldn't send your quote just now. Your answers are still here — please try again. If it keeps happening, call us on ${SITE.phoneDisplay}.`;
+
     try {
-      console.log("Form submitted:", data);
-      
       // Use user's auth token if logged in, otherwise use public anon key
       const token = authToken || publicAnonKey;
-      console.log('Submitting with token type:', authToken ? 'User JWT' : 'Anon Key');
-      
-      // Send form data to backend
+
       const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/submit-form`, {
         method: 'POST',
         headers: {
@@ -233,31 +234,33 @@ export default function App() {
         }),
       });
 
-      const result = await response.json();
+      let result: { referenceNumber?: string } | null = null;
+      try {
+        result = await response.json();
+      } catch {
+        result = null;
+      }
 
       if (!response.ok) {
         console.error('Failed to submit form:', result);
-        // Still show success page even if email fails, as data is saved
-        if (result.note) {
-          console.log(result.note);
-        }
-        measureLeadCreated();
-      } else {
-        console.log('Form submitted successfully:', result);
-        if (result.referenceNumber) {
-          setSubmissionReference(result.referenceNumber);
-        }
-        measureLeadCreated();
+        setSubmitError(quoteSubmitError);
+        return;
       }
 
+      if (result?.referenceNumber) {
+        setSubmissionReference(result.referenceNumber);
+      }
+      measureLeadCreated();
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('businessHealthFormDraft');
+      }
       setIsFormOpen(false);
       setIsSuccessOpen(true);
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Still show success page as failsafe
-      setIsFormOpen(false);
-      setIsSuccessOpen(true);
+      setSubmitError(quoteSubmitError);
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   };
@@ -268,6 +271,8 @@ export default function App() {
   };
 
   const handleBackToLanding = () => {
+    if (isSubmittingRef.current) return;
+    setSubmitError(null);
     setIsFormOpen(false);
   };
 
@@ -438,12 +443,24 @@ export default function App() {
       )}
       
       {/* Form Overlay */}
-      <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+      <Dialog
+        open={isFormOpen}
+        onOpenChange={(open) => {
+          if (isSubmitting) return;
+          setIsFormOpen(open);
+          if (!open) setSubmitError(null);
+        }}
+      >
         <DialogContent
           className="!fixed !inset-x-2 !top-2 !bottom-2 !left-2 !right-2 !translate-x-0 !translate-y-0 !max-w-none !w-auto !h-auto max-h-[calc(100dvh-1rem)] sm:!inset-auto sm:!top-[50%] sm:!left-[50%] sm:!bottom-auto sm:!right-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:!max-w-[75vw] sm:!w-[75vw] sm:!h-[85vh] overflow-hidden !p-0 bg-white rounded-xl"
         >
           <div className="h-full max-h-[calc(100dvh-1rem)] sm:max-h-[85vh] overflow-y-auto overscroll-contain">
-            <EnhancedMultiStepForm onSubmit={handleFormSubmit} onBack={handleBackToLanding} />
+            <EnhancedMultiStepForm
+              onSubmit={handleFormSubmit}
+              onBack={handleBackToLanding}
+              isSubmitting={isSubmitting}
+              submitError={submitError}
+            />
           </div>
         </DialogContent>
       </Dialog>
