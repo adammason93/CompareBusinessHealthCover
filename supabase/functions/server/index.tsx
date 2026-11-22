@@ -77,8 +77,33 @@ function resolveBrand(sourceWebsite?: string | null): SiteBrand {
   return BRAND_CBHC;
 }
 
+
 function emailFrom(brand: SiteBrand): string {
   return `${brand.name} <${brand.noreply}>`;
+}
+
+const CLIENT_SUBMISSION_ID_PATTERN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function sanitizeClientSubmissionId(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const id = value.trim();
+  return CLIENT_SUBMISSION_ID_PATTERN.test(id) ? id.toLowerCase() : null;
+}
+
+function createReferenceNumber(brandId: SiteBrand["id"], uniquePart: string): string {
+  const prefix = brandId === "hcc" ? "HCC" : "CBHC";
+  const short = uniquePart.replace(/-/g, "").slice(-8).toUpperCase();
+  return `${prefix}-${short}`;
+}
+
+function quoteSuccessBody(referenceNumber: string, emailSent: boolean) {
+  return {
+    success: true as const,
+    referenceNumber,
+    emailSent,
+    message: "Your insurance quote request has been submitted successfully. We'll be in touch soon!",
+  };
 }
 
 async function handleSignup(email: string, password: string, name: string) {
@@ -790,6 +815,10 @@ app.get("/make-server-2031af1c/get-form", async (c) => {
 
 // Submit multi-step insurance form endpoint
 app.post("/make-server-2031af1c/submit-form", async (c) => {
+  let saved = false;
+  let emailSent = false;
+  let referenceNumber: string | null = null;
+
   try {
     const body = await c.req.json();
     const formData = body;
@@ -823,6 +852,21 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
       console.log('📝 Anonymous form submission (no user login)');
     }
 
+    const clientSubmissionId = sanitizeClientSubmissionId(formData.submissionId);
+    const uniquePart = clientSubmissionId ?? crypto.randomUUID();
+    const submissionId = `form_submission_${uniquePart}`;
+    const quoteReference = createReferenceNumber(brand.id, uniquePart);
+    referenceNumber = quoteReference;
+
+    const existing = await kv.get(submissionId);
+    if (existing && (existing.referenceNumber || existing.submissionId === submissionId)) {
+      console.log("Idempotent quote submit — returning existing submission", existing.referenceNumber || quoteReference);
+      return c.json(quoteSuccessBody(
+        existing.referenceNumber || quoteReference,
+        Boolean(existing.emailSent),
+      ));
+    }
+
     // Prepare email content
     const htmlContent = `
       <html>
@@ -837,6 +881,10 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; width: 40%;">Source Website:</td>
                   <td style="padding: 8px 0;">${sourceWebsite}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold;">Reference:</td>
+                  <td style="padding: 8px 0;">${referenceNumber}</td>
                 </tr>
                 ${formData.source ? `<tr><td style="padding: 8px 0; font-weight: bold;">Lead source:</td><td style="padding: 8px 0;">${formData.source}</td></tr>` : ""}
                 ${formData.referrer ? `<tr><td style="padding: 8px 0; font-weight: bold;">Referrer:</td><td style="padding: 8px 0;">${formData.referrer}</td></tr>` : ""}
@@ -990,25 +1038,51 @@ ${formData.preferredContactTime ? `Preferred Time: ${formData.preferredContactTi
 ` : ''}
 
 ---
+Reference: ${referenceNumber}
 Submitted at: ${new Date().toISOString()}
     `.trim();
 
-    // Send email using Resend API
+    const timestamp = new Date().toISOString();
+    const baseRecord = {
+      ...formData,
+      submissionId,
+      referenceNumber: quoteReference,
+      timestamp,
+      emailSent: false,
+    };
+
+    try {
+      await kv.set(submissionId, baseRecord);
+      if (userId) {
+        await kv.set(`user_submission_${userId}_${submissionId}`, baseRecord);
+      }
+      saved = true;
+    } catch (error) {
+      console.error("Failed to save insurance form submission:", error);
+      return c.json({
+        error: "Internal server error while processing your request",
+      }, 500);
+    }
+
+    const persistEmailStatus = async (updates: Record<string, unknown>) => {
+      try {
+        const latest = { ...baseRecord, ...updates };
+        await kv.set(submissionId, latest);
+        if (userId) {
+          await kv.set(`user_submission_${userId}_${submissionId}`, latest);
+        }
+      } catch (error) {
+        console.error("Failed to update submission email status:", error);
+      }
+    };
+
+    // Send email using Resend API — failures must not undo a saved lead
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     
     if (!resendApiKey) {
       console.error("RESEND_API_KEY environment variable is not set");
-      // Store form data anyway
-      const submissionId = `form_submission_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      await kv.set(submissionId, {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        emailError: "API key not configured"
-      });
-      return c.json({ 
-        error: "Email service not configured",
-        note: "Your submission has been saved and we'll contact you soon."
-      }, 500);
+      await persistEmailStatus({ emailSent: false, emailError: "API key not configured" });
+      return c.json(quoteSuccessBody(quoteReference, false));
     }
 
     const internalSubject = `New Insurance Quote Request from ${formData.firstName} ${formData.lastName || ""} (${sourceWebsite})`;
@@ -1050,27 +1124,10 @@ Submitted at: ${new Date().toISOString()}
     }
 
     if (internalSuccessCount === 0) {
-      const errorData = internalErrors.join(" | ");
-      const submissionIdEarly = `form_submission_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      await kv.set(submissionIdEarly, {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        emailError: errorData,
-      });
-
-      return c.json({
-        error: "Failed to send email",
-        details: errorData,
-        note: "Your submission has been saved and we'll contact you soon.",
-      }, 500);
-    }
-
-    if (internalErrors.length > 0) {
+      console.error("Failed to send all internal lead emails:", internalErrors.join(" | "));
+    } else if (internalErrors.length > 0) {
       console.warn("Some internal lead emails failed (others succeeded):", internalErrors);
     }
-
-    // Generate submission ID
-    const submissionId = `form_submission_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // Wait 1000ms (1 second) to avoid Resend rate limit (2 requests per second max)
     console.log("⏳ Waiting 1 second before sending customer confirmation email to avoid rate limit...");
@@ -1091,6 +1148,7 @@ Submitted at: ${new Date().toISOString()}
               <p>Dear ${formData.firstName},</p>
               
               <p>Thank you for requesting a quote from <strong>${brand.name}</strong>. We have received your information and our team will review your requirements.</p>
+              <p>Your reference number is <strong>${referenceNumber}</strong>.</p>
               
               <p>One of our insurance specialists will contact you shortly at <strong>${formData.phone}</strong> or via email at <strong>${formData.email}</strong> to discuss your options and provide you with a personalised quote.</p>
               
@@ -1132,46 +1190,34 @@ Submitted at: ${new Date().toISOString()}
       body: JSON.stringify(customerEmailPayload),
     });
 
+    let customerEmailSent = false;
+    let customerEmailError: string | null = null;
     if (customerEmailResponse.ok) {
+      customerEmailSent = true;
       const customerResult = await customerEmailResponse.json();
       console.log("Customer confirmation email sent successfully:", customerResult);
     } else {
-      const customerError = await customerEmailResponse.text();
-      console.error("Failed to send customer confirmation email:", customerError);
-      // Don't fail the whole request if customer email fails
+      customerEmailError = await customerEmailResponse.text();
+      console.error("Failed to send customer confirmation email:", customerEmailError);
     }
 
-    // Store submission in KV store for backup
-    await kv.set(submissionId, {
-      submissionId, // Include the ID in the stored data!
-      ...formData,
-      timestamp: new Date().toISOString(),
-      emailSent: true,
-      ...(internalErrors.length > 0
-        ? { internalNotifyPartialFailures: internalErrors }
-        : {}),
+    emailSent = internalSuccessCount > 0 || customerEmailSent;
+    const emailErrorParts = [
+      ...internalErrors,
+      ...(customerEmailError ? [`customer: ${customerEmailError}`] : []),
+    ];
+    await persistEmailStatus({
+      emailSent,
+      ...(emailErrorParts.length > 0 ? { emailError: emailErrorParts.join(" | ") } : {}),
+      ...(internalErrors.length > 0 ? { internalNotifyPartialFailures: internalErrors } : {}),
     });
 
-    // If user is logged in, also store with user reference
-    if (userId) {
-      const userSubmissionKey = `user_submission_${userId}_${submissionId}`;
-      await kv.set(userSubmissionKey, {
-        submissionId,
-        ...formData,
-        timestamp: new Date().toISOString(),
-        emailSent: true,
-        ...(internalErrors.length > 0
-          ? { internalNotifyPartialFailures: internalErrors }
-          : {}),
-      });
-    }
-
-    return c.json({ 
-      success: true, 
-      message: "Your insurance quote request has been submitted successfully. We'll be in touch soon!" 
-    });
+    return c.json(quoteSuccessBody(quoteReference, emailSent));
   } catch (error) {
     console.error("Error processing insurance form submission:", error);
+    if (saved && referenceNumber) {
+      return c.json(quoteSuccessBody(referenceNumber, emailSent));
+    }
     return c.json({ 
       error: "Internal server error while processing your request" 
     }, 500);

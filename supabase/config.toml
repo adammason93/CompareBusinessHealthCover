@@ -1,0 +1,5 @@
+# The live Edge Function is named make-server-2031af1c.
+# Source lives in supabase/functions/server and is not published by a git merge
+# to Cloudflare; deploy it separately (see the pull request description).
+[functions.make-server-2031af1c]
+entrypoint = "./functions/server/index.tsx"

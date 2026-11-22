@@ -99,10 +99,53 @@ function resolveInitialPage(): string {
   return hash || 'home';
 }
 
+
+const QUOTE_SUBMISSION_ID_KEY = "businessHealthFormSubmissionId";
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function createQuoteSubmissionId(): string {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
+      const random = (Math.random() * 16) | 0;
+      const value = char === "x" ? random : (random & 0x3) | 0x8;
+      return value.toString(16);
+    });
+  }
+}
+
+function getOrCreateQuoteSubmissionId(): string {
+  try {
+    const existing = localStorage.getItem(QUOTE_SUBMISSION_ID_KEY);
+    if (existing && UUID_PATTERN.test(existing)) {
+      return existing.toLowerCase();
+    }
+  } catch {
+    // Ignore storage errors and create a fresh id
+  }
+  const id = createQuoteSubmissionId();
+  try {
+    localStorage.setItem(QUOTE_SUBMISSION_ID_KEY, id);
+  } catch {
+    // Still submit with an in-memory id
+  }
+  return id;
+}
+
+function clearQuoteSubmissionId() {
+  try {
+    localStorage.removeItem(QUOTE_SUBMISSION_ID_KEY);
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [submissionReference, setSubmissionReference] = useState<string | null>(null);
+  const [confirmationEmailSent, setConfirmationEmailSent] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -214,6 +257,7 @@ export default function App() {
     setIsSubmitting(true);
     setSubmitError(null);
     setSubmissionReference(null);
+    setConfirmationEmailSent(true);
 
     const quoteSubmitError = `Sorry, we couldn't send your quote just now. Your answers are still here — please try again. If it keeps happening, call us on ${SITE.phoneDisplay}.`;
 
@@ -229,12 +273,13 @@ export default function App() {
         },
         body: JSON.stringify({
           ...data,
+          submissionId: getOrCreateQuoteSubmissionId(),
           sourceWebsite: SITE.domain,
           ...leadAttributionPayload(),
         }),
       });
 
-      let result: { referenceNumber?: string } | null = null;
+      let result: { referenceNumber?: string; emailSent?: boolean } | null = null;
       try {
         result = await response.json();
       } catch {
@@ -250,10 +295,12 @@ export default function App() {
       if (result?.referenceNumber) {
         setSubmissionReference(result.referenceNumber);
       }
+      setConfirmationEmailSent(result?.emailSent !== false);
       measureLeadCreated();
       if (typeof window !== 'undefined') {
         localStorage.removeItem('businessHealthFormDraft');
       }
+      clearQuoteSubmissionId();
       setIsFormOpen(false);
       setIsSuccessOpen(true);
     } catch (error) {
@@ -268,6 +315,7 @@ export default function App() {
   const handleReset = () => {
     setIsSuccessOpen(false);
     setSubmissionReference(null);
+    setConfirmationEmailSent(true);
   };
 
   const handleBackToLanding = () => {
@@ -468,7 +516,7 @@ export default function App() {
       {/* Success Overlay */}
       <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
         <DialogContent className="!max-w-[95vw] sm:!max-w-[500px] md:!max-w-[600px] !w-auto p-0 bg-white overflow-y-auto max-h-[90vh]">
-          <SuccessPage onReset={handleReset} referenceNumber={submissionReference} />
+          <SuccessPage onReset={handleReset} referenceNumber={submissionReference} emailSent={confirmationEmailSent} />
         </DialogContent>
       </Dialog>
 
