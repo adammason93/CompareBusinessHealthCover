@@ -131,7 +131,8 @@ async function proxyNotInterested(request: Request, url: URL): Promise<Response>
     body: request.method === 'POST' ? await request.arrayBuffer() : undefined,
   })
   const out = new Headers()
-  out.set('Content-Type', upstream.headers.get('Content-Type') ?? 'text/html; charset=utf-8')
+  // Supabase's default domain forces text/plain on HTML; this route only ever returns our HTML pages.
+  out.set('Content-Type', 'text/html; charset=utf-8')
   out.set('Cache-Control', 'no-store')
   out.set('X-Robots-Tag', 'noindex, nofollow')
   out.set('Referrer-Policy', 'no-referrer')
