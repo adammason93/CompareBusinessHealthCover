@@ -37,11 +37,16 @@ function InitialsBadge({ name }: { name: string }) {
   );
 }
 
+/** "fewer than 10" reads as-is; numeric ranges read "about 10 to 24". */
+function teamPhrase(band: string): string {
+  return band.startsWith("fewer") ? band : `about ${band}`;
+}
+
 function sizeSentence(band: string | null): string {
   switch (band) {
     case null:
       return "Group cover is usually available from 2 employees, and most schemes let you add new starters as your team changes.";
-    case "under 10":
+    case "fewer than 10":
       return "For a smaller team, a scheme can usually start from 2 people, and most plans let you add new starters as you grow.";
     case "10 to 24":
     case "25 to 49":
@@ -49,6 +54,10 @@ function sizeSentence(band: string | null): string {
     default:
       return `With a team of ${band} people, some insurers may offer more tailored scheme options, including medical history disregarded underwriting, which a broker can explain.`;
   }
+}
+
+function capitalise(v: string): string {
+  return v.charAt(0).toUpperCase() + v.slice(1);
 }
 
 export function useOutreachFirm(slug: string): { firm: OutreachFirm | null; status: "loading" | "ready" | "missing" } {
@@ -87,7 +96,7 @@ export function OutreachPage({ firm, onGetStarted, renderEmbeddedForm }: Outreac
 
   const facts = [
     firm.sector ? { label: "Sector", value: firm.sector } : null,
-    firm.staffBand ? { label: "Team size", value: `About ${firm.staffBand} people` } : null,
+    firm.staffBand ? { label: "Team size", value: `${capitalise(teamPhrase(firm.staffBand))} people` } : null,
   ].filter(Boolean) as { label: string; value: string }[];
 
   const steps = [
@@ -134,7 +143,7 @@ export function OutreachPage({ firm, onGetStarted, renderEmbeddedForm }: Outreac
           <h1 className="text-3xl sm:text-5xl mb-5 text-white">Health cover options for {firm.firm}</h1>
           <p className="text-lg sm:text-xl text-white/90 mb-8">
             A short, plain-English overview of group private medical insurance for a team
-            {firm.staffBand ? ` of about ${firm.staffBand} people` : " like yours"}, and how our free introduction to an
+            {firm.staffBand ? ` of ${teamPhrase(firm.staffBand)} people` : " like yours"}, and how our free introduction to an
             FCA-regulated broker works.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
