@@ -74,7 +74,7 @@ async function sendTelegramText(text: string, label: string): Promise<boolean> {
   if (!token || !chatId) return false;
 
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 5000);
+  const timer = setTimeout(() => controller.abort(), 10000);
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
@@ -1763,14 +1763,15 @@ app.get("/make-server-2031af1c/outreach-page", async (c) => {
 });
 
 // ---------------------------------------------------------------------------
-// "Firm opened their page" alert. The site posts here from a client-side beacon only
-// after the page has been visible in a real browser for ~2s and the visitor has
-// interacted, or after ~10s visible (never on the raw GET), so email scanners and
-// link prefetchers that just fetch the URL don't count.
-// Known bot/scanner user agents, impossible spoofed UAs (e.g. legacy Edge/12 with
-// modern Chrome), low Cloudflare trust scores, and common cloud-datacentre networks
-// are logged but never alert. At most one alert per firm per 24 hours (atomic claim
-// in claim_outreach_page_alert). Every beacon is logged in public.outreach_page_views.
+// "Firm opened their page" alert. The site posts here (via the Cloudflare Worker
+// at /outreach-page-view) from a client-side beacon only after the page has been
+// visible for ~2s AND the visitor has interacted (never on the raw GET, and never
+// on a visibility timer alone — Microsoft Safe Links and similar keep a tab open
+// for 10s+). The Worker attaches real Cloudflare network signals and can force-skip
+// Adam's own browser/network. Known bot/scanner user agents, impossible spoofed UAs,
+// low trust scores, scanner/cloud networks, and headless signals are logged but
+// never alert. At most one alert per firm per 24 hours (claim_outreach_page_alert).
+// Every beacon is logged in public.outreach_page_views.
 // ---------------------------------------------------------------------------
 
 const BOT_UA = /bot|crawl|spider|slurp|preview|scan|headless|phantom|puppeteer|playwright|selenium|python|curl|wget|httpclient|okhttp|java\/|go-http|axios|node-fetch|libwww|proofpoint|mimecast|barracuda|safelinks|forcepoint|symantec|messagelabs|trendmicro|sophos|fortinet|zscaler|cisco|ironport|microsoft office|outlook-ios|googleimageproxy|ggpht|yahoomailproxy|facebookexternalhit|linkedin|slack|whatsapp|telegram|discord|skype/i;
@@ -1779,11 +1780,20 @@ const BOT_UA = /bot|crawl|spider|slurp|preview|scan|headless|phantom|puppeteer|p
 // browser still sends the old token, and the widely copied "Chrome/125 … Edge/12.246"
 // string is a known spoof.
 const LEGACY_EDGE_UA = /\bEdge\//i;
+// Keep in sync with worker/index.ts. Used to skip, never to allow, a view.
 const DATACENTRE_ORG =
-  /google llc|amazon(?:\s|$)|aws|microsoft(?:\s| corporation)|azure|digitalocean|hetzner|ovh|alibaba|tencent|linode|akamai|ovhcloud|huawei|oracle cloud|vultr|scaleway|contabo|m247|choopa/i;
+  /google llc|amazon(?:\s|$)|aws|microsoft(?:\s| corporation)|azure|digitalocean|hetzner|ovh|alibaba|tencent|linode|akamai|ovhcloud|huawei|oracle cloud|vultr|scaleway|contabo|m247|choopa|proofpoint|mimecast|barracuda|vipre|messagelabs|forcepoint|zscaler|sophos/i;
+const SCANNER_ASN = new Set([
+  8075, // Microsoft
+  15169, 396982, // Google
+  16509, 14618, // Amazon
+  26211, 22843, // Proofpoint
+  46786, 14120, // Mimecast
+  15347, // Barracuda
+]);
+const OWNER_NETWORK_ORG = /morris and sons/i;
 const LOW_TRUST_SCORE = 15;
 const MIN_VISIBLE_MS = 1500;
-const MIN_VISIBLE_WITHOUT_INTERACTION_MS = 10000;
 
 type RequestCf = {
   clientTrustScore?: number;
@@ -1794,6 +1804,17 @@ type RequestCf = {
 function requestCf(req: Request): RequestCf | null {
   const cf = (req as Request & { cf?: RequestCf }).cf;
   return cf && typeof cf === "object" ? cf : null;
+}
+
+function stringOrNull(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const t = value.trim();
+  return t ? t.slice(0, 200) : null;
+}
+
+function numberOrNull(value: unknown): number | null {
+  const n = typeof value === "number" ? value : typeof value === "string" ? Number(value) : NaN;
+  return Number.isFinite(n) ? n : null;
 }
 
 function isBotOrSpoofedUa(ua: string): boolean {
@@ -1829,8 +1850,14 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
   const visibleMs = Number(body.visibleMs ?? 0);
   const hadInteraction = body.hadInteraction === true;
   const cf = requestCf(c.req.raw);
-  const trustScore = typeof cf?.clientTrustScore === "number" ? cf.clientTrustScore : null;
-  const asOrg = typeof cf?.asOrganization === "string" ? cf.asOrganization : null;
+  const forceSkip = typeof body.forceSkip === "string" && body.forceSkip.trim() ? body.forceSkip.trim().slice(0, 80) : null;
+  const trustScore = numberOrNull(body.trustScore) ?? (typeof cf?.clientTrustScore === "number" ? cf.clientTrustScore : null);
+  const asOrg = stringOrNull(body.asOrg) ?? (typeof cf?.asOrganization === "string" ? cf.asOrganization : null);
+  const asn = numberOrNull(body.asn);
+  const ip = stringOrNull(body.ip);
+  const country = stringOrNull(body.country) ?? (typeof cf?.country === "string" ? cf.country : null);
+  const screenWidth = numberOrNull(body.screenWidth);
+  const screenHeight = numberOrNull(body.screenHeight);
 
   const { data: firm, error } = await supabase
     .from("outreach_contacts")
@@ -1848,10 +1875,27 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
   const log = async (alerted: boolean, skipped_reason: string | null) => {
     const { error: logError } = await supabase
       .from("outreach_page_views")
-      .insert({ slug, user_agent: ua || null, referrer, alerted, skipped_reason });
+      .insert({
+        slug,
+        user_agent: ua || null,
+        referrer,
+        alerted,
+        skipped_reason,
+        ip,
+        as_org: asOrg,
+        country,
+        trust_score: trustScore,
+        visible_ms: Number.isFinite(visibleMs) ? Math.round(visibleMs) : null,
+        had_interaction: hadInteraction,
+        webdriver: body.webdriver === true,
+      });
     if (logError) console.error("Page-view log failed:", logError.message);
   };
 
+  if (forceSkip) {
+    await log(false, forceSkip);
+    return c.json({ ok: true, alerted: false, reason: forceSkip });
+  }
   if (isBotOrSpoofedUa(ua)) {
     await log(false, "bot-user-agent");
     return c.json({ ok: true, alerted: false, reason: "bot" });
@@ -1860,7 +1904,11 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
     await log(false, "automation-or-too-quick");
     return c.json({ ok: true, alerted: false, reason: "not-a-real-view" });
   }
-  if (!hadInteraction && visibleMs < MIN_VISIBLE_WITHOUT_INTERACTION_MS) {
+  if (screenWidth === 0 || screenHeight === 0) {
+    await log(false, "zero-screen");
+    return c.json({ ok: true, alerted: false, reason: "zero-screen" });
+  }
+  if (!hadInteraction) {
     await log(false, "no-interaction");
     return c.json({ ok: true, alerted: false, reason: "no-interaction" });
   }
@@ -1868,9 +1916,13 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
     await log(false, "low-trust-client");
     return c.json({ ok: true, alerted: false, reason: "low-trust" });
   }
-  if (asOrg && DATACENTRE_ORG.test(asOrg)) {
-    await log(false, "datacentre-network");
-    return c.json({ ok: true, alerted: false, reason: "datacentre" });
+  if (asOrg && (DATACENTRE_ORG.test(asOrg) || OWNER_NETWORK_ORG.test(asOrg))) {
+    await log(false, OWNER_NETWORK_ORG.test(asOrg) ? "owner-network" : "datacentre-network");
+    return c.json({ ok: true, alerted: false, reason: asOrg && OWNER_NETWORK_ORG.test(asOrg) ? "owner-network" : "datacentre" });
+  }
+  if (asn !== null && SCANNER_ASN.has(asn)) {
+    await log(false, "scanner-asn");
+    return c.json({ ok: true, alerted: false, reason: "scanner-asn" });
   }
 
   const { data: claimed, error: claimError } = await supabase.rpc("claim_outreach_page_alert", { p_slug: slug });

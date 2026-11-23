@@ -13,26 +13,42 @@ export type OutreachFirm = {
 };
 
 const PAGE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page`;
-const VIEW_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page-view`;
+// Same-origin so the Worker can see Cloudflare network signals and Adam's ignore cookie.
+const VIEW_URL = "/outreach-page-view";
 const VIEW_AFTER_MS = 2000;
-const VIEW_WITHOUT_INTERACTION_MS = 10000;
+const OWNER_IGNORE_KEY = "cbhc_owner_ignore";
 // Legacy Edge used "Edge/12"; current Edge uses "Edg/". The Chrome 125 + Edge/12.246
 // string is a known spoof — no real browser has ever sent both.
 const BOT_OR_SPOOFED_UA =
   /headless|bot|crawl|spider|preview|slurp|facebookexternalhit|linkedin|slack|whatsapp|telegram|\bEdge\//i;
 
+function isOwnerIgnored(): boolean {
+  try {
+    if (localStorage.getItem(OWNER_IGNORE_KEY) === "1") return true;
+  } catch {
+    /* storage blocked */
+  }
+  return typeof document !== "undefined" && /(?:^|;\s*)cbhc_owner_ignore=1(?:;|$)/.test(document.cookie);
+}
+
+function hasZeroScreen(): boolean {
+  return typeof screen !== "undefined" && (screen.width === 0 || screen.height === 0);
+}
+
 /**
  * Tell the server a person is looking at this page, so it can alert Adam.
  * Only fires from a real browser after the page has been visible for ~2s and the visitor
- * has interacted (click, tap, key, or scroll wheel), or after ~10s visible with no
- * interaction. Never on the raw GET, so email scanners and link prefetchers that just
- * fetch the URL don't count. Once per tab session per firm; the server also limits
- * alerts to one per firm per 24h.
+ * has genuinely interacted (click, tap, key, wheel, or scroll). A visibility timer alone
+ * is not enough: email scanners often keep a page open for 10s+ without a person there.
+ * Never on the raw GET. Once per tab session per firm; the server also limits alerts
+ * to one per firm per 24h. Adam's own browser can opt out via /owner/ignore-alerts/.
  */
 function useViewBeacon(slug: string) {
   useEffect(() => {
     if (typeof document === "undefined" || (navigator as any).webdriver) return;
     if (BOT_OR_SPOOFED_UA.test(navigator.userAgent)) return;
+    if (hasZeroScreen()) return;
+    if (isOwnerIgnored()) return;
     const key = `cbhc_view_${slug}`;
     try {
       if (sessionStorage.getItem(key)) return;
@@ -45,9 +61,7 @@ function useViewBeacon(slug: string) {
     let sent = false;
     let interacted = false;
 
-    const readyToSend = () =>
-      visibleMs >= VIEW_WITHOUT_INTERACTION_MS ||
-      (interacted && visibleMs >= VIEW_AFTER_MS);
+    const readyToSend = () => interacted && visibleMs >= VIEW_AFTER_MS;
 
     const send = () => {
       if (sent || !readyToSend()) return;
@@ -60,22 +74,23 @@ function useViewBeacon(slug: string) {
       fetch(VIEW_URL, {
         method: "POST",
         keepalive: true,
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${publicAnonKey}` },
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           slug,
           visibleMs: Math.round(visibleMs),
           hadInteraction: interacted,
           webdriver: Boolean((navigator as any).webdriver),
           referrer: document.referrer || undefined,
+          screenWidth: typeof screen !== "undefined" ? screen.width : undefined,
+          screenHeight: typeof screen !== "undefined" ? screen.height : undefined,
         }),
       }).catch(() => undefined);
     };
     const schedule = () => {
       if (timer) clearTimeout(timer);
-      if (sent) return;
-      const wait = interacted
-        ? VIEW_AFTER_MS - visibleMs
-        : VIEW_WITHOUT_INTERACTION_MS - visibleMs;
+      if (sent || !interacted) return;
+      const wait = VIEW_AFTER_MS - visibleMs;
       timer = setTimeout(() => {
         if (since !== null) visibleMs += performance.now() - since;
         since = document.visibilityState === "visible" ? performance.now() : null;
@@ -102,7 +117,7 @@ function useViewBeacon(slug: string) {
       if (readyToSend()) send();
       else schedule();
     };
-    const interactEvents = ["pointerdown", "keydown", "touchstart", "wheel"] as const;
+    const interactEvents = ["pointerdown", "keydown", "touchstart", "wheel", "scroll"] as const;
     document.addEventListener("visibilitychange", onVisibility);
     for (const ev of interactEvents) {
       window.addEventListener(ev, onInteract, { once: true, passive: true });
