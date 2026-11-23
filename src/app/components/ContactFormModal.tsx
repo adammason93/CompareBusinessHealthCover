@@ -4,7 +4,7 @@ import { projectId, publicAnonKey } from "/utils/supabase/info";
 import { SITE } from "@/app/config/site";
 import { leadAttributionPayload } from "@/app/config/tracking";
 import { measureLeadCreated } from "@/app/config/openaiPixel";
-import { pushLeadSubmittedApp } from "@/app/config/analytics";
+import { pushLeadSubmitted } from "@/app/config/analytics";
 
 interface ContactFormModalProps {
   isOpen: boolean;
@@ -54,7 +54,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
 
       setSubmitStatus("success");
       measureLeadCreated();
-      pushLeadSubmittedApp({ leadType: "contact" });
+      pushLeadSubmitted({ leadType: "contact" });
       setFormData({
         name: "",
         email: "",

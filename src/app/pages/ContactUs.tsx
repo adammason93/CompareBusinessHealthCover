@@ -5,6 +5,7 @@ import { projectId, publicAnonKey } from '/utils/supabase/info';
 import { SITE } from '@/app/config/site';
 import { leadAttributionPayload } from '@/app/config/tracking';
 import { measureLeadCreated } from '@/app/config/openaiPixel';
+import { pushLeadSubmitted } from '@/app/config/analytics';
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 interface ContactUsProps {
@@ -54,7 +55,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
 
       setSubmitSuccess(true);
       measureLeadCreated();
-      pushLeadSubmittedApp({ leadType: "contact" });
+      pushLeadSubmitted({ leadType: "contact" });
       setFormData({
         name: "",
         email: "",
