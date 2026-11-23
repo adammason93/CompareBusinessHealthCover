@@ -29,6 +29,62 @@ async function sendResend(
   return { ok: res.ok, status: res.status, body };
 }
 
+
+type TelegramLeadNotify = {
+  leadType: "quote" | "contact";
+  reference?: string | null;
+  company?: string | null;
+  employees?: string | number | null;
+};
+
+/** Best-effort owner alert. Must never throw or change the HTTP response. */
+async function notifyTelegramLead(details: TelegramLeadNotify): Promise<void> {
+  const token = Deno.env.get("TELEGRAM_BOT_TOKEN");
+  const chatId = Deno.env.get("TELEGRAM_CHAT_ID");
+  if (!token || !chatId) return;
+
+  const ukTime = new Date().toLocaleString("en-GB", {
+    timeZone: "Europe/London",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  const lines = ["New CBHC lead", `Type: ${details.leadType}`];
+  const reference = details.reference?.toString().trim();
+  const company = details.company?.toString().trim();
+  const employees = details.employees === undefined || details.employees === null
+    ? ""
+    : String(details.employees).trim();
+  if (reference) lines.push(`Reference: ${reference}`);
+  if (company) lines.push(`Company: ${company}`);
+  if (employees) lines.push(`Employees: ${employees}`);
+  lines.push(`Time: ${ukTime} UK`);
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text: lines.join("\n") }),
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const body = (await res.text()).replaceAll(token, "[redacted]");
+      console.error("Telegram lead notify failed:", res.status, body);
+    }
+  } catch (error) {
+    const raw = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+    console.error("Telegram lead notify error:", raw.replaceAll(token, "[redacted]"));
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Shared edge function serves sister sites — brand Resend mail from sourceWebsite. */
 type SiteBrand = {
   id: "cbhc" | "hcc";
@@ -582,6 +638,11 @@ Submitted at: ${new Date().toISOString()}
         timestamp: new Date().toISOString(),
         emailError: errorData,
       });
+
+      await notifyTelegramLead({
+        leadType: "contact",
+        company,
+      });
       
       return c.json({ 
         error: "Failed to send email", 
@@ -603,6 +664,11 @@ Submitted at: ${new Date().toISOString()}
       message,
       sourceWebsite: sourceWebsite || "",
       timestamp: new Date().toISOString(),
+    });
+
+    await notifyTelegramLead({
+      leadType: "contact",
+      company,
     });
 
     return c.json({ 
@@ -1070,6 +1136,13 @@ Submitted at: ${new Date().toISOString()}
         error: "Internal server error while processing your request",
       }, 500);
     }
+
+    await notifyTelegramLead({
+      leadType: "quote",
+      reference: quoteReference,
+      company: formData.companyName,
+      employees: formData.peopleCount,
+    });
 
     const persistEmailStatus = async (updates: Record<string, unknown>) => {
       try {
