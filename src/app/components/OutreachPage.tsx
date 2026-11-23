@@ -15,17 +15,24 @@ export type OutreachFirm = {
 const PAGE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page`;
 const VIEW_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page-view`;
 const VIEW_AFTER_MS = 2000;
+const VIEW_WITHOUT_INTERACTION_MS = 10000;
+// Legacy Edge used "Edge/12"; current Edge uses "Edg/". The Chrome 125 + Edge/12.246
+// string is a known spoof — no real browser has ever sent both.
+const BOT_OR_SPOOFED_UA =
+  /headless|bot|crawl|spider|preview|slurp|facebookexternalhit|linkedin|slack|whatsapp|telegram|\bEdge\//i;
 
 /**
  * Tell the server a person is looking at this page, so it can alert Adam.
- * Only fires from a real browser after the page has been visible for ~2s, never on the
- * raw GET, so email scanners and link prefetchers that just fetch the URL don't count.
- * Once per tab session per firm; the server also limits alerts to one per firm per 24h.
+ * Only fires from a real browser after the page has been visible for ~2s and the visitor
+ * has interacted (click, tap, key, or scroll wheel), or after ~10s visible with no
+ * interaction. Never on the raw GET, so email scanners and link prefetchers that just
+ * fetch the URL don't count. Once per tab session per firm; the server also limits
+ * alerts to one per firm per 24h.
  */
 function useViewBeacon(slug: string) {
   useEffect(() => {
     if (typeof document === "undefined" || (navigator as any).webdriver) return;
-    if (/headless|bot|crawl|spider|preview/i.test(navigator.userAgent)) return;
+    if (BOT_OR_SPOOFED_UA.test(navigator.userAgent)) return;
     const key = `cbhc_view_${slug}`;
     try {
       if (sessionStorage.getItem(key)) return;
@@ -36,9 +43,14 @@ function useViewBeacon(slug: string) {
     let since = document.visibilityState === "visible" ? performance.now() : null;
     let timer: ReturnType<typeof setTimeout> | null = null;
     let sent = false;
+    let interacted = false;
+
+    const readyToSend = () =>
+      visibleMs >= VIEW_WITHOUT_INTERACTION_MS ||
+      (interacted && visibleMs >= VIEW_AFTER_MS);
 
     const send = () => {
-      if (sent) return;
+      if (sent || !readyToSend()) return;
       sent = true;
       try {
         sessionStorage.setItem(key, "1");
@@ -52,6 +64,7 @@ function useViewBeacon(slug: string) {
         body: JSON.stringify({
           slug,
           visibleMs: Math.round(visibleMs),
+          hadInteraction: interacted,
           webdriver: Boolean((navigator as any).webdriver),
           referrer: document.referrer || undefined,
         }),
@@ -59,12 +72,16 @@ function useViewBeacon(slug: string) {
     };
     const schedule = () => {
       if (timer) clearTimeout(timer);
+      if (sent) return;
+      const wait = interacted
+        ? VIEW_AFTER_MS - visibleMs
+        : VIEW_WITHOUT_INTERACTION_MS - visibleMs;
       timer = setTimeout(() => {
         if (since !== null) visibleMs += performance.now() - since;
         since = document.visibilityState === "visible" ? performance.now() : null;
-        if (visibleMs >= VIEW_AFTER_MS) send();
+        if (readyToSend()) send();
         else schedule();
-      }, Math.max(100, VIEW_AFTER_MS - visibleMs));
+      }, Math.max(100, wait));
     };
     const onVisibility = () => {
       if (document.visibilityState === "visible") {
@@ -76,10 +93,24 @@ function useViewBeacon(slug: string) {
         if (timer) clearTimeout(timer);
       }
     };
+    const onInteract = () => {
+      interacted = true;
+      if (since !== null) {
+        visibleMs += performance.now() - since;
+        since = performance.now();
+      }
+      if (readyToSend()) send();
+      else schedule();
+    };
+    const interactEvents = ["pointerdown", "keydown", "touchstart", "wheel"] as const;
     document.addEventListener("visibilitychange", onVisibility);
+    for (const ev of interactEvents) {
+      window.addEventListener(ev, onInteract, { once: true, passive: true });
+    }
     if (since !== null) schedule();
     return () => {
       document.removeEventListener("visibilitychange", onVisibility);
+      for (const ev of interactEvents) window.removeEventListener(ev, onInteract);
       if (timer) clearTimeout(timer);
     };
   }, [slug]);
