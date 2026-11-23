@@ -27,7 +27,7 @@ import { getSEOConfig } from "@/app/config/seo";
 import { SITE, canonicalPageUrl } from "@/app/config/site";
 import { captureLeadAttributionFromLocation, leadAttributionPayload } from "@/app/config/tracking";
 import { measureLeadCreated } from "@/app/config/openaiPixel";
-import { pushLeadSubmittedApp } from "@/app/config/analytics";
+import { pushLeadSubmitted } from "@/app/config/analytics";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
 
 /** `/blog-admin/` must match `blog-admin` (hosts often normalize with a trailing slash). */
@@ -304,7 +304,7 @@ export default function App() {
       }
       setConfirmationEmailSent(result?.emailSent !== false);
       measureLeadCreated();
-      pushLeadSubmittedApp({
+      pushLeadSubmitted({
         leadType: "quote",
         referenceNumber: result?.referenceNumber ?? null,
       });
