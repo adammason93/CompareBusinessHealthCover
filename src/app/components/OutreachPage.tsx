@@ -13,6 +13,77 @@ export type OutreachFirm = {
 };
 
 const PAGE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page`;
+const VIEW_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page-view`;
+const VIEW_AFTER_MS = 2000;
+
+/**
+ * Tell the server a person is looking at this page, so it can alert Adam.
+ * Only fires from a real browser after the page has been visible for ~2s, never on the
+ * raw GET, so email scanners and link prefetchers that just fetch the URL don't count.
+ * Once per tab session per firm; the server also limits alerts to one per firm per 24h.
+ */
+function useViewBeacon(slug: string) {
+  useEffect(() => {
+    if (typeof document === "undefined" || (navigator as any).webdriver) return;
+    if (/headless|bot|crawl|spider|preview/i.test(navigator.userAgent)) return;
+    const key = `cbhc_view_${slug}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+    } catch {
+      /* storage blocked: still send once for this mount */
+    }
+    let visibleMs = 0;
+    let since = document.visibilityState === "visible" ? performance.now() : null;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let sent = false;
+
+    const send = () => {
+      if (sent) return;
+      sent = true;
+      try {
+        sessionStorage.setItem(key, "1");
+      } catch {
+        /* ignore */
+      }
+      fetch(VIEW_URL, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${publicAnonKey}` },
+        body: JSON.stringify({
+          slug,
+          visibleMs: Math.round(visibleMs),
+          webdriver: Boolean((navigator as any).webdriver),
+          referrer: document.referrer || undefined,
+        }),
+      }).catch(() => undefined);
+    };
+    const schedule = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (since !== null) visibleMs += performance.now() - since;
+        since = document.visibilityState === "visible" ? performance.now() : null;
+        if (visibleMs >= VIEW_AFTER_MS) send();
+        else schedule();
+      }, Math.max(100, VIEW_AFTER_MS - visibleMs));
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") {
+        since = performance.now();
+        schedule();
+      } else {
+        if (since !== null) visibleMs += performance.now() - since;
+        since = null;
+        if (timer) clearTimeout(timer);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    if (since !== null) schedule();
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      if (timer) clearTimeout(timer);
+    };
+  }, [slug]);
+}
 const SMALL_WORDS = new Set(["and", "of", "the", "for", "&"]);
 
 /** "Haworth Tompkins" → "HT". Our own lettering, never the firm's logo. */
@@ -90,6 +161,7 @@ interface OutreachPageProps {
 }
 
 export function OutreachPage({ firm, onGetStarted, renderEmbeddedForm }: OutreachPageProps) {
+  useViewBeacon(firm.slug);
   useEffect(() => {
     document.title = `Health cover options for ${firm.firm} | ${SITE.name}`;
   }, [firm.firm]);

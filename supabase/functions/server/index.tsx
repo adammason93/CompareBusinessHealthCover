@@ -1717,6 +1717,9 @@ app.post("/make-server-2031af1c/not-interested", async (c) => {
 // contact email, and we show a staff band rather than the raw figure.
 // ---------------------------------------------------------------------------
 
+/** The one test- slug allowed to render a page and send a (TEST-labelled) view alert. */
+const OUTREACH_TEST_SLUG = "test-adam";
+
 function staffBand(count: number | null | undefined): string | null {
   if (!count || count < 1) return null;
   if (count < 10) return "fewer than 10";
@@ -1730,7 +1733,8 @@ function staffBand(count: number | null | undefined): string | null {
 app.get("/make-server-2031af1c/outreach-page", async (c) => {
   const raw = (c.req.query("slug") ?? "").trim().toLowerCase();
   const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
-  if (!OPTOUT_SLUG.test(raw) || raw.startsWith("test-")) {
+  const isTestPage = raw === OUTREACH_TEST_SLUG;
+  if (!OPTOUT_SLUG.test(raw) || (raw.startsWith("test-") && !isTestPage)) {
     return c.json({ error: "not_found" }, 404, headers);
   }
   const { data, error } = await supabase
@@ -1742,7 +1746,7 @@ app.get("/make-server-2031af1c/outreach-page", async (c) => {
     console.error("Outreach page lookup failed:", error.message);
     return c.json({ error: "lookup_failed" }, 500, headers);
   }
-  if (!data || data.page_enabled === false || await isSuppressed(raw)) {
+  if (!data || data.page_enabled === false || (!isTestPage && await isSuppressed(raw))) {
     return c.json({ error: "not_found" }, 404, headers);
   }
   return c.json(
@@ -1755,6 +1759,107 @@ app.get("/make-server-2031af1c/outreach-page", async (c) => {
     200,
     headers,
   );
+});
+
+// ---------------------------------------------------------------------------
+// "Firm opened their page" alert. The site posts here from a client-side beacon only
+// after the page has been visible in a real browser for ~2s (never on the raw GET), so
+// email security scanners and link prefetchers that just fetch the URL don't count.
+// Known bot/scanner user agents are logged but never alert. At most one alert per firm
+// per 24 hours (atomic claim in claim_outreach_page_alert). Every beacon is logged in
+// public.outreach_page_views.
+// ---------------------------------------------------------------------------
+
+const BOT_UA = /bot|crawl|spider|slurp|preview|scan|headless|phantom|puppeteer|playwright|selenium|python|curl|wget|httpclient|okhttp|java\/|go-http|axios|node-fetch|libwww|proofpoint|mimecast|barracuda|safelinks|forcepoint|symantec|messagelabs|trendmicro|sophos|fortinet|zscaler|cisco|ironport|microsoft office|outlook-ios|googleimageproxy|ggpht|yahoomailproxy|facebookexternalhit|linkedin|slack|whatsapp|telegram|discord|skype/i;
+
+function ukTimeNow(): string {
+  return new Date().toLocaleString("en-GB", {
+    timeZone: "Europe/London",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
+
+app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
+  let body: Record<string, unknown> = {};
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ ok: false }, 400);
+  }
+  const slug = String(body.slug ?? "").trim().toLowerCase();
+  if (!OPTOUT_SLUG.test(slug)) return c.json({ ok: false }, 400);
+  const isTest = slug === OUTREACH_TEST_SLUG;
+  if (slug.startsWith("test-") && !isTest) return c.json({ ok: true, alerted: false, reason: "test-slug" });
+
+  const ua = (c.req.header("user-agent") ?? "").slice(0, 300);
+  const referrer = String(body.referrer ?? "").slice(0, 300) || null;
+  const visibleMs = Number(body.visibleMs ?? 0);
+
+  const { data: firm, error } = await supabase
+    .from("outreach_contacts")
+    .select("slug, firm, sector, staff_count, phone, page_enabled")
+    .eq("slug", slug)
+    .maybeSingle();
+  if (error) {
+    console.error("Page-view lookup failed:", error.message);
+    return c.json({ ok: false }, 500);
+  }
+  if (!firm || firm.page_enabled === false || (!isTest && await isSuppressed(slug))) {
+    return c.json({ ok: false }, 404);
+  }
+
+  const log = async (alerted: boolean, skipped_reason: string | null) => {
+    const { error: logError } = await supabase
+      .from("outreach_page_views")
+      .insert({ slug, user_agent: ua || null, referrer, alerted, skipped_reason });
+    if (logError) console.error("Page-view log failed:", logError.message);
+  };
+
+  if (!ua || BOT_UA.test(ua)) {
+    await log(false, "bot-user-agent");
+    return c.json({ ok: true, alerted: false, reason: "bot" });
+  }
+  if (body.webdriver === true || !Number.isFinite(visibleMs) || visibleMs < 1500) {
+    await log(false, "automation-or-too-quick");
+    return c.json({ ok: true, alerted: false, reason: "not-a-real-view" });
+  }
+
+  const { data: claimed, error: claimError } = await supabase.rpc("claim_outreach_page_alert", { p_slug: slug });
+  if (claimError) {
+    console.error("Page-view alert claim failed:", claimError.message);
+    await log(false, "claim-failed");
+    return c.json({ ok: false }, 500);
+  }
+  if (!claimed) {
+    await log(false, "already-alerted-24h");
+    return c.json({ ok: true, alerted: false, reason: "already-alerted" });
+  }
+
+  const band = staffBand(firm.staff_count);
+  const details = [firm.sector, band ? `${band} staff` : null].filter(Boolean).join(" · ");
+  const phone = firm.phone ? String(firm.phone).replace(/\s+/g, "") : null;
+  const lines = [
+    `${isTest ? "TEST — " : ""}👀 ${firm.firm} opened their page`,
+    details || null,
+    phone ? `Call: ${phone}` : "No public number found",
+    `Page: https://comparebusinesshealthcover.co.uk/for/${slug}/`,
+    `Time: ${ukTimeNow()} UK`,
+  ].filter(Boolean);
+
+  const sent = await sendTelegramText(lines.join("\n"), "page-view");
+  if (!sent) {
+    // Give the slot back so the next real view can try again.
+    await supabase.from("outreach_page_alerts").delete().eq("slug", slug);
+    await log(false, "telegram-failed");
+    return c.json({ ok: false, alerted: false }, 502);
+  }
+  await log(true, null);
+  return c.json({ ok: true, alerted: true });
 });
 
 Deno.serve(app.fetch);
