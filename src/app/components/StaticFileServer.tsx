@@ -234,6 +234,7 @@ Crawl-delay: 5
 # Block access to admin and API areas
 Disallow: /admin-leads
 Disallow: /for/
+Disallow: /owner/
 Disallow: /api/
 Disallow: /*.json$
 

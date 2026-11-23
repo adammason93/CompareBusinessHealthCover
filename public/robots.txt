@@ -59,6 +59,7 @@ Disallow: /chatgpt-ads
 
 # Personalised outreach pages are only for the firm we emailed
 Disallow: /for/
+Disallow: /owner/
 
 Allow: /sitemap.xml
 Allow: /robots.txt

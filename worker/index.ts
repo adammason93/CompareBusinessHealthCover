@@ -139,11 +139,163 @@ async function proxyNotInterested(request: Request, url: URL): Promise<Response>
   return new Response(request.method === 'HEAD' ? null : upstream.body, { status: upstream.status, headers: out })
 }
 
+const VIEW_FUNCTION_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/outreach-page-view`
+const OWNER_IGNORE_PATH = '/owner/ignore-alerts'
+const OWNER_IGNORE_COOKIE = 'cbhc_owner_ignore=1; Max-Age=31536000; Path=/; Secure; SameSite=Lax; HttpOnly'
+const OWNER_NETWORK_ORG = /morris and sons/i
+// Keep in sync with supabase/functions/server/index.tsx.
+const DATACENTRE_OR_SCANNER_ORG =
+  /google llc|amazon(?:\s|$)|aws|microsoft(?:\s| corporation)|azure|digitalocean|hetzner|ovh|alibaba|tencent|linode|akamai|ovhcloud|huawei|oracle cloud|vultr|scaleway|contabo|m247|choopa|proofpoint|mimecast|barracuda|vipre|messagelabs|forcepoint|zscaler|sophos/i
+const SCANNER_ASN = new Set([
+  8075, // Microsoft
+  15169, 396982, // Google
+  16509, 14618, // Amazon
+  26211, 22843, // Proofpoint
+  46786, 14120, // Mimecast
+  15347, // Barracuda
+])
+const LOW_TRUST_SCORE = 15
+
+type WorkerCf = {
+  asOrganization?: string
+  asn?: number
+  country?: string
+  city?: string
+  colo?: string
+  clientTrustScore?: number
+  botManagement?: { score?: number }
+}
+
+function workerCf(request: Request): WorkerCf | null {
+  const cf = (request as Request & { cf?: WorkerCf }).cf
+  return cf && typeof cf === 'object' ? cf : null
+}
+
+function hasOwnerIgnoreCookie(request: Request): boolean {
+  return /(?:^|;\s*)cbhc_owner_ignore=1(?:;|$)/.test(request.headers.get('Cookie') ?? '')
+}
+
+function trustScoreOf(cf: WorkerCf | null): number | null {
+  const n = cf?.clientTrustScore ?? cf?.botManagement?.score
+  return typeof n === 'number' && Number.isFinite(n) ? n : null
+}
+
+/** Skip reasons the Worker can see (real Cloudflare signals + Adam's cookie). */
+function outreachViewSkipReason(request: Request): string | null {
+  if (hasOwnerIgnoreCookie(request)) return 'owner-browser'
+  const cf = workerCf(request)
+  const asOrg = typeof cf?.asOrganization === 'string' ? cf.asOrganization : ''
+  if (asOrg && OWNER_NETWORK_ORG.test(asOrg)) return 'owner-network'
+  if (asOrg && DATACENTRE_OR_SCANNER_ORG.test(asOrg)) return 'datacentre-network'
+  const asn = typeof cf?.asn === 'number' ? cf.asn : null
+  if (asn !== null && SCANNER_ASN.has(asn)) return 'scanner-asn'
+  const trust = trustScoreOf(cf)
+  if (trust !== null && trust <= LOW_TRUST_SCORE) return 'low-trust-client'
+  return null
+}
+
+function ownerIgnoreResponse(request: Request): Response {
+  const url = new URL(request.url)
+  const off = url.searchParams.get('off') === '1'
+  const cookie = off
+    ? 'cbhc_owner_ignore=; Max-Age=0; Path=/; Secure; SameSite=Lax; HttpOnly'
+    : OWNER_IGNORE_COOKIE
+  const message = off
+    ? 'This browser will get outreach page alerts again. You can close this page.'
+    : 'This browser will no longer trigger outreach page alerts. You can close this page.'
+  const clearOrSet = off
+    ? 'try{localStorage.removeItem("cbhc_owner_ignore")}catch(e){}'
+    : 'try{localStorage.setItem("cbhc_owner_ignore","1")}catch(e){}'
+  const html = `<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outreach alerts</title>
+</head>
+<body style="font-family:Georgia,serif;max-width:32rem;margin:3rem auto;padding:0 1.25rem;color:#1a1a1a;line-height:1.5">
+<p>${message}</p>
+<script>${clearOrSet}</script>
+</body>
+</html>`
+  return new Response(request.method === 'HEAD' ? null : html, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Robots-Tag': 'noindex, nofollow',
+      'Set-Cookie': cookie,
+    },
+  })
+}
+
+async function proxyOutreachPageView(request: Request): Promise<Response> {
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: { 'Access-Control-Allow-Origin': request.headers.get('Origin') ?? '', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Credentials': 'true' },
+    })
+  }
+  if (request.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST, OPTIONS' } })
+  }
+  let body: Record<string, unknown> = {}
+  try {
+    body = (await request.json()) as Record<string, unknown>
+  } catch {
+    return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'Content-Type': 'application/json' } })
+  }
+  const cf = workerCf(request)
+  const payload = {
+    ...body,
+    ip: request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Real-IP') ?? undefined,
+    asOrg: cf?.asOrganization ?? undefined,
+    asn: typeof cf?.asn === 'number' ? cf.asn : undefined,
+    country: cf?.country ?? undefined,
+    city: cf?.city ?? undefined,
+    colo: cf?.colo ?? undefined,
+    trustScore: trustScoreOf(cf),
+    forceSkip: outreachViewSkipReason(request) ?? undefined,
+  }
+  const upstream = await fetch(VIEW_FUNCTION_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${publicAnonKey}`,
+      apikey: publicAnonKey,
+      'User-Agent': request.headers.get('User-Agent') ?? '',
+    },
+    body: JSON.stringify(payload),
+  })
+  const out = new Headers()
+  out.set('Content-Type', upstream.headers.get('Content-Type') ?? 'application/json')
+  out.set('Cache-Control', 'no-store')
+  return new Response(upstream.body, { status: upstream.status, headers: out })
+}
+
+function withOwnerIgnoreCookie(request: Request, response: Response): Response {
+  if (!OWNER_NETWORK_ORG.test(workerCf(request)?.asOrganization ?? '')) return response
+  if (hasOwnerIgnoreCookie(request)) return response
+  const headers = new Headers(response.headers)
+  headers.append('Set-Cookie', OWNER_IGNORE_COOKIE)
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const requestUrl = new URL(request.url)
     if (normalizePathname(requestUrl.pathname) === '/not-interested') {
       return proxyNotInterested(request, requestUrl)
+    }
+    if (normalizePathname(requestUrl.pathname) === OWNER_IGNORE_PATH) {
+      if (request.method !== 'GET' && request.method !== 'HEAD') {
+        return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } })
+      }
+      return ownerIgnoreResponse(request)
+    }
+    if (normalizePathname(requestUrl.pathname) === '/outreach-page-view') {
+      return proxyOutreachPageView(request)
     }
 
     if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -171,7 +323,10 @@ export default {
       headers.set('Content-Type', 'text/html; charset=utf-8')
       headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
       headers.set('X-Robots-Tag', 'noindex, nofollow')
-      return new Response(request.method === 'HEAD' ? null : spa.body, { status: spa.ok ? 200 : spa.status, headers })
+      return withOwnerIgnoreCookie(
+        request,
+        new Response(request.method === 'HEAD' ? null : spa.body, { status: spa.ok ? 200 : spa.status, headers }),
+      )
     }
 
     if (!hasStaticAssetExtension(normalizedPath)) {
