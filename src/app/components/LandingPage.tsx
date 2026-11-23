@@ -2,7 +2,6 @@ import { Shield, Check, Star, ArrowRight, ChevronDown, ChevronUp, Heart, Home as
 import { Button } from "@/app/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
 import { GeoGuideBody } from "@/app/components/GeoGuidePage";
@@ -23,7 +22,6 @@ const STICKY_BANNER_MINIMIZED_KEY = "cbhc_sticky_quote_minimized";
 
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [benefitModalOpen, setBenefitModalOpen] = useState<string | null>(null);
   const [showStickyBanner, setShowStickyBanner] = useState(false);
   const [stickyBannerMinimized, setStickyBannerMinimized] = useState(() => {
@@ -301,12 +299,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                     <Phone className="w-4 h-4" aria-hidden />
                     {SITE.phoneDisplay}
                   </a>
-                  <button 
-                    onClick={() => setIsContactModalOpen(true)}
-                    className="button-hover-animate border-2 border-white text-white hover:bg-white/15 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-black/20 backdrop-blur-[2px]"
-                  >
-                    Get in touch
-                  </button>
                 </div>
               </div>
             </div>
@@ -754,12 +746,6 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
 
       {/* Footer */}
       <Footer onNavigate={onNavigate} />
-
-      {/* Contact Form Modal */}
-      <ContactFormModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)}
-      />
 
       {/* Benefit Details Modal */}
       {benefitModalOpen && (
