@@ -9,8 +9,8 @@
   --brand-navy-dark: #174A3A;
   --brand-navy-deeper: #123528;
   --brand-navy-strip: #1A5240;
-  --brand-teal: #48C774;
-  --brand-teal-hover: #3DB866;
+  --brand-teal: #157A3C;
+  --brand-teal-hover: #116332;
   --brand-teal-soft: #3FAF78;
   --brand-teal-light: #9DC8B3;
   --brand-teal-muted: #E8F2ED;
@@ -151,7 +151,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   /**

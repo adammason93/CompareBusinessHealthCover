@@ -1,9 +1,10 @@
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { useState, useEffect, useRef, memo } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { BusinessCoverNavMenu } from "@/app/components/BusinessCoverNavMenu";
 import { Logo } from "@/app/components/Logo";
 import { BUSINESS_COVER_NAV_LABEL } from "@/app/config/navigation";
+import { SITE, telHref } from "@/app/config/site";
 
 interface HeaderProps {
   onGetStarted: () => void;
@@ -98,6 +99,13 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               >
                 Contact Us
               </button>
+              <a
+                href={telHref()}
+                className="text-white font-semibold whitespace-nowrap hover:text-brand-teal-light py-2 inline-flex items-center gap-2"
+              >
+                <Phone className="w-4 h-4" aria-hidden />
+                {SITE.phoneDisplay}
+              </a>
               <button
                 onClick={onGetStarted}
                 className={`bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full font-semibold whitespace-nowrap shadow-md transition-all duration-200 ${
@@ -108,19 +116,36 @@ export const Header = memo(function Header({ onGetStarted, onNavigate }: HeaderP
               </button>
             </nav>
 
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-white/80 hover:text-brand-teal-light p-2"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            <div className="flex items-center gap-1 lg:hidden">
+              <a
+                href={telHref()}
+                className="inline-flex items-center gap-1.5 text-white font-semibold px-2 py-2 text-sm whitespace-nowrap hover:text-brand-teal-light"
+                aria-label={`Call ${SITE.phoneDisplay}`}
+              >
+                <Phone className="w-4 h-4" aria-hidden />
+                {SITE.phoneDisplay}
+              </a>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-white/80 hover:text-brand-teal-light p-2"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
         {mobileMenuOpen && (
           <div className="lg:hidden bg-brand-navy-dark border-t border-brand-teal/20">
             <div className="px-4 py-6 space-y-4 max-h-[80vh] overflow-y-auto">
+              <a
+                href={telHref()}
+                className="flex items-center gap-2 text-white font-semibold py-2"
+              >
+                <Phone className="w-5 h-5" aria-hidden />
+                {SITE.phoneDisplay}
+              </a>
               <div>
                 <button
                   onClick={() => setCoverDropdownOpen(!coverDropdownOpen)}

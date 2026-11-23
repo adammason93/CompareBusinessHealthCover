@@ -17,11 +17,20 @@ interface HomeBlogSectionProps {
   onNavigate: (page: string) => void;
 }
 
+/** The deployed Edge Function does not currently expose GET /blog/posts (it 404s).
+ *  Keep this false so the ads landing page does not request a missing endpoint.
+ *  Turn it back on once the blog API is deployed. */
+const HOME_BLOG_API_ENABLED = false;
+
 export function HomeBlogSection({ onNavigate }: HomeBlogSectionProps) {
   const [posts, setPosts] = useState<TeaserPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(HOME_BLOG_API_ENABLED);
+
 
   useEffect(() => {
+    if (!HOME_BLOG_API_ENABLED) {
+      return;
+    }
     let cancelled = false;
     (async () => {
       try {
@@ -45,7 +54,7 @@ export function HomeBlogSection({ onNavigate }: HomeBlogSectionProps) {
     };
   }, []);
 
-  if (!loading && posts.length === 0) {
+  if (!HOME_BLOG_API_ENABLED || (!loading && posts.length === 0)) {
     return null;
   }
 

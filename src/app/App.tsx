@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { LandingPage } from "@/app/components/LandingPage";
-import { EnhancedMultiStepForm } from "@/app/components/EnhancedMultiStepForm";
+import { QuoteForm } from "@/app/components/QuoteForm";
 import { SuccessPage } from "@/app/components/SuccessPage";
-import { EmbeddedForm } from "@/app/components/EmbeddedForm";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { AuthModal } from "@/app/components/AuthModal";
@@ -28,6 +27,7 @@ import { getSEOConfig } from "@/app/config/seo";
 import { SITE, canonicalPageUrl } from "@/app/config/site";
 import { captureLeadAttributionFromLocation, leadAttributionPayload } from "@/app/config/tracking";
 import { measureLeadCreated } from "@/app/config/openaiPixel";
+import { pushLeadSubmittedApp } from "@/app/config/analytics";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
 
 /** `/blog-admin/` must match `blog-admin` (hosts often normalize with a trailing slash). */
@@ -35,6 +35,8 @@ function routeKeyFromPathname(pathname: string): string {
   const key = pathname.replace(/^\//, "").replace(/^index\.html$/i, "").replace(/\/+$/, "");
   if (key === "terms-and-conditions") return "terms-conditions";
   if (key === "providers") return "small-business-health-insurance-providers";
+  if (key === "privacy") return "privacy-policy";
+  if (key === "contact") return "contact-us";
   return key;
 }
 
@@ -245,6 +247,11 @@ export default function App() {
 
   const handleGetStarted = () => {
     setSubmitError(null);
+    const embedded = document.getElementById("quote-form");
+    if (embedded) {
+      embedded.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     setIsFormOpen(true);
   };
 
@@ -297,6 +304,10 @@ export default function App() {
       }
       setConfirmationEmailSent(result?.emailSent !== false);
       measureLeadCreated();
+      pushLeadSubmittedApp({
+        leadType: "quote",
+        referenceNumber: result?.referenceNumber ?? null,
+      });
       if (typeof window !== 'undefined') {
         localStorage.removeItem('businessHealthFormDraft');
       }
@@ -327,6 +338,8 @@ export default function App() {
   const handleNavigate = (page: string) => {
     let target = page.replace(/^\/+|\/+$/g, "") || "home";
     if (target === "terms-and-conditions") target = "terms-conditions";
+    if (target === "privacy") target = "privacy-policy";
+    if (target === "contact") target = "contact-us";
     setCurrentPage(target);
     window.history.pushState({ page: target }, "", pathForPage(target));
     requestAnimationFrame(() => {
@@ -367,7 +380,14 @@ export default function App() {
 
   const renderEmbeddedForm = () => {
     return (
-      <EmbeddedForm onSubmit={handleFormSubmit} onBack={handleBackToLanding} />
+      <QuoteForm
+        variant="embedded"
+        onSubmit={handleFormSubmit}
+        onBack={handleBackToLanding}
+        isSubmitting={isSubmitting}
+        submitError={submitError}
+        onNavigate={handleNavigate}
+      />
     );
   };
 
@@ -390,6 +410,7 @@ export default function App() {
           slug={currentPage}
           onGetStarted={handleGetStarted}
           onNavigate={handleNavigate}
+          renderEmbeddedForm={renderEmbeddedForm}
         />
       );
     }
@@ -503,11 +524,13 @@ export default function App() {
           className="!fixed !inset-x-2 !top-2 !bottom-2 !left-2 !right-2 !translate-x-0 !translate-y-0 !max-w-none !w-auto !h-auto max-h-[calc(100dvh-1rem)] sm:!inset-auto sm:!top-[50%] sm:!left-[50%] sm:!bottom-auto sm:!right-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:!max-w-[75vw] sm:!w-[75vw] sm:!h-[85vh] overflow-hidden !p-0 bg-white rounded-xl"
         >
           <div className="h-full max-h-[calc(100dvh-1rem)] sm:max-h-[85vh] overflow-y-auto overscroll-contain">
-            <EnhancedMultiStepForm
+            <QuoteForm
+              variant="modal"
               onSubmit={handleFormSubmit}
               onBack={handleBackToLanding}
               isSubmitting={isSubmitting}
               submitError={submitError}
+              onNavigate={handleNavigate}
             />
           </div>
         </DialogContent>

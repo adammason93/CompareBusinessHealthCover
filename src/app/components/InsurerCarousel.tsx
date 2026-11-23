@@ -6,27 +6,27 @@ import "slick-carousel/slick/slick-theme.css";
 const insurers = [
   {
     name: "Aviva",
-    logo: "/images/insurers/aviva.png",
+    logo: "/images/insurers/aviva.webp",
     description: "Trusted UK insurer for business and employee health cover",
   },
   {
     name: "AXA",
-    logo: "/images/insurers/axa.png",
+    logo: "/images/insurers/axa.webp",
     description: "Comprehensive private medical insurance for UK companies",
   },
   {
     name: "Vitality",
-    logo: "/images/insurers/vitality.png",
+    logo: "/images/insurers/vitality.webp",
     description: "Health cover that rewards healthier living for your team",
   },
   {
     name: "Bupa",
-    logo: "/images/insurers/bupa-v2.png",
+    logo: "/images/insurers/bupa-v2.webp",
     description: "Leading healthcare provider with strong business schemes",
   },
   {
     name: "WPA",
-    logo: "/images/insurers/wpa.png",
+    logo: "/images/insurers/wpa.webp",
     description: "Specialist health insurance for businesses of all sizes",
   },
 ];

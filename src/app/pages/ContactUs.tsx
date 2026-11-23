@@ -54,6 +54,7 @@ export function ContactUs({ onGetStarted }: ContactUsProps) {
 
       setSubmitSuccess(true);
       measureLeadCreated();
+      pushLeadSubmittedApp({ leadType: "contact" });
       setFormData({
         name: "",
         email: "",

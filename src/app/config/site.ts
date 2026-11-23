@@ -9,6 +9,8 @@ export const SITE = {
   noreply: 'noreply@comparebusinesshealthcover.co.uk',
   phone: '01484 773038',
   phoneDisplay: '01484 773038',
+  /** Digits only, for tel: links */
+  phoneTel: '01484773038',
   twitterHandle: '@CompareBizHealth',
   defaultImage: 'https://comparebusinesshealthcover.co.uk/og-image.jpg',
   themeColor: '#1E5E4A',
@@ -29,4 +31,8 @@ export function mailto(email = SITE.email) {
 
 export function emailFrom(displayName = SITE.name) {
   return `${displayName} <${SITE.noreply}>`;
+}
+
+export function telHref(phone: string = SITE.phoneTel): string {
+  return `tel:${phone.replace(/\s/g, "")}`;
 }

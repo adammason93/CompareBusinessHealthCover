@@ -24,17 +24,19 @@ const aspectRatio = `${LOGO.width} / ${LOGO.height}`;
 
 export const Logo = memo(function Logo({ className = '', onClick, size = 'md' }: LogoProps) {
   const image = (
-    <img
-      src={LOGO.src}
-      alt={SITE.name}
-      data-logo
-      className={`block shrink-0 object-contain object-left ${sizes[size]} ${className}`}
-      style={{ aspectRatio }}
-      width={LOGO.width}
-      height={LOGO.height}
-      fetchPriority="high"
-      decoding="async"
-    />
+    <picture>
+      <source type="image/webp" srcSet={LOGO.srcSetWebp} sizes="(max-width: 640px) 192px, 288px" />
+      <img
+        src={LOGO.srcPng}
+        alt={SITE.name}
+        data-logo
+        className={`block shrink-0 object-contain object-left ${sizes[size]} ${className}`}
+        style={{ aspectRatio }}
+        width={LOGO.width}
+        height={LOGO.height}
+        decoding="async"
+      />
+    </picture>
   );
 
   if (onClick) {

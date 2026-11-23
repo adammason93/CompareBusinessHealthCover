@@ -1,4 +1,5 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
+import { SITE, telHref } from "@/app/config/site";
 import { Button } from "@/app/components/ui/button";
 import { getGeoGuide } from "@/app/content/geo-guides.mjs";
 
@@ -6,6 +7,7 @@ interface GeoGuidePageProps {
   slug: string;
   onGetStarted: () => void;
   onNavigate?: (page: string) => void;
+  renderEmbeddedForm?: () => JSX.Element;
 }
 
 export function GeoGuideBody({
@@ -111,7 +113,7 @@ export function GeoGuideBody({
   );
 }
 
-export function GeoGuidePage({ slug, onGetStarted, onNavigate }: GeoGuidePageProps) {
+export function GeoGuidePage({ slug, onGetStarted, onNavigate, renderEmbeddedForm }: GeoGuidePageProps) {
   const guide = getGeoGuide(slug);
   if (!guide) return null;
 
@@ -126,15 +128,41 @@ export function GeoGuidePage({ slug, onGetStarted, onNavigate }: GeoGuidePagePro
               Written by Compare Business Healthcover · Last reviewed {guide.lastReviewed}
             </p>
           ) : null}
-          <Button
-            size="lg"
-            onClick={onGetStarted}
-            className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-8 py-6 text-lg"
-          >
-            Get an SME quote <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+            <Button
+              size="lg"
+              onClick={onGetStarted}
+              className="bg-brand-teal hover:bg-brand-teal-hover text-white rounded-full px-8 py-6 text-lg"
+            >
+              Get an SME quote <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+            <a
+              href={telHref()}
+              className="inline-flex items-center justify-center gap-2 text-white font-semibold text-lg hover:underline"
+            >
+              <Phone className="w-5 h-5" aria-hidden />
+              {SITE.phoneDisplay}
+            </a>
+          </div>
         </div>
       </section>
+      {renderEmbeddedForm ? (
+        <section id="quote-form" className="bg-brand-surface py-8 sm:py-10 scroll-mt-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Start a free SME quote</h2>
+            <p className="text-gray-600 text-center mb-6 text-sm">
+              A few short questions. Prefer to talk? Call{" "}
+              <a href={telHref()} className="font-semibold text-brand-navy underline">
+                {SITE.phoneDisplay}
+              </a>
+              .
+            </p>
+            <div className="bg-white rounded-2xl shadow-lg p-3 sm:p-6">
+              {renderEmbeddedForm()}
+            </div>
+          </div>
+        </section>
+      ) : null}
       <div className="bg-white">
         <GeoGuideBody slug={slug} onNavigate={onNavigate} />
       </div>
