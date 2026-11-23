@@ -11,6 +11,7 @@ import { CookieManager } from "@/app/components/CookieManager";
 import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
 import { ContactUs } from "@/app/pages/ContactUs";
 import { GeoGuidePage } from "@/app/components/GeoGuidePage";
+import { OutreachPage, useOutreachFirm } from "@/app/components/OutreachPage";
 import { getGeoGuide } from "@/app/content/geo-guides.mjs";
 import { PrivacyPolicy } from "@/app/pages/PrivacyPolicy";
 import { TermsConditions } from "@/app/pages/TermsConditions";
@@ -141,6 +142,28 @@ function clearQuoteSubmissionId() {
   } catch {
     // Ignore storage errors
   }
+}
+
+function OutreachRoute({
+  slug,
+  onGetStarted,
+  renderEmbeddedForm,
+  onMissing,
+}: {
+  slug: string;
+  onGetStarted: () => void;
+  renderEmbeddedForm: (initialCompanyName?: string) => JSX.Element;
+  onMissing: () => void;
+}) {
+  const { firm, status } = useOutreachFirm(slug);
+  useEffect(() => {
+    if (status === "missing") onMissing();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+  if (!firm) {
+    return <div className="min-h-[70vh] section-hero" aria-busy="true" />;
+  }
+  return <OutreachPage firm={firm} onGetStarted={onGetStarted} renderEmbeddedForm={renderEmbeddedForm} />;
 }
 
 export default function App() {
@@ -378,10 +401,11 @@ export default function App() {
     setIsSubmissionsOpen(true);
   };
 
-  const renderEmbeddedForm = () => {
+  const renderEmbeddedForm = (initialCompanyName?: string) => {
     return (
       <QuoteForm
         variant="embedded"
+        initialCompanyName={initialCompanyName}
         onSubmit={handleFormSubmit}
         onBack={handleBackToLanding}
         isSubmitting={isSubmitting}
@@ -402,6 +426,22 @@ export default function App() {
     if (currentPage.startsWith('static/')) {
       const fileName = currentPage.replace('static/', '');
       return <StaticFileServer fileName={fileName} />;
+    }
+
+    const outreachSlug = /^for\/([a-z0-9][a-z0-9-]{0,79})$/i.exec(currentPage)?.[1];
+    if (outreachSlug) {
+      return (
+        <OutreachRoute
+          slug={outreachSlug.toLowerCase()}
+          onGetStarted={handleGetStarted}
+          renderEmbeddedForm={renderEmbeddedForm}
+          onMissing={() => {
+            // Unknown or switched-off firm: fall back to the normal homepage, keeping UTMs.
+            window.history.replaceState({ page: 'home' }, '', `/${window.location.search}`);
+            setCurrentPage('home');
+          }}
+        />
+      );
     }
 
     if (currentPage !== 'contact-us' && getGeoGuide(currentPage)) {

@@ -162,6 +162,16 @@ export default {
 
     const normalizedPath = normalizePathname(original.pathname)
 
+    // Personalised outreach pages (/for/<slug>) are the SPA, but never indexed or followed.
+    if (/^\/for\/[^/]+$/i.test(normalizedPath)) {
+      const spa = await env.STATIC.fetch(new Request(new URL('/index.html', original.origin), request))
+      const headers = new Headers(spa.headers)
+      headers.set('Content-Type', 'text/html; charset=utf-8')
+      headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+      headers.set('X-Robots-Tag', 'noindex, nofollow')
+      return new Response(request.method === 'HEAD' ? null : spa.body, { status: spa.ok ? 200 : spa.status, headers })
+    }
+
     if (!hasStaticAssetExtension(normalizedPath)) {
       const prerendered = await fetchPrerenderedHtml(request, env, original.origin, normalizedPath)
       if (prerendered) return prerendered

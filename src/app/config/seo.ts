@@ -154,6 +154,16 @@ export const SEO_CONFIG = {
 };
 
 export function getSEOConfig(page: string) {
+  // Personalised outreach pages are only for the firm we emailed: keep them out of search.
+  if (page.startsWith('for/')) {
+    return {
+      title: `Health cover options for your business | ${SITE.name}`,
+      description:
+        'A short overview of group private medical insurance and how our free introduction to an FCA-regulated broker works.',
+      keywords: '',
+      noindex: true,
+    };
+  }
   if (page.startsWith('blog/') && page !== 'blog') {
     return SEO_CONFIG.pages.blog;
   }
