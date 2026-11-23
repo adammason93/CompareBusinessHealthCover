@@ -7,6 +7,7 @@ export type LeadAttribution = {
   utmSource?: string;
   utmMedium?: string;
   utmCampaign?: string;
+  utmContent?: string;
   landingPath?: string;
   landingUrl?: string;
   referrer?: string;
@@ -76,18 +77,22 @@ export function captureLeadAttributionFromLocation(
   search = window.location.search,
   referrer = document.referrer,
 ): LeadAttribution | null {
-  const existing = getLeadAttribution();
-  if (existing) return existing;
-
   const path = routeKeyFromPathname(pathname).toLowerCase();
   const params = new URLSearchParams(search);
+
+  // A personalised outreach page (/for/<slug>) always wins: the visitor came from our email.
+  const outreachSlug = /^for\/([a-z0-9][a-z0-9-]{0,79})$/.exec(path)?.[1];
+  const existing = getLeadAttribution();
+  if (existing && !(outreachSlug && existing.source !== "outreach-page")) return existing;
 
   const utmSource = (params.get("utm_source") || "").trim();
   const utmMedium = (params.get("utm_medium") || "").trim();
   const utmCampaign = (params.get("utm_campaign") || "").trim();
+  const utmContent = (params.get("utm_content") || "").trim().slice(0, 80);
   const srcParam = (params.get("src") || params.get("source") || "").trim();
 
-  let source: string | undefined = PATH_SOURCE_MAP[path];
+  let source: string | undefined = outreachSlug ? "outreach-page" : PATH_SOURCE_MAP[path];
+  if (!source && utmMedium.toLowerCase() === "outreach") source = "Email outreach";
   if (!source) source = sourceFromHint(utmSource || srcParam);
   if (!source && utmMedium.toLowerCase() === "cpc") source = "PPC";
   if (!source) source = sourceFromReferrer(referrer);
@@ -98,6 +103,7 @@ export function captureLeadAttributionFromLocation(
     utmSource: utmSource || undefined,
     utmMedium: utmMedium || undefined,
     utmCampaign: utmCampaign || undefined,
+    utmContent: utmContent || outreachSlug || undefined,
     landingPath: path || "/",
     landingUrl: `${pathname}${search}`.slice(0, 500),
     referrer: referrer ? referrer.slice(0, 500) : undefined,
@@ -113,6 +119,7 @@ export function leadAttributionPayload(): {
   utmSource?: string;
   utmMedium?: string;
   utmCampaign?: string;
+  utmContent?: string;
   landingPath?: string;
   landingUrl?: string;
   referrer?: string;
@@ -124,6 +131,7 @@ export function leadAttributionPayload(): {
     utmSource: attr.utmSource,
     utmMedium: attr.utmMedium,
     utmCampaign: attr.utmCampaign,
+    utmContent: attr.utmContent,
     landingPath: attr.landingPath,
     landingUrl: attr.landingUrl,
     referrer: attr.referrer,

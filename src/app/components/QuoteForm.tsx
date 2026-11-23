@@ -38,6 +38,8 @@ interface QuoteFormProps {
   /** Tighter layout when the form sits on a landing page rather than in the modal. */
   variant?: "modal" | "embedded";
   onNavigate?: (page: string) => void;
+  /** Prefill the company name (personalised outreach pages). */
+  initialCompanyName?: string;
 }
 
 const TITLE_LABELS: Record<string, string> = {
@@ -79,6 +81,7 @@ export function QuoteForm({
   submitError = null,
   variant = "modal",
   onNavigate,
+  initialCompanyName,
 }: QuoteFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -91,6 +94,7 @@ export function QuoteForm({
     mode: "onChange",
     defaultValues: {
       ...readFormDraft(),
+      ...(initialCompanyName ? { companyName: initialCompanyName } : {}),
       compareType: "sme-health",
     },
   });

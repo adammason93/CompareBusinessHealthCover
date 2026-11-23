@@ -967,7 +967,7 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
                 ${formData.source ? `<tr><td style="padding: 8px 0; font-weight: bold;">Lead source:</td><td style="padding: 8px 0;">${formData.source}</td></tr>` : ""}
                 ${formData.referrer ? `<tr><td style="padding: 8px 0; font-weight: bold;">Referrer:</td><td style="padding: 8px 0;">${formData.referrer}</td></tr>` : ""}
                 ${formData.landingUrl || formData.landingPath ? `<tr><td style="padding: 8px 0; font-weight: bold;">Landing:</td><td style="padding: 8px 0;">${formData.landingUrl || formData.landingPath}</td></tr>` : ""}
-                ${formData.utmSource || formData.utmCampaign ? `<tr><td style="padding: 8px 0; font-weight: bold;">UTM:</td><td style="padding: 8px 0;">${[formData.utmSource, formData.utmMedium, formData.utmCampaign].filter(Boolean).join(" / ")}</td></tr>` : ""}
+                ${formData.utmSource || formData.utmCampaign ? `<tr><td style="padding: 8px 0; font-weight: bold;">UTM:</td><td style="padding: 8px 0;">${[formData.utmSource, formData.utmMedium, formData.utmCampaign, formData.utmContent].filter(Boolean).join(" / ")}</td></tr>` : ""}
               </table>
               <h3 style="color: #26B4AF; margin-top: 0;">Personal Details</h3>
               <table style="width: 100%; border-collapse: collapse;">
@@ -1092,7 +1092,7 @@ Source Website: ${sourceWebsite}
 ${formData.source ? `Lead source: ${formData.source}` : ""}
 ${formData.referrer ? `Referrer: ${formData.referrer}` : ""}
 ${formData.landingUrl || formData.landingPath ? `Landing: ${formData.landingUrl || formData.landingPath}` : ""}
-${formData.utmSource || formData.utmCampaign ? `UTM: ${[formData.utmSource, formData.utmMedium, formData.utmCampaign].filter(Boolean).join(" / ")}` : ""}
+${formData.utmSource || formData.utmCampaign ? `UTM: ${[formData.utmSource, formData.utmMedium, formData.utmCampaign, formData.utmContent].filter(Boolean).join(" / ")}` : ""}
 
 PERSONAL DETAILS
 Name: ${formData.title || ""} ${formData.firstName} ${formData.lastName || ""}
@@ -1465,6 +1465,7 @@ app.get("/make-server-2031af1c/admin/leads", async (c) => {
         referrer: submission.referrer || '',
         utmSource: submission.utmSource || '',
         utmCampaign: submission.utmCampaign || '',
+        utmContent: submission.utmContent || '',
         premiumValue: submission.premiumValue || '',
         commissionPaid: submission.commissionPaid || '',
         policyStartDate: submission.policyStartDate || '',
@@ -1707,6 +1708,53 @@ app.post("/make-server-2031af1c/not-interested", async (c) => {
   }
 
   return OPTOUT_DONE_PAGE();
+});
+
+// ---------------------------------------------------------------------------
+// Personalised outreach pages: https://comparebusinesshealthcover.co.uk/for/<slug>
+// The site fetches one firm's public page facts here. Unknown, switched-off or opted-out
+// slugs return 404 so the site falls back to the normal homepage. We never return the
+// contact email, and we show a staff band rather than the raw figure.
+// ---------------------------------------------------------------------------
+
+function staffBand(count: number | null | undefined): string | null {
+  if (!count || count < 1) return null;
+  if (count < 10) return "under 10";
+  if (count < 25) return "10 to 24";
+  if (count < 50) return "25 to 49";
+  if (count < 100) return "50 to 99";
+  if (count < 250) return "100 to 249";
+  return "250 or more";
+}
+
+app.get("/make-server-2031af1c/outreach-page", async (c) => {
+  const raw = (c.req.query("slug") ?? "").trim().toLowerCase();
+  const headers = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
+  if (!OPTOUT_SLUG.test(raw) || raw.startsWith("test-")) {
+    return c.json({ error: "not_found" }, 404, headers);
+  }
+  const { data, error } = await supabase
+    .from("outreach_contacts")
+    .select("slug, firm, sector, staff_count, page_enabled")
+    .eq("slug", raw)
+    .maybeSingle();
+  if (error) {
+    console.error("Outreach page lookup failed:", error.message);
+    return c.json({ error: "lookup_failed" }, 500, headers);
+  }
+  if (!data || data.page_enabled === false || await isSuppressed(raw)) {
+    return c.json({ error: "not_found" }, 404, headers);
+  }
+  return c.json(
+    {
+      slug: data.slug,
+      firm: data.firm,
+      sector: data.sector ?? null,
+      staffBand: staffBand(data.staff_count),
+    },
+    200,
+    headers,
+  );
 });
 
 Deno.serve(app.fetch);
