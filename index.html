@@ -114,13 +114,13 @@
     <meta name="theme-color" content="#1E5E4A" />
     
     <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" />
 
-    <!-- Poppins: stylesheet in <head> (not CSS @import) so display=swap can start earlier -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
+    <!-- Self-hosted Poppins (latin). Preload the weights used in the header and hero so they
+         start with the document instead of waiting for CSS. -->
+    <link rel="preload" href="/fonts/poppins-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-latin-800.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- LCP image for the homepage hero (ads land here). Small WebP; srcset for larger screens. -->
     <link
