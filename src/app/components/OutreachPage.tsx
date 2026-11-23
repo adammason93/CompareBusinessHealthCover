@@ -171,6 +171,31 @@ export function OutreachPage({ firm, onGetStarted, renderEmbeddedForm }: Outreac
         </div>
       </section>
 
+      <section className="bg-brand-surface">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 pb-6">
+          <p className="text-gray-700 text-lg leading-relaxed text-center">
+            Answer a few short questions below and we'll introduce {firm.firm} to an FCA-regulated broker, who can talk
+            you through group health cover options. It's free, and there's no obligation.
+          </p>
+        </div>
+      </section>
+
+      <section id="quote-form" className="bg-brand-surface pb-10 sm:pb-12 scroll-mt-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Start a free enquiry for {firm.firm}</h2>
+          <p className="text-gray-600 text-center mb-6 text-sm">
+            A few short questions. Prefer to talk? Call{" "}
+            <a href={telHref()} className="font-semibold text-brand-navy underline">
+              {SITE.phoneDisplay}
+            </a>
+            .
+          </p>
+          <div className="bg-white rounded-2xl shadow-lg p-3 sm:p-6 border border-gray-100">
+            {renderEmbeddedForm(firm.firm)}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-800">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">What group cover can look like for your team</h2>
@@ -192,7 +217,7 @@ export function OutreachPage({ firm, onGetStarted, renderEmbeddedForm }: Outreac
         </div>
       </section>
 
-      <section className="bg-brand-surface">
+      <section className="bg-brand-surface border-t border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">How the free introduction works</h2>
           <ol className="grid gap-4 sm:grid-cols-3">
@@ -216,21 +241,6 @@ export function OutreachPage({ firm, onGetStarted, renderEmbeddedForm }: Outreac
         </div>
       </section>
 
-      <section id="quote-form" className="bg-white py-10 scroll-mt-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Start a free enquiry for {firm.firm}</h2>
-          <p className="text-gray-600 text-center mb-6 text-sm">
-            A few short questions. Prefer to talk? Call{" "}
-            <a href={telHref()} className="font-semibold text-brand-navy underline">
-              {SITE.phoneDisplay}
-            </a>
-            .
-          </p>
-          <div className="bg-white rounded-2xl shadow-lg p-3 sm:p-6 border border-gray-100">
-            {renderEmbeddedForm(firm.firm)}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
