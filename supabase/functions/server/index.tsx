@@ -1719,7 +1719,7 @@ app.post("/make-server-2031af1c/not-interested", async (c) => {
 
 function staffBand(count: number | null | undefined): string | null {
   if (!count || count < 1) return null;
-  if (count < 10) return "under 10";
+  if (count < 10) return "fewer than 10";
   if (count < 25) return "10 to 24";
   if (count < 50) return "25 to 49";
   if (count < 100) return "50 to 99";
