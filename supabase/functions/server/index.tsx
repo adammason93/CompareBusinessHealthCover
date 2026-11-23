@@ -79,7 +79,7 @@ async function sendTelegramText(text: string, label: string): Promise<boolean> {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text }),
+      body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
       signal: controller.signal,
     });
     if (!res.ok) {
@@ -518,6 +518,7 @@ Crawl-delay: 5
 
 # Block access to admin and API areas
 Disallow: /admin-leads
+Disallow: /for/
 Disallow: /api/
 Disallow: /*.json$
 
@@ -1763,14 +1764,41 @@ app.get("/make-server-2031af1c/outreach-page", async (c) => {
 
 // ---------------------------------------------------------------------------
 // "Firm opened their page" alert. The site posts here from a client-side beacon only
-// after the page has been visible in a real browser for ~2s (never on the raw GET), so
-// email security scanners and link prefetchers that just fetch the URL don't count.
-// Known bot/scanner user agents are logged but never alert. At most one alert per firm
-// per 24 hours (atomic claim in claim_outreach_page_alert). Every beacon is logged in
-// public.outreach_page_views.
+// after the page has been visible in a real browser for ~2s and the visitor has
+// interacted, or after ~10s visible (never on the raw GET), so email scanners and
+// link prefetchers that just fetch the URL don't count.
+// Known bot/scanner user agents, impossible spoofed UAs (e.g. legacy Edge/12 with
+// modern Chrome), low Cloudflare trust scores, and common cloud-datacentre networks
+// are logged but never alert. At most one alert per firm per 24 hours (atomic claim
+// in claim_outreach_page_alert). Every beacon is logged in public.outreach_page_views.
 // ---------------------------------------------------------------------------
 
 const BOT_UA = /bot|crawl|spider|slurp|preview|scan|headless|phantom|puppeteer|playwright|selenium|python|curl|wget|httpclient|okhttp|java\/|go-http|axios|node-fetch|libwww|proofpoint|mimecast|barracuda|safelinks|forcepoint|symantec|messagelabs|trendmicro|sophos|fortinet|zscaler|cisco|ironport|microsoft office|outlook-ios|googleimageproxy|ggpht|yahoomailproxy|facebookexternalhit|linkedin|slack|whatsapp|telegram|discord|skype/i;
+
+// Legacy EdgeHTML used "Edge/12"–"Edge/18". Chromium Edge uses "Edg/". No real
+// browser still sends the old token, and the widely copied "Chrome/125 … Edge/12.246"
+// string is a known spoof.
+const LEGACY_EDGE_UA = /\bEdge\//i;
+const DATACENTRE_ORG =
+  /google llc|amazon(?:\s|$)|aws|microsoft(?:\s| corporation)|azure|digitalocean|hetzner|ovh|alibaba|tencent|linode|akamai|ovhcloud|huawei|oracle cloud|vultr|scaleway|contabo|m247|choopa/i;
+const LOW_TRUST_SCORE = 15;
+const MIN_VISIBLE_MS = 1500;
+const MIN_VISIBLE_WITHOUT_INTERACTION_MS = 10000;
+
+type RequestCf = {
+  clientTrustScore?: number;
+  asOrganization?: string;
+  country?: string;
+};
+
+function requestCf(req: Request): RequestCf | null {
+  const cf = (req as Request & { cf?: RequestCf }).cf;
+  return cf && typeof cf === "object" ? cf : null;
+}
+
+function isBotOrSpoofedUa(ua: string): boolean {
+  return !ua || BOT_UA.test(ua) || LEGACY_EDGE_UA.test(ua);
+}
 
 function ukTimeNow(): string {
   return new Date().toLocaleString("en-GB", {
@@ -1799,6 +1827,10 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
   const ua = (c.req.header("user-agent") ?? "").slice(0, 300);
   const referrer = String(body.referrer ?? "").slice(0, 300) || null;
   const visibleMs = Number(body.visibleMs ?? 0);
+  const hadInteraction = body.hadInteraction === true;
+  const cf = requestCf(c.req.raw);
+  const trustScore = typeof cf?.clientTrustScore === "number" ? cf.clientTrustScore : null;
+  const asOrg = typeof cf?.asOrganization === "string" ? cf.asOrganization : null;
 
   const { data: firm, error } = await supabase
     .from("outreach_contacts")
@@ -1820,13 +1852,25 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
     if (logError) console.error("Page-view log failed:", logError.message);
   };
 
-  if (!ua || BOT_UA.test(ua)) {
+  if (isBotOrSpoofedUa(ua)) {
     await log(false, "bot-user-agent");
     return c.json({ ok: true, alerted: false, reason: "bot" });
   }
-  if (body.webdriver === true || !Number.isFinite(visibleMs) || visibleMs < 1500) {
+  if (body.webdriver === true || !Number.isFinite(visibleMs) || visibleMs < MIN_VISIBLE_MS) {
     await log(false, "automation-or-too-quick");
     return c.json({ ok: true, alerted: false, reason: "not-a-real-view" });
+  }
+  if (!hadInteraction && visibleMs < MIN_VISIBLE_WITHOUT_INTERACTION_MS) {
+    await log(false, "no-interaction");
+    return c.json({ ok: true, alerted: false, reason: "no-interaction" });
+  }
+  if (trustScore !== null && trustScore <= LOW_TRUST_SCORE) {
+    await log(false, "low-trust-client");
+    return c.json({ ok: true, alerted: false, reason: "low-trust" });
+  }
+  if (asOrg && DATACENTRE_ORG.test(asOrg)) {
+    await log(false, "datacentre-network");
+    return c.json({ ok: true, alerted: false, reason: "datacentre" });
   }
 
   const { data: claimed, error: claimError } = await supabase.rpc("claim_outreach_page_alert", { p_slug: slug });
