@@ -164,8 +164,10 @@ export default {
 
     // Personalised outreach pages (/for/<slug>) are the SPA, but never indexed or followed.
     if (/^\/for\/[^/]+$/i.test(normalizedPath)) {
-      const spa = await env.STATIC.fetch(new Request(new URL('/index.html', original.origin), request))
+      // Workers Assets answers /index.html with a 307 to "/", so ask for "/" (the SPA shell) directly.
+      const spa = await env.STATIC.fetch(new Request(new URL('/', original.origin), { method: 'GET', headers: request.headers }))
       const headers = new Headers(spa.headers)
+      headers.delete('Location')
       headers.set('Content-Type', 'text/html; charset=utf-8')
       headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
       headers.set('X-Robots-Tag', 'noindex, nofollow')
