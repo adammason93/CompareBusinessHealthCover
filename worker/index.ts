@@ -1,4 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
+import { projectId, publicAnonKey } from '../utils/supabase/info'
 /**
  * Serves the Vite build from Workers Assets. SPA fallback for non-file routes only.
  */
@@ -110,8 +111,40 @@ async function fetchPrerenderedHtml(
   return new Response(html, { status: 200, statusText: 'OK', headers })
 }
 
+const OPTOUT_FUNCTION_URL = `https://${projectId}.supabase.co/functions/v1/make-server-2031af1c/not-interested`
+
+/** Outreach "Not interested" link: proxy to the edge function so the link stays on the brand domain. */
+async function proxyNotInterested(request: Request, url: URL): Promise<Response> {
+  if (request.method !== 'GET' && request.method !== 'HEAD' && request.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, POST' } })
+  }
+  const headers = new Headers({
+    Authorization: `Bearer ${publicAnonKey}`,
+    apikey: publicAnonKey,
+    'User-Agent': request.headers.get('User-Agent') ?? '',
+  })
+  const contentType = request.headers.get('Content-Type')
+  if (contentType) headers.set('Content-Type', contentType)
+  const upstream = await fetch(`${OPTOUT_FUNCTION_URL}${url.search}`, {
+    method: request.method === 'HEAD' ? 'GET' : request.method,
+    headers,
+    body: request.method === 'POST' ? await request.arrayBuffer() : undefined,
+  })
+  const out = new Headers()
+  out.set('Content-Type', upstream.headers.get('Content-Type') ?? 'text/html; charset=utf-8')
+  out.set('Cache-Control', 'no-store')
+  out.set('X-Robots-Tag', 'noindex, nofollow')
+  out.set('Referrer-Policy', 'no-referrer')
+  return new Response(request.method === 'HEAD' ? null : upstream.body, { status: upstream.status, headers: out })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
+    const requestUrl = new URL(request.url)
+    if (normalizePathname(requestUrl.pathname) === '/not-interested') {
+      return proxyNotInterested(request, requestUrl)
+    }
+
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return env.STATIC.fetch(request)
     }

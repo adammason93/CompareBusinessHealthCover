@@ -64,22 +64,34 @@ async function notifyTelegramLead(details: TelegramLeadNotify): Promise<void> {
   if (employees) lines.push(`Employees: ${employees}`);
   lines.push(`Time: ${ukTime} UK`);
 
+  await sendTelegramText(lines.join("\n"), "lead");
+}
+
+/** Best-effort Telegram message to Adam. Never throws; never logs the bot token. */
+async function sendTelegramText(text: string, label: string): Promise<boolean> {
+  const token = Deno.env.get("TELEGRAM_BOT_TOKEN");
+  const chatId = Deno.env.get("TELEGRAM_CHAT_ID");
+  if (!token || !chatId) return false;
+
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 5000);
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: lines.join("\n") }),
+      body: JSON.stringify({ chat_id: chatId, text }),
       signal: controller.signal,
     });
     if (!res.ok) {
       const body = (await res.text()).replaceAll(token, "[redacted]");
-      console.error("Telegram lead notify failed:", res.status, body);
+      console.error(`Telegram ${label} notify failed:`, res.status, body);
+      return false;
     }
+    return true;
   } catch (error) {
     const raw = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-    console.error("Telegram lead notify error:", raw.replaceAll(token, "[redacted]"));
+    console.error(`Telegram ${label} notify error:`, raw.replaceAll(token, "[redacted]"));
+    return false;
   } finally {
     clearTimeout(timer);
   }
@@ -1512,6 +1524,189 @@ app.put("/make-server-2031af1c/admin/leads/:id", async (c) => {
     console.error('Error stack:', error.stack);
     return c.json({ error: error.message || "Failed to update lead" }, 500);
   }
+});
+
+// ---------------------------------------------------------------------------
+// Cold outreach "Not interested" opt-out.
+// Public URL: https://comparebusinesshealthcover.co.uk/not-interested?f=<slug>&t=<token>
+// (the site Worker proxies that path here). token = base64url(HMAC-SHA256(OPTOUT_SECRET,
+// "optout:v1:" + slug)) cut to 22 chars, so only links we generated are accepted.
+// GET only shows a confirm button (email security scanners prefetch links); the POST
+// records the opt-out and alerts Adam once per slug.
+// ---------------------------------------------------------------------------
+
+const OPTOUT_PUBLIC_URL = "https://comparebusinesshealthcover.co.uk/not-interested";
+const OPTOUT_SLUG = /^[a-z0-9][a-z0-9-]{0,79}$/;
+
+async function optOutToken(slug: string): Promise<string | null> {
+  const secret = Deno.env.get("OPTOUT_SECRET");
+  if (!secret) return null;
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = new Uint8Array(
+    await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`optout:v1:${slug}`)),
+  );
+  let bin = "";
+  for (const b of sig) bin += String.fromCharCode(b);
+  return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "").slice(0, 22);
+}
+
+async function validOptOut(slug: unknown, token: unknown): Promise<string | null> {
+  if (typeof slug !== "string" || typeof token !== "string") return null;
+  const s = slug.trim().toLowerCase();
+  if (!OPTOUT_SLUG.test(s)) return null;
+  const expected = await optOutToken(s);
+  if (!expected || token.length !== expected.length) return null;
+  let diff = 0;
+  for (let i = 0; i < expected.length; i++) diff |= expected.charCodeAt(i) ^ token.charCodeAt(i);
+  return diff === 0 ? s : null;
+}
+
+function escapeHtml(v: string): string {
+  return v.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]!));
+}
+
+function optOutPage(title: string, bodyHtml: string, status = 200): Response {
+  const html = `<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>${escapeHtml(title)} | Compare Business Healthcover</title>
+<style>
+body{margin:0;background:#f4f7f6;font-family:Poppins,Arial,Helvetica,sans-serif;color:#1f2d2a}
+.wrap{max-width:520px;margin:48px auto;padding:0 16px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden}
+.top{background:#1E5E4A;padding:20px 24px}
+.top img{height:40px;display:block;background:#fff;border-radius:6px;padding:6px 10px}
+.main{padding:28px 24px}
+h1{font-size:22px;margin:0 0 12px;color:#1E5E4A}
+p{line-height:1.6;margin:0 0 14px}
+button{background:#1E5E4A;color:#fff;border:0;border-radius:8px;padding:12px 20px;font-size:16px;cursor:pointer}
+button:hover{background:#174a3a}
+.small{font-size:13px;color:#5b6b67}
+a{color:#1E5E4A}
+</style></head><body><div class="wrap"><div class="card">
+<div class="top"><a href="https://comparebusinesshealthcover.co.uk/"><img src="https://comparebusinesshealthcover.co.uk/logo-v6.png" alt="Compare Business Healthcover"></a></div>
+<div class="main"><h1>${escapeHtml(title)}</h1>${bodyHtml}</div></div>
+<p class="small" style="text-align:center;margin-top:16px">Compare Business Healthcover introduces UK businesses to FCA-regulated brokers.</p>
+</div></body></html>`;
+  return new Response(html, {
+    status,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex, nofollow",
+      "Referrer-Policy": "no-referrer",
+    },
+  });
+}
+
+const OPTOUT_INVALID_PAGE = () =>
+  optOutPage(
+    "This link isn't valid",
+    `<p>We couldn't confirm this link. If you'd like us to stop contacting you, just reply to our email with "STOP" and we'll remove you straight away.</p>`,
+  );
+
+const OPTOUT_DONE_PAGE = () =>
+  optOutPage(
+    "Thanks — we won't contact you again",
+    `<p>You've been removed from our outreach list, so you won't get any more emails from us.</p>
+<p class="small">If this was a mistake, just reply to our email and let us know.</p>`,
+  );
+
+async function isSuppressed(slug: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from("outreach_suppressions")
+    .select("slug")
+    .eq("slug", slug)
+    .maybeSingle();
+  if (error) console.error("Opt-out lookup failed:", error.message);
+  return !!data;
+}
+
+app.get("/make-server-2031af1c/not-interested", async (c) => {
+  const slug = await validOptOut(c.req.query("f"), c.req.query("t"));
+  if (!slug) return OPTOUT_INVALID_PAGE();
+  if (await isSuppressed(slug)) return OPTOUT_DONE_PAGE();
+  const token = c.req.query("t")!;
+  return optOutPage(
+    "Not interested?",
+    `<p>Click the button below and we'll take you off our list. You won't hear from us again.</p>
+<form method="post" action="${OPTOUT_PUBLIC_URL}">
+<input type="hidden" name="f" value="${escapeHtml(slug)}">
+<input type="hidden" name="t" value="${escapeHtml(token)}">
+<button type="submit">Confirm I'm not interested</button>
+</form>`,
+  );
+});
+
+app.post("/make-server-2031af1c/not-interested", async (c) => {
+  let f: unknown;
+  let t: unknown;
+  try {
+    const body = await c.req.parseBody();
+    f = body["f"];
+    t = body["t"];
+  } catch {
+    return OPTOUT_INVALID_PAGE();
+  }
+  const slug = await validOptOut(f, t);
+  if (!slug) return OPTOUT_INVALID_PAGE();
+
+  const { data: contact } = await supabase
+    .from("outreach_contacts")
+    .select("firm, email")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  const { data: inserted, error } = await supabase
+    .from("outreach_suppressions")
+    .upsert(
+      {
+        slug,
+        firm: contact?.firm ?? null,
+        email: contact?.email ?? null,
+        user_agent: (c.req.header("user-agent") ?? "").slice(0, 300) || null,
+      },
+      { onConflict: "slug", ignoreDuplicates: true },
+    )
+    .select("slug, opted_out_at");
+
+  if (error) {
+    console.error("Opt-out save failed:", error.message);
+    return optOutPage(
+      "Sorry, something went wrong",
+      `<p>We couldn't save that just now. Please reply to our email with "STOP" and we'll remove you straight away.</p>`,
+      500,
+    );
+  }
+
+  // Only the first confirmed click inserts a row, so repeat clicks never re-alert.
+  if (inserted && inserted.length > 0) {
+    const ukTime = new Date(inserted[0].opted_out_at ?? Date.now()).toLocaleString("en-GB", {
+      timeZone: "Europe/London",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+    const firm = contact?.firm ?? slug;
+    const email = contact?.email ?? "email unknown";
+    const prefix = slug.startsWith("test-") ? "TEST — " : "";
+    await sendTelegramText(
+      `${prefix}Not interested: ${firm} (${email}) clicked opt-out at ${ukTime} UK.\nAdded to the do-not-contact list.`,
+      "opt-out",
+    );
+  }
+
+  return OPTOUT_DONE_PAGE();
 });
 
 Deno.serve(app.fetch);
