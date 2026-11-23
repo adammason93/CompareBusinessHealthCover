@@ -58,12 +58,12 @@ export function SuccessPage({ onReset, referenceNumber, emailSent = true }: Succ
           transition={{ delay: 0.3 }}
         >
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 flex items-center justify-center gap-2">
-            Enquiry Submitted Successfully!
+            Enquiry received
             <Sparkles className="w-6 h-6 text-yellow-500" />
           </h1>
           
           <p className="text-base text-gray-700 mb-5">
-            Great news! You have passed our internal qualification for a full market search.
+            Thank you. We have received your enquiry and will introduce you to an FCA-regulated broker partner, who will compare group cover options for your business.
           </p>
 
           <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-5 mb-6">
@@ -80,9 +80,9 @@ export function SuccessPage({ onReset, referenceNumber, emailSent = true }: Succ
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Personalised Quote Analysis</h3>
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Broker introduction</h3>
                   <p className="text-xs text-gray-600">
-                    Our experts are now comparing rates from leading insurers to find your best options
+                    An FCA-regulated broker partner will compare group schemes for your company and explain the options.
                   </p>
                 </div>
               </motion.div>
@@ -118,9 +118,9 @@ export function SuccessPage({ onReset, referenceNumber, emailSent = true }: Succ
                   <Phone className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Expert Contact</h3>
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">They will be in touch</h3>
                   <p className="text-xs text-gray-600">
-                    An advisor will contact you within 24 hours to discuss your personalised quotes
+                    The broker partner will contact you to discuss quotes. There is no obligation to buy.
                   </p>
                 </div>
               </motion.div>

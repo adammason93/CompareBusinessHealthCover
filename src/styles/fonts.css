@@ -1,1 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+/* Poppins is loaded from index.html (not @import) so the font can be preloaded.
+   This fallback reduces layout shift while the webfont arrives. */
+@font-face {
+  font-family: 'Poppins Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 112%;
+  ascent-override: 105%;
+  descent-override: 35%;
+  line-gap-override: 0%;
+}

@@ -45,21 +45,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- OpenAI Ads Measurement Pixel (consent gated via CookieManager) -->
-    <script>
-      !function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
-      oaiq("consent", false);
-      oaiq("init", { pixelId: "KonfcdkXumw9Kw5nvJtduo" });
-      window.addEventListener("DOMContentLoaded", function () {
-        try {
-          var consent = localStorage.getItem("cookieConsent");
-          var prefs = JSON.parse(localStorage.getItem("cookiePreferences") || "{}");
-          if (consent === "accepted" || prefs.marketing === true) {
-            oaiq("consent", true);
-          }
-        } catch (e) { /* ignore */ }
-      });
-    </script>
+    <!-- OpenAI Ads pixel is loaded only after marketing consent (see openaiPixel.ts). -->
     
     <!-- Primary Meta Tags -->
     <title>Compare Business Health Insurance UK | Company PMI</title>
@@ -128,9 +114,24 @@
     <meta name="theme-color" content="#1E5E4A" />
     
     <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <!-- Poppins: stylesheet in <head> (not CSS @import) so display=swap can start earlier -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
+
+    <!-- LCP image for the homepage hero (ads land here). Small WebP; srcset for larger screens. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/images/hero-office-team-v4-800.webp"
+      imagesrcset="/images/hero-office-team-v4-800.webp 800w, /images/hero-office-team-v4-1200.webp 1200w, /images/hero-office-team-v4-1600.webp 1600w, /images/hero-office-team-v4-1983.webp 1983w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="https://images.unsplash.com" />

@@ -1,7 +1,7 @@
-import { Shield, Check, Star, ArrowRight, ChevronDown, ChevronUp, Heart, Home as HomeIcon, FileText, X } from "lucide-react";
+import { Shield, Check, Star, ArrowRight, ChevronDown, ChevronUp, Heart, Home as HomeIcon, FileText, X, Phone } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, MessageCircle, Phone, Mail, TrendingUp, Headphones, PiggyBank } from "lucide-react";
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ContactFormModal } from "@/app/components/ContactFormModal";
 import { Users, Building2 } from "lucide-react";
 import { FAQSection } from "@/app/components/FAQSection";
@@ -14,52 +14,12 @@ import { HomeBlogSection } from "@/app/components/HomeBlogSection";
 import { Footer } from "@/app/components/Footer";
 import { InsurerCarousel } from "@/app/components/InsurerCarousel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { SITE } from "@/app/config/site";
+import { SITE, telHref } from "@/app/config/site";
+import { ResponsiveImage } from "@/app/components/ResponsiveImage";
+import { COOKIE_BANNER_EVENT } from "@/app/components/CookieManager";
 import { LOGO } from "@/app/config/brand";
 
 const STICKY_BANNER_MINIMIZED_KEY = "cbhc_sticky_quote_minimized";
-
-const HERO_SENTENCES = [
-  "SME Health Insurance From Just 2 Employees",
-  'Compare UK Business Health Cover',
-  'Protect Your Team & Retain Top Talent',
-];
-
-const HeroTypewriter = memo(function HeroTypewriter() {
-  const [typewriterText, setTypewriterText] = useState('');
-  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentSentence = HERO_SENTENCES[currentSentenceIndex];
-    if (!currentSentence) return;
-
-    const typingSpeed = isDeleting ? 50 : 100;
-    const pauseTime = 2000;
-
-    const timer = setTimeout(() => {
-      if (!isDeleting && typewriterText === currentSentence) {
-        setTimeout(() => setIsDeleting(true), pauseTime);
-      } else if (isDeleting && typewriterText === '') {
-        setIsDeleting(false);
-        setCurrentSentenceIndex((prev) => (prev + 1) % HERO_SENTENCES.length);
-      } else if (isDeleting) {
-        setTypewriterText(currentSentence.substring(0, typewriterText.length - 1));
-      } else {
-        setTypewriterText(currentSentence.substring(0, typewriterText.length + 1));
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timer);
-  }, [typewriterText, isDeleting, currentSentenceIndex]);
-
-  return (
-    <div className="flex items-center gap-3 min-h-[28px] sm:min-h-[32px]">
-      <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
-      <span className="text-white text-base sm:text-lg">{typewriterText}</span>
-    </div>
-  );
-});
 
 export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOpenAuth, onLogout, onViewSubmissions, user }: LandingPageProps) {
   const [isMobile, setIsMobile] = useState(false);
@@ -74,6 +34,17 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
     }
   });
   const bannerSentinelRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const [cookieBannerVisible, setCookieBannerVisible] = useState(true);
+
+  useEffect(() => {
+    const onBanner = (event: Event) => {
+      const detail = (event as CustomEvent<{ visible?: boolean }>).detail;
+      setCookieBannerVisible(Boolean(detail?.visible));
+    };
+    window.addEventListener(COOKIE_BANNER_EVENT, onBanner);
+    return () => window.removeEventListener(COOKIE_BANNER_EVENT, onBanner);
+  }, []);
 
   const minimizeStickyBanner = () => {
     setStickyBannerMinimized(true);
@@ -123,11 +94,12 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
   }, []);
 
   useEffect(() => {
-    const sentinel = bannerSentinelRef.current;
-    if (!sentinel) return;
+    const hero = heroRef.current;
+    if (!hero) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // Only show the sticky bar once the whole hero has left the viewport.
         setShowStickyBanner((prev) => {
           const next = !entry.isIntersecting;
           return prev === next ? prev : next;
@@ -136,7 +108,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       { threshold: 0 }
     );
 
-    observer.observe(sentinel);
+    observer.observe(hero);
     return () => observer.disconnect();
   }, []);
 
@@ -257,17 +229,20 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       />
 
       {/* Hero Section */}
-      <section className="section-hero relative overflow-hidden">
+      <section ref={heroRef} id="home-hero" className="section-hero relative overflow-hidden">
         <div className="relative">
           <div className="section-hero-image">
-            <ImageWithFallback 
+            <ResponsiveImage
               src={LOGO.heroOfficeTeam}
+              webpSrcSet={LOGO.heroOfficeTeamWebp}
+              avifSrcSet={LOGO.heroOfficeTeamAvif}
+              sizes="100vw"
               alt="Business team collaborating in a modern office"
-              className="object-cover object-right"
+              className="object-cover object-right w-full h-full"
               loading="eager"
-              fetchpriority="high"
-              width={1983}
-              height={793}
+              fetchPriority="high"
+              width={1200}
+              height={480}
             />
           </div>
           <div className="section-hero-overlay" />
@@ -298,7 +273,10 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
               {/* Right Column - Benefits & Buttons */}
               <div className="[text-shadow:0_1px_2px_rgb(0_0_0_/_0.45),0_2px_12px_rgb(30_94_74_/_0.35)]">
                 <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                  <HeroTypewriter />
+                  <div className="flex items-center gap-3">
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0 drop-shadow" />
+                    <span className="text-white text-base sm:text-lg font-medium">SME health insurance from just 2 employees</span>
+                  </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0 drop-shadow" />
                     <span className="text-white text-base sm:text-lg font-medium">Cover from just 2 employees — built for growing SMEs</span>
@@ -316,6 +294,13 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
                   >
                     Get an SME quote <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline-block" />
                   </button>
+                  <a
+                    href={telHref()}
+                    className="button-hover-animate border-2 border-white text-white hover:bg-white/15 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg w-full sm:w-auto text-center bg-black/20 backdrop-blur-[2px] [text-shadow:none] inline-flex items-center justify-center gap-2"
+                  >
+                    <Phone className="w-4 h-4" aria-hidden />
+                    {SITE.phoneDisplay}
+                  </a>
                   <button 
                     onClick={() => setIsContactModalOpen(true)}
                     className="button-hover-animate border-2 border-white text-white hover:bg-white/15 rounded-full px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg cursor-pointer w-full sm:w-auto text-center bg-black/20 backdrop-blur-[2px]"
@@ -349,6 +334,24 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
         </div>
         <div ref={bannerSentinelRef} className="h-px w-full" aria-hidden="true" />
       </section>
+
+      {renderEmbeddedForm ? (
+        <section id="quote-form" className="bg-brand-surface py-8 sm:py-12 scroll-mt-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 text-center">Start a free SME quote</h2>
+            <p className="text-gray-600 text-center mb-6 text-sm sm:text-base">
+              A few short questions. We introduce you to an FCA-regulated broker partner — we are not an insurer. Prefer to talk? Call{" "}
+              <a href={telHref()} className="font-semibold text-brand-navy underline">
+                {SITE.phoneDisplay}
+              </a>
+              .
+            </p>
+            <div className="bg-white rounded-2xl shadow-lg p-3 sm:p-6">
+              {renderEmbeddedForm()}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* Trust Section */}
       <section className="bg-white py-4 sm:py-6 border-b">
@@ -700,10 +703,15 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       <section className="bg-brand-surface py-0">
         <div className="grid md:grid-cols-2">
           <div className="relative">
-            <img 
+            <ResponsiveImage
               src={LOGO.businessHandshake}
+              webpSrcSet={LOGO.businessHandshakeWebp}
+              sizes="(min-width: 768px) 50vw, 100vw"
               alt="Business team reviewing employee benefits"
               className="w-full h-full object-cover absolute inset-0"
+              loading="lazy"
+              width={1200}
+              height={799}
             />
           </div>
           <div className="bg-brand-navy-dark text-white p-8 lg:p-12 flex flex-col justify-center">
@@ -800,7 +808,7 @@ export function LandingPage({ onGetStarted, onNavigate, renderEmbeddedForm, onOp
       )}
 
       {/* Sticky Bottom Banner — can be minimised so it does not block the page */}
-      {showStickyBanner && (
+      {showStickyBanner && !cookieBannerVisible && (
         stickyBannerMinimized ? (
           <div className="fixed bottom-4 sm:bottom-6 right-3 sm:right-6 z-40 flex items-center gap-2">
             <button

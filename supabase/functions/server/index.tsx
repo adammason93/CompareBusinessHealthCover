@@ -897,6 +897,12 @@ app.post("/make-server-2031af1c/submit-form", async (c) => {
                   <td style="padding: 8px 0; font-weight: bold; width: 40%;">Name:</td>
                   <td style="padding: 8px 0;">${formData.title || ""} ${formData.firstName} ${formData.lastName || ""}</td>
                 </tr>
+                ${formData.companyName ? `
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold;">Company:</td>
+                  <td style="padding: 8px 0;">${formData.companyName}</td>
+                </tr>
+                ` : ""}
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold;">Email:</td>
                   <td style="padding: 8px 0;"><a href="mailto:${formData.email}">${formData.email}</a></td>
@@ -1012,6 +1018,7 @@ ${formData.utmSource || formData.utmCampaign ? `UTM: ${[formData.utmSource, form
 
 PERSONAL DETAILS
 Name: ${formData.title || ""} ${formData.firstName} ${formData.lastName || ""}
+${formData.companyName ? `Company: ${formData.companyName}` : ""}
 Email: ${formData.email}
 Phone: ${formData.phone}
 ${formData.postcode ? `Postcode: ${formData.postcode}` : ''}

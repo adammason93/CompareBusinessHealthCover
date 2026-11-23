@@ -53,6 +53,8 @@ function canonicalHostRedirect(url: URL): string | null {
 const PATH_REDIRECTS: Record<string, string> = {
   "/terms-and-conditions": "/terms-conditions/",
   "/providers": "/small-business-health-insurance-providers/",
+  "/privacy": "/privacy-policy/",
+  "/contact": "/contact-us/",
 }
 
 function permanentRedirect(fromUrl: URL, toPath: string): Response {

@@ -13,7 +13,15 @@ interface CookiePreferences {
   functional: boolean;
 }
 
-const COOKIE_CONSENT_TTL_MS = 24 * 60 * 60 * 1000; // re-prompt every 24 hours for now
+/** Re-prompt after six months. Shorter windows were blocking returning ad visitors. */
+export const COOKIE_BANNER_EVENT = "cbhc-cookie-banner";
+
+function dispatchCookieBannerVisibility(visible: boolean): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(COOKIE_BANNER_EVENT, { detail: { visible } }));
+}
+
+const COOKIE_CONSENT_TTL_MS = 180 * 24 * 60 * 60 * 1000;
 
 function getConsentTimestamp(): number | null {
   const raw =
@@ -23,7 +31,7 @@ function getConsentTimestamp(): number | null {
   return Number.isFinite(t) ? t : null;
 }
 
-/** True if user has a consent choice that is still within the 24h window. */
+/** True if the user has a consent choice (accept, decline, or custom) still within the TTL. */
 function hasFreshCookieConsentChoice(): boolean {
   const hasChoice = Boolean(
     localStorage.getItem('cookieConsent') || sessionStorage.getItem('cookieConsent')
@@ -44,6 +52,10 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
     marketing: false,
     functional: false,
   });
+
+  useEffect(() => {
+    dispatchCookieBannerVisibility(isVisible);
+  }, [isVisible]);
 
   useEffect(() => {
     if (!hasFreshCookieConsentChoice()) {
@@ -125,28 +137,24 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
   };
 
   const handleDeclineAll = () => {
-    console.log('❌ Non-essential cookies declined');
     const essentialOnly: CookiePreferences = {
       essential: true,
       analytics: false,
       marketing: false,
       functional: false,
     };
-    
-    // Store in sessionStorage (temporary) — still stamp a date so 24h re-prompt works
-    sessionStorage.setItem('cookieConsent', 'declined');
-    sessionStorage.setItem('cookieConsentDate', new Date().toISOString());
-    
-    // Clear localStorage consent
-    localStorage.removeItem('cookieConsent');
-    localStorage.removeItem('cookiePreferences');
-    localStorage.removeItem('cookieConsentDate');
-    
-    // Clear tracking cookies
+
+    const declinedAt = new Date().toISOString();
+    localStorage.setItem('cookieConsent', 'declined');
+    localStorage.setItem('cookieConsentDate', declinedAt);
+    localStorage.setItem('cookiePreferences', JSON.stringify(essentialOnly));
+    sessionStorage.removeItem('cookieConsent');
+    sessionStorage.removeItem('cookieConsentDate');
+
     clearTrackingCookies();
     applyGoogleConsent(essentialOnly);
     setOpenaiPixelConsent(false);
-    
+
     setPreferences(essentialOnly);
     setIsVisible(false);
     setShowCustomize(false);
@@ -418,83 +426,58 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
   }
 
   return (
-    <>
-      {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-[9998]" />
-      
-      {/* Cookie Consent Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 sm:p-6 animate-slide-up">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-brand-navy-dark to-brand-navy rounded-lg shadow-2xl border border-brand-teal/20 overflow-hidden">
-          <div className="p-6 sm:p-8">
-            <div className="flex items-start gap-4">
-              {/* Cookie Icon */}
-              <div className="flex-shrink-0">
-                <div className="bg-brand-teal/10 p-3 rounded-full">
-                  <Cookie className="w-6 h-6 text-brand-teal" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  🍪 Cookie Consent
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                  We use cookies to enhance your browsing experience, analyse site traffic, and personalise content. 
-                  By clicking "Accept All", you consent to our use of cookies. You can manage your preferences or 
-                  decline non-essential cookies.
-                </p>
-                <p className="text-gray-400 text-xs mb-4">
-                  Essential cookies are always enabled to ensure the website functions properly. For more information, 
-                  please read our{' '}
-                  <button 
-                    onClick={() => {
-                      setIsVisible(false);
-                      onNavigate?.('cookie-policy');
-                    }}
-                    className="text-brand-teal hover:text-brand-teal-light underline"
-                  >
-                    Cookie Policy
-                  </button>{' '}
-                  and{' '}
-                  <button 
-                    onClick={() => {
-                      setIsVisible(false);
-                      onNavigate?.('privacy-policy');
-                    }}
-                    className="text-brand-teal hover:text-brand-teal-light underline"
-                  >
-                    Privacy Policy
-                  </button>.
-                </p>
-
-                {/* Action Buttons */}
-                <div className="flex flex-wrap gap-3">
-                  <button
-                    onClick={handleAcceptAll}
-                    className="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-hover text-white rounded-lg font-semibold transition-colors shadow-lg shadow-brand-teal/20"
-                  >
-                    Accept All
-                  </button>
-                  <button
-                    onClick={handleDeclineAll}
-                    className="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-semibold transition-colors"
-                  >
-                    Decline Non-Essential
-                  </button>
-                  <button
-                    onClick={() => setShowCustomize(true)}
-                    className="px-6 py-2.5 bg-transparent hover:bg-white/5 text-brand-teal border border-brand-teal/50 rounded-lg font-semibold transition-colors"
-                  >
-                    Customize
-                  </button>
-                </div>
-              </div>
-            </div>
+    <div
+      className="fixed bottom-0 left-0 right-0 z-[9999] p-3 sm:p-4 pointer-events-none"
+      role="dialog"
+      aria-label="Cookie consent"
+    >
+      <div className="pointer-events-auto max-w-4xl mx-auto bg-brand-navy text-white rounded-lg shadow-xl border border-brand-teal/20 px-4 py-3 sm:px-5 sm:py-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <p className="text-sm text-gray-200 leading-snug flex-1">
+            We use cookies to measure visits and improve our ads, if you accept.
+            Essential cookies keep the site working. Read our{' '}
+            <button
+              type="button"
+              onClick={() => onNavigate?.('cookie-policy')}
+              className="text-white underline font-medium"
+            >
+              cookie policy
+            </button>{' '}
+            and{' '}
+            <button
+              type="button"
+              onClick={() => onNavigate?.('privacy-policy')}
+              className="text-white underline font-medium"
+            >
+              privacy policy
+            </button>.
+          </p>
+          <div className="flex flex-wrap gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={handleAcceptAll}
+              className="px-4 py-2.5 min-w-[8.5rem] bg-brand-teal hover:bg-brand-teal-hover text-white rounded-lg font-semibold text-sm"
+            >
+              Accept all
+            </button>
+            <button
+              type="button"
+              onClick={handleDeclineAll}
+              className="px-4 py-2.5 min-w-[8.5rem] bg-white text-brand-navy hover:bg-brand-surface rounded-lg font-semibold text-sm"
+            >
+              Decline
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowCustomize(true)}
+              className="px-4 py-2.5 bg-transparent text-white border border-white/50 hover:bg-white/10 rounded-lg font-semibold text-sm"
+            >
+              Customize
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -502,10 +485,10 @@ export function CookieManager({ onNavigate }: CookieManagerProps) {
 export function getCookieConsent(): 'accepted' | 'declined' | 'customized' | null {
   const localConsent = localStorage.getItem('cookieConsent');
   const sessionConsent = sessionStorage.getItem('cookieConsent');
-  
+
   if (localConsent === 'accepted') return 'accepted';
   if (localConsent === 'customized') return 'customized';
-  if (sessionConsent === 'declined') return 'declined';
+  if (localConsent === 'declined' || sessionConsent === 'declined') return 'declined';
   return null;
 }
 
