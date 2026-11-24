@@ -16,7 +16,7 @@
         'wait_for_update': 500
       });
       try {
-        var consentTtl = 24 * 60 * 60 * 1000;
+        var consentTtl = 180 * 24 * 60 * 60 * 1000;
         var consentDate = localStorage.getItem('cookieConsentDate') || sessionStorage.getItem('cookieConsentDate');
         var consentTime = consentDate ? Date.parse(consentDate) : NaN;
         if (isFinite(consentTime) && (Date.now() - consentTime) < consentTtl) {
