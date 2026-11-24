@@ -1715,7 +1715,8 @@ app.post("/make-server-2031af1c/not-interested", async (c) => {
 // Personalised outreach pages: https://comparebusinesshealthcover.co.uk/for/<slug>
 // The site fetches one firm's public page facts here. Unknown, switched-off or opted-out
 // slugs return 404 so the site falls back to the normal homepage. We never return the
-// contact email, and we show a staff band rather than the raw figure.
+// contact email or contact name (those are for Telegram alerts only), and we show a
+// staff band rather than the raw figure.
 // ---------------------------------------------------------------------------
 
 /** The one test- slug allowed to render a page and send a (TEST-labelled) view alert. */
@@ -1861,7 +1862,7 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
 
   const { data: firm, error } = await supabase
     .from("outreach_contacts")
-    .select("slug, firm, sector, staff_count, phone, page_enabled")
+    .select("slug, firm, sector, staff_count, phone, email, contact_name, page_enabled")
     .eq("slug", slug)
     .maybeSingle();
   if (error) {
@@ -1939,9 +1940,15 @@ app.post("/make-server-2031af1c/outreach-page-view", async (c) => {
   const band = staffBand(firm.staff_count);
   const details = [firm.sector, band ? `${band} staff` : null].filter(Boolean).join(" · ");
   const phone = firm.phone ? String(firm.phone).replace(/\s+/g, "") : null;
+  const email = typeof firm.email === "string" && firm.email.trim() ? firm.email.trim() : null;
+  const contact = typeof firm.contact_name === "string" && firm.contact_name.trim()
+    ? firm.contact_name.trim()
+    : null;
   const lines = [
     `${isTest ? "TEST — " : ""}👀 ${firm.firm} opened their page`,
     details || null,
+    contact ? `Contact: ${contact}` : null,
+    email ? `Email: ${email}` : null,
     phone ? `Call: ${phone}` : "No public number found",
     `Page: https://comparebusinesshealthcover.co.uk/for/${slug}/`,
     `Time: ${ukTimeNow()} UK`,
